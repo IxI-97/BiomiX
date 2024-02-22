@@ -1,5 +1,5 @@
-# **BiomiX webpage:** https://ixi-97.github.io/
-# **BiomiX package/source:** https://github.com/IxI-97/BiomiX
+## **BiomiX webpage:** https://ixi-97.github.io/
+## **BiomiX package/source:** https://github.com/IxI-97/BiomiX
 
  
  <div align="center">
