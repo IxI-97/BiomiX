@@ -1,4 +1,13 @@
 # Biomix
 R tool to analyse and integrate multiple -omics data
 
-See the PDF presentation clicking on view code and opening the SLIDES_BIOMIX.pdf :)
+# **BiomiX webpage:** https://ixi-97.github.io/
+# **BiomiX package/source:** https://github.com/IxI-97/BiomiX
+
+ 
+ <div align="center">
+    <img src="https://github.com/IxI-97/IxI-97.github.io/blob/main/BiomiX_logo3.png?raw=true">
+</div>
+
+
+
