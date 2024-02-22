@@ -1,0 +1,21 @@
+PA	phosphatidic acid
+CPA	Cyclic phosphatidic acid
+PE-NMe2	phosphatidyl-N-dimethylethanolamine
+PE-NMe	phosphatidyl-N-methylethanolamine
+LysoPA	lysophosphatidic acid
+PGP	phosphatidylglycerophosphate
+PIP2	phosphatidylinositol
+PIP	phosphatidylinositol
+PI	phosphatidylinositol
+LysoPE	lysophosphatidylethanolamine
+PC	phosphatidylcholine
+LysoPC	lysophosphatidylcholine 
+DG	diacylglycerol
+MG	monoacylglyceride
+SM	sphingomyelin
+PS	phosphatidylserine
+PG	phosphatidylglycerol
+CL	cardiolipin
+PE	phosphatidylethanolamine
+Cer	ceramide
+TG	Triacylglycerol
