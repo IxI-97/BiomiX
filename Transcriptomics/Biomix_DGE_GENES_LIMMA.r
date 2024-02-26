@@ -4,16 +4,16 @@
 # MANUAL INPUT
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"C1"
-# args[2] <-"Control"
-# args[3] <-"/home/henry/Desktop/BiomiX2.2"
+# args[1] <-"CLL"
+# args[2] <-"AML"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
-# iterations = 2
-# i=2
-# selection_samples = "YES"
+# iterations = 2+1
+# i=1
+# selection_samples = "NO"
 # purity_filter = "NO"
-# Cell_type = "Whole_RNA"
+# Cell_type = "RNA"
 # setwd(directory[[1]])
 # COMMAND <- vroom(paste(directory,"COMMANDS.tsv",sep="/"), delim = "\t")
 # COMMAND_MOFA <- vroom(paste(directory,"COMMANDS_MOFA.tsv",sep="/"), delim = "\t")

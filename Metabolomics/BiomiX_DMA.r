@@ -25,20 +25,20 @@ if (length(args) == 0) {
 }
 
 # MANUAL INPUT
-# # #
+# # # #
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"cachexic"
-# args[2] <-"control"
-# args[3] <-"/home/cristia/Scrivania/BiomiX2.2"
+# args[1] <-"PTB"
+# args[2] <-"HC"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # 
 # directory <- args[3]
 # iterations = 1
 # selection_samples = "NO"
-# Cell_type = "Cachexia"
+# Cell_type = "Plasma"
 # i = 1
-# ANNOTATION = "Annotated"
-# DIR_METADATA <- readLines("/home/cristia/Scrivania/BiomiX2.2/directory.txt")
+# ANNOTATION = "MS1"
+# DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
 
 
 # library(vroom)
@@ -379,8 +379,20 @@ rownames(matrix) <- matrix$ID
 ###
 
 
+#This part of code is to refill the column having an NA name and rename the duplicated ones
+na_cols <- which(is.na(colnames(matrix)))
+new_names <- paste("UNKNOWN",1:sum(is.na(colnames(matrix))),sep="") 
+colnames(matrix)[na_cols] <- new_names
+
+colnames(matrix) <- make.unique(names(matrix), sep = "_")
+
+#====================================
+
+
 #matrixs <- matrix %>% filter(CONDITION == args[2]| CONDITION ==args[1])
 matrixs <- matrix 
+
+
 matrixs <- add_column(matrixs, Metadata$CONDITION, .after = 1)
 colnames(matrixs)[2] <- "CONDITION"
 
@@ -588,6 +600,7 @@ if(ANNOTATION == "Annotated"){
                 Heat <-apply(Heat,2,as.numeric)
                 rownames(Heat) <-samples
                 Heat<-t(Heat)
+                Heat[Heat == 0] <- 1
                 Heat <-apply(Heat,2,log10)
                 
                 library(ComplexHeatmap)
@@ -648,11 +661,9 @@ if(ANNOTATION == "Annotated"){
                         
                         pathway_class_HMDB = 
                                 metpath::pathway_class(hmdb_pathway)
-                        pathway_class_KEGG = 
-                                metpath::pathway_class(kegg_hsa_pathway)
                         
                         
-                        pdf(file=paste("Pathway_analysis_HMDB_", args[1],"_",args[2],"_", Cell_type,".pdf", sep=""))
+                        #pdf(file=paste("Pathway_analysis_HMDB_", args[1],"_",args[2],"_", Cell_type,".pdf", sep=""))
                         
                         
                         gc()
@@ -673,7 +684,12 @@ if(ANNOTATION == "Annotated"){
                         
                         result
                         
+                        #dev.off()
+                        
+                        
                         if (length(result) != 0){
+                                
+                                pdf(file=paste("Pathway_analysis_HMDB", args[1],"_",args[2],"_", Cell_type,".pdf", sep=""))
                                 
                                 x<-enrich_bar_plot(
                                         object = result,
@@ -701,11 +717,14 @@ if(ANNOTATION == "Annotated"){
                 if (COMMAND_ADVANCED[2,9] == "KEGG" ){
                         colnames(query_id)[1] <- "KEGG"
                         
+                        pathway_class_KEGG = 
+                                metpath::pathway_class(kegg_hsa_pathway)
+                        
                         dir.create(path = paste(directory2,"/Pathway_analysis/", "KEGG_", Cell_type, "_",args[1],"_vs_", args[2], sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
                         setwd(paste(directory2,"/Pathway_analysis/", "KEGG_", Cell_type, "_",args[1],"_vs_", args[2], sep =""))
                         
                         
-                        pdf(file=paste("Pathway_analysis_KEGG_", args[1],"_",args[2],"_", Cell_type),".pdf", sep="")
+                        #pdf(file=paste("Pathway_analysis_KEGG_", args[1],"_",args[2],"_", Cell_type,".pdf", sep=""))
                         
                         
                         head(pathway_class_KEGG)
@@ -725,7 +744,7 @@ if(ANNOTATION == "Annotated"){
                         
                         
                         result = 
-                                enrich_kegg(query_id = unique(query_id$Kegg), 
+                                enrich_kegg(query_id = unique(query_id$KEGG), 
                                             query_type = "compound", 
                                             id_type = "KEGG",
                                             pathway_database = pathway_database, 
@@ -736,7 +755,11 @@ if(ANNOTATION == "Annotated"){
                         
                         result
                         
+                        #dev.off()
+                        
                         if (length(result) != 0){
+                                
+                                pdf(file=paste("Pathway_analysis_KEGG", args[1],"_",args[2],"_", Cell_type,".pdf", sep=""))
                                 
                                 x <-enrich_bar_plot(
                                         object = result,
@@ -1185,6 +1208,11 @@ if(ANNOTATION == "Annotated"){
         MASS <- as.array(round(as.numeric(total$`m/z`),4))
         RT <- as.array(total$RT_min)
         
+        MASS <- MASS[0:300]
+        RT <- RT[0:300]
+        RT <- rep(1,300)
+        
+        
         cat(MASS, fill = getOption("width"), sep = ",")
         xx<-paste(MASS, collapse = " ")
         xx<-gsub(" ", ",", xx, fixed=TRUE)
@@ -1231,8 +1259,10 @@ if(ANNOTATION == "Annotated"){
                         tolerance           = tolerance,
                         tolerance_mode      = "ppm",
                         masses              = MASS,
+                        #masses              = "[114.0907,245.0765]",
                         all_masses          = '[]',
                         retention_times     = RT,
+                        #retention_times     = "[2.316083333,0.948808333]",
                         all_retention_times = '[]'
                 )
                 

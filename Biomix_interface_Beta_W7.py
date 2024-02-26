@@ -990,9 +990,10 @@ class Ui_BiomiX(object):
 
         # Read the table
         df = pd.read_csv(table_directory, delimiter="\t")
-
+        print(df)
         # Extract unique elements from the "conditions" column
         unique_conditions = df["CONDITION"].unique()
+        print(unique_conditions)
 
         # Populate the QComboBox with unique elements
         self.ComboBox_1.addItems(unique_conditions)
