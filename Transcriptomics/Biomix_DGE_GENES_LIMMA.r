@@ -4,12 +4,12 @@
 # MANUAL INPUT
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"CLL"
-# args[2] <-"AML"
+# args[1] <-"PTB"
+# args[2] <-"HC"
 # args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
-# iterations = 2+1
+# iterations = 1
 # i=1
 # selection_samples = "NO"
 # purity_filter = "NO"
@@ -1902,7 +1902,7 @@ which(colnames(DGE3) %in% Metadata$ID )
 
 tmp = NULL
 for (i in 1:length(Metadata$ID)){
-  x <-grep(Metadata$ID[i], colnames(DGE3))
+  x <- which(Metadata$ID[i] == colnames(DGE3))
   tmp<-append(tmp,x)
 }
 
@@ -2132,7 +2132,7 @@ if(NORMALIZATION=="YES"){
   
 }
 
-#permette di scrivere un file csv contenente tutti i risultati (in questo caso con pvalue adj ordinato)
+ #permette di scrivere un file csv contenente tutti i risultati (in questo caso con pvalue adj ordinato)
 
 DGE <- read.table(file = paste(args[1], "_",args[2],"_",Cell_type ,".tsv",sep ="") , sep="\t", header = TRUE)
 DGE$X <- rownames(DGE)

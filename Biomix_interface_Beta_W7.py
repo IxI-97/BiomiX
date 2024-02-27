@@ -754,6 +754,7 @@ class Ui_BiomiX(object):
         font.setWeight(50)
         self.spinBox_3.setFont(font)
         self.spinBox_3.setObjectName("spinBox_3")
+        self.spinBox_3.setProperty("value", 1)
         self.label_65 = QtWidgets.QLabel(self.centralwidget)
         self.label_65.setGeometry(QtCore.QRect(660, 460, 121, 31))
         font = QtGui.QFont()
