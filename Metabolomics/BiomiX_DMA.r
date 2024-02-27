@@ -36,7 +36,7 @@ if (length(args) == 0) {
 # iterations = 1
 # selection_samples = "NO"
 # Cell_type = "Plasma"
-# i = 1
+# i = 2
 # ANNOTATION = "MS1"
 # DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
 
@@ -395,6 +395,8 @@ matrixs <- matrix
 
 matrixs <- add_column(matrixs, Metadata$CONDITION, .after = 1)
 colnames(matrixs)[2] <- "CONDITION"
+matrixs[,3:ncol(matrixs)]<-apply(matrixs[,3:ncol(matrixs)],2,as.numeric)
+matrixs[matrixs == 0] <- 1
 
 
 #SAVING THE INPUT FOR THE MOFA ANALYSIS
@@ -1208,9 +1210,9 @@ if(ANNOTATION == "Annotated"){
         MASS <- as.array(round(as.numeric(total$`m/z`),4))
         RT <- as.array(total$RT_min)
         
-        MASS <- MASS[0:300]
-        RT <- RT[0:300]
-        RT <- rep(1,300)
+        # MASS <- MASS[0:300]
+        # RT <- RT[0:300]
+        # RT <- rep(1,300)
         
         
         cat(MASS, fill = getOption("width"), sep = ",")
@@ -1687,6 +1689,7 @@ if(ANNOTATION == "Annotated"){
                 Heat <-apply(Heat,2,as.numeric)
                 rownames(Heat) <-samples
                 Heat<-t(Heat)
+                Heat[Heat == 0] <- 1
                 Heat <-apply(Heat,2,log10)
                 annot_vis<-rownames(Heat)
                 pool<-rbind(ALTI,BASSI)
