@@ -220,7 +220,7 @@ for(output in file_to_transfer){
         if(file.exists(paste(directory,"/","MOFA", "/OUTPUT/",output, sep =""))){
                 dir.create(path =  paste(DIR_METADATA_output,"/","MOFA","/OUTPUT/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
                 file.copy(paste(directory,"/","MOFA", "/OUTPUT/",output, sep =""), paste(DIR_METADATA_output,"/","MOFA","/OUTPUT/", sep =""), overwrite = TRUE, recursive = TRUE, copy.mode = TRUE) 
-                unlink(paste(directory,"/","MOFA", "/OUTPUT/",output, sep =""), recursive=TRUE)
+                #unlink(paste(directory,"/","MOFA", "/OUTPUT/",output, sep =""), recursive=TRUE)
                 print(paste(output,"copied", sep = " "))
         }}
 
@@ -228,7 +228,7 @@ output<-dir(path = paste(directory,"/","Clinical_data", "/OUTPUT/",sep =""), pat
         if(file.exists(paste(directory,"/","Clinical_data", "/OUTPUT/",output, sep =""))){
                 dir.create(path =  paste(DIR_METADATA_output,"/","Clinical_data","/OUTPUT/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
                 file.copy(paste(directory,"/","Clinical_data", "/OUTPUT/",output, sep =""), paste(DIR_METADATA_output,"/","Clinical_data","/OUTPUT/", sep =""), overwrite = TRUE, recursive = TRUE, copy.mode = TRUE) 
-                unlink(paste(directory,"/","Clinical_data", "/OUTPUT/",output, sep =""), recursive=TRUE)
+                #unlink(paste(directory,"/","Clinical_data", "/OUTPUT/",output, sep =""), recursive=TRUE)
                 print(paste(output,"copied", sep = " "))
         }
 

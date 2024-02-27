@@ -10,9 +10,9 @@ library(litsearchr)
 # MANUAL INPUT
 # # #
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"C4"
-# args[2] <-"Control"
-# args[3] <-"/home/henry/Desktop/BiomiX2.2"
+# args[1] <-"PTB"
+# args[2] <-"HC"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
 
@@ -415,6 +415,14 @@ print(paste("factor analyzed:", numb, "*********************************"))
 #####BLOCK RESEARCH QUERY ALL OMICS TOGETHER ####
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(TRUE, TRUE, TRUE))){
+
 files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
@@ -443,13 +451,20 @@ write(line,file=paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep="")
 if (length(uu) == 1){
 write("no_results",file=paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
         write.table(uu,file=paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
-}
+}}
 
 
 #####BLOCK RESEARCH QUERY OMICS PAIRS TOGETHER ####
 #TRASCRIPTOMICS-METABOLOMICS
-
+print("TRASCRIPTOMICS-METABOLOMICS")
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(TRUE, TRUE, FALSE))){
 files<- files[grep("\\Metabolomics|\\RNAseq", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
@@ -478,10 +493,16 @@ if (length(uu) == 1){
         write("no_results",paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
                 write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
 }
-
+}
 #TRASCRIPTOMICS-METHYLOMICS
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(TRUE, FALSE, TRUE))){
 files<- files[grep("\\Methylomics|\\RNAseq", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
@@ -510,13 +531,19 @@ if (length(uu) == 1){
         write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
                 write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
 }
-
+}
 
 
 
 #METABOLOMICS-METHYLOMICS
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(TRUE, TRUE, TRUE))){
 files<- files[grep("\\Methylomics|\\Metabolomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
@@ -544,7 +571,7 @@ write(line,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""
 if (length(uu) == 1){
         write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
                 write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
-}
+}}
 
 #BLOCK SINGLE OMICS ANALYSIS
 #TRANSCRIPTOMICS
