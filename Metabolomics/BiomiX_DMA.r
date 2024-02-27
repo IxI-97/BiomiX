@@ -519,7 +519,9 @@ if(ANNOTATION == "Annotated"){
         total <- total %>% arrange(padj)
         x <- colnames(total) %in% matrix$ID
         total <- total[,!x]
-        write.table(total,paste(directory2,"/",Cell_type,"_",args[1],"_vs_",args[2],"_results.tsv", sep = ""),quote = FALSE, row.names = F, sep = "\t")
+        total_3 <- total
+        colnames(total_3)[colnames(total_3) == "NAME"] <- "NAME.x"
+        write.table(total_3,paste(directory2,"/",Cell_type,"_",args[1],"_vs_",args[2],"_results.tsv", sep = ""),quote = FALSE, row.names = F, sep = "\t")
         
         
         total$padj<-as.numeric(total$padj)
