@@ -1,1 +1,1 @@
-HMDB	m/z	NAME.x	shapiro_pvalue	p_val	log2FC	RT_min	RT_sec	padj	RT	adductRelationScore	RTscore	Identifier	Name	Formula	Adduct	Molecular.Weight	PPM.Error	Ionization.Score	Final.Score	Kegg	Kegg_URI	HMDB_URI	LipidMaps	LipidMaps_URI	Metlin	Metlin_URI	PubChem	PubChem_URI	NAME.y	SMILES	INCHIKEY	CHEMICAL_FORMULA	AVERAGE_MASS	MONO_MASS	MS2_annot	annot_level
+shapiro_pvalue	p_val	log2FC	NAME	padj
