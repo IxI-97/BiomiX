@@ -4,8 +4,8 @@
 # MANUAL INPUT
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"PTB"
-# args[2] <-"HC"
+# args[1] <-"CLL"
+# args[2] <-"T-PLL"
 # args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
