@@ -305,24 +305,24 @@ matr_4[12:13,1]<-c("NUMERIC_CLINICAL_DATA_FILE?", "BINARY_CLINICAL_DATA_FILE")
 
 dir.create(path =  paste(directory,"/","Report_parameters/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
 line="#PARAMETERS OMICS INPUT#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(COMMAND[,-1], file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE , row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(COMMAND[,-1], file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , row.names = F)
 line="#PARAMETERS INTEGRATION#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
 COMMAND_MOFA[,1]<-c("TYPE_INTEGRATION", "MULTIOMICS INTEGRATION?", "N° MOFA FACTOR CALCULATED? 0 = AUTOMATIC MODE", "MOFA FACTOR TO EXPLORE WITH VISUALIZATION", "MIN OMICS SHARED PER SAMPLE")
-write.table(COMMAND_MOFA, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
+write.table(COMMAND_MOFA, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (GENERAL)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (METABOLOMICS)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_2, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_2, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (METADATA)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (MOFA)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[1], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
 
 
 cat("\n\n\n\n\n Report parameters saved ^-^")

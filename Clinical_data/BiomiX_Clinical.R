@@ -6,9 +6,9 @@ library(vroom)
 # MANUAL INPUT
 # # #
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"C4"
-# args[2] <-"Control"
-# args[3] <-"/home/henry/Desktop/BiomiX2.2"
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
 
@@ -126,21 +126,21 @@ BINARY[t] <- "Unknown"
 
 for (fact in factors){
         
-        BINARY$factors<- FACTORS_WEIGHTS[,fact]
+        BINARY$factors<- FACTORS_WEIGHTS[,paste("Factor",fact,sep="")]
         
         pval=NULL
         clinic=NULL
         means=NULL
         for (i2 in 2:length(BINARY)){
                 print(i2)
-                SLE <-  BINARY[,i2] == "Yes" | BINARY[,i2] == "Present" | BINARY[,i2] == "Past" | BINARY[,i2] == "Male"
+                SLE <-  BINARY[,i2] == "Yes" | BINARY[,i2] == "Present" | BINARY[,i2] == "Past" | BINARY[,i2] == "Male" | BINARY[,i2] == "M" | BINARY[,i2] == "1" | BINARY[,i2] == "M" | BINARY[,i2] == "m"
                 if (sum(SLE) == 0){
                         SLE = NULL
                         }else{
                                 SLE <- BINARY[SLE,ncol(BINARY)]
                                 }
                 
-                CTRL <- BINARY[,i2] == "No" | BINARY[,i2] == "Female"
+                CTRL <- BINARY[,i2] == "No" | BINARY[,i2] == "Female"| BINARY[,i2] == "U" | BINARY[,i2] == "0" | BINARY[,i2] == "f"
                 if (sum(CTRL) == 0){ 
                   CTRL = NULL }else{
                                 CTRL <- BINARY[CTRL,ncol(BINARY)]

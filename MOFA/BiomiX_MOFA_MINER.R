@@ -7,9 +7,9 @@ library(dplyr)
 
 # MANUAL INPUT
 # args = as.list(c("BLymphocytes","SJS"))
-# args[1] <-"C4"
-# args[2] <-"Control"
-# args[3] <-"/home/henry/Desktop/BiomiX2.2"
+# args[1] <-"PTB"
+# args[2] <-"HC"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # 
 # directory <-args[3]
 # 
@@ -269,7 +269,7 @@ for (omik in (nam)){
                 x <- x + ggtitle(paste("Enrichment_analysis_",omik,"negative_contributors_to_factor_",numb, "_HMDB_results", sep=""))
                 print(x)
                 
-                write.table(result@result, paste("MOFA_Factor_Pathways/", omik, "factor_", numb, "_negative_HMDB_table_results.tsv", sep =""),quote = FALSE, row.names = F, sep = "\t")
+                write.table(result@result, paste("MOFA_Factor_Pathways/TABLES/", omik, "factor_", numb, "_negative_HMDB_table_results.tsv", sep =""),quote = FALSE, row.names = F, sep = "\t")
                 
         }
         
@@ -309,7 +309,7 @@ for (omik in (nam)){
                 x <- x + ggtitle(paste("Enrichment_analysis_",omik,"negative_contributors_to_factor_",numb, "_KEGG_results", sep=""))
                 print(x)
                 
-                write.table(result@result, paste("MOFA_Factor_Pathways/", omik, "factor_", numb, "_negative_KEGG_table_results.tsv", sep =""),quote = FALSE, row.names = F, sep = "\t")
+                write.table(result@result, paste("MOFA_Factor_Pathways/TABLES/", omik, "factor_", numb, "_negative_KEGG_table_results.tsv", sep =""),quote = FALSE, row.names = F, sep = "\t")
                 
         }
         
