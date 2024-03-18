@@ -9,16 +9,16 @@ library(dplyr)
 # print(args)
 # 
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"C1"
-# args[2] <-"Control"
-# args[3] <-"/home/henry/Desktop/BiomiX2.2"
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
+# args[3] <-"/home/cristia/BiomiX2.2"
 # 
 # directory <- args[3]
 # iterations = 1
-# i=5
+# i=2
 # selection_samples = "NO"
 # Cell_type = "Whole_methyl"
-# DIR_METADATA <- readLines("/home/henry/Desktop/BiomiX2.2/directory.txt")
+# DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
 
 # Matrix <- vroom("WHOLEBLOOD_METHYLOMICS_SSC_vs_CTRL.tsv" , delim = "\t", col_names = TRUE)
 # Metadata_total <- vroom("/home/henry/Desktop/BiomiX2.0/Metadata/Metadata_PRECISESADS.tsv" , delim = "\t", col_names = TRUE)
@@ -354,7 +354,7 @@ if (length(c(ALTI$gene, BASSI$gene)) > 2){
 
 
 
-pdf(file=paste(directory_path,"/Pathways_DMG_EnrichR.tsv", sep=""), width = 20, height = 9)
+pdf(file=paste(directory_path,"/Pathways_DMG_EnrichR.pdf", sep=""), width = 20, height = 9)
 
 
 #PATHWAY ANALYSIS
@@ -370,7 +370,7 @@ if(length(ALTI$gene) != 0){
                         if (websiteLive) {
                           print(enriched[[paths]])
                                 dir.create(paste(directory_path,"/TABLES", sep=""))
-                                write.table(x=enriched[[paths]], file=paste(directory_path,"/TABLES/",names(enriched)[paths],".tsv", sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                                write.table(x=enriched[[paths]], file=paste(directory_path,"/TABLES/",names(enriched)[paths],"_upregulated.tsv", sep="")  ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
                                 xx<-plotEnrich(enriched[[paths]], showTerms = 25 , numChar = 40, y = "Count", orderBy = "P.value", title = paste("Enrichment_analysis_upregulated_genes","_",dbs[paths], sep=""))
                                 print(xx)
                         }}}}
@@ -381,6 +381,7 @@ if(length(BASSI$gene) != 0){
         for(paths in 1:3){
                 if (nrow(enriched[[paths]]) != 0){
                         if (websiteLive) {
+                                write.table(x=enriched[[paths]], file=paste(directory_path,"/TABLES/",names(enriched)[paths],"_downregulated.tsv", sep="")  ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
                                 xx<-plotEnrich(enriched[[paths]], showTerms = 25 , numChar = 40, y = "Count", orderBy = "P.value", title = paste("Enrichment_analysis_downregulated_genes","_",dbs[paths], sep=""))
                                 print(xx)
                         }}}}
