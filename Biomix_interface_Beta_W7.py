@@ -22,7 +22,7 @@ class ItemDelegate(QStyledItemDelegate):
 class Ui_BiomiX(object):
     def setupUi(self, BiomiX):
         BiomiX.setObjectName("BiomiX")
-        BiomiX.resize(851, 649)
+        BiomiX.resize(1200, 800)
         icon = QtGui.QIcon()
         icon.addPixmap(
             QtGui.QPixmap("BiomiX_logo3.png"),
@@ -32,545 +32,34 @@ class Ui_BiomiX(object):
         BiomiX.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(BiomiX)
         self.centralwidget.setObjectName("centralwidget")
-        self.label_31 = QtWidgets.QLabel(self.centralwidget)
-        self.label_31.setGeometry(QtCore.QRect(470, 460, 121, 31))
+        
+        main_layout = QtWidgets.QVBoxLayout(self.centralwidget)
+        
+        
+        #BLOCK 1
+        
+        #LEFT
+        
+        block1_layout = QtWidgets.QHBoxLayout()
+        
+        block1_left_layout = QtWidgets.QVBoxLayout()
+        #block1_left_layout.setStretch(0, 1)  # Ensure this layout takes available space
+        
+        #Label line
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_31.setFont(font)
-        self.label_31.setObjectName("label_31")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(310, 550, 261, 51))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.pushButton.setObjectName("pushButton")
-        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(35, 140, 771, 231))
-        self.layoutWidget.setObjectName("layoutWidget")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.layoutWidget)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_6.setSpacing(4)
-        self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_10.setSpacing(0)
-        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.label_36 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_36.setFont(font)
-        self.label_36.setObjectName("label_36")
-        self.horizontalLayout_10.addWidget(self.label_36)
-        self.label_16 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_16.setFont(font)
-        self.label_16.setObjectName("label_16")
-        self.horizontalLayout_10.addWidget(self.label_16)
-        self.label_37 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_37.setFont(font)
-        self.label_37.setObjectName("label_37")
-        self.horizontalLayout_10.addWidget(self.label_37)
-        self.label_38 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_38.setFont(font)
-        self.label_38.setObjectName("label_38")
-        self.horizontalLayout_10.addWidget(self.label_38)
-        self.label_39 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_39.setFont(font)
-        self.label_39.setObjectName("label_39")
-        self.horizontalLayout_10.addWidget(self.label_39)
-        self.label_40 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_40.setFont(font)
-        self.label_40.setObjectName("label_40")
-        self.horizontalLayout_10.addWidget(self.label_40)
-        self.label_41 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_41.setFont(font)
-        self.label_41.setObjectName("label_41")
-        self.horizontalLayout_10.addWidget(self.label_41)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_10)
-        self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_11.setSizeConstraint(QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint)
-        self.horizontalLayout_11.setSpacing(0)
-        self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.label_42 = QtWidgets.QLabel(self.layoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_42.sizePolicy().hasHeightForWidth())
-        self.label_42.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_42.setFont(font)
-        self.label_42.setObjectName("label_42")
-        self.horizontalLayout_11.addWidget(self.label_42)
-        self.checkBox_4 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_4.setText("")
-        self.checkBox_4.setObjectName("checkBox_4")
-        self.horizontalLayout_11.addWidget(self.checkBox_4)
-        self.comboBox_3 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_3.setFont(font)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.comboBox_3.sizePolicy().hasHeightForWidth())
-        self.comboBox_3.setSizePolicy(sizePolicy)
-        self.comboBox_3.setEditable(True)
-        self.comboBox_3.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_3.setObjectName("comboBox_3")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.horizontalLayout_11.addWidget(self.comboBox_3)
-        self.label_43 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_43.setText("")
-        self.label_43.setObjectName("label_43")
-        self.horizontalLayout_11.addWidget(self.label_43)
-        self.checkBox_27 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_27.setText("")
-        self.checkBox_27.setObjectName("checkBox_27")
-        self.horizontalLayout_11.addWidget(self.checkBox_27)
-        self.lineEdit_11 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_11.setFont(font)
-        self.lineEdit_11.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_11.sizePolicy().hasHeightForWidth())
-        self.lineEdit_11.setSizePolicy(sizePolicy)
-        self.lineEdit_11.setObjectName("lineEdit_11")
-        self.horizontalLayout_11.addWidget(self.lineEdit_11)
-        self.label_44 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_44.setText("")
-        self.label_44.setObjectName("label_44")
-        self.horizontalLayout_11.addWidget(self.label_44)
-        self.checkBox_29 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_29.setText("")
-        self.checkBox_29.setObjectName("checkBox_29")
-        self.horizontalLayout_11.addWidget(self.checkBox_29)
-        self.Push_01 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_01.setObjectName("Upload File 1")
-        self.horizontalLayout_11.addWidget(self.Push_01)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_11)
-        self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_12.setSpacing(0)
-        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
-        self.label_45 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_45.setFont(font)
-        self.label_45.setObjectName("label_45")
-        self.horizontalLayout_12.addWidget(self.label_45)
-        self.checkBox_30 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_30.setText("")
-        self.checkBox_30.setObjectName("checkBox_30")
-        self.horizontalLayout_12.addWidget(self.checkBox_30)
-        self.comboBox_4 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_4.setFont(font)
-        self.comboBox_4.setEditable(True)
-        self.comboBox_4.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_4.setObjectName("comboBox_4")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.horizontalLayout_12.addWidget(self.comboBox_4)
-        self.label_46 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_46.setText("")
-        self.label_46.setObjectName("label_46")
-        self.horizontalLayout_12.addWidget(self.label_46)
-        self.checkBox_31 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_31.setText("")
-        self.checkBox_31.setObjectName("checkBox_31")
-        self.horizontalLayout_12.addWidget(self.checkBox_31)
-        self.lineEdit_12 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_12.setFont(font)
-        self.lineEdit_12.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_12.sizePolicy().hasHeightForWidth())
-        self.lineEdit_12.setSizePolicy(sizePolicy)
-        self.lineEdit_12.setObjectName("lineEdit_12")
-        self.horizontalLayout_12.addWidget(self.lineEdit_12)
-        self.label_47 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_47.setText("")
-        self.label_47.setObjectName("label_47")
-        self.horizontalLayout_12.addWidget(self.label_47)
-        self.checkBox_33 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_33.setText("")
-        self.checkBox_33.setObjectName("checkBox_33")
-        self.horizontalLayout_12.addWidget(self.checkBox_33)
-        self.Push_02 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_02.setObjectName("Upload File 2")
-        self.horizontalLayout_12.addWidget(self.Push_02)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_12)
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_13.setSpacing(0)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.label_48 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_48.setFont(font)
-        self.label_48.setObjectName("label_48")
-        self.horizontalLayout_13.addWidget(self.label_48)
-        self.checkBox_34 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_34.setText("")
-        self.checkBox_34.setObjectName("checkBox_34")
-        self.horizontalLayout_13.addWidget(self.checkBox_34)
-        self.comboBox_11 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_11.setFont(font)
-        self.comboBox_11.setEditable(True)
-        self.comboBox_11.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_11.setObjectName("comboBox_11")
-        self.comboBox_11.addItem("")
-        self.comboBox_11.addItem("")
-        self.comboBox_11.addItem("")
-        self.comboBox_11.addItem("")
-        self.comboBox_11.addItem("")
-        self.horizontalLayout_13.addWidget(self.comboBox_11)
-        self.label_49 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_49.setText("")
-        self.label_49.setObjectName("label_49")
-        self.horizontalLayout_13.addWidget(self.label_49)
-        self.checkBox_35 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_35.setText("")
-        self.checkBox_35.setObjectName("checkBox_35")
-        self.horizontalLayout_13.addWidget(self.checkBox_35)
-        self.lineEdit_13 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_13.setFont(font)
-        self.lineEdit_13.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_13.sizePolicy().hasHeightForWidth())
-        self.lineEdit_13.setSizePolicy(sizePolicy)
-        self.lineEdit_13.setObjectName("lineEdit_13")
-        self.horizontalLayout_13.addWidget(self.lineEdit_13)
-        self.label_50 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_50.setText("")
-        self.label_50.setObjectName("label_50")
-        self.horizontalLayout_13.addWidget(self.label_50)
-        self.checkBox_37 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_37.setText("")
-        self.checkBox_37.setObjectName("checkBox_37")
-        self.horizontalLayout_13.addWidget(self.checkBox_37)
-        self.Push_03 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_03.setObjectName("Upload File 3")
-        self.horizontalLayout_13.addWidget(self.Push_03)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_13)
-        self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_14.setSpacing(0)
-        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        self.label_51 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_51.setFont(font)
-        self.label_51.setObjectName("label_51")
-        self.horizontalLayout_14.addWidget(self.label_51)
-        self.checkBox_38 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_38.setText("")
-        self.checkBox_38.setObjectName("checkBox_38")
-        self.horizontalLayout_14.addWidget(self.checkBox_38)
-        self.comboBox_12 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_12.setFont(font)
-        self.comboBox_12.setEditable(True)
-        self.comboBox_12.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_12.setObjectName("comboBox_12")
-        self.comboBox_12.addItem("")
-        self.comboBox_12.addItem("")
-        self.comboBox_12.addItem("")
-        self.comboBox_12.addItem("")
-        self.comboBox_12.addItem("")
-        self.horizontalLayout_14.addWidget(self.comboBox_12)
-        self.label_52 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_52.setText("")
-        self.label_52.setObjectName("label_52")
-        self.horizontalLayout_14.addWidget(self.label_52)
-        self.checkBox_39 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_39.setText("")
-        self.checkBox_39.setObjectName("checkBox_39")
-        self.horizontalLayout_14.addWidget(self.checkBox_39)
-        self.lineEdit_14 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_14.setFont(font)
-        self.lineEdit_14.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_14.sizePolicy().hasHeightForWidth())
-        self.lineEdit_14.setSizePolicy(sizePolicy)
-        self.lineEdit_14.setObjectName("lineEdit_14")
-        self.horizontalLayout_14.addWidget(self.lineEdit_14)
-        self.label_53 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_53.setText("")
-        self.label_53.setObjectName("label_53")
-        self.horizontalLayout_14.addWidget(self.label_53)
-        self.checkBox_41 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_41.setText("")
-        self.checkBox_41.setObjectName("checkBox_41")
-        self.horizontalLayout_14.addWidget(self.checkBox_41)
-        self.Push_04 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_04.setObjectName("Upload File 4")
-        self.horizontalLayout_14.addWidget(self.Push_04)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_14)
-        self.horizontalLayout_15 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_15.setSpacing(0)
-        self.horizontalLayout_15.setObjectName("horizontalLayout_15")
-        self.label_54 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_54.setFont(font)
-        self.label_54.setObjectName("label_54")
-        self.horizontalLayout_15.addWidget(self.label_54)
-        self.checkBox_42 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_42.setText("")
-        self.checkBox_42.setObjectName("checkBox_42")
-        self.horizontalLayout_15.addWidget(self.checkBox_42)
-        self.comboBox_13 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_13.setFont(font)
-        self.comboBox_13.setEditable(True)
-        self.comboBox_13.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_13.setObjectName("comboBox_13")
-        self.comboBox_13.addItem("")
-        self.comboBox_13.addItem("")
-        self.comboBox_13.addItem("")
-        self.comboBox_13.addItem("")
-        self.comboBox_13.addItem("")
-        self.horizontalLayout_15.addWidget(self.comboBox_13)
-        self.label_55 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_55.setText("")
-        self.label_55.setObjectName("label_55")
-        self.horizontalLayout_15.addWidget(self.label_55)
-        self.checkBox_43 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_43.setText("")
-        self.checkBox_43.setObjectName("checkBox_43")
-        self.horizontalLayout_15.addWidget(self.checkBox_43)
-        self.lineEdit_15 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_15.setFont(font)
-        self.lineEdit_15.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_15.sizePolicy().hasHeightForWidth())
-        self.lineEdit_15.setSizePolicy(sizePolicy)
-        self.lineEdit_15.setObjectName("lineEdit_15")
-        self.horizontalLayout_15.addWidget(self.lineEdit_15)
-        self.label_56 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_56.setText("")
-        self.label_56.setObjectName("label_56")
-        self.horizontalLayout_15.addWidget(self.label_56)
-        self.checkBox_45 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_45.setText("")
-        self.checkBox_45.setObjectName("checkBox_45")
-        self.horizontalLayout_15.addWidget(self.checkBox_45)
-        self.Push_05 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_05.setObjectName("Upload File 5")
-        self.horizontalLayout_15.addWidget(self.Push_05)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_15)
-        self.horizontalLayout_16 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_16.setSpacing(0)
-        self.horizontalLayout_16.setObjectName("horizontalLayout_16")
-        self.label_57 = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_57.setFont(font)
-        self.label_57.setObjectName("label_57")
-        self.horizontalLayout_16.addWidget(self.label_57)
-        self.checkBox_46 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_46.setText("")
-        self.checkBox_46.setObjectName("checkBox_46")
-        self.horizontalLayout_16.addWidget(self.checkBox_46)
-        self.comboBox_14 = QtWidgets.QComboBox(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_14.setFont(font)
-        self.comboBox_14.setEditable(True)
-        self.comboBox_14.setIconSize(QtCore.QSize(10, 16))
-        self.comboBox_14.setObjectName("comboBox_14")
-        self.comboBox_14.addItem("")
-        self.comboBox_14.addItem("")
-        self.comboBox_14.addItem("")
-        self.comboBox_14.addItem("")
-        self.comboBox_14.addItem("")
-        self.horizontalLayout_16.addWidget(self.comboBox_14)
-        self.label_58 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_58.setText("")
-        self.label_58.setObjectName("label_58")
-        self.horizontalLayout_16.addWidget(self.label_58)
-        self.checkBox_47 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_47.setText("")
-        self.checkBox_47.setObjectName("checkBox_47")
-        self.horizontalLayout_16.addWidget(self.checkBox_47)
-        self.lineEdit_16 = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_16.setFont(font)
-        self.lineEdit_16.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lineEdit_16.sizePolicy().hasHeightForWidth())
-        self.lineEdit_16.setSizePolicy(sizePolicy)
-        self.lineEdit_16.setObjectName("lineEdit_16")
-        self.horizontalLayout_16.addWidget(self.lineEdit_16)
-        self.label_59 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_59.setText("")
-        self.label_59.setObjectName("label_59")
-        self.horizontalLayout_16.addWidget(self.label_59)
-        self.checkBox_49 = QtWidgets.QCheckBox(self.layoutWidget)
-        self.checkBox_49.setText("")
-        self.checkBox_49.setObjectName("checkBox_49")
-        self.horizontalLayout_16.addWidget(self.checkBox_49)
-        self.Push_06 = QtWidgets.QPushButton(self.layoutWidget)
-        self.Push_06.setObjectName("Upload File 6")
-        self.horizontalLayout_16.addWidget(self.Push_06)
-        self.verticalLayout_6.addLayout(self.horizontalLayout_16)
-        self.label_60 = QtWidgets.QLabel(self.centralwidget)
-        self.label_60.setGeometry(QtCore.QRect(270, 460, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_60.setFont(font)
-        self.label_60.setObjectName("label_60")
-        self.layoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget_2.setGeometry(QtCore.QRect(70, 10, 681, 123))
-        self.layoutWidget_2.setObjectName("layoutWidget_2")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget_2)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label_5 = QtWidgets.QLabel(self.layoutWidget_2)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.verticalLayout_3.addWidget(self.label_5)
-        self.label_7 = QtWidgets.QLabel(self.layoutWidget_2)
+        block1_left_layout.addWidget(self.label_5)
+        
+        #Combobox Condition
+        self.label_7 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -581,13 +70,15 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.label_7.setObjectName("label_7")
-        self.verticalLayout_3.addWidget(self.label_7)
-        self.label_61 = QtWidgets.QLabel(self.layoutWidget_2)
+        block1_left_layout.addWidget(self.label_7)
+        self.label_61 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
+        
+        #Combobox Controls
         self.label_61.setFont(font)
         self.label_61.setStyleSheet("QWidget{\n"
 "\n"
@@ -595,13 +86,15 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.label_61.setObjectName("label_61")
-        self.verticalLayout_3.addWidget(self.label_61)
-        self.label_8 = QtWidgets.QLabel(self.layoutWidget_2)
+        block1_left_layout.addWidget(self.label_61)
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
+        
+        #Combobox output
         self.label_8.setFont(font)
         self.label_8.setStyleSheet("QWidget{\n"
 "\n"
@@ -609,22 +102,23 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.label_8.setObjectName("label_8")
-        self.verticalLayout_3.addWidget(self.label_8)
-        self.horizontalLayout_2.addLayout(self.verticalLayout_3, 0)
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.label_63 = QtWidgets.QLabel(self.layoutWidget_2)
-        self.label_63.setText("")
-        self.label_63.setObjectName("label_63")
-        self.verticalLayout_4.addWidget(self.label_63)
-        self.line_2 = QtWidgets.QFrame(self.layoutWidget_2)
+        block1_left_layout.addWidget(self.label_8)
+        
+        
+        #RIGHT
+        block1_right_layout = QtWidgets.QVBoxLayout()
+        #block1_right_layout.setStretch(0, 1)  # Ensure this layout takes available space
+
+        self.line_2 = QtWidgets.QFrame(self.centralwidget)
         self.line_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_2.setObjectName("line_2")
-        self.verticalLayout_4.addWidget(self.line_2)
-        self.ComboBox_1 = QtWidgets.QComboBox(self.layoutWidget_2)
+        block1_right_layout.addWidget(self.line_2)
+        
+        #Combobox Condition
+        self.ComboBox_1 = QtWidgets.QComboBox(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -635,12 +129,12 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.ComboBox_1.setObjectName("ComboBox_1")
-        self.verticalLayout_4.addWidget(self.ComboBox_1)
+        block1_right_layout.addWidget(self.ComboBox_1)
         
-        
-        self.ComboBox_2 = QtWidgets.QComboBox(self.layoutWidget_2)
+        #Combobox controls
+        self.ComboBox_2 = QtWidgets.QComboBox(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -651,20 +145,684 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.ComboBox_2.setObjectName("ComboBox_2")
-        self.verticalLayout_4.addWidget(self.ComboBox_2)
+        block1_right_layout.addWidget(self.ComboBox_2)
         
-        self.Push_output = QtWidgets.QPushButton(self.layoutWidget_2)
+        #Output button
+        self.Push_output = QtWidgets.QPushButton(self.centralwidget)
         self.Push_output.setObjectName("Upload File 1")
-        self.verticalLayout_4.addWidget(self.Push_output)
- 
+        block1_right_layout.addWidget(self.Push_output)
         
-        self.load_data()
+        self.line_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.ComboBox_1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.ComboBox_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_output.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
-        self.horizontalLayout_2.addLayout(self.verticalLayout_4, 2)
-        self.label_64 = QtWidgets.QLabel(self.centralwidget)
-        self.label_64.setGeometry(QtCore.QRect(80, 420, 91, 31))
+        
+        block1_layout.addLayout(block1_left_layout)
+        block1_layout.addLayout(block1_right_layout)
+        
+        main_layout.addLayout(block1_layout)
+        
+#========================================================
+
+        # Block 2
+        block2_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # Column 1
+        block2_column1_layout = QtWidgets.QVBoxLayout()
+
+        #label
+        self.label_36 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("Ubuntu")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_36.setFont(font)
+        self.label_36.setObjectName("label_36")
+        block2_column1_layout.addWidget(self.label_36)
+
+        #input 1
+        self.label_42 = QtWidgets.QLabel(self.centralwidget)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.label_42.sizePolicy().hasHeightForWidth())
+        #self.label_42.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_42.setFont(font)
+        self.label_42.setObjectName("label_42")
+        block2_column1_layout.addWidget(self.label_42)
+        
+        #input 2
+        self.label_45 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_45.setFont(font)
+        self.label_45.setObjectName("label_45")
+        block2_column1_layout.addWidget(self.label_45)
+        
+        #input 3
+        self.label_48 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_48.setFont(font)
+        self.label_48.setObjectName("label_48")
+        block2_column1_layout.addWidget(self.label_48)
+        
+        #input 4
+        self.label_51 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_51.setFont(font)
+        self.label_51.setObjectName("label_51")
+        block2_column1_layout.addWidget(self.label_51)
+        
+        #input 5
+        self.label_54 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_54.setFont(font)
+        self.label_54.setObjectName("label_54")
+        block2_column1_layout.addWidget(self.label_54)
+        
+        #input 6
+        self.label_57 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_57.setFont(font)
+        self.label_57.setObjectName("label_57")
+        block2_column1_layout.addWidget(self.label_57)
+        
+        
+        self.label_36.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_42.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_45.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_48.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_51.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_54.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_57.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_layout.addLayout(block2_column1_layout)
+        
+        
+        # Column 2
+        block2_column2_layout = QtWidgets.QVBoxLayout()
+        
+        #Analysis label
+        self.label_16 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_16.setFont(font)
+        self.label_16.setObjectName("label_16")
+        block2_column2_layout.addWidget(self.label_16)
+        
+        #Checkbox 1
+        self.checkBox_4 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_4.setText("")
+        self.checkBox_4.setObjectName("checkBox_4")
+        block2_column2_layout.addWidget(self.checkBox_4)
+        
+        #Checkbox 2
+        self.checkBox_30 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_30.setText("")
+        self.checkBox_30.setObjectName("checkBox_30")
+        block2_column2_layout.addWidget(self.checkBox_30)
+        
+        #Checkbox 3
+        self.checkBox_34 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_34.setText("")
+        self.checkBox_34.setObjectName("checkBox_34")
+        block2_column2_layout.addWidget(self.checkBox_34)
+        
+        #Checkbox 4
+        self.checkBox_38 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_38.setText("")
+        self.checkBox_38.setObjectName("checkBox_38")
+        block2_column2_layout.addWidget(self.checkBox_38)
+        
+        #Checkbox 5
+        self.checkBox_42 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_42.setText("")
+        self.checkBox_42.setObjectName("checkBox_42")
+        block2_column2_layout.addWidget(self.checkBox_42)
+        
+        #Checkbox 6
+        self.checkBox_46 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_46.setText("")
+        self.checkBox_46.setObjectName("checkBox_46")
+        block2_column2_layout.addWidget(self.checkBox_46)
+        
+        
+        self.label_16.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_4.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_30.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_34.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_38.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_42.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_46.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_layout.addLayout(block2_column2_layout)
+        
+
+
+        
+        # Column 3
+        
+        block2_column3_layout = QtWidgets.QVBoxLayout()
+        
+        #Label data type
+        self.label_37 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_37.setFont(font)
+        self.label_37.setObjectName("label_37")
+        block2_column3_layout.addWidget(self.label_37)
+        
+        #Data type 1
+        self.comboBox_3 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_3.setFont(font)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.comboBox_3.sizePolicy().hasHeightForWidth())
+        #self.comboBox_3.setSizePolicy(sizePolicy)
+        self.comboBox_3.setEditable(True)
+        #self.comboBox_3.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_3.setObjectName("comboBox_3")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_3)
+        
+        #Data type 2
+        self.comboBox_4 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_4.setFont(font)
+        self.comboBox_4.setEditable(True)
+        #self.comboBox_4.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_4.setObjectName("comboBox_4")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_4)
+        
+        
+        #Data type 3
+        self.comboBox_11 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_11.setFont(font)
+        self.comboBox_11.setEditable(True)
+        #self.comboBox_11.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_11.setObjectName("comboBox_11")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        self.comboBox_11.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_11)
+        
+        
+        #Data type 4
+        self.comboBox_12 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_12.setFont(font)
+        self.comboBox_12.setEditable(True)
+        #self.comboBox_12.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_12.setObjectName("comboBox_12")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        self.comboBox_12.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_12)
+        
+        
+        #Data type 5
+        self.comboBox_13 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_13.setFont(font)
+        self.comboBox_13.setEditable(True)
+        #self.comboBox_13.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_13.setObjectName("comboBox_13")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        self.comboBox_13.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_13)
+        
+        
+        #Data type 6
+        self.comboBox_14 = QtWidgets.QComboBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_14.setFont(font)
+        self.comboBox_14.setEditable(True)
+        #self.comboBox_14.setIconSize(QtCore.QSize(10, 16))
+        self.comboBox_14.setObjectName("comboBox_14")
+        self.comboBox_14.addItem("")
+        self.comboBox_14.addItem("")
+        self.comboBox_14.addItem("")
+        self.comboBox_14.addItem("")
+        self.comboBox_14.addItem("")
+        block2_column3_layout.addWidget(self.comboBox_14)
+        
+        
+        self.label_37.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_3.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_4.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_11.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_12.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_13.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_14.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_layout.addLayout(block2_column3_layout)
+        
+
+        
+        # Column 4
+        
+        block2_column4_layout = QtWidgets.QVBoxLayout()
+        
+        #Label integration
+        self.label_38 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_38.setFont(font)
+        self.label_38.setObjectName("label_38")
+        block2_column4_layout.addWidget(self.label_38)   
+        
+        #Check box 1
+        self.checkBox_27 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_27.setText("")
+        self.checkBox_27.setObjectName("checkBox_27")
+        block2_column4_layout.addWidget(self.checkBox_27, 0, QtCore.Qt.AlignHCenter)
+        
+        #Check box 2
+        self.checkBox_31 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_31.setText("")
+        self.checkBox_31.setObjectName("checkBox_31")
+        block2_column4_layout.addWidget(self.checkBox_31, 0, QtCore.Qt.AlignHCenter)
+        
+        #Check box 3
+        self.checkBox_35 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_35.setText("")
+        self.checkBox_35.setObjectName("checkBox_35")
+        block2_column4_layout.addWidget(self.checkBox_35, 0, QtCore.Qt.AlignHCenter)
+        
+        #Check box 4
+        self.checkBox_39 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_39.setText("")
+        self.checkBox_39.setObjectName("checkBox_39")
+        block2_column4_layout.addWidget(self.checkBox_39, 0, QtCore.Qt.AlignHCenter)
+        
+        #Check box 5
+        self.checkBox_43 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_43.setText("")
+        self.checkBox_43.setObjectName("checkBox_43")
+        block2_column4_layout.addWidget(self.checkBox_43, 0, QtCore.Qt.AlignHCenter)
+        
+        #Check box 6
+        self.checkBox_47 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_47.setText("")
+        self.checkBox_47.setObjectName("checkBox_47")
+        block2_column4_layout.addWidget(self.checkBox_47, 0, QtCore.Qt.AlignHCenter)
+        
+        
+        self.label_38.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_27.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_31.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_35.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_39.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_43.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_47.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+             
+        
+        block2_layout.addLayout(block2_column4_layout)
+        
+             
+             
+             
+        # Column 5 
+             
+        block2_column5_layout = QtWidgets.QVBoxLayout()  
+             
+             
+             
+        self.label_39 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_39.setFont(font)
+        self.label_39.setObjectName("label_39")
+        block2_column5_layout.addWidget(self.label_39)    
+             
+             
+        self.lineEdit_11 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_11.setFont(font)
+        self.lineEdit_11.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_11.sizePolicy().hasHeightForWidth())
+        #self.lineEdit_11.setSizePolicy(sizePolicy)
+        self.lineEdit_11.setObjectName("lineEdit_11")
+        block2_column5_layout.addWidget(self.lineEdit_11) 
+             
+        self.lineEdit_12 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_12.setFont(font)
+        self.lineEdit_12.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_12.sizePolicy().hasHeightForWidth())
+        #fself.lineEdit_12.setSizePolicy(sizePolicy)
+        self.lineEdit_12.setObjectName("lineEdit_12")
+        block2_column5_layout.addWidget(self.lineEdit_12) 
+        
+        self.lineEdit_13 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_13.setFont(font)
+        self.lineEdit_13.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_13.sizePolicy().hasHeightForWidth())
+        #self.lineEdit_13.setSizePolicy(sizePolicy)
+        self.lineEdit_13.setObjectName("lineEdit_13")
+        block2_column5_layout.addWidget(self.lineEdit_13)   
+             
+        self.lineEdit_14 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_14.setFont(font)
+        self.lineEdit_14.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_14.sizePolicy().hasHeightForWidth())
+        #self.lineEdit_14.setSizePolicy(sizePolicy)
+        self.lineEdit_14.setObjectName("lineEdit_14")
+        block2_column5_layout.addWidget(self.lineEdit_14)     
+             
+        self.lineEdit_15 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_15.setFont(font)
+        self.lineEdit_15.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_15.sizePolicy().hasHeightForWidth())
+        #self.lineEdit_15.setSizePolicy(sizePolicy)
+        self.lineEdit_15.setObjectName("lineEdit_15")
+        block2_column5_layout.addWidget(self.lineEdit_15)     
+             
+        self.lineEdit_16 = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_16.setFont(font)
+        self.lineEdit_16.setEnabled(True)
+        #sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        #sizePolicy.setHorizontalStretch(0)
+        #sizePolicy.setVerticalStretch(0)
+        #sizePolicy.setHeightForWidth(self.lineEdit_16.sizePolicy().hasHeightForWidth())
+        #self.lineEdit_16.setSizePolicy(sizePolicy)
+        self.lineEdit_16.setObjectName("lineEdit_16")
+        block2_column5_layout.addWidget(self.lineEdit_16)
+        
+        
+        self.label_39.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_11.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_12.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_13.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_14.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_15.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_16.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_layout.addLayout(block2_column5_layout)
+        
+        
+        # Column 6 
+             
+        block2_column6_layout = QtWidgets.QVBoxLayout() 
+        
+        
+        self.label_40 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_40.setFont(font)
+        self.label_40.setObjectName("label_40")
+        block2_column6_layout.addWidget(self.label_40)     
+        
+        self.checkBox_29 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_29.setText("")
+        self.checkBox_29.setObjectName("checkBox_29")
+        block2_column6_layout.addWidget(self.checkBox_29, 0, QtCore.Qt.AlignHCenter)
+        
+        self.checkBox_33 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_33.setText("")
+        self.checkBox_33.setObjectName("checkBox_33")
+        block2_column6_layout.addWidget(self.checkBox_33, 0, QtCore.Qt.AlignHCenter)
+        
+        self.checkBox_37 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_37.setText("")
+        self.checkBox_37.setObjectName("checkBox_37")
+        block2_column6_layout.addWidget(self.checkBox_37, 0, QtCore.Qt.AlignHCenter)
+        
+        self.checkBox_41 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_41.setText("")
+        self.checkBox_41.setObjectName("checkBox_41")
+        block2_column6_layout.addWidget(self.checkBox_41, 0, QtCore.Qt.AlignHCenter)
+        
+        self.checkBox_45 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_45.setText("")
+        self.checkBox_45.setObjectName("checkBox_45")
+        block2_column6_layout.addWidget(self.checkBox_45, 0, QtCore.Qt.AlignHCenter)
+        
+        self.checkBox_49 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_49.setText("")
+        self.checkBox_49.setObjectName("checkBox_49")
+        block2_column6_layout.addWidget(self.checkBox_49, 0, QtCore.Qt.AlignHCenter)
+        
+        
+        self.label_40.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_29.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_33.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_37.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_41.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_45.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_49.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+             
+        block2_layout.addLayout(block2_column6_layout)
+             
+             
+           
+        # Column 7 
+             
+        block2_column7_layout = QtWidgets.QVBoxLayout() 
+        
+        
+        self.label_41 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_41.setFont(font)
+        self.label_41.setObjectName("label_41")
+        block2_column7_layout.addWidget(self.label_41)
+        
+        self.Push_01 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_01.setObjectName("Upload File 1")
+        block2_column7_layout.addWidget(self.Push_01)
+        
+        self.Push_02 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_02.setObjectName("Upload File 2")
+        block2_column7_layout.addWidget(self.Push_02)
+        
+        self.Push_03 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_03.setObjectName("Upload File 3")
+        block2_column7_layout.addWidget(self.Push_03)
+        
+        self.Push_04 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_04.setObjectName("Upload File 4")
+        block2_column7_layout.addWidget(self.Push_04)
+        
+        self.Push_05 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_05.setObjectName("Upload File 5")
+        block2_column7_layout.addWidget(self.Push_05)
+        
+        self.Push_06 = QtWidgets.QPushButton(self.centralwidget)
+        self.Push_06.setObjectName("Upload File 6")
+        block2_column7_layout.addWidget(self.Push_06)
+        
+        
+        self.label_41.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_01.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_02.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_03.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_04.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_05.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.Push_06.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_layout.addLayout(block2_column7_layout)
+        
+        main_layout.addLayout(block2_layout)    
+        
+        #============================================================================================
+        
+        # Block 3
+        block3_layout = QtWidgets.QVBoxLayout()
+        
+        block3_top_layout = QtWidgets.QHBoxLayout()
+        
+        #Upper
+        
+        #Label
+        
+        self.label_66 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_66.setFont(font)
+        self.label_66.setObjectName("label_66")
+        block3_top_layout.addWidget(self.label_66)
+
+        
+        #Line
+        self.line_3 = QtWidgets.QFrame(self.centralwidget)
+        self.line_3.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_3.setObjectName("line_3")
+        block3_top_layout.addWidget(self.line_3)
+        
+        self.label_66.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_3.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block3_layout.addLayout(block3_top_layout)
+        
+        
+        #Middle
+        
+        block3_middle_layout = QtWidgets.QHBoxLayout()
+        
+        #label integration
+        self.label_64 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -675,145 +833,34 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.label_64.setObjectName("label_64")
-        self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_4.setGeometry(QtCore.QRect(610, 460, 44, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_4.setFont(font)
-        self.spinBox_4.setObjectName("spinBox_4")
-        self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBox.setGeometry(QtCore.QRect(530, 420, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox.setFont(font)
-        self.checkBox.setObjectName("checkBox")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(610, 560, 121, 21))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label.setFont(font)
-        self.label.setStyleSheet("QLabel{\n"
-"\n"
-"color:\"blue\"\n"
-"\n"
-"}")
-        self.label.setObjectName("label")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(80, 550, 191, 21))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("color: green;")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(80, 580, 191, 21))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.pushButton_3.setFont(font)
-        self.pushButton_3.setStyleSheet("color: blue;")
-        self.pushButton_3.setObjectName("pushButton_3")
+        block3_middle_layout.addWidget(self.label_64)
+        
+        # radio button YES
         self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(190, 420, 57, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.radioButton.setFont(font)
         self.radioButton.setObjectName("radioButton")
-        self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox.setGeometry(QtCore.QRect(220, 460, 44, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox.setFont(font)
-        self.spinBox.setObjectName("spinBox")
-        self.spinBox_3 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_3.setGeometry(QtCore.QRect(420, 460, 44, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_3.setFont(font)
-        self.spinBox_3.setObjectName("spinBox_3")
-        self.spinBox_3.setProperty("value", 1)
-        self.label_65 = QtWidgets.QLabel(self.centralwidget)
-        self.label_65.setGeometry(QtCore.QRect(660, 460, 121, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_65.setFont(font)
-        self.label_65.setObjectName("label_65")
-        self.checkBox_50 = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBox_50.setGeometry(QtCore.QRect(610, 420, 171, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_50.setFont(font)
-        self.checkBox_50.setObjectName("checkBox_50")
-        self.line_3 = QtWidgets.QFrame(self.centralwidget)
-        self.line_3.setGeometry(QtCore.QRect(195, 380, 531, 20))
-        self.line_3.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_3.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_3.setObjectName("line_3")
-        self.label_66 = QtWidgets.QLabel(self.centralwidget)
-        self.label_66.setGeometry(QtCore.QRect(35, 380, 151, 17))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_66.setFont(font)
-        self.label_66.setObjectName("label_66")
-        self.label_67 = QtWidgets.QLabel(self.centralwidget)
-        self.label_67.setGeometry(QtCore.QRect(110, 460, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_67.setFont(font)
-        self.label_67.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_67.setObjectName("label_67")
+        block3_middle_layout.addWidget(self.radioButton)
+        
+        # radio button NO
         self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QtCore.QRect(250, 420, 45, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
+        block3_middle_layout.addWidget(self.radioButton_2)
+        
+        #label methods
         self.label_68 = QtWidgets.QLabel(self.centralwidget)
-        self.label_68.setGeometry(QtCore.QRect(430, 420, 71, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -824,21 +871,265 @@ class Ui_BiomiX(object):
 "\n"
 "}")
         self.label_68.setObjectName("label_68")
+        block3_middle_layout.addWidget(self.label_68)
+        
+        #MOFA checkbox
+        self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox.setFont(font)
+        self.checkBox.setObjectName("checkBox")
+        block3_middle_layout.addWidget(self.checkBox)
+        
+        #MURLOC checkbox
+        self.checkBox_50 = QtWidgets.QCheckBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_50.setFont(font)
+        self.checkBox_50.setObjectName("checkBox_50")
+        block3_middle_layout.addWidget(self.checkBox_50)
+        
+        
+        self.label_64.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.radioButton.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.radioButton_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_68.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)        
+        self.checkBox.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_50.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)        
+                
+        block3_layout.addLayout(block3_middle_layout)
+        
+        
+        
+        #Bottom
+        
+        #label factors
+        block3_bottom_layout = QtWidgets.QHBoxLayout()
+        self.label_67 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_67.setFont(font)
+        self.label_67.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_67.setObjectName("label_67")
+        block3_bottom_layout.addWidget(self.label_67)
+        
+        #Box N factor
+        self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox.setFont(font)
+        self.spinBox.setObjectName("spinBox")
+        block3_bottom_layout.addWidget(self.spinBox)
+        
+        #Label N factor
+        self.label_60 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_60.setFont(font)
+        self.label_60.setObjectName("label_60")
+        block3_bottom_layout.addWidget(self.label_60)
+        
+        #Box factor to explore
+        self.spinBox_3 = QtWidgets.QSpinBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_3.setFont(font)
+        self.spinBox_3.setObjectName("spinBox_3")
+        self.spinBox_3.setProperty("value", 1)
+        block3_bottom_layout.addWidget(self.spinBox_3)
+        
+        #label factor to explore
+        self.label_31 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_31.setFont(font)
+        self.label_31.setObjectName("label_31")
+        block3_bottom_layout.addWidget(self.label_31)
+        
+        
+       #box number omics
+        self.spinBox_4 = QtWidgets.QSpinBox(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_4.setFont(font)
+        self.spinBox_4.setObjectName("spinBox_4")
+        block3_bottom_layout.addWidget(self.spinBox_4)
+        
+        #Label number omics
+        self.label_65 = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_65.setFont(font)
+        self.label_65.setObjectName("label_65")
+        block3_bottom_layout.addWidget(self.label_65)
+        
+        
+        
+        self.label_67.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_60.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_3.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)        
+        self.label_31.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_4.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)   
+        self.label_65.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block3_layout.addLayout(block3_bottom_layout)
+        
+        main_layout.addLayout(block3_layout)
+        
+        
+        
+        #SPACE
+        
+        block3_5_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        self.label_space = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_space.setFont(font)
+        self.label_space.setObjectName("label_space")
+        block3_bottom_layout.addWidget(self.label_space)
+        
+        self.label_space.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block3_5_layout.addWidget(self.label_space)
+        
+        main_layout.addLayout(block3_5_layout)
+        
+        
+        # Block 4
+        block4_layout = QtWidgets.QHBoxLayout()
+        
+        block4_side_buttons_layout = QtWidgets.QVBoxLayout()
+        
+        #Open advanced options button
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("color: green;")
+        self.pushButton_2.setObjectName("pushButton_2")
+        block4_side_buttons_layout.addWidget(self.pushButton_2)
+        
+        #chatbot button
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pushButton_3.setFont(font)
+        self.pushButton_3.setStyleSheet("color: blue;")
+        self.pushButton_3.setObjectName("pushButton_3")
+        block4_side_buttons_layout.addWidget(self.pushButton_3)
+        
+        block4_layout.addLayout(block4_side_buttons_layout)
+        
+        
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.pushButton.setObjectName("pushButton")
+        block4_layout.addWidget(self.pushButton)
+        
+        #self.load_data() ???
+        
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label.setFont(font)
+        self.label.setStyleSheet("QLabel{\n"
+"\n"
+"color:\"blue\"\n"
+"\n"
+"}")
+        self.label.setObjectName("label")
+        
+        
+        self.pushButton_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.pushButton_3.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.pushButton.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)        
+        
+        block4_layout.addWidget(self.label)
+        
+        main_layout.addLayout(block4_layout)
+        
+        
+ 
+        
+        self.load_data()
+
+
+
         BiomiX.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(BiomiX)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 701, 22))
+        #self.menubar.setGeometry(QtCore.QRect(0, 0, 701, 22))
         self.menubar.setObjectName("menubar")
         BiomiX.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(BiomiX)
         self.statusbar.setObjectName("statusbar")
         BiomiX.setStatusBar(self.statusbar)
+        self.menubar.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
 
         self.retranslateUi(BiomiX)
         QtCore.QMetaObject.connectSlotsByName(BiomiX)
         
         
         
-        # BLOCK
+        # BLOCK BUTTON CONNECTIONS
         
         self.Push_01.clicked.connect(self.open_dialog1)
         self.Push_02.clicked.connect(self.open_dialog2)
@@ -867,7 +1158,7 @@ class Ui_BiomiX(object):
 
     def retranslateUi(self, BiomiX):
         _translate = QtCore.QCoreApplication.translate
-        BiomiX.setWindowTitle(_translate("BiomiX", "Biomix 1.0"))
+        BiomiX.setWindowTitle(_translate("BiomiX", "Biomix 2.3"))
         self.label_31.setText(_translate("BiomiX", "Factor to explore"))
         self.pushButton.setText(_translate("BiomiX", "Start Analysis"))
         self.Push_output.setText(_translate("BiomiX", "Select the directory"))
@@ -879,8 +1170,8 @@ class Ui_BiomiX(object):
         self.Push_06.setText(_translate("BiomiX", "Upload"))
         self.label_36.setText(_translate("BiomiX", "Input"))
         self.label_16.setText(_translate("BiomiX", "Analysis     "))
-        self.label_37.setText(_translate("BiomiX", "          Data type                  "))
-        self.label_38.setText(_translate("BiomiX", "Integration             "))
+        self.label_37.setText(_translate("BiomiX", "                Data type                  "))
+        self.label_38.setText(_translate("BiomiX", "         Integration             "))
         self.label_39.setText(_translate("BiomiX", "         Label                  "))
         self.label_40.setText(_translate("BiomiX", "         Selection  "))
         self.label_41.setText(_translate("BiomiX", "  Data Upload "))
@@ -925,18 +1216,19 @@ class Ui_BiomiX(object):
         self.label_7.setText(_translate("BiomiX", "    Condition"))
         self.label_8.setText(_translate("BiomiX", "      Output"))
         self.label_61.setText(_translate("BiomiX", "      Control "))
-        self.label_64.setText(_translate("BiomiX", " Integration"))
+        self.label_64.setText(_translate("BiomiX", "     Integration    "))
         self.checkBox.setText(_translate("BiomiX", "MOFA"))
-        self.label.setText(_translate("BiomiX", "Analysis status"))
+        self.label.setText(_translate("BiomiX", "       Analysis status"))
         self.pushButton_2.setText(_translate("BiomiX", "Open advanced options"))
         self.pushButton_3.setText(_translate("BiomiX", "Open BiomiX chatbot"))
         self.radioButton.setText(_translate("BiomiX", "Yes"))
         self.label_65.setText(_translate("BiomiX", "Omics overlay"))
+        self.label_space.setText(_translate("BiomiX", "  "))
         self.checkBox_50.setText(_translate("BiomiX", "Murloc (Coming soon!)"))
         self.label_66.setText(_translate("BiomiX", "Integration Options"))
         self.label_67.setText(_translate("BiomiX", " Factors"))
         self.radioButton_2.setText(_translate("BiomiX", "No"))
-        self.label_68.setText(_translate("BiomiX", "Method"))
+        self.label_68.setText(_translate("BiomiX", "    Method    "))
 
     
 #FUNCTION FIRST WINDOWS
@@ -2023,144 +2315,70 @@ class SecondWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle('Second Window')
         self.setObjectName("BiomiX_advanced")
-        self.resize(851, 689)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 851, 699))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.tabWidget.setFont(font)
-        self.tabWidget.setObjectName("tabWidget")
+        self.resize(1200, 800)
+        
+        self.tabWidget = QtWidgets.QTabWidget()
+
+        # Imposta il QTabWidget come central widget della finestra
+        self.setCentralWidget(self.tabWidget)
+        
+        
+        #TAB 13 it is the general TAB
+        
         self.tab_13 = QtWidgets.QWidget()
         self.tab_13.setObjectName("tab_13")
-        self.doubleSpinBox_53 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_53.setGeometry(QtCore.QRect(440, 40, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.doubleSpinBox_53.setFont(font)
-        self.doubleSpinBox_53.setSingleStep(0.25)
-        self.doubleSpinBox_53.setProperty("value", 0.05)
-        self.doubleSpinBox_53.setObjectName("doubleSpinBox_53")
-        self.line_87 = QtWidgets.QFrame(self.tab_13)
-        self.line_87.setGeometry(QtCore.QRect(500, 10, 221, 20))
-        self.line_87.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_87.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_87.setObjectName("line_87")
-        self.doubleSpinBox_54 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_54.setGeometry(QtCore.QRect(560, 120, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.doubleSpinBox_54.setFont(font)
-        self.doubleSpinBox_54.setSingleStep(0.25)
-        self.doubleSpinBox_54.setProperty("value", 0.05)
-        self.doubleSpinBox_54.setObjectName("doubleSpinBox_54")
-        self.label_233 = QtWidgets.QLabel(self.tab_13)
-        self.label_233.setGeometry(QtCore.QRect(190, 120, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_233.setFont(font)
-        self.label_233.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_233.setObjectName("label_233")
-        self.line_88 = QtWidgets.QFrame(self.tab_13)
-        self.line_88.setGeometry(QtCore.QRect(500, 90, 221, 20))
-        self.line_88.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_88.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_88.setObjectName("line_88")
-        self.label_234 = QtWidgets.QLabel(self.tab_13)
-        self.label_234.setGeometry(QtCore.QRect(320, 40, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_234.setFont(font)
-        self.label_234.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_234.setObjectName("label_234")
-        self.line_89 = QtWidgets.QFrame(self.tab_13)
-        self.line_89.setGeometry(QtCore.QRect(90, 90, 191, 20))
-        self.line_89.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_89.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_89.setObjectName("line_89")
-        self.label_237 = QtWidgets.QLabel(self.tab_13)
-        self.label_237.setGeometry(QtCore.QRect(440, 120, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_237.setFont(font)
-        self.label_237.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_237.setObjectName("label_237")
-        self.doubleSpinBox_55 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_55.setGeometry(QtCore.QRect(230, 40, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.doubleSpinBox_55.setFont(font)
-        self.doubleSpinBox_55.setSingleStep(0.25)
-        self.doubleSpinBox_55.setProperty("value", 0.5)
-        self.doubleSpinBox_55.setObjectName("doubleSpinBox_55")
+        
+        
+        main_layout = QtWidgets.QVBoxLayout(self.tab_13)
+
+        #TAB/BLOCK 1
+        
+        #TRANSCRIPTOMICS GENERAL
+        
+        #Line 1
+        block1_layout = QtWidgets.QVBoxLayout()
+        
+        block1_line1_layout = QtWidgets.QHBoxLayout()
+        
+        #initial line
         self.line_90 = QtWidgets.QFrame(self.tab_13)
-        self.line_90.setGeometry(QtCore.QRect(90, 10, 191, 20))
         self.line_90.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_90.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_90.setObjectName("line_90")
-        self.doubleSpinBox_56 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_56.setGeometry(QtCore.QRect(330, 120, 61, 31))
+        block1_line1_layout.addWidget(self.line_90)
+        
+        #transcriptomics label
+        self.label_308 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.doubleSpinBox_56.setFont(font)
-        self.doubleSpinBox_56.setSingleStep(0.25)
-        self.doubleSpinBox_56.setProperty("value", 0.5)
-        self.doubleSpinBox_56.setObjectName("doubleSpinBox_56")
-        self.label_239 = QtWidgets.QLabel(self.tab_13)
-        self.label_239.setGeometry(QtCore.QRect(530, 40, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_239.setFont(font)
-        self.label_239.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_239.setObjectName("label_239")
+        self.label_308.setFont(font)
+        self.label_308.setObjectName("label_308")
+        block1_line1_layout.addWidget(self.label_308)
+        
+        #ending line
+        self.line_87 = QtWidgets.QFrame(self.tab_13)
+        self.line_87.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_87.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_87.setObjectName("line_87")
+        block1_line1_layout.addWidget(self.line_87)
+        
+        block1_layout.addLayout(block1_line1_layout)
+        
+        
+        self.line_90.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_308.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_87.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block1_line2_layout = QtWidgets.QHBoxLayout()
+        
+        #label FC
         self.label_240 = QtWidgets.QLabel(self.tab_13)
-        self.label_240.setGeometry(QtCore.QRect(90, 40, 131, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2171,68 +2389,230 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_240.setObjectName("label_240")
-        self.comboBox_61 = QtWidgets.QComboBox(self.tab_13)
-        self.comboBox_61.setGeometry(QtCore.QRect(620, 200, 86, 31))
+        block1_line2_layout.addWidget(self.label_240)
+        
+        #Doublespinbox FC
+        self.doubleSpinBox_55 = QtWidgets.QDoubleSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.comboBox_61.setFont(font)
-        self.comboBox_61.setAutoFillBackground(False)
-        self.comboBox_61.setObjectName("comboBox_61")
-        self.comboBox_61.addItem("")
-        self.comboBox_61.addItem("")
-        self.label_241 = QtWidgets.QLabel(self.tab_13)
-        self.label_241.setGeometry(QtCore.QRect(320, 200, 111, 31))
+        self.doubleSpinBox_55.setFont(font)
+        self.doubleSpinBox_55.setSingleStep(0.25)
+        self.doubleSpinBox_55.setProperty("value", 0.5)
+        self.doubleSpinBox_55.setObjectName("doubleSpinBox_55")
+        block1_line2_layout.addWidget(self.doubleSpinBox_55)
+        
+        #Label padj
+        self.label_234 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_241.setFont(font)
-        self.label_241.setStyleSheet("QWidget{\n"
+        self.label_234.setFont(font)
+        self.label_234.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_241.setObjectName("label_241")
-        self.line_91 = QtWidgets.QFrame(self.tab_13)
-        self.line_91.setGeometry(QtCore.QRect(500, 170, 221, 20))
-        self.line_91.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_91.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_91.setObjectName("line_91")
-        self.doubleSpinBox_57 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_57.setGeometry(QtCore.QRect(440, 200, 61, 31))
+        self.label_234.setObjectName("label_234")
+        block1_line2_layout.addWidget(self.label_234)
+        
+        #Doublespinbox padj
+        self.doubleSpinBox_53 = QtWidgets.QDoubleSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.doubleSpinBox_57.setFont(font)
-        self.doubleSpinBox_57.setSingleStep(0.25)
-        self.doubleSpinBox_57.setProperty("value", 0.05)
-        self.doubleSpinBox_57.setObjectName("doubleSpinBox_57")
-        self.doubleSpinBox_58 = QtWidgets.QDoubleSpinBox(self.tab_13)
-        self.doubleSpinBox_58.setGeometry(QtCore.QRect(230, 200, 61, 31))
+        self.doubleSpinBox_53.setFont(font)
+        self.doubleSpinBox_53.setSingleStep(0.25)
+        self.doubleSpinBox_53.setProperty("value", 0.05)
+        self.doubleSpinBox_53.setObjectName("doubleSpinBox_53")
+        block1_line2_layout.addWidget(self.doubleSpinBox_53)
+        
+        #Label panel
+        self.label_239 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.doubleSpinBox_58.setFont(font)
-        self.doubleSpinBox_58.setSingleStep(0.25)
-        self.doubleSpinBox_58.setProperty("value", 0.15)
-        self.doubleSpinBox_58.setObjectName("doubleSpinBox_58")
+        self.label_239.setFont(font)
+        self.label_239.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_239.setObjectName("label_239")
+        block1_line2_layout.addWidget(self.label_239)
+        
+        self.push_panel = QtWidgets.QPushButton(self.tab_13)
+        block1_line2_layout.addWidget(self.push_panel)
+        
+        block1_layout.addLayout(block1_line2_layout)
+        
+        
+        self.label_240.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_55.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_234.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_53.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_239.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_panel.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        #METABOLOMICS GENERAL
+        
+        block1_line3_layout = QtWidgets.QHBoxLayout()
+        
+        #line beginning
+        self.line_89 = QtWidgets.QFrame(self.tab_13)
+        self.line_89.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_89.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_89.setObjectName("line_89")
+        block1_line3_layout.addWidget(self.line_89)
+        
+        #metabolomics label
+        self.label_309 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_309.setFont(font)
+        self.label_309.setObjectName("label_309")
+        block1_line3_layout.addWidget(self.label_309)
+        
+        #ending line
+        self.line_88 = QtWidgets.QFrame(self.tab_13)
+        self.line_88.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_88.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_88.setObjectName("line_88")
+        block1_line3_layout.addWidget(self.line_88)
+        
+        block1_layout.addLayout(block1_line3_layout)
+        
+        self.line_89.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_309.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_88.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block1_line4_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Label FC
+        self.label_233 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_233.setFont(font)
+        self.label_233.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_233.setObjectName("label_233")
+        block1_line4_layout.addWidget(self.label_233)
+        
+        #doublespinbox FC
+        self.doubleSpinBox_56 = QtWidgets.QDoubleSpinBox(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_56.setFont(font)
+        self.doubleSpinBox_56.setSingleStep(0.25)
+        self.doubleSpinBox_56.setProperty("value", 0.5)
+        self.doubleSpinBox_56.setObjectName("doubleSpinBox_56")
+        block1_line4_layout.addWidget(self.doubleSpinBox_56)
+        
+        
+        
+        #label padj
+        self.label_237 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_237.setFont(font)
+        self.label_237.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_237.setObjectName("label_237")
+        block1_line4_layout.addWidget(self.label_237)
+        
+        #doublespinbox padj
+        self.doubleSpinBox_54 = QtWidgets.QDoubleSpinBox(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_54.setFont(font)
+        self.doubleSpinBox_54.setSingleStep(0.25)
+        self.doubleSpinBox_54.setProperty("value", 0.05)
+        self.doubleSpinBox_54.setObjectName("doubleSpinBox_54")
+        block1_line4_layout.addWidget(self.doubleSpinBox_54)
+        
+        block1_layout.addLayout(block1_line4_layout)
+        
+        self.label_233.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_56.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_237.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_54.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        #METHYLOMICS GENERAL
+        
+        block1_line5_layout = QtWidgets.QHBoxLayout()
+        
+        #initial line
         self.line_92 = QtWidgets.QFrame(self.tab_13)
-        self.line_92.setGeometry(QtCore.QRect(90, 170, 201, 20))
         self.line_92.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_92.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_92.setObjectName("line_92")
-        self.label_242 = QtWidgets.QLabel(self.tab_13)
-        self.label_242.setGeometry(QtCore.QRect(90, 200, 131, 31))
+        block1_line5_layout.addWidget(self.line_92)
+        
+        #label methylomics
+        self.label_310 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_310.setFont(font)
+        self.label_310.setObjectName("label_310")
+        block1_line5_layout.addWidget(self.label_310)
+        
+        #ending line
+        self.line_91 = QtWidgets.QFrame(self.tab_13)
+        self.line_91.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_91.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_91.setObjectName("line_91")
+        block1_line5_layout.addWidget(self.line_91)
+        
+        block1_layout.addLayout(block1_line5_layout)
+        
+        
+        self.line_92.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_310.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_91.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block1_line6_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Label FC
+        self.label_242 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2243,10 +2623,54 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_242.setObjectName("label_242")
-        self.label_244 = QtWidgets.QLabel(self.tab_13)
-        self.label_244.setGeometry(QtCore.QRect(530, 200, 81, 31))
+        block1_line6_layout.addWidget(self.label_242)
+        
+        #Doublespinbox FC
+        self.doubleSpinBox_58 = QtWidgets.QDoubleSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_58.setFont(font)
+        self.doubleSpinBox_58.setSingleStep(0.25)
+        self.doubleSpinBox_58.setProperty("value", 0.15)
+        self.doubleSpinBox_58.setObjectName("doubleSpinBox_58")
+        block1_line6_layout.addWidget(self.doubleSpinBox_58)
+        
+        #label padj
+        self.label_241 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_241.setFont(font)
+        self.label_241.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_241.setObjectName("label_241")
+        block1_line6_layout.addWidget(self.label_241)
+        
+        #Doublespinbox padj
+        self.doubleSpinBox_57 = QtWidgets.QDoubleSpinBox(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_57.setFont(font)
+        self.doubleSpinBox_57.setSingleStep(0.25)
+        self.doubleSpinBox_57.setProperty("value", 0.05)
+        self.doubleSpinBox_57.setObjectName("doubleSpinBox_57")
+        block1_line6_layout.addWidget(self.doubleSpinBox_57)
+
+        #label array
+        self.label_244 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2257,35 +2681,76 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_244.setObjectName("label_244")
-        self.spinBox_37 = QtWidgets.QSpinBox(self.tab_13)
-        self.spinBox_37.setGeometry(QtCore.QRect(400, 280, 51, 31))
+        block1_line6_layout.addWidget(self.label_244)
+        
+        #array combobox
+        self.comboBox_61 = QtWidgets.QComboBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.spinBox_37.setFont(font)
-        self.spinBox_37.setProperty("value", 3)
-        self.spinBox_37.setObjectName("spinBox_37")
-        self.spinBox_38 = QtWidgets.QSpinBox(self.tab_13)
-        self.spinBox_38.setGeometry(QtCore.QRect(400, 320, 51, 31))
+        self.comboBox_61.setFont(font)
+        self.comboBox_61.setAutoFillBackground(False)
+        self.comboBox_61.setObjectName("comboBox_61")
+        self.comboBox_61.addItem("")
+        self.comboBox_61.addItem("")
+        block1_line6_layout.addWidget(self.comboBox_61)
+        
+        block1_layout.addLayout(block1_line6_layout)
+        
+        
+        self.label_242.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_58.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_241.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_57.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_244.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_61.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        #PANEL AND POSITIVITY CRITERIA
+        
+        block1_line7_layout = QtWidgets.QHBoxLayout()
+        
+        #starting line
+        self.line_94 = QtWidgets.QFrame(self.tab_13)
+        self.line_94.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_94.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_94.setObjectName("line_94")
+        block1_line7_layout.addWidget(self.line_94)
+        
+        #label panel and positivity criteria
+        self.label_311 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.spinBox_38.setFont(font)
-        self.spinBox_38.setProperty("value", 10)
-        self.spinBox_38.setObjectName("spinBox_38")
-        self.checkBox_65 = QtWidgets.QCheckBox(self.tab_13)
-        self.checkBox_65.setGeometry(QtCore.QRect(730, 280, 31, 31))
-        self.checkBox_65.setText("")
-        self.checkBox_65.setChecked(True)
-        self.checkBox_65.setObjectName("checkBox_65")
+        self.label_311.setFont(font)
+        self.label_311.setObjectName("label_311")
+        block1_line7_layout.addWidget(self.label_311)
+        
+        #ending line
+        self.line_93 = QtWidgets.QFrame(self.tab_13)
+        self.line_93.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_93.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_93.setObjectName("line_93")
+        block1_line7_layout.addWidget(self.line_93)
+        
+        
+        block1_layout.addLayout(block1_line7_layout)
+        
+        self.line_94.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_311.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_93.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block1_line8_layout = QtWidgets.QHBoxLayout()
+        
+        #Z-score > 2
         self.label_246 = QtWidgets.QLabel(self.tab_13)
-        self.label_246.setGeometry(QtCore.QRect(80, 280, 311, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2296,58 +2761,24 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_246.setObjectName("label_246")
-        self.label_247 = QtWidgets.QLabel(self.tab_13)
-        self.label_247.setGeometry(QtCore.QRect(80, 320, 311, 31))
+        block1_line8_layout.addWidget(self.label_246)
+        
+        #spinbox Z-score > 2
+        self.spinBox_37 = QtWidgets.QSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_247.setFont(font)
-        self.label_247.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_247.setObjectName("label_247")
-        self.label_247b = QtWidgets.QLabel(self.tab_13)
-        self.label_247b.setGeometry(QtCore.QRect(460, 320, 201, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_247b.setFont(font)
-        self.label_247b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_247b.setObjectName("label_247b")
-        self.spinBox_38b = QtWidgets.QSpinBox(self.tab_13)
-        self.spinBox_38b.setGeometry(QtCore.QRect(670, 320, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_38b.setFont(font)
-        self.spinBox_38b.setProperty("value", 20)
-        self.spinBox_38b.setObjectName("spinBox_38b")
-        self.line_93 = QtWidgets.QFrame(self.tab_13)
-        self.line_93.setGeometry(QtCore.QRect(530, 250, 191, 20))
-        self.line_93.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_93.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_93.setObjectName("line_93")
-        self.line_94 = QtWidgets.QFrame(self.tab_13)
-        self.line_94.setGeometry(QtCore.QRect(90, 250, 171, 20))
-        self.line_94.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_94.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_94.setObjectName("line_94")
+        self.spinBox_37.setFont(font)
+        self.spinBox_37.setProperty("value", 3)
+        self.spinBox_37.setObjectName("spinBox_37")
+        block1_line8_layout.addWidget(self.spinBox_37)
+        
+        #label removal positive controls
         self.label_248 = QtWidgets.QLabel(self.tab_13)
-        self.label_248.setGeometry(QtCore.QRect(460, 280, 251, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2358,65 +2789,102 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_248.setObjectName("label_248")
-        self.label_308 = QtWidgets.QLabel(self.tab_13)
-        self.label_308.setGeometry(QtCore.QRect(310, 10, 171, 20))
+        block1_line8_layout.addWidget(self.label_248)
+        
+        #checkbox removal positive controls
+        self.checkBox_65 = QtWidgets.QCheckBox(self.tab_13)
+        self.checkBox_65.setText("")
+        self.checkBox_65.setChecked(True)
+        self.checkBox_65.setObjectName("checkBox_65")
+        block1_line8_layout.addWidget(self.checkBox_65)
+        
+        
+        block1_layout.addLayout(block1_line8_layout)
+        
+        
+        
+        self.label_246.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_37.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_248.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_65.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        block1_line9_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #label Z-score > 1
+        self.label_247 = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_308.setFont(font)
-        self.label_308.setObjectName("label_308")
-        self.label_309 = QtWidgets.QLabel(self.tab_13)
-        self.label_309.setGeometry(QtCore.QRect(310, 90, 171, 20))
+        self.label_247.setFont(font)
+        self.label_247.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_247.setObjectName("label_247")
+        block1_line9_layout.addWidget(self.label_247)
+        
+        #spinbox Z-score > 1
+        self.spinBox_38 = QtWidgets.QSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_309.setFont(font)
-        self.label_309.setObjectName("label_309")
-        self.label_310 = QtWidgets.QLabel(self.tab_13)
-        self.label_310.setGeometry(QtCore.QRect(320, 170, 171, 20))
+        self.spinBox_38.setFont(font)
+        self.spinBox_38.setProperty("value", 10)
+        self.spinBox_38.setObjectName("spinBox_38")
+        block1_line9_layout.addWidget(self.spinBox_38)
+        
+        
+        #Label Number genes Heatmap
+        self.label_247b = QtWidgets.QLabel(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_310.setFont(font)
-        self.label_310.setObjectName("label_310")
-        self.label_311 = QtWidgets.QLabel(self.tab_13)
-        self.label_311.setGeometry(QtCore.QRect(280, 240, 231, 20))
+        self.label_247b.setFont(font)
+        self.label_247b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_247b.setObjectName("label_247b")
+        block1_line9_layout.addWidget(self.label_247b)
+        
+        #Spinbox Number genes Heatmap
+        self.spinBox_38b = QtWidgets.QSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_311.setFont(font)
-        self.label_311.setObjectName("label_311")
-        self.line_109 = QtWidgets.QFrame(self.tab_13)
-        self.line_109.setGeometry(QtCore.QRect(90, 410, 191, 20))
-        self.line_109.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_109.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_109.setObjectName("line_109")
-        self.label_314 = QtWidgets.QLabel(self.tab_13)
-        self.label_314.setGeometry(QtCore.QRect(310, 410, 201, 20))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_314.setFont(font)
-        self.label_314.setObjectName("label_314")
-        self.line_110 = QtWidgets.QFrame(self.tab_13)
-        self.line_110.setGeometry(QtCore.QRect(500, 410, 221, 20))
-        self.line_110.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_110.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_110.setObjectName("line_110")
+        self.spinBox_38b.setFont(font)
+        self.spinBox_38b.setProperty("value", 20)
+        self.spinBox_38b.setObjectName("spinBox_38b")
+        block1_line9_layout.addWidget(self.spinBox_38b)
+        
+        
+        block1_layout.addLayout(block1_line9_layout)
+        
+        self.label_247.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_38.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_247b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_38b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block1_line10_layout = QtWidgets.QHBoxLayout()
+        
+        #label clustering distance
         self.label_X1 = QtWidgets.QLabel(self.tab_13)
-        self.label_X1.setGeometry(QtCore.QRect(80, 360, 141, 30))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2427,10 +2895,12 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_X1.setObjectName("label_X1")
+        block1_line10_layout.addWidget(self.label_X1)
+        
+        #combobox clustering distance
         self.comboBox_X1 = QtWidgets.QComboBox(self.tab_13)
-        self.comboBox_X1.setGeometry(QtCore.QRect(230, 360, 96, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2446,11 +2916,12 @@ class SecondWindow(QMainWindow):
         self.comboBox_X1.addItem("")
         self.comboBox_X1.addItem("")
         self.comboBox_X1.addItem("")
+        block1_line10_layout.addWidget(self.comboBox_X1)
         
+        #label clustering methods
         self.label_X2 = QtWidgets.QLabel(self.tab_13)
-        self.label_X2.setGeometry(QtCore.QRect(400, 360, 141, 30))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2461,10 +2932,12 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_X2.setObjectName("label_X2")
+        block1_line10_layout.addWidget(self.label_X2)
+        
+        #combobox clustering methods
         self.comboBox_X2 = QtWidgets.QComboBox(self.tab_13)
-        self.comboBox_X2.setGeometry(QtCore.QRect(550, 360, 86, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2479,13 +2952,59 @@ class SecondWindow(QMainWindow):
         self.comboBox_X2.addItem("")
         self.comboBox_X2.addItem("")
         self.comboBox_X2.addItem("")
+        block1_line10_layout.addWidget(self.comboBox_X2)
         
         
+        block1_layout.addLayout(block1_line10_layout)
         
-        self.label_243 = QtWidgets.QLabel(self.tab_13)
-        self.label_243.setGeometry(QtCore.QRect(100, 430, 101, 31))
+        self.label_X1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_X1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_X2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_X2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block1_line11_layout = QtWidgets.QHBoxLayout()
+        
+        #starting line
+        self.line_109 = QtWidgets.QFrame(self.tab_13)
+        self.line_109.setGeometry(QtCore.QRect(90, 410, 191, 20))
+        self.line_109.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_109.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_109.setObjectName("line_109")
+        block1_line11_layout.addWidget(self.line_109)
+        
+        #label computational resourses
+        self.label_314 = QtWidgets.QLabel(self.tab_13)
+        self.label_314.setGeometry(QtCore.QRect(310, 410, 201, 20))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_314.setFont(font)
+        self.label_314.setObjectName("label_314")
+        block1_line11_layout.addWidget(self.label_314)
+        
+        #ending line
+        self.line_110 = QtWidgets.QFrame(self.tab_13)
+        self.line_110.setGeometry(QtCore.QRect(500, 410, 221, 20))
+        self.line_110.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_110.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_110.setObjectName("line_110")
+        block1_line11_layout.addWidget(self.line_110)
+        
+        
+        block1_layout.addLayout(block1_line11_layout)
+        
+        self.line_109.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_314.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_110.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block1_line12_layout = QtWidgets.QHBoxLayout()
+        
+        #label CPU threads
+        self.label_243 = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2496,10 +3015,24 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_243.setObjectName("label_243")
-        self.label_243b = QtWidgets.QLabel(self.tab_13)
-        self.label_243b.setGeometry(QtCore.QRect(500, 430, 171, 31))
+        block1_line12_layout.addWidget(self.label_243)
+        
+        #spinbox CPU threads
+        self.spinBox_39 = QtWidgets.QSpinBox(self.tab_13)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_39.setFont(font)
+        self.spinBox_39.setProperty("value", 3)
+        self.spinBox_39.setObjectName("spinBox_39")
+        block1_line12_layout.addWidget(self.spinBox_39)
+        
+        #label MOFA input feature number
+        self.label_243b = QtWidgets.QLabel(self.tab_13)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2510,10 +3043,12 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_243b.setObjectName("label_243b")
+        block1_line12_layout.addWidget(self.label_243b)
+        
+        #combobox MOFA input feature number
         self.comboBox_81b = QtWidgets.QComboBox(self.tab_13)
-        self.comboBox_81b.setGeometry(QtCore.QRect(680, 430, 61, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -2526,926 +3061,253 @@ class SecondWindow(QMainWindow):
         self.comboBox_81b.addItem("")
         self.comboBox_81b.addItem("")
         self.comboBox_81b.addItem("")
-        self.spinBox_39 = QtWidgets.QSpinBox(self.tab_13)
-        self.spinBox_39.setGeometry(QtCore.QRect(210, 430, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_39.setFont(font)
-        self.spinBox_39.setProperty("value", 3)
-        self.spinBox_39.setObjectName("spinBox_39")
-        self.push_panel = QtWidgets.QPushButton(self.tab_13)
-        self.push_panel.setGeometry(QtCore.QRect(630, 40, 101, 31))
+        block1_line12_layout.addWidget(self.comboBox_81b)
+        
+        block1_layout.addLayout(block1_line12_layout)
+        
+        self.label_243.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_39.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_243b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_81b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        main_layout.addLayout(block1_layout)
         
         self.tabWidget.addTab(self.tab_13, "")
-        self.tab_14 = QtWidgets.QWidget()
-        self.tab_14.setObjectName("tab_14")
-        self.label_253 = QtWidgets.QLabel(self.tab_14)
-        self.label_253.setGeometry(QtCore.QRect(260, 40, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_253.setFont(font)
-        self.label_253.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_253.setObjectName("label_253")
-        self.comboBox_64 = QtWidgets.QComboBox(self.tab_14)
-        self.comboBox_64.setGeometry(QtCore.QRect(230, 140, 51, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_64.setFont(font)
-        self.comboBox_64.setAutoFillBackground(False)
-        self.comboBox_64.setObjectName("comboBox_64")
-        self.comboBox_64.addItem("")
-        self.comboBox_64.addItem("")
-        self.comboBox_64.addItem("")
-        self.comboBox_64.addItem("")
-        self.label_254 = QtWidgets.QLabel(self.tab_14)
-        self.label_254.setGeometry(QtCore.QRect(380, 90, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_254.setFont(font)
-        self.label_254.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_254.setObjectName("label_254")
-        self.label_255 = QtWidgets.QLabel(self.tab_14)
-        self.label_255.setGeometry(QtCore.QRect(180, 140, 51, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_255.setFont(font)
-        self.label_255.setObjectName("label_255")
-        self.label_256 = QtWidgets.QLabel(self.tab_14)
-        self.label_256.setGeometry(QtCore.QRect(60, 40, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_256.setFont(font)
-        self.label_256.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_256.setObjectName("label_256")
-        self.line_97 = QtWidgets.QFrame(self.tab_14)
-        self.line_97.setGeometry(QtCore.QRect(10, 10, 221, 20))
-        self.line_97.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_97.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_97.setObjectName("line_97")
-        self.spinBox_40 = QtWidgets.QSpinBox(self.tab_14)
-        self.spinBox_40.setGeometry(QtCore.QRect(400, 40, 44, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.spinBox_40.setFont(font)
-        self.spinBox_40.setMaximum(100)
-        self.spinBox_40.setObjectName("spinBox_40")
-        self.label_258 = QtWidgets.QLabel(self.tab_14)
-        self.label_258.setGeometry(QtCore.QRect(160, 90, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_258.setFont(font)
-        self.label_258.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_258.setObjectName("label_258")
-        self.label_260 = QtWidgets.QLabel(self.tab_14)
-        self.label_260.setGeometry(QtCore.QRect(330, 140, 51, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_260.setFont(font)
-        self.label_260.setObjectName("label_260")
-        self.comboBox_65 = QtWidgets.QComboBox(self.tab_14)
-        self.comboBox_65.setGeometry(QtCore.QRect(530, 140, 51, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_65.setFont(font)
-        self.comboBox_65.setAutoFillBackground(False)
-        self.comboBox_65.setObjectName("comboBox_65")
-        self.comboBox_65.addItem("")
-        self.comboBox_65.addItem("")
-        self.comboBox_65.addItem("")
-        self.comboBox_65.addItem("")
-        self.label_261 = QtWidgets.QLabel(self.tab_14)
-        self.label_261.setGeometry(QtCore.QRect(260, 10, 181, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_261.setFont(font)
-        self.label_261.setObjectName("label_261")
-        self.comboBox_66 = QtWidgets.QComboBox(self.tab_14)
-        self.comboBox_66.setGeometry(QtCore.QRect(150, 40, 86, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_66.setFont(font)
-        self.comboBox_66.setAutoFillBackground(False)
-        self.comboBox_66.setObjectName("comboBox_66")
-        self.comboBox_66.addItem("")
-        self.comboBox_66.addItem("")
-        self.line_98 = QtWidgets.QFrame(self.tab_14)
-        self.line_98.setGeometry(QtCore.QRect(460, 10, 291, 20))
-        self.line_98.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_98.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_98.setObjectName("line_98")
-        self.comboBox_67 = QtWidgets.QComboBox(self.tab_14)
-        self.comboBox_67.setGeometry(QtCore.QRect(500, 90, 51, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_67.setFont(font)
-        self.comboBox_67.setAutoFillBackground(False)
-        self.comboBox_67.setObjectName("comboBox_67")
-        self.comboBox_67.addItem("")
-        self.comboBox_68 = QtWidgets.QComboBox(self.tab_14)
-        self.comboBox_68.setGeometry(QtCore.QRect(250, 90, 51, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_68.setFont(font)
-        self.comboBox_68.setAutoFillBackground(False)
-        self.comboBox_68.setObjectName("comboBox_68")
-        self.comboBox_68.addItem("")
-        self.comboBox_68.addItem("")
-        self.label_262 = QtWidgets.QLabel(self.tab_14)
-        self.label_262.setGeometry(QtCore.QRect(490, 140, 81, 31))
-        font = QtGui.QFont()
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_262.setFont(font)
-        self.label_262.setObjectName("label_262")
-        self.spinBox_41 = QtWidgets.QSpinBox(self.tab_14)
-        self.spinBox_41.setGeometry(QtCore.QRect(590, 40, 44, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.spinBox_41.setFont(font)
-        self.spinBox_41.setMaximum(100)
-        self.spinBox_41.setObjectName("spinBox_41")
-        self.tabWidget_5 = QtWidgets.QTabWidget(self.tab_14)
-        self.tabWidget_5.setGeometry(QtCore.QRect(0, -30, 851, 699))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.tabWidget_5.setFont(font)
-        self.tabWidget_5.setStyleSheet("")
-        self.tabWidget_5.setObjectName("tabWidget_5")
         
         
         
-        self.tab_15 = QtWidgets.QWidget()
-        self.tab_15.setObjectName("tab_15")
-        self.doubleSpinBox_60 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_60.setGeometry(QtCore.QRect(610, 40, 61, 31))
-        self.doubleSpinBox_60.setSingleStep(0.25)
-        self.doubleSpinBox_60.setProperty("value", 90.0)
-        self.doubleSpinBox_60.setObjectName("doubleSpinBox_60")
-        self.doubleSpinBox_61 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_61.setGeometry(QtCore.QRect(370, 40, 61, 31))
-        self.doubleSpinBox_61.setSingleStep(0.25)
-        self.doubleSpinBox_61.setProperty("value", 0.05)
-        self.doubleSpinBox_61.setObjectName("doubleSpinBox_61")
-        self.line_99 = QtWidgets.QFrame(self.tab_15)
-        self.line_99.setGeometry(QtCore.QRect(430, 10, 251, 20))
-        self.line_99.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_99.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_99.setObjectName("line_99")
-        self.doubleSpinBox_62 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_62.setGeometry(QtCore.QRect(370, 120, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.doubleSpinBox_62.setFont(font)
-        self.doubleSpinBox_62.setSingleStep(0.25)
-        self.doubleSpinBox_62.setProperty("value", 0.05)
-        self.doubleSpinBox_62.setObjectName("doubleSpinBox_62")
-        self.label_263 = QtWidgets.QLabel(self.tab_15)
-        self.label_263.setGeometry(QtCore.QRect(30, 120, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_263.setFont(font)
-        self.label_263.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_263.setObjectName("label_263")
-        self.line_100 = QtWidgets.QFrame(self.tab_15)
-        self.line_100.setGeometry(QtCore.QRect(430, 90, 251, 20))
-        self.line_100.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_100.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_100.setObjectName("line_100")
-        self.label_264 = QtWidgets.QLabel(self.tab_15)
-        self.label_264.setGeometry(QtCore.QRect(250, 40, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_264.setFont(font)
-        self.label_264.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_264.setObjectName("label_264")
-        self.line_101 = QtWidgets.QFrame(self.tab_15)
-        self.line_101.setGeometry(QtCore.QRect(20, 90, 191, 20))
-        self.line_101.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_101.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_101.setObjectName("line_101")
-        self.label_265 = QtWidgets.QLabel(self.tab_15)
-        self.label_265.setGeometry(QtCore.QRect(470, 120, 121, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_265.setFont(font)
-        self.label_265.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_265.setObjectName("label_265")
-        self.label_266 = QtWidgets.QLabel(self.tab_15)
-        self.label_266.setGeometry(QtCore.QRect(250, 90, 161, 20))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_266.setFont(font)
-        self.label_266.setObjectName("label_266")
-        self.label_267 = QtWidgets.QLabel(self.tab_15)
-        self.label_267.setGeometry(QtCore.QRect(250, 120, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_267.setFont(font)
-        self.label_267.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_267.setObjectName("label_267")
-        self.label_268 = QtWidgets.QLabel(self.tab_15)
-        self.label_268.setGeometry(QtCore.QRect(240, 10, 181, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_268.setFont(font)
-        self.label_268.setObjectName("label_268")
-        self.label_269 = QtWidgets.QLabel(self.tab_15)
-        self.label_269.setGeometry(QtCore.QRect(470, 40, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_269.setFont(font)
-        self.label_269.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_269.setObjectName("label_269")
-        self.checkBox_66 = QtWidgets.QCheckBox(self.tab_15)
-        self.checkBox_66.setGeometry(QtCore.QRect(610, 120, 31, 31))
-        self.checkBox_66.setText("")
-        self.checkBox_66.setChecked(True)
-        self.checkBox_66.setObjectName("checkBox_66")
-        self.doubleSpinBox_63 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_63.setGeometry(QtCore.QRect(170, 40, 61, 31))
-        self.doubleSpinBox_63.setSingleStep(0.25)
-        self.doubleSpinBox_63.setProperty("value", 0.5)
-        self.doubleSpinBox_63.setObjectName("doubleSpinBox_63")
-        self.line_102 = QtWidgets.QFrame(self.tab_15)
-        self.line_102.setGeometry(QtCore.QRect(20, 10, 191, 20))
-        self.line_102.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_102.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_102.setObjectName("line_102")
-        self.doubleSpinBox_64 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_64.setGeometry(QtCore.QRect(170, 120, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.doubleSpinBox_64.setFont(font)
-        self.doubleSpinBox_64.setSingleStep(0.25)
-        self.doubleSpinBox_64.setProperty("value", 0.5)
-        self.doubleSpinBox_64.setObjectName("doubleSpinBox_64")
-        self.label_270 = QtWidgets.QLabel(self.tab_15)
-        self.label_270.setGeometry(QtCore.QRect(30, 40, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_270.setFont(font)
-        self.label_270.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_270.setObjectName("label_270")
-        self.comboBox_69 = QtWidgets.QComboBox(self.tab_15)
-        self.comboBox_69.setGeometry(QtCore.QRect(560, 200, 86, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_69.setFont(font)
-        self.comboBox_69.setAutoFillBackground(False)
-        self.comboBox_69.setObjectName("comboBox_69")
-        self.comboBox_69.addItem("")
-        self.comboBox_69.addItem("")
-        self.label_271 = QtWidgets.QLabel(self.tab_15)
-        self.label_271.setGeometry(QtCore.QRect(250, 200, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_271.setFont(font)
-        self.label_271.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_271.setObjectName("label_271")
-        self.line_103 = QtWidgets.QFrame(self.tab_15)
-        self.line_103.setGeometry(QtCore.QRect(430, 170, 251, 20))
-        self.line_103.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_103.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_103.setObjectName("line_103")
-        self.doubleSpinBox_65 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_65.setGeometry(QtCore.QRect(370, 200, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.doubleSpinBox_65.setFont(font)
-        self.doubleSpinBox_65.setSingleStep(0.25)
-        self.doubleSpinBox_65.setProperty("value", 0.05)
-        self.doubleSpinBox_65.setObjectName("doubleSpinBox_65")
-        self.doubleSpinBox_66 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_66.setGeometry(QtCore.QRect(170, 200, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.doubleSpinBox_66.setFont(font)
-        self.doubleSpinBox_66.setSingleStep(0.25)
-        self.doubleSpinBox_66.setProperty("value", 0.5)
-        self.doubleSpinBox_66.setObjectName("doubleSpinBox_66")
-        self.line_104 = QtWidgets.QFrame(self.tab_15)
-        self.line_104.setGeometry(QtCore.QRect(20, 170, 201, 20))
-        self.line_104.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_104.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_104.setObjectName("line_104")
-        self.label_272 = QtWidgets.QLabel(self.tab_15)
-        self.label_272.setGeometry(QtCore.QRect(30, 200, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_272.setFont(font)
-        self.label_272.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_272.setObjectName("label_272")
-        self.label_273 = QtWidgets.QLabel(self.tab_15)
-        self.label_273.setGeometry(QtCore.QRect(250, 170, 181, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_273.setFont(font)
-        self.label_273.setObjectName("label_273")
-        self.label_274 = QtWidgets.QLabel(self.tab_15)
-        self.label_274.setGeometry(QtCore.QRect(470, 200, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_274.setFont(font)
-        self.label_274.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_274.setObjectName("label_274")
-        self.spinBox_42 = QtWidgets.QSpinBox(self.tab_15)
-        self.spinBox_42.setGeometry(QtCore.QRect(330, 280, 51, 31))
-        self.spinBox_42.setProperty("value", 3)
-        self.spinBox_42.setObjectName("spinBox_42")
-        self.label_275 = QtWidgets.QLabel(self.tab_15)
-        self.label_275.setGeometry(QtCore.QRect(210, 250, 241, 17))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_275.setFont(font)
-        self.label_275.setObjectName("label_275")
-        self.spinBox_43 = QtWidgets.QSpinBox(self.tab_15)
-        self.spinBox_43.setGeometry(QtCore.QRect(330, 320, 51, 31))
-        self.spinBox_43.setProperty("value", 10)
-        self.spinBox_43.setObjectName("spinBox_43")
-        self.checkBox_67 = QtWidgets.QCheckBox(self.tab_15)
-        self.checkBox_67.setGeometry(QtCore.QRect(540, 320, 31, 31))
-        self.checkBox_67.setText("")
-        self.checkBox_67.setChecked(True)
-        self.checkBox_67.setObjectName("checkBox_67")
-        self.label_276 = QtWidgets.QLabel(self.tab_15)
-        self.label_276.setGeometry(QtCore.QRect(10, 280, 311, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_276.setFont(font)
-        self.label_276.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_276.setObjectName("label_276")
-        self.label_277 = QtWidgets.QLabel(self.tab_15)
-        self.label_277.setGeometry(QtCore.QRect(10, 320, 311, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_277.setFont(font)
-        self.label_277.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_277.setObjectName("label_277")
-        self.line_105 = QtWidgets.QFrame(self.tab_15)
-        self.line_105.setGeometry(QtCore.QRect(460, 250, 221, 20))
-        self.line_105.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_105.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_105.setObjectName("line_105")
-        self.line_106 = QtWidgets.QFrame(self.tab_15)
-        self.line_106.setGeometry(QtCore.QRect(20, 250, 171, 20))
-        self.line_106.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_106.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_106.setObjectName("line_106")
-        self.label_278 = QtWidgets.QLabel(self.tab_15)
-        self.label_278.setGeometry(QtCore.QRect(420, 280, 261, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_278.setFont(font)
-        self.label_278.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_278.setObjectName("label_278")
-        self.comboBox_70 = QtWidgets.QComboBox(self.tab_15)
-        self.comboBox_70.setGeometry(QtCore.QRect(630, 400, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.comboBox_70.setFont(font)
-        self.comboBox_70.setAutoFillBackground(False)
-        self.comboBox_70.setObjectName("comboBox_70")
-        self.comboBox_70.addItem("")
-        self.comboBox_70.addItem("")
-        self.comboBox_70.addItem("")
-        self.label_279 = QtWidgets.QLabel(self.tab_15)
-        self.label_279.setGeometry(QtCore.QRect(20, 400, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_279.setFont(font)
-        self.label_279.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_279.setObjectName("label_279")
-        self.label_280 = QtWidgets.QLabel(self.tab_15)
-        self.label_280.setGeometry(QtCore.QRect(490, 400, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_280.setFont(font)
-        self.label_280.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_280.setObjectName("label_280")
-        self.doubleSpinBox_67 = QtWidgets.QDoubleSpinBox(self.tab_15)
-        self.doubleSpinBox_67.setGeometry(QtCore.QRect(410, 400, 61, 31))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.doubleSpinBox_67.setFont(font)
-        self.doubleSpinBox_67.setSingleStep(0.25)
-        self.doubleSpinBox_67.setProperty("value", 0.5)
-        self.doubleSpinBox_67.setObjectName("doubleSpinBox_67")
-        self.label_281 = QtWidgets.QLabel(self.tab_15)
-        self.label_281.setGeometry(QtCore.QRect(280, 370, 111, 20))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_281.setFont(font)
-        self.label_281.setObjectName("label_281")
-        self.label_282 = QtWidgets.QLabel(self.tab_15)
-        self.label_282.setGeometry(QtCore.QRect(190, 400, 211, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_282.setFont(font)
-        self.label_282.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_282.setObjectName("label_282")
-        self.line_107 = QtWidgets.QFrame(self.tab_15)
-        self.line_107.setGeometry(QtCore.QRect(20, 370, 241, 20))
-        self.line_107.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_107.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_107.setObjectName("line_107")
-        self.spinBox_44 = QtWidgets.QSpinBox(self.tab_15)
-        self.spinBox_44.setGeometry(QtCore.QRect(120, 400, 51, 31))
-        self.spinBox_44.setProperty("value", 3)
-        self.spinBox_44.setObjectName("spinBox_44")
-        self.line_108 = QtWidgets.QFrame(self.tab_15)
-        self.line_108.setGeometry(QtCore.QRect(400, 370, 281, 20))
-        self.line_108.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_108.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_108.setObjectName("line_108")
-        self.tabWidget_5.addTab(self.tab_15, "")
+        #TAB 16 it is the metaboloics annotation TAB
         
+        #TAB/BLOCK 2
         
+        #METABOLOMICS ANNOTATION
+        
+
         
         
         self.tab_16 = QtWidgets.QWidget()
         self.tab_16.setObjectName("tab_16")
-        self.comboBox_71 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_71.setGeometry(QtCore.QRect(360, 560, 61, 31))
+        
+        main_layout = QtWidgets.QVBoxLayout(self.tab_16)
+        
+        block2_layout = QtWidgets.QVBoxLayout()
+        
+        #Line 1
+        
+        block2_line1_layout = QtWidgets.QHBoxLayout()
+        
+        #starting line
+        self.line_112 = QtWidgets.QFrame(self.tab_16)
+        self.line_112.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_112.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_112.setObjectName("line_112")
+        block2_line1_layout.addWidget(self.line_112)
+        
+        #label metabolomics annotation
+        self.label_313 = QtWidgets.QLabel(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.comboBox_71.setFont(font)
-        self.comboBox_71.setAutoFillBackground(False)
-        self.comboBox_71.setObjectName("comboBox_71")
-        self.comboBox_71.addItem("")
-        self.comboBox_71.addItem("")
-        self.comboBox_71.addItem("")
-        self.comboBox_71.addItem("")
-        self.label_283 = QtWidgets.QLabel(self.tab_16)
-        self.label_283.setGeometry(QtCore.QRect(240, 400, 121, 31))
+        self.label_313.setFont(font)
+        self.label_313.setObjectName("label_313")
+        block2_line1_layout.addWidget(self.label_313)
+        
+        #ending line
+        self.line_111 = QtWidgets.QFrame(self.tab_16)
+        self.line_111.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_111.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_111.setObjectName("line_111")
+        block2_line1_layout.addWidget(self.line_111)
+        
+        block2_layout.addLayout(block2_line1_layout)
+        
+        self.line_112.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_313.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_111.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_line2_layout = QtWidgets.QHBoxLayout()
+        
+        #annotation radiobutton
+        self.radioButton_3 = QtWidgets.QRadioButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_283.setFont(font)
-        self.label_283.setStyleSheet("QWidget{\n"
+        self.radioButton_3.setFont(font)
+        self.radioButton_3.setObjectName("radioButton_3")
+        self.radioButton_3.setChecked(False)
+        block2_line2_layout.addWidget(self.radioButton_3)
+        
+        block2_layout.addLayout(block2_line2_layout)
+        
+        
+        block2_line3_layout = QtWidgets.QHBoxLayout()
+        
+        #label metabolite annotations
+        self.label_287 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_287.setFont(font)
+        self.label_287.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_283.setObjectName("label_283")
+        self.label_287.setObjectName("label_287")
+        block2_line3_layout.addWidget(self.label_287)
         
-        self.label_344 = QtWidgets.QLabel(self.tab_16)
-        self.label_344.setGeometry(QtCore.QRect(430, 400, 101, 31))
+        #Combobox metabolite annotations
+        self.comboBox_75 = QtWidgets.QComboBox(self.tab_16)
         font = QtGui.QFont()
         font.setFamily("Ubuntu")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_344.setFont(font)
-        self.label_344.setStyleSheet("QWidget{\n"
+        self.comboBox_75.setFont(font)
+        self.comboBox_75.setAutoFillBackground(False)
+        self.comboBox_75.setObjectName("comboBox_75")
+        self.comboBox_75.addItem("")
+        self.comboBox_75.addItem("")
+        self.comboBox_75.addItem("")
+        block2_line3_layout.addWidget(self.comboBox_75)
+        
+        
+        block2_layout.addLayout(block2_line3_layout)
+        
+        
+        self.radioButton_3.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_287.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_75.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line4_layout = QtWidgets.QHBoxLayout()
+        
+        #initial line
+        self.line_148 = QtWidgets.QFrame(self.tab_16)
+        self.line_148.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_148.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_148.setObjectName("line_148")
+        block2_line4_layout.addWidget(self.line_148)
+        
+        #central line
+        self.line_146 = QtWidgets.QFrame(self.tab_16)
+        self.line_146.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_146.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_146.setObjectName("line_146")
+        block2_line4_layout.addWidget(self.line_146)
+        
+        #ending line
+        self.line_147 = QtWidgets.QFrame(self.tab_16)
+        self.line_147.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_147.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_147.setObjectName("line_147")
+        block2_line4_layout.addWidget(self.line_147)
+        
+        block2_layout.addLayout(block2_line4_layout)
+        
+        self.line_148.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.line_146.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.line_147.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line5_layout = QtWidgets.QHBoxLayout()
+        
+        #MS1 radiobutton
+        self.radioButton_2 = QtWidgets.QRadioButton(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Ubuntu")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.radioButton_2.setFont(font)
+        self.radioButton_2.setObjectName("radioButton_2")
+        block2_line5_layout.addWidget(self.radioButton_2)
+        
+        block2_layout.addLayout(block2_line5_layout)
+        
+        
+        block2_line6_layout = QtWidgets.QHBoxLayout()
+        
+        #label ion mode
+        self.label_299 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_299.setFont(font)
+        self.label_299.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_344.setObjectName("label_344")
-        self.comboBox_72 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_72.setGeometry(QtCore.QRect(240, 560, 61, 31))
+        self.label_299.setObjectName("label_299")
+        block2_line6_layout.addWidget(self.label_299)
+        
+        
+        #combobox ion mode
+        self.comboBox_78 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_78.setFont(font)
+        self.comboBox_78.setAutoFillBackground(False)
+        self.comboBox_78.setObjectName("comboBox_78")
+        self.comboBox_78.addItem("")
+        self.comboBox_78.addItem("")
+        self.comboBox_78.addItem("")
+        block2_line6_layout.addWidget(self.comboBox_78)
+        
+        #label M/Z tolerance ppm
+        self.label_284 = QtWidgets.QLabel(self.tab_16)
         font = QtGui.QFont()
         font.setFamily("Ubuntu")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.comboBox_72.setFont(font)
-        self.comboBox_72.setAutoFillBackground(False)
-        self.comboBox_72.setObjectName("comboBox_72")
-        self.comboBox_72.addItem("")
-        self.comboBox_72.addItem("")
-        self.comboBox_72.addItem("")
-        self.comboBox_72.addItem("")
-        self.label_286 = QtWidgets.QLabel(self.tab_16)
-        self.label_286.setGeometry(QtCore.QRect(40, 400, 130, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_286.setFont(font)
-        self.label_286.setStyleSheet("QWidget{\n"
+        self.label_284.setFont(font)
+        self.label_284.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
+        self.label_284.setObjectName("label_284")
+        block2_line6_layout.addWidget(self.label_284)
         
-        
-        self.label_286.setObjectName("label_286")
-        self.spinBox_45 = QtWidgets.QSpinBox(self.tab_16)
-        self.spinBox_45.setGeometry(QtCore.QRect(370, 400, 44, 31))
-        self.spinBox_45.setProperty("value", 10)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_45.setFont(font)
-        self.spinBox_45.setMaximum(100)
-        self.spinBox_45.setObjectName("spinBox_45")
-        self.push_annot_01 = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_01.setGeometry(QtCore.QRect(380, 270, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_annot_01.setFont(font)
-        self.push_annot_02 = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_02.setGeometry(QtCore.QRect(530, 270, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_annot_02.setFont(font)
-        self.push_annot_03 = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_03.setGeometry(QtCore.QRect(680, 270, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_annot_03.setFont(font)
-        
-        self.push_MS2 = QtWidgets.QPushButton(self.tab_16)
-        self.push_MS2.setGeometry(QtCore.QRect(710, 560, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_MS2.setFont(font)
-        
-        self.label_289 = QtWidgets.QLabel(self.tab_16)
-        self.label_289.setGeometry(QtCore.QRect(70, 560, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_289.setFont(font)
-        self.label_289.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_289.setObjectName("label_289")
-        
-        
-        self.comboBox_73 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_73.setGeometry(QtCore.QRect(515, 560, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_73.setFont(font)
-        self.comboBox_73.setAutoFillBackground(False)
-        self.comboBox_73.setObjectName("comboBox_73")
-        self.comboBox_73.addItem("")
-        self.comboBox_73.addItem("")
-        self.comboBox_73.addItem("")
-        self.comboBox_73.addItem("")
-        self.comboBox_74 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_74.setGeometry(QtCore.QRect(540, 400, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_74.setFont(font)
-        self.comboBox_74.setAutoFillBackground(False)
-        self.comboBox_74.setObjectName("comboBox_74")
-        self.comboBox_74.addItem("")
-        self.comboBox_74.addItem("")
-        self.spinBox_74 = QtWidgets.QSpinBox(self.tab_16)
-        self.spinBox_74.setGeometry(QtCore.QRect(180, 400, 46, 31))
-        self.spinBox_74.setProperty("value", 25)
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_74.setFont(font)
-        self.spinBox_74.setMaximum(100)
-        self.spinBox_74.setObjectName("spinBox_74")
-        self.checkBox_68 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_68.setGeometry(QtCore.QRect(400, 310, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_68.setFont(font)
-        self.checkBox_68.setObjectName("checkBox_68")
-        self.checkBox_68.setChecked(True)
-        self.checkBox_69 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_69.setGeometry(QtCore.QRect(620, 190, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_69.setFont(font)
-        self.checkBox_69.setObjectName("checkBox_69")
-        self.checkBox_69.setChecked(True)
-        self.checkBox_70 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_70.setGeometry(QtCore.QRect(290, 230, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_70.setFont(font)
-        self.checkBox_70.setObjectName("checkBox_70")
-        self.checkBox_71 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_71.setGeometry(QtCore.QRect(480, 310, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_71.setFont(font)
-        self.checkBox_71.setObjectName("checkBox_71")
-        self.checkBox_71.setChecked(True)
+        #Spinbox M/Z tolerance ppm
         self.spinBox_47 = QtWidgets.QSpinBox(self.tab_16)
-        self.spinBox_47.setGeometry(QtCore.QRect(460, 150, 44, 31))
         self.spinBox_47.setProperty("value", 15)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.spinBox_47.setFont(font)
         self.spinBox_47.setMaximum(100)
         self.spinBox_47.setObjectName("spinBox_47")
-        self.checkBox_72 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_72.setGeometry(QtCore.QRect(340, 190, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_72.setFont(font)
-        self.checkBox_72.setObjectName("checkBox_72")
-        self.checkBox_72.setChecked(True)
-        self.checkBox_73 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_73.setGeometry(QtCore.QRect(210, 270, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_73.setFont(font)
-        self.checkBox_73.setObjectName("checkBox_73")
-        self.checkBox_74 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_74.setGeometry(QtCore.QRect(280, 190, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_74.setFont(font)
-        self.checkBox_74.setObjectName("checkBox_74")
-        self.checkBox_74.setChecked(True)
-        self.checkBox_75 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_75.setGeometry(QtCore.QRect(410, 190, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_75.setFont(font)
-        self.checkBox_75.setObjectName("checkBox_75")
-        self.checkBox_75.setChecked(True)
-        self.checkBox_76 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_76.setGeometry(QtCore.QRect(230, 310, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_76.setFont(font)
-        self.checkBox_76.setObjectName("checkBox_76")
-        self.checkBox_76.setChecked(True)
-        self.checkBox_77 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_77.setGeometry(QtCore.QRect(540, 190, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_77.setFont(font)
-        self.checkBox_77.setObjectName("checkBox_77")
-        self.checkBox_77.setChecked(True)
-        self.line_111 = QtWidgets.QFrame(self.tab_16)
-        self.line_111.setGeometry(QtCore.QRect(500, 10, 201, 20))
-        self.line_111.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_111.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_111.setObjectName("line_111")
-        self.checkBox_78 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_78.setGeometry(QtCore.QRect(300, 310, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_78.setFont(font)
-        self.checkBox_78.setObjectName("checkBox_78")
-        self.checkBox_78.setChecked(True)
-        self.checkBox_79 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_79.setGeometry(QtCore.QRect(500, 230, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_79.setFont(font)
-        self.checkBox_79.setObjectName("checkBox_79")
-        self.checkBox_80 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_80.setGeometry(QtCore.QRect(420, 230, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_80.setFont(font)
-        self.checkBox_80.setObjectName("checkBox_80")
-        self.checkBox_81 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_81.setGeometry(QtCore.QRect(480, 190, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_81.setFont(font)
-        self.checkBox_81.setObjectName("checkBox_81")
-        self.checkBox_81.setChecked(True)
-        self.checkBox_82 = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_82.setGeometry(QtCore.QRect(350, 230, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_82.setFont(font)
-        self.checkBox_82.setObjectName("checkBox_82")
-        self.line_112 = QtWidgets.QFrame(self.tab_16)
-        self.line_112.setGeometry(QtCore.QRect(70, 10, 201, 20))
-        self.line_112.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_112.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_112.setObjectName("line_112")
+        block2_line6_layout.addWidget(self.spinBox_47)
+        
+        
+        block2_layout.addLayout(block2_line6_layout)
+        
+        self.radioButton_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_299.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_284.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_47.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line7_layout = QtWidgets.QHBoxLayout()
+        
+        #label adducts positive mode
         self.label_296 = QtWidgets.QLabel(self.tab_16)
-        self.label_296.setGeometry(QtCore.QRect(100, 190, 151, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3456,38 +3318,221 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_296.setObjectName("label_296")
-        self.label_297 = QtWidgets.QLabel(self.tab_16)
-        self.label_297.setGeometry(QtCore.QRect(100, 310, 111, 31))
+        block2_line7_layout.addWidget(self.label_296)
+        
+        
+        #M+H
+        self.checkBox_74 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_297.setFont(font)
-        self.label_297.setStyleSheet("QWidget{\n"
+        self.checkBox_74.setFont(font)
+        self.checkBox_74.setObjectName("checkBox_74")
+        self.checkBox_74.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_74)
+        
+        #M-2H
+        self.checkBox_72 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_72.setFont(font)
+        self.checkBox_72.setObjectName("checkBox_72")
+        self.checkBox_72.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_72)
+        
+        #M+Na
+        self.checkBox_75 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_75.setFont(font)
+        self.checkBox_75.setObjectName("checkBox_75")
+        self.checkBox_75.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_75)
+        
+        #M+K
+        self.checkBox_81 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_81.setFont(font)
+        self.checkBox_81.setObjectName("checkBox_81")
+        self.checkBox_81.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_81)
+        
+        #M+NH4
+        self.checkBox_77 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_77.setFont(font)
+        self.checkBox_77.setObjectName("checkBox_77")
+        self.checkBox_77.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_77)
+        
+        #M+H-H2O
+        self.checkBox_69 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_69.setFont(font)
+        self.checkBox_69.setObjectName("checkBox_69")
+        self.checkBox_69.setChecked(True)
+        block2_line7_layout.addWidget(self.checkBox_69)
+        
+        
+        block2_layout.addLayout(block2_line7_layout)
+        
+        self.label_296.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_74.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_72.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_75.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_81.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_77.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_69.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line8_layout = QtWidgets.QHBoxLayout()
+        
+        #label negative adducts
+        self.label_298 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_298.setFont(font)
+        self.label_298.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_297.setObjectName("label_297")
-        self.comboBox_78 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_78.setGeometry(QtCore.QRect(180, 150, 86, 31))
+        self.label_298.setObjectName("label_298")
+        block2_line8_layout.addWidget(self.label_298)
+        
+        #M-H
+        self.checkBox_70 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.comboBox_78.setFont(font)
-        self.comboBox_78.setAutoFillBackground(False)
-        self.comboBox_78.setObjectName("comboBox_78")
-        self.comboBox_78.addItem("")
-        self.comboBox_78.addItem("")
-        self.comboBox_78.addItem("")
+        self.checkBox_70.setFont(font)
+        self.checkBox_70.setObjectName("checkBox_70")
+        block2_line8_layout.addWidget(self.checkBox_70)
         
-        self.comboBox_90 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_90.setGeometry(QtCore.QRect(335, 270, 46, 31))
+        #M-Cl
+        
+        self.checkBox_82 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_82.setFont(font)
+        self.checkBox_82.setObjectName("checkBox_82")
+        block2_line8_layout.addWidget(self.checkBox_82)
+        
+        #M-FA-H
+        
+        self.checkBox_80 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_80.setFont(font)
+        self.checkBox_80.setObjectName("checkBox_80")
+        block2_line8_layout.addWidget(self.checkBox_80)
+        
+        #M+H-H2O
+        
+        self.checkBox_79 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_79.setFont(font)
+        self.checkBox_79.setObjectName("checkBox_79")
+        block2_line8_layout.addWidget(self.checkBox_79)
+        
+        
+        block2_layout.addLayout(block2_line8_layout)
+        
+        self.label_298.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_70.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_82.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_80.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_79.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line9_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #label neutral adducts
+        self.label_300 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_300.setFont(font)
+        self.label_300.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_300.setObjectName("label_300")
+        block2_line9_layout.addWidget(self.label_300)
+        
+        #checkbox M
+        
+        self.checkBox_73 = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_73.setFont(font)
+        self.checkBox_73.setObjectName("checkBox_73")
+        block2_line9_layout.addWidget(self.checkBox_73)
+        
+        #label MS1 files 
+        self.label_343 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_343.setFont(font)
+        self.label_343.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_343.setObjectName("label_343")
+        block2_line9_layout.addWidget(self.label_343)
+        
+        
+        
+        
+        
+        #Position MS1 input N° 1
+        self.comboBox_90 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3501,11 +3546,22 @@ class SecondWindow(QMainWindow):
         self.comboBox_90.addItem("")
         self.comboBox_90.addItem("")
         self.comboBox_90.addItem("")
+        block2_line9_layout.addWidget(self.comboBox_90)
         
-        self.comboBox_91 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_91.setGeometry(QtCore.QRect(485, 270, 46, 31))
+        #Input MS1 file N°1
+        self.push_annot_01 = QtWidgets.QPushButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_annot_01.setFont(font)
+        block2_line9_layout.addWidget(self.push_annot_01)
+        
+        #Position MS1 input N° 2
+        self.comboBox_91 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3519,11 +3575,22 @@ class SecondWindow(QMainWindow):
         self.comboBox_91.addItem("")
         self.comboBox_91.addItem("")
         self.comboBox_91.addItem("")
+        block2_line9_layout.addWidget(self.comboBox_91)
         
-        self.comboBox_92 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_92.setGeometry(QtCore.QRect(635, 270, 46, 31))
+        #Input MS1 file N°2
+        self.push_annot_02 = QtWidgets.QPushButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_annot_02.setFont(font)
+        block2_line9_layout.addWidget(self.push_annot_02)
+        
+        #Position MS1 input N° 3
+        self.comboBox_92 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3537,186 +3604,304 @@ class SecondWindow(QMainWindow):
         self.comboBox_92.addItem("")
         self.comboBox_92.addItem("")
         self.comboBox_92.addItem("")
+        block2_line9_layout.addWidget(self.comboBox_92)
         
-        self.label_298 = QtWidgets.QLabel(self.tab_16)
-        self.label_298.setGeometry(QtCore.QRect(100, 230, 161, 31))
+        #Input MS1 file N°3
+        self.push_annot_03 = QtWidgets.QPushButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_annot_03.setFont(font)
+        block2_line9_layout.addWidget(self.push_annot_03)
+        
+        
+        block2_layout.addLayout(block2_line9_layout)
+        
+        self.label_300.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_73.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_343.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_90.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_01.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_91.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_02.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_92.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_03.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line10_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Label databases MS1
+        self.label_297 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_298.setFont(font)
-        self.label_298.setStyleSheet("QWidget{\n"
+        self.label_297.setFont(font)
+        self.label_297.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_298.setObjectName("label_298")
-        self.label_299 = QtWidgets.QLabel(self.tab_16)
-        self.label_299.setGeometry(QtCore.QRect(100, 150, 71, 31))
+        self.label_297.setObjectName("label_297")
+        block2_line10_layout.addWidget(self.label_297)
+        
+        #checkbox HMDB
+        self.checkBox_76 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_299.setFont(font)
-        self.label_299.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_299.setObjectName("label_299")
-        self.label_313 = QtWidgets.QLabel(self.tab_16)
-        self.label_313.setGeometry(QtCore.QRect(300, 10, 181, 20))
+        self.checkBox_76.setFont(font)
+        self.checkBox_76.setObjectName("checkBox_76")
+        self.checkBox_76.setChecked(True)
+        block2_line10_layout.addWidget(self.checkBox_76)
+        
+        
+        #Checkbox lipidmaps
+        self.checkBox_78 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_313.setFont(font)
-        self.label_313.setObjectName("label_313")
-        self.label_324 = QtWidgets.QLabel(self.tab_16)
-        self.label_324.setGeometry(QtCore.QRect(430, 560, 81, 31))
-        self.label_324.setObjectName("label_324")
-        self.label_325 = QtWidgets.QLabel(self.tab_16)
-        self.label_325.setGeometry(QtCore.QRect(310, 560, 61, 31))
-        self.label_325.setObjectName("label_325")
-        self.label_326 = QtWidgets.QLabel(self.tab_16)
-        self.label_326.setGeometry(QtCore.QRect(190, 560, 51, 31))
-        self.label_326.setObjectName("label_326")
-        self.label_300 = QtWidgets.QLabel(self.tab_16)
-        self.label_300.setGeometry(QtCore.QRect(100, 270, 101, 31))
+        self.checkBox_78.setFont(font)
+        self.checkBox_78.setObjectName("checkBox_78")
+        self.checkBox_78.setChecked(True)
+        block2_line10_layout.addWidget(self.checkBox_78)
+        
+        #Checkbox metlin
+        self.checkBox_68 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_300.setFont(font)
-        self.label_300.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_300.setObjectName("label_300")
-        self.label_343 = QtWidgets.QLabel(self.tab_16)
-        self.label_343.setGeometry(QtCore.QRect(250, 270, 71, 31))
+        self.checkBox_68.setFont(font)
+        self.checkBox_68.setObjectName("checkBox_68")
+        self.checkBox_68.setChecked(True)
+        block2_line10_layout.addWidget(self.checkBox_68)
+        
+        #checkbox kegg
+        self.checkBox_71 = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_343.setFont(font)
-        self.label_343.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_343.setObjectName("label_343")
-        self.radioButton = QtWidgets.QRadioButton(self.tab_16)
-        self.radioButton.setGeometry(QtCore.QRect(100, 370, 331, 23))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.radioButton.setFont(font)
-        self.radioButton.setObjectName("radioButton")
-        self.radioButton_2 = QtWidgets.QRadioButton(self.tab_16)
-        self.radioButton_2.setGeometry(QtCore.QRect(100, 120, 151, 23))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.radioButton_2.setFont(font)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.tab_16)
-        self.radioButton_3.setGeometry(QtCore.QRect(100, 30, 151, 23))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.radioButton_3.setFont(font)
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.radioButton_3.setChecked(False)
-        self.label_287 = QtWidgets.QLabel(self.tab_16)
-        self.label_287.setGeometry(QtCore.QRect(100, 60, 161, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_287.setFont(font)
-        self.label_287.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_287.setObjectName("label_287")
-        self.comboBox_75 = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_75.setGeometry(QtCore.QRect(270, 60, 86, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_75.setFont(font)
-        self.comboBox_75.setAutoFillBackground(False)
-        self.comboBox_75.setObjectName("comboBox_75")
-        self.comboBox_75.addItem("")
-        self.comboBox_75.addItem("")
-        self.comboBox_75.addItem("")
-        self.label_284 = QtWidgets.QLabel(self.tab_16)
-        self.label_284.setGeometry(QtCore.QRect(310, 150, 141, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_284.setFont(font)
-        self.label_284.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_284.setObjectName("label_284")
+        self.checkBox_71.setFont(font)
+        self.checkBox_71.setObjectName("checkBox_71")
+        self.checkBox_71.setChecked(True)
+        block2_line10_layout.addWidget(self.checkBox_71)
+        
+        block2_layout.addLayout(block2_line10_layout)
+        
+        self.label_297.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_76.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_78.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_68.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_71.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_line11_layout = QtWidgets.QHBoxLayout()
+        
+        #inital line
         self.line_143 = QtWidgets.QFrame(self.tab_16)
         self.line_143.setGeometry(QtCore.QRect(100, 350, 151, 20))
         self.line_143.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_143.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_143.setObjectName("line_143")
+        block2_line11_layout.addWidget(self.line_143)
+        
+        #central line
         self.line_144 = QtWidgets.QFrame(self.tab_16)
         self.line_144.setGeometry(QtCore.QRect(320, 350, 151, 20))
         self.line_144.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_144.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_144.setObjectName("line_144")
+        block2_line11_layout.addWidget(self.line_144)
+        
+        #ending line
         self.line_145 = QtWidgets.QFrame(self.tab_16)
         self.line_145.setGeometry(QtCore.QRect(540, 350, 151, 20))
         self.line_145.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_145.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_145.setObjectName("line_145")
-        self.line_146 = QtWidgets.QFrame(self.tab_16)
-        self.line_146.setGeometry(QtCore.QRect(320, 100, 151, 20))
-        self.line_146.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_146.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_146.setObjectName("line_146")
-        self.line_147 = QtWidgets.QFrame(self.tab_16)
-        self.line_147.setGeometry(QtCore.QRect(540, 100, 151, 20))
-        self.line_147.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_147.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_147.setObjectName("line_147")
-        self.line_148 = QtWidgets.QFrame(self.tab_16)
-        self.line_148.setGeometry(QtCore.QRect(100, 100, 151, 20))
-        self.line_148.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_148.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_148.setObjectName("line_148")
-        self.tabWidget_5.addTab(self.tab_16, "")
-        self.tabWidget.addTab(self.tab_14, "")
-        self.label_296b = QtWidgets.QLabel(self.tab_16)
-        self.label_296b.setGeometry(QtCore.QRect(70, 440, 161, 31))
+        block2_line11_layout.addWidget(self.line_145)
+        
+        block2_layout.addLayout(block2_line11_layout)
+        
+        self.line_143.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.line_144.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.line_145.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_line12_layout = QtWidgets.QHBoxLayout()
+        
+        #MS1 and MS2 annotation radiobutton
+        self.radioButton = QtWidgets.QRadioButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.radioButton.setFont(font)
+        self.radioButton.setObjectName("radioButton")
+        block2_line12_layout.addWidget(self.radioButton)
+        
+        
+        block2_layout.addLayout(block2_line12_layout)
+        
+        self.radioButton.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line13_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #label mz match MS2
+        self.label_286 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_286.setFont(font)
+        self.label_286.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        
+        
+        self.label_286.setObjectName("label_286")
+        block2_line13_layout.addWidget(self.label_286)
+        
+        #spinbox mz match MS2
+        self.spinBox_74 = QtWidgets.QSpinBox(self.tab_16)
+        self.spinBox_74.setProperty("value", 25)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_74.setFont(font)
+        self.spinBox_74.setMaximum(100)
+        self.spinBox_74.setObjectName("spinBox_74")
+        block2_line13_layout.addWidget(self.spinBox_74)
+        
+        #Label RT match MS2
+        self.label_283 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_283.setFont(font)
+        self.label_283.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_283.setObjectName("label_283")
+        block2_line13_layout.addWidget(self.label_283)
+        
+        #Spinbox RT match MS2
+        self.spinBox_45 = QtWidgets.QSpinBox(self.tab_16)
+        self.spinBox_45.setProperty("value", 10)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_45.setFont(font)
+        self.spinBox_45.setMaximum(100)
+        self.spinBox_45.setObjectName("spinBox_45")
+        block2_line13_layout.addWidget(self.spinBox_45)
+        
+        #Label column type
+        self.label_344 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_344.setFont(font)
+        self.label_344.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_344.setObjectName("label_344")
+        block2_line13_layout.addWidget(self.label_344)
+        
+        #Combobox column type
+        self.comboBox_74 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_74.setFont(font)
+        self.comboBox_74.setAutoFillBackground(False)
+        self.comboBox_74.setObjectName("comboBox_74")
+        self.comboBox_74.addItem("")
+        self.comboBox_74.addItem("")
+        block2_line13_layout.addWidget(self.comboBox_74)
+        
+        #label ion mode
+        self.label_299b = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_299b.setFont(font)
+        self.label_299b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_299b.setObjectName("label_299b")
+        block2_line13_layout.addWidget(self.label_299b)
+        
+        #combobox ion mode
+        self.comboBox_78b = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_78b.setFont(font)
+        self.comboBox_78b.setAutoFillBackground(False)
+        self.comboBox_78b.setObjectName("comboBox_78b")
+        self.comboBox_78b.addItem("")
+        self.comboBox_78b.addItem("")
+        self.comboBox_78b.addItem("")
+        block2_line13_layout.addWidget(self.comboBox_78b)
+        
+        block2_layout.addLayout(block2_line13_layout)
+        
+        
+        self.label_286.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_74.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_283.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_45.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_344.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_74.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_299b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_78b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line14_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        #adduct positive ion
+        
+        self.label_296b = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3727,10 +3912,98 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_296b.setObjectName("label_296b")
-        self.label_296c = QtWidgets.QLabel(self.tab_16)
-        self.label_296c.setGeometry(QtCore.QRect(70, 480, 161, 31))
+        block2_line14_layout.addWidget(self.label_296b)
+        
+        #M-H
+        self.checkBox_70b = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_70b.setFont(font)
+        self.checkBox_70b.setObjectName("checkBox_70b")
+        self.checkBox_70b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_70b)
+        
+        #M-2H
+        self.checkBox_72b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_72b.setFont(font)
+        self.checkBox_72b.setObjectName("checkBox_72b")
+        self.checkBox_72b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_72b)
+        
+        #M-Na
+        self.checkBox_75b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_75b.setFont(font)
+        self.checkBox_75b.setObjectName("checkBox_75b")
+        self.checkBox_75b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_75b)
+        
+        #M-K
+        self.checkBox_81b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_81b.setFont(font)
+        self.checkBox_81b.setObjectName("checkBox_81b")
+        self.checkBox_81b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_81b)
+        
+        #M-NH4
+        self.checkBox_77b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_77b.setFont(font)
+        self.checkBox_77b.setObjectName("checkBox_77b")
+        self.checkBox_77b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_77b)
+                
+        #M-H-H2O
+        self.checkBox_69b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_69b.setFont(font)
+        self.checkBox_69b.setObjectName("checkBox_69b")
+        self.checkBox_69b.setChecked(True)
+        block2_line14_layout.addWidget(self.checkBox_69b)
+        
+        block2_layout.addLayout(block2_line14_layout)
+        
+        self.label_296b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_70b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_72b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_75b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_81b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_77b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_69b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line15_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Adduct negative mode
+        
+        self.label_296c = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3741,10 +4014,68 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_296c.setObjectName("label_296c")
-        self.label_296d = QtWidgets.QLabel(self.tab_16)
-        self.label_296d.setGeometry(QtCore.QRect(70, 520, 101, 31))
+        block2_line15_layout.addWidget(self.label_296c)
+        
+        #M-H
+        self.checkBox_70c = QtWidgets.QCheckBox(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_70c.setFont(font)
+        self.checkBox_70c.setObjectName("checkBox_70c")
+        block2_line15_layout.addWidget(self.checkBox_70c)
+        
+        #M-Cl
+        self.checkBox_82b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_82b.setFont(font)
+        self.checkBox_82b.setObjectName("checkBox_82b")
+        block2_line15_layout.addWidget(self.checkBox_82b)
+        
+        #M-FA-H
+        self.checkBox_80b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_80b.setFont(font)
+        self.checkBox_80b.setObjectName("checkBox_80b")
+        block2_line15_layout.addWidget(self.checkBox_80b)
+        
+        #M-H-H2O
+        self.checkBox_79b = QtWidgets.QCheckBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_79b.setFont(font)
+        self.checkBox_79b.setObjectName("checkBox_79b")
+        block2_line15_layout.addWidget(self.checkBox_79b)
+        
+        
+        block2_layout.addLayout(block2_line15_layout)
+        
+        self.label_296c.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_70c.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_82b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_80b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_79b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_line16_layout = QtWidgets.QHBoxLayout()
+        
+        #Label neutral adducts
+        self.label_296d = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3755,130 +4086,41 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_296d.setObjectName("label_296d")
-        self.label_297b = QtWidgets.QLabel(self.tab_16)
-        self.label_297b.setGeometry(QtCore.QRect(600, 560, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_297b.setFont(font)
-        self.label_297b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_297b.setObjectName("label_297b")
+        block2_line16_layout.addWidget(self.label_296d)
         
-        self.checkBox_70b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_70b.setGeometry(QtCore.QRect(280, 440, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_70b.setFont(font)
-        self.checkBox_70b.setObjectName("checkBox_70b")
-        self.checkBox_70b.setChecked(True)
-        self.checkBox_70c = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_70c.setGeometry(QtCore.QRect(290, 480, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_70c.setFont(font)
-        self.checkBox_70c.setObjectName("checkBox_70b")
-        self.checkBox_72b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_72b.setGeometry(QtCore.QRect(340, 440, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_72b.setFont(font)
-        self.checkBox_72b.setObjectName("checkBox_72b")
-        self.checkBox_72b.setChecked(True)
-        self.checkBox_75b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_75b.setGeometry(QtCore.QRect(410, 440, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_75b.setFont(font)
-        self.checkBox_75b.setObjectName("checkBox_75b")
-        self.checkBox_75b.setChecked(True)
-        self.checkBox_81b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_81b.setGeometry(QtCore.QRect(480, 440, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_81b.setFont(font)
-        self.checkBox_81b.setObjectName("checkBox_81b")
-        self.checkBox_81b.setChecked(True)
-        self.checkBox_77b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_77b.setGeometry(QtCore.QRect(540, 440, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_77b.setFont(font)
-        self.checkBox_77b.setObjectName("checkBox_77b")
-        self.checkBox_77b.setChecked(True)
-        self.checkBox_69b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_69b.setGeometry(QtCore.QRect(620, 440, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_69b.setFont(font)
-        self.checkBox_69b.setObjectName("checkBox_69b")
-        self.checkBox_69b.setChecked(True)
-        self.checkBox_82b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_82b.setGeometry(QtCore.QRect(350, 480, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_82b.setFont(font)
-        self.checkBox_82b.setObjectName("checkBox_82b")
-        self.checkBox_80b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_80b.setGeometry(QtCore.QRect(420, 480, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_80b.setFont(font)
-        self.checkBox_80b.setObjectName("checkBox_80b")
-        self.checkBox_79b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_79b.setGeometry(QtCore.QRect(500, 480, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_79b.setFont(font)
-        self.checkBox_79b.setObjectName("checkBox_79b")
+        
+        
+        #Check box neutral adduct M
         self.checkBox_73b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_73b.setGeometry(QtCore.QRect(190, 520, 51, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.checkBox_73b.setFont(font)
         self.checkBox_73b.setObjectName("checkBox_73b")
-        self.comboBox_90b = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_90b.setGeometry(QtCore.QRect(335, 520, 46, 31))
+        block2_line16_layout.addWidget(self.checkBox_73b)
+        
+        #label MS1 files
+        self.label_343b = QtWidgets.QLabel(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_343b.setFont(font)
+        self.label_343b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_343b.setObjectName("label_343b")
+        block2_line16_layout.addWidget(self.label_343b)
+        
+        #Position MS1 input N° 1
+        self.comboBox_90b = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3892,10 +4134,22 @@ class SecondWindow(QMainWindow):
         self.comboBox_90b.addItem("")
         self.comboBox_90b.addItem("")
         self.comboBox_90b.addItem("")
-        self.comboBox_91b = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_91b.setGeometry(QtCore.QRect(485, 520, 46, 31))
+        block2_line16_layout.addWidget(self.comboBox_90b)
+        
+        #Input MS1 input N° 1
+        self.push_annot_01b = QtWidgets.QPushButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_annot_01b.setFont(font)
+        block2_line16_layout.addWidget(self.push_annot_01b)
+        
+        #Position MS1 input N° 2
+        self.comboBox_91b = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3909,10 +4163,22 @@ class SecondWindow(QMainWindow):
         self.comboBox_91b.addItem("")
         self.comboBox_91b.addItem("")
         self.comboBox_91b.addItem("")
-        self.comboBox_92b = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_92b.setGeometry(QtCore.QRect(635, 520, 46, 31))
+        block2_line16_layout.addWidget(self.comboBox_91b)
+        
+        #Input MS1 input N° 2
+        self.push_annot_02b = QtWidgets.QPushButton(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_annot_02b.setFont(font)
+        block2_line16_layout.addWidget(self.push_annot_02b)
+        
+        #Position MS1 input N° 3
+        self.comboBox_92b = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -3926,76 +4192,175 @@ class SecondWindow(QMainWindow):
         self.comboBox_92b.addItem("")
         self.comboBox_92b.addItem("")
         self.comboBox_92b.addItem("")
-        self.push_annot_01b = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_01b.setGeometry(QtCore.QRect(380, 520, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_annot_01b.setFont(font)
-        self.push_annot_02b = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_02b.setGeometry(QtCore.QRect(530, 520, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_annot_02b.setFont(font)
+        block2_line16_layout.addWidget(self.comboBox_92b)
+        
+        #Input MS1 input N° 3
         self.push_annot_03b = QtWidgets.QPushButton(self.tab_16)
-        self.push_annot_03b.setGeometry(QtCore.QRect(680, 520, 81, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
         self.push_annot_03b.setFont(font)
-        self.label_343b = QtWidgets.QLabel(self.tab_16)
-        self.label_343b.setGeometry(QtCore.QRect(250, 520, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_343b.setFont(font)
-        self.label_343b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_343b.setObjectName("label_343b")
-        self.label_299b = QtWidgets.QLabel(self.tab_16)
-        self.label_299b.setGeometry(QtCore.QRect(640, 400, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_299b.setFont(font)
-        self.label_299b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_299b.setObjectName("label_299b")
-        self.comboBox_78b = QtWidgets.QComboBox(self.tab_16)
-        self.comboBox_78b.setGeometry(QtCore.QRect(720, 400, 86, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_78b.setFont(font)
-        self.comboBox_78b.setAutoFillBackground(False)
-        self.comboBox_78b.setObjectName("comboBox_78b")
-        self.comboBox_78b.addItem("")
-        self.comboBox_78b.addItem("")
-        self.comboBox_78b.addItem("")
+        block2_line16_layout.addWidget(self.push_annot_03b)
         
-        self.label_289b = QtWidgets.QLabel(self.tab_16)
-        self.label_289b.setGeometry(QtCore.QRect(70, 600, 111, 31))
+        block2_layout.addLayout(block2_line16_layout)
+        
+        self.label_296d.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_73b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_343b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_90b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_01b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_91b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_02b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_92b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_annot_03b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block2_line17_layout = QtWidgets.QHBoxLayout()
+        
+        #label databases MS2
+        self.label_289 = QtWidgets.QLabel(self.tab_16)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_289.setFont(font)
+        self.label_289.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_289.setObjectName("label_289")
+        block2_line17_layout.addWidget(self.label_289)
+        
+        #label HMDB
+        self.label_326 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_326.setFont(font)
+        self.label_326.setObjectName("label_326")
+        
+        block2_line17_layout.addWidget(self.label_326)
+        
+        #Priority HMDB
+        self.comboBox_72 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_72.setFont(font)
+        self.comboBox_72.setAutoFillBackground(False)
+        self.comboBox_72.setObjectName("comboBox_72")
+        self.comboBox_72.addItem("")
+        self.comboBox_72.addItem("")
+        self.comboBox_72.addItem("")
+        self.comboBox_72.addItem("")
+        block2_line17_layout.addWidget(self.comboBox_72)
+        
+        #label MASSBANK
+        self.label_325 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_325.setFont(font)
+        self.label_325.setObjectName("label_325")
+        block2_line17_layout.addWidget(self.label_325)
+        
+        #Priority MASSBANK
+        self.comboBox_71 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_71.setFont(font)
+        self.comboBox_71.setAutoFillBackground(False)
+        self.comboBox_71.setObjectName("comboBox_71")
+        self.comboBox_71.addItem("")
+        self.comboBox_71.addItem("")
+        self.comboBox_71.addItem("")
+        self.comboBox_71.addItem("")
+        block2_line17_layout.addWidget(self.comboBox_71)
+        
+        #label MONA
+        self.label_324 = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_324.setFont(font)
+        self.label_324.setObjectName("label_324")
+        block2_line17_layout.addWidget(self.label_324)
+        
+        #Priority MONA
+        self.comboBox_73 = QtWidgets.QComboBox(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_73.setFont(font)
+        self.comboBox_73.setAutoFillBackground(False)
+        self.comboBox_73.setObjectName("comboBox_73")
+        self.comboBox_73.addItem("")
+        self.comboBox_73.addItem("")
+        self.comboBox_73.addItem("")
+        self.comboBox_73.addItem("")
+        block2_line17_layout.addWidget(self.comboBox_73)
+        
+        #label MS2 directory
+        self.label_297b = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_297b.setFont(font)
+        self.label_297b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_297b.setObjectName("label_297b")
+        block2_line17_layout.addWidget(self.label_297b)
+        
+        #button MS2 directory
+        self.push_MS2 = QtWidgets.QPushButton(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_MS2.setFont(font)
+        block2_line17_layout.addWidget(self.push_MS2)
+        
+        block2_layout.addLayout(block2_line17_layout)
+        
+        self.label_289.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_326.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_72.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_325.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_71.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_324.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_73.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_297b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_MS2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_line18_layout = QtWidgets.QHBoxLayout()
+        
+        #Label database MS1
+        self.label_289b = QtWidgets.QLabel(self.tab_16)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -4006,50 +4371,60 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_289b.setObjectName("label_289b")
+        block2_line18_layout.addWidget(self.label_289b)
+        
+        #checkbox HMDB
         self.checkBox_76b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_76b.setGeometry(QtCore.QRect(210, 600, 71, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.checkBox_76b.setFont(font)
         self.checkBox_76b.setObjectName("checkBox_76b")
         self.checkBox_76b.setChecked(True)
+        block2_line18_layout.addWidget(self.checkBox_76b)
+        
+        #checkbox lipidmaps
         self.checkBox_78b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_78b.setGeometry(QtCore.QRect(280, 600, 91, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.checkBox_78b.setFont(font)
         self.checkBox_78b.setObjectName("checkBox_78b")
         self.checkBox_78b.setChecked(True)
+        block2_line18_layout.addWidget(self.checkBox_78b)
+        
+        #checkbox metlin
         self.checkBox_68b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_68b.setGeometry(QtCore.QRect(380, 600, 81, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.checkBox_68b.setFont(font)
         self.checkBox_68b.setObjectName("checkBox_68b")
         self.checkBox_68b.setChecked(True)
+        block2_line18_layout.addWidget(self.checkBox_68b)
+        
+        #checkbox kegg
         self.checkBox_71b = QtWidgets.QCheckBox(self.tab_16)
-        self.checkBox_71b.setGeometry(QtCore.QRect(460, 600, 91, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.checkBox_71b.setFont(font)
         self.checkBox_71b.setObjectName("checkBox_71b")
         self.checkBox_71b.setChecked(True)
+        block2_line18_layout.addWidget(self.checkBox_71b)
+        
+        #label MZ tolerance ppm in MS1
         self.label_284b = QtWidgets.QLabel(self.tab_16)
-        self.label_284b.setGeometry(QtCore.QRect(530, 600, 141, 31))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -4060,417 +4435,521 @@ class SecondWindow(QMainWindow):
 "\n"
 "}")
         self.label_284b.setObjectName("label_284b")
+        block2_line18_layout.addWidget(self.label_284b)
+        
+        #Spinbox MZ tolerance ppm in MS1
         self.spinBox_47b = QtWidgets.QSpinBox(self.tab_16)
-        self.spinBox_47b.setGeometry(QtCore.QRect(680, 600, 44, 31))
         self.spinBox_47b.setProperty("value", 15)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.spinBox_47b.setFont(font)
         self.spinBox_47b.setMaximum(100)
         self.spinBox_47b.setObjectName("spinBox_47b")
+        block2_line18_layout.addWidget(self.spinBox_47b)
+        
+        
+        block2_layout.addLayout(block2_line18_layout)
+        
+        self.label_289b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_76b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_78b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_68b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_71b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_284b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_47b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        main_layout.addLayout(block2_layout)
+        
+        
+        self.tabWidget.addTab(self.tab_16, "")
         
         
         
         
+        #TAB 18 contains the Metadata tab
         
         
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.line_95 = QtWidgets.QFrame(self.tab)
-        self.line_95.setGeometry(QtCore.QRect(90, 10, 241, 20))
-        self.line_95.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_95.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_95.setObjectName("line_95")
-        self.comboBox_62 = QtWidgets.QComboBox(self.tab)
-        self.comboBox_62.setGeometry(QtCore.QRect(390, 40, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_62.setFont(font)
-        self.comboBox_62.setAutoFillBackground(False)
-        self.comboBox_62.setObjectName("comboBox_62")
-        self.comboBox_62.addItem("")
-        self.comboBox_62.addItem("")
-        self.comboBox_62.addItem("")
-        self.label_250 = QtWidgets.QLabel(self.tab)
-        self.label_250.setGeometry(QtCore.QRect(250, 40, 131, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_250.setFont(font)
-        self.label_250.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_250.setObjectName("label_250")
-        self.doubleSpinBox_59 = QtWidgets.QDoubleSpinBox(self.tab)
-        self.doubleSpinBox_59.setGeometry(QtCore.QRect(680, 40, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.doubleSpinBox_59.setFont(font)
-        self.doubleSpinBox_59.setSingleStep(0.25)
-        self.doubleSpinBox_59.setProperty("value", 0.5)
-        self.doubleSpinBox_59.setObjectName("doubleSpinBox_59")
-        self.label_252 = QtWidgets.QLabel(self.tab)
-        self.label_252.setGeometry(QtCore.QRect(460, 40, 211, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_252.setFont(font)
-        self.label_252.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_252.setObjectName("label_252")
-        self.label_249 = QtWidgets.QLabel(self.tab)
-        self.label_249.setGeometry(QtCore.QRect(80, 40, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_249.setFont(font)
-        self.label_249.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_249.setObjectName("label_249")
-        self.label_312 = QtWidgets.QLabel(self.tab)
-        self.label_312.setGeometry(QtCore.QRect(350, 10, 111, 20))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_312.setFont(font)
-        self.label_312.setObjectName("label_312")
-        self.line_96 = QtWidgets.QFrame(self.tab)
-        self.line_96.setGeometry(QtCore.QRect(470, 10, 261, 20))
-        self.line_96.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_96.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_96.setObjectName("line_96")
-        self.comboBox_81 = QtWidgets.QComboBox(self.tab)
-        self.comboBox_81.setGeometry(QtCore.QRect(180, 40, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_81.setFont(font)
-        self.comboBox_81.setAutoFillBackground(False)
-        self.comboBox_81.setObjectName("comboBox_81")
-        self.comboBox_81.addItem("")
-        self.comboBox_81.addItem("")
-        self.comboBox_81.addItem("")
-        self.comboBox_81.addItem("")
-        self.comboBox_81.addItem("")
-        self.comboBox_81.addItem("")
-        self.line_113 = QtWidgets.QFrame(self.tab)
-        self.line_113.setGeometry(QtCore.QRect(540, 90, 191, 20))
-        self.line_113.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_113.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_113.setObjectName("line_113")
-        self.label_327 = QtWidgets.QLabel(self.tab)
-        self.label_327.setGeometry(QtCore.QRect(530, 130, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_327.setFont(font)
-        self.label_327.setObjectName("label_327")
-        self.comboBox_80 = QtWidgets.QComboBox(self.tab)
-        self.comboBox_80.setGeometry(QtCore.QRect(400, 130, 121, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_80.setFont(font)
-        self.comboBox_80.setAutoFillBackground(False)
-        self.comboBox_80.setObjectName("comboBox_80")
-        self.comboBox_80.addItem("")
-        self.comboBox_80.addItem("")
-        self.label_301 = QtWidgets.QLabel(self.tab)
-        self.label_301.setGeometry(QtCore.QRect(270, 130, 121, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_301.setFont(font)
-        self.label_301.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_301.setObjectName("label_301")
-        self.label_301b = QtWidgets.QLabel(self.tab)
-        self.label_301b.setGeometry(QtCore.QRect(270, 170, 141, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_301b.setFont(font)
-        self.label_301b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_301b.setObjectName("label_301b")
-        self.doubleSpinBox_68 = QtWidgets.QDoubleSpinBox(self.tab)
-        self.doubleSpinBox_68.setGeometry(QtCore.QRect(390, 220, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.doubleSpinBox_68.setFont(font)
-        self.doubleSpinBox_68.setSingleStep(0.25)
-        self.doubleSpinBox_68.setProperty("value", 0.05)
-        self.doubleSpinBox_68.setObjectName("doubleSpinBox_68")
-        self.line_114 = QtWidgets.QFrame(self.tab)
-        self.line_114.setGeometry(QtCore.QRect(90, 90, 211, 20))
-        self.line_114.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_114.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_114.setObjectName("line_114")
-        self.checkBox_84 = QtWidgets.QCheckBox(self.tab)
-        self.checkBox_84.setGeometry(QtCore.QRect(230, 270, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_84.setFont(font)
-        self.checkBox_84.setObjectName("checkBox_84")
-        self.comboBox_79 = QtWidgets.QComboBox(self.tab)
-        self.comboBox_79.setGeometry(QtCore.QRect(610, 130, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_79.setFont(font)
-        self.comboBox_79.setAutoFillBackground(False)
-        self.comboBox_79.setObjectName("comboBox_79")
-        self.comboBox_79.addItem("")
-        self.comboBox_79.addItem("")
-        self.comboBox_79.addItem("")
-        self.comboBox_79.addItem("")
-        self.comboBox_79.addItem("")
-        self.comboBox_79.addItem("")
-        self.label_317 = QtWidgets.QLabel(self.tab)
-        self.label_317.setGeometry(QtCore.QRect(140, 220, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_317.setFont(font)
-        self.label_317.setObjectName("label_317")
-        self.label_318 = QtWidgets.QLabel(self.tab)
-        self.label_318.setGeometry(QtCore.QRect(140, 270, 61, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_318.setFont(font)
-        self.label_318.setObjectName("label_318")
-        self.label_307 = QtWidgets.QLabel(self.tab)
-        self.label_307.setGeometry(QtCore.QRect(470, 220, 121, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_307.setFont(font)
-        self.label_307.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_307.setObjectName("label_307")
-        self.label_307b = QtWidgets.QLabel(self.tab)
-        self.label_307b.setGeometry(QtCore.QRect(480, 170, 161, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_307b.setFont(font)
-        self.label_307b.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_307b.setObjectName("label_307b")
-        self.checkBox_83 = QtWidgets.QCheckBox(self.tab)
-        self.checkBox_83.setGeometry(QtCore.QRect(465, 270, 81, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.checkBox_83.setFont(font)
-        self.checkBox_83.setObjectName("checkBox_83")
-        self.label_323 = QtWidgets.QLabel(self.tab)
-        self.label_323.setGeometry(QtCore.QRect(140, 130, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_323.setFont(font)
-        self.label_323.setObjectName("label_323")
-        self.label_306 = QtWidgets.QLabel(self.tab)
-        self.label_306.setGeometry(QtCore.QRect(270, 220, 111, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_306.setFont(font)
-        self.label_306.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_306.setObjectName("label_306")
-        self.spinBox_48 = QtWidgets.QSpinBox(self.tab)
-        self.spinBox_48.setGeometry(QtCore.QRect(600, 220, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_48.setFont(font)
-        self.spinBox_48.setProperty("value", 10)
-        self.spinBox_48.setObjectName("spinBox_48")
-        self.spinBox_48b = QtWidgets.QSpinBox(self.tab)
-        self.spinBox_48b.setGeometry(QtCore.QRect(420, 170, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_48b.setFont(font)
-        self.spinBox_48b.setProperty("value", 10)
-        self.spinBox_48b.setObjectName("spinBox_48b")
-        self.spinBox_48c = QtWidgets.QSpinBox(self.tab)
-        self.spinBox_48c.setGeometry(QtCore.QRect(650, 170, 51, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.spinBox_48c.setFont(font)
-        self.spinBox_48c.setProperty("value", 10)
-        self.spinBox_48c.setObjectName("spinBox_48c")
-        self.label_315 = QtWidgets.QLabel(self.tab)
-        self.label_315.setGeometry(QtCore.QRect(320, 90, 201, 20))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_315.setFont(font)
-        self.label_315.setObjectName("label_315")
-#        self.pushButton_5 = QtWidgets.QPushButton(self.tab)
-#        self.pushButton_5.setGeometry(QtCore.QRect(230, 480, 351, 41))
-#        font = QtGui.QFont()
-#        font.setFamily("Ubuntu")
-#        font.setPointSize(11)
-#        font.setBold(False)
-#        font.setWeight(50)
-#        self.pushButton_5.setFont(font)
-#        self.pushButton_5.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-#        self.pushButton_5.setStyleSheet("QWidget{\n"
-#"\n"
-#"background-color:rgb(114, 159, 207)\n"
-#"\n"
-#"}")
-        #self.pushButton_5.setObjectName("pushButton_5")
-        self.push_clinical_numeric = QtWidgets.QPushButton(self.tab)
-        self.push_clinical_numeric.setGeometry(QtCore.QRect(330, 270, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_clinical_numeric.setFont(font)
+        #UPPER LINE
+       
+       
         
-        self.push_clinical_binary = QtWidgets.QPushButton(self.tab)
-        self.push_clinical_binary.setGeometry(QtCore.QRect(540, 270, 91, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setWeight(50)
-        self.push_clinical_binary.setFont(font)
+
+        #TAB/BLOCK 3
+        
+        #Line 1
+        block3_layout = QtWidgets.QVBoxLayout()
+        
+        block1_line1_layout = QtWidgets.QHBoxLayout()
 
         self.tab_18 = QtWidgets.QWidget()
         self.tab_18.setObjectName("tab_18")
         
-        self.comboBox_82 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_82.setGeometry(QtCore.QRect(200, 40, 61, 31))
+        
+        
+        main_layout = QtWidgets.QVBoxLayout(self.tab_18)
+        
+        
+        block3_line1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        #starting line
+        self.line_120 = QtWidgets.QFrame(self.tab_18)
+        self.line_120.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_120.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_120.setObjectName("line_120")
+        block3_line1_layout.addWidget(self.line_120)
+        
+        #label filtering by column
+        self.label_333 = QtWidgets.QLabel(self.tab_18)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_333.setFont(font)
+        self.label_333.setObjectName("label_333")
+        block3_line1_layout.addWidget(self.label_333)
+        
+        #ending line
+        self.line_121 = QtWidgets.QFrame(self.tab_18)
+        self.line_121.setGeometry(QtCore.QRect(490, 10, 261, 20))
+        self.line_121.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_121.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_121.setObjectName("line_121")
+        block3_line1_layout.addWidget(self.line_121)
+        
+        
+        block3_layout.addLayout(block3_line1_layout)
+        
+        self.line_120.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_333.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_121.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block3_line2_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        
+        # label column name
+        self.label_330 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_330.setFont(font)
+        self.label_330.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_330.setObjectName("label_330")
+        block3_line2_layout.addWidget(self.label_330)
+        
+        # combobox column name
+        self.comboBox_82 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.comboBox_82.setFont(font)
         self.comboBox_82.setAutoFillBackground(False)
         self.comboBox_82.setObjectName("comboBox_82")
+        block3_line2_layout.addWidget(self.comboBox_82)
         
-        self.comboBox_84 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_84.setGeometry(QtCore.QRect(200, 100, 61, 31))
+        # label data type
+        self.label_331 = QtWidgets.QLabel(self.tab_18)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_331.setFont(font)
+        self.label_331.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_331.setObjectName("label_331")
+        block3_line2_layout.addWidget(self.label_331)
+        
+        # combobox data type
+        self.comboBox_83 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_83.setFont(font)
+        self.comboBox_83.setAutoFillBackground(False)
+        self.comboBox_83.setObjectName("comboBox_83")
+        self.comboBox_83.addItem("")
+        self.comboBox_83.addItem("")
+        block3_line2_layout.addWidget(self.comboBox_83)
+        
+        # label threshold factor selected
+        self.label_332 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_332.setFont(font)
+        self.label_332.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_332.setObjectName("label_332")
+        block3_line2_layout.addWidget(self.label_332)
+        
+        # input threshold factor selected
+        self.lineEdit_17 = QtWidgets.QLineEdit(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_17.setFont(font)
+        self.lineEdit_17.setEnabled(True)
+        self.lineEdit_17.setObjectName("lineEdit_17")
+        block3_line2_layout.addWidget(self.lineEdit_17)
+        
+        
+        block3_layout.addLayout(block3_line2_layout)
+        
+        self.label_330.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_82.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_331.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_83.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_332.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_17.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block3_line3_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        # label column name
+        self.label_334 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_334.setFont(font)
+        self.label_334.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_334.setObjectName("label_334")
+        block3_line3_layout.addWidget(self.label_334)
+        
+        
+        # combobox column name
+        self.comboBox_84 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.comboBox_84.setFont(font)
         self.comboBox_84.setAutoFillBackground(False)
         self.comboBox_84.setObjectName("comboBox_84")
+        block3_line3_layout.addWidget(self.comboBox_84)
         
-        self.comboBox_86 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_86.setGeometry(QtCore.QRect(200, 160, 61, 31))
+        
+        # label data type
+        self.label_336 = QtWidgets.QLabel(self.tab_18)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_336.setFont(font)
+        self.label_336.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_336.setObjectName("label_336")
+        block3_line3_layout.addWidget(self.label_336)
+        
+        # combobox data type
+        self.comboBox_85 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_85.setFont(font)
+        self.comboBox_85.setAutoFillBackground(False)
+        self.comboBox_85.setObjectName("comboBox_85")
+        self.comboBox_85.addItem("")
+        self.comboBox_85.addItem("")
+        block3_line3_layout.addWidget(self.comboBox_85)
+        
+        # label threshold factor selected
+        self.label_335 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_335.setFont(font)
+        self.label_335.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_335.setObjectName("label_335")
+        block3_line3_layout.addWidget(self.label_335)
+        
+        # input threshold factor selected
+        self.lineEdit_18 = QtWidgets.QLineEdit(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_18.setFont(font)
+        self.lineEdit_18.setEnabled(True)
+        block3_line3_layout.addWidget(self.lineEdit_18)
+        
+        
+        
+        
+        block3_layout.addLayout(block3_line3_layout)
+        
+        self.label_334.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_84.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_336.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_85.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_335.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_18.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block3_line4_layout = QtWidgets.QHBoxLayout()
+        
+        # label column name
+        self.label_337 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_337.setFont(font)
+        self.label_337.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_337.setObjectName("label_337")
+        block3_line4_layout.addWidget(self.label_337)
+        
+        # combobox column name
+        self.comboBox_86 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.comboBox_86.setFont(font)
         self.comboBox_86.setAutoFillBackground(False)
         self.comboBox_86.setObjectName("comboBox_86")
+        block3_line4_layout.addWidget(self.comboBox_86)
         
-        self.comboBox_88 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_88.setGeometry(QtCore.QRect(200, 220, 61, 31))
+        # label data type
+        self.label_338 = QtWidgets.QLabel(self.tab_18)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_338.setFont(font)
+        self.label_338.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_338.setObjectName("label_338")
+        block3_line4_layout.addWidget(self.label_338)
+        
+        # combobox data type
+        self.comboBox_87 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_87.setFont(font)
+        self.comboBox_87.setAutoFillBackground(False)
+        self.comboBox_87.setObjectName("comboBox_87")
+        self.comboBox_87.addItem("")
+        self.comboBox_87.addItem("")
+        block3_line4_layout.addWidget(self.comboBox_87)
+        
+        # label threshold factor selected
+        self.label_339 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_339.setFont(font)
+        self.label_339.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_339.setObjectName("label_339")
+        block3_line4_layout.addWidget(self.label_339)
+        
+        
+        # input threshold factor selected
+        self.lineEdit_19 = QtWidgets.QLineEdit(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_19.setFont(font)
+        self.lineEdit_19.setEnabled(True)
+        self.lineEdit_19.setObjectName("lineEdit_19")
+        block3_line4_layout.addWidget(self.lineEdit_19)
+        
+        
+        
+        
+        
+        
+        
+        block3_layout.addLayout(block3_line4_layout)
+        
+        self.label_337.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_86.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_338.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_87.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_339.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_19.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block3_line5_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # label column name
+        self.label_340 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_340.setFont(font)
+        self.label_340.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_340.setObjectName("label_340")
+        block3_line5_layout.addWidget(self.label_340)
+        
+        # combobox column name
+        self.comboBox_88 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         self.comboBox_88.setFont(font)
         self.comboBox_88.setAutoFillBackground(False)
         self.comboBox_88.setObjectName("comboBox_88")
+        block3_line5_layout.addWidget(self.comboBox_88)
+        
+        
+        # label data type
+        self.label_341 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_341.setFont(font)
+        self.label_341.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_341.setObjectName("label_341")
+        block3_line5_layout.addWidget(self.label_341)
+        
+        # combobox data type
+        self.comboBox_89 = QtWidgets.QComboBox(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_89.setFont(font)
+        self.comboBox_89.setAutoFillBackground(False)
+        self.comboBox_89.setObjectName("comboBox_89")
+        self.comboBox_89.addItem("")
+        self.comboBox_89.addItem("")
+        block3_line5_layout.addWidget(self.comboBox_89)
+        
+        # label threshold factor selected
+        self.label_342 = QtWidgets.QLabel(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_342.setFont(font)
+        self.label_342.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_342.setObjectName("label_342")
+        block3_line5_layout.addWidget(self.label_342)
+        
+        # input threshold factor selected
+        self.lineEdit_20 = QtWidgets.QLineEdit(self.tab_18)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.lineEdit_20.setFont(font)
+        self.lineEdit_20.setEnabled(True)
+        self.lineEdit_20.setObjectName("lineEdit_20")
+        block3_line5_layout.addWidget(self.lineEdit_20)
+        
+        self.label_340.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_88.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_341.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_89.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_342.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.lineEdit_20.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        block3_layout.addLayout(block3_line5_layout)
+        
+        
+        main_layout.addLayout(block3_layout)
+        
+        
+        self.tabWidget.addTab(self.tab_18, "")
+        
+        
+        
         
         
         
@@ -4495,301 +4974,549 @@ class SecondWindow(QMainWindow):
         delegate = ItemDelegate()
         self.comboBox_82.setItemDelegate(delegate)
         
-        self.label_330 = QtWidgets.QLabel(self.tab_18)
-        self.label_330.setGeometry(QtCore.QRect(90, 40, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_330.setFont(font)
-        self.label_330.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_330.setObjectName("label_330")
-        self.label_331 = QtWidgets.QLabel(self.tab_18)
-        self.label_331.setGeometry(QtCore.QRect(280, 40, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_331.setFont(font)
-        self.label_331.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_331.setObjectName("label_331")
-        self.comboBox_83 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_83.setGeometry(QtCore.QRect(350, 40, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_83.setFont(font)
-        self.comboBox_83.setAutoFillBackground(False)
-        self.comboBox_83.setObjectName("comboBox_83")
-        self.comboBox_83.addItem("")
-        self.comboBox_83.addItem("")
         
-        self.comboBox_85 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_85.setGeometry(QtCore.QRect(350, 100, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_85.setFont(font)
-        self.comboBox_85.setAutoFillBackground(False)
-        self.comboBox_85.setObjectName("comboBox_85")
-        self.comboBox_85.addItem("")
-        self.comboBox_85.addItem("")
         
-        self.comboBox_87 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_87.setGeometry(QtCore.QRect(350, 160, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_87.setFont(font)
-        self.comboBox_87.setAutoFillBackground(False)
-        self.comboBox_87.setObjectName("comboBox_87")
-        self.comboBox_87.addItem("")
-        self.comboBox_87.addItem("")
         
-        self.comboBox_89 = QtWidgets.QComboBox(self.tab_18)
-        self.comboBox_89.setGeometry(QtCore.QRect(350, 220, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.comboBox_89.setFont(font)
-        self.comboBox_89.setAutoFillBackground(False)
-        self.comboBox_89.setObjectName("comboBox_89")
-        self.comboBox_89.addItem("")
-        self.comboBox_89.addItem("")
         
-        self.label_332 = QtWidgets.QLabel(self.tab_18)
-        self.label_332.setGeometry(QtCore.QRect(470, 40, 181, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_332.setFont(font)
-        self.label_332.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_332.setObjectName("label_332")
-
-        self.lineEdit_17 = QtWidgets.QLineEdit(self.tab_18)
-        self.lineEdit_17.setGeometry(QtCore.QRect(660, 40, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_17.setFont(font)
-        self.lineEdit_17.setEnabled(True)
-        self.lineEdit_17.setObjectName("lineEdit_17")
-        self.lineEdit_18 = QtWidgets.QLineEdit(self.tab_18)
-        self.lineEdit_18.setGeometry(QtCore.QRect(660, 100, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_18.setFont(font)
-        self.lineEdit_18.setEnabled(True)
-        self.lineEdit_19 = QtWidgets.QLineEdit(self.tab_18)
-        self.lineEdit_19.setGeometry(QtCore.QRect(660, 160, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_19.setFont(font)
-        self.lineEdit_19.setEnabled(True)
-        self.lineEdit_19.setObjectName("lineEdit_19")
-        self.lineEdit_20 = QtWidgets.QLineEdit(self.tab_18)
-        self.lineEdit_20.setGeometry(QtCore.QRect(660, 220, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.lineEdit_20.setFont(font)
-        self.lineEdit_20.setEnabled(True)
-        self.lineEdit_20.setObjectName("lineEdit_20")
-        self.line_120 = QtWidgets.QFrame(self.tab_18)
-        self.line_120.setGeometry(QtCore.QRect(90, 10, 231, 20))
-        self.line_120.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_120.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_120.setObjectName("line_95")
-        self.line_121 = QtWidgets.QFrame(self.tab_18)
-        self.line_121.setGeometry(QtCore.QRect(490, 10, 261, 20))
-        self.line_121.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_121.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_121.setObjectName("line_96")
-        self.label_333 = QtWidgets.QLabel(self.tab_18)
-        self.label_333.setGeometry(QtCore.QRect(350, 10, 131, 20))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_333.setFont(font)
-        self.label_333.setObjectName("label_333")
+        #TAB contains the MOFA options tab
         
-        self.label_334 = QtWidgets.QLabel(self.tab_18)
-        self.label_334.setGeometry(QtCore.QRect(90, 100, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_334.setFont(font)
-        self.label_334.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_334.setObjectName("label_334")
         
-        self.label_335 = QtWidgets.QLabel(self.tab_18)
-        self.label_335.setGeometry(QtCore.QRect(470, 100, 181, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_335.setFont(font)
-        self.label_335.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_335.setObjectName("label_335")
-        
-        self.label_336 = QtWidgets.QLabel(self.tab_18)
-        self.label_336.setGeometry(QtCore.QRect(280, 100, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_336.setFont(font)
-        self.label_336.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_336.setObjectName("label_336")
-        
-        self.label_337 = QtWidgets.QLabel(self.tab_18)
-        self.label_337.setGeometry(QtCore.QRect(90, 160, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_337.setFont(font)
-        self.label_337.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_337.setObjectName("label_337")
-        
-        self.label_338 = QtWidgets.QLabel(self.tab_18)
-        self.label_338.setGeometry(QtCore.QRect(280, 160, 71, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_338.setFont(font)
-        self.label_338.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_338.setObjectName("label_338")
-        self.label_339 = QtWidgets.QLabel(self.tab_18)
-        self.label_339.setGeometry(QtCore.QRect(470, 160, 181, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_339.setFont(font)
-        self.label_339.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_339.setObjectName("label_339")
+        #UPPER LINE
+       
+       
         
 
-        self.label_340 = QtWidgets.QLabel(self.tab_18)
-        self.label_340.setGeometry(QtCore.QRect(90, 220, 101, 31))
-        font = QtGui.QFont()
-        font.setFamily("Ubuntu")
-        font.setPointSize(11)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_340.setFont(font)
-        self.label_340.setStyleSheet("QWidget{\n"
-"\n"
-"background-color:rgb(114, 159, 207)\n"
-"\n"
-"}")
-        self.label_340.setObjectName("label_340")
+        #TAB/BLOCK 4
         
-        self.label_341 = QtWidgets.QLabel(self.tab_18)
-        self.label_341.setGeometry(QtCore.QRect(280, 220, 71, 31))
+        #Line 1
+        
+        
+        self.tab = QtWidgets.QWidget()
+        self.tab.setObjectName("tab")
+        
+        block4_layout = QtWidgets.QVBoxLayout()
+        
+        main_layout = QtWidgets.QVBoxLayout(self.tab)
+        
+        
+        block4_line1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #inital line
+        self.line_95 = QtWidgets.QFrame(self.tab)
+        self.line_95.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_95.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_95.setObjectName("line_95")
+        block4_line1_layout.addWidget(self.line_95)
+        
+        #label mofa options
+        self.label_312 = QtWidgets.QLabel(self.tab)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_341.setFont(font)
-        self.label_341.setStyleSheet("QWidget{\n"
+        self.label_312.setFont(font)
+        self.label_312.setObjectName("label_312")
+        block4_line1_layout.addWidget(self.label_312)
+        
+        #ending line
+        self.line_96 = QtWidgets.QFrame(self.tab)
+        self.line_96.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_96.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_96.setObjectName("line_96")
+        block4_line1_layout.addWidget(self.line_96)
+        
+        
+        
+        block4_layout.addLayout(block4_line1_layout)
+        
+        self.line_95.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_312.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_96.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line2_layout = QtWidgets.QHBoxLayout()
+
+        
+        
+        
+        #Label max iterations
+        self.label_249 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_249.setFont(font)
+        self.label_249.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_341.setObjectName("label_341")
-        self.label_342 = QtWidgets.QLabel(self.tab_18)
-        self.label_342.setGeometry(QtCore.QRect(470, 220, 181, 31))
+        self.label_249.setObjectName("label_249")
+        block4_line2_layout.addWidget(self.label_249)
+        
+        #Combobox max iterations
+        self.comboBox_81 = QtWidgets.QComboBox(self.tab)
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
-        self.label_342.setFont(font)
-        self.label_342.setStyleSheet("QWidget{\n"
+        self.comboBox_81.setFont(font)
+        self.comboBox_81.setAutoFillBackground(False)
+        self.comboBox_81.setObjectName("comboBox_81")
+        self.comboBox_81.addItem("")
+        self.comboBox_81.addItem("")
+        self.comboBox_81.addItem("")
+        self.comboBox_81.addItem("")
+        self.comboBox_81.addItem("")
+        self.comboBox_81.addItem("")
+        block4_line2_layout.addWidget(self.comboBox_81)
+        
+        #Label Convergence mode
+        self.label_250 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_250.setFont(font)
+        self.label_250.setStyleSheet("QWidget{\n"
 "\n"
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.label_342.setObjectName("label_342")
+        self.label_250.setObjectName("label_250")
+        block4_line2_layout.addWidget(self.label_250)
+        
+        #Combobox Convergence mode
+        self.comboBox_62 = QtWidgets.QComboBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_62.setFont(font)
+        self.comboBox_62.setAutoFillBackground(False)
+        self.comboBox_62.setObjectName("comboBox_62")
+        self.comboBox_62.addItem("")
+        self.comboBox_62.addItem("")
+        self.comboBox_62.addItem("")
+        block4_line2_layout.addWidget(self.comboBox_62)
+        
+        #Label Threshold contribution weight
+        self.label_252 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_252.setFont(font)
+        self.label_252.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_252.setObjectName("label_252")
+        block4_line2_layout.addWidget(self.label_252)
+        
+        
+        #Doublespinbox Threshold contribution weight
+        self.doubleSpinBox_59 = QtWidgets.QDoubleSpinBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_59.setFont(font)
+        self.doubleSpinBox_59.setSingleStep(0.25)
+        self.doubleSpinBox_59.setProperty("value", 0.5)
+        self.doubleSpinBox_59.setObjectName("doubleSpinBox_59")
+        block4_line2_layout.addWidget(self.doubleSpinBox_59)
+        
+        
+        
+        
+        
+        
+        block4_layout.addLayout(block4_line2_layout)
+        
+        self.label_249.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_81.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_250.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_62.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_252.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_59.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line3_layout = QtWidgets.QHBoxLayout()
+
+        #Initial line
+        self.line_114 = QtWidgets.QFrame(self.tab)
+        self.line_114.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_114.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_114.setObjectName("line_114")
+        block4_line3_layout.addWidget(self.line_114)
+        
+        #label mofa interpretation
+        self.label_315 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_315.setFont(font)
+        self.label_315.setObjectName("label_315")
+        block4_line3_layout.addWidget(self.label_315)
+        
+        #ending line
+        self.line_113 = QtWidgets.QFrame(self.tab)
+        self.line_113.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_113.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_113.setObjectName("line_113")
+        block4_line3_layout.addWidget(self.line_113)
+        
+        block4_layout.addLayout(block4_line3_layout)
+        
+        self.line_114.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_315.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.line_113.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line4_layout = QtWidgets.QHBoxLayout()
+        
+        
+        
+        #Label bibliography
+        self.label_323 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_323.setFont(font)
+        self.label_323.setObjectName("label_323")
+        block4_line4_layout.addWidget(self.label_323)
+        
+        
+        #Label type of research
+        self.label_301 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_301.setFont(font)
+        self.label_301.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_301.setObjectName("label_301")
+        block4_line4_layout.addWidget(self.label_301)
+        
+        
+        #combobox type of research
+        self.comboBox_80 = QtWidgets.QComboBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_80.setFont(font)
+        self.comboBox_80.setAutoFillBackground(False)
+        self.comboBox_80.setObjectName("comboBox_80")
+        self.comboBox_80.addItem("")
+        self.comboBox_80.addItem("")
+        block4_line4_layout.addWidget(self.comboBox_80)
+        
+        #Label number of articles
+        self.label_327 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_327.setFont(font)
+        self.label_327.setObjectName("label_327")
+        block4_line4_layout.addWidget(self.label_327)
+        
+        #Combobox number of articles
+        self.comboBox_79 = QtWidgets.QComboBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.comboBox_79.setFont(font)
+        self.comboBox_79.setAutoFillBackground(False)
+        self.comboBox_79.setObjectName("comboBox_79")
+        self.comboBox_79.addItem("")
+        self.comboBox_79.addItem("")
+        self.comboBox_79.addItem("")
+        self.comboBox_79.addItem("")
+        self.comboBox_79.addItem("")
+        self.comboBox_79.addItem("")
+        block4_line4_layout.addWidget(self.comboBox_79)
+        
+        
+        block4_layout.addLayout(block4_line4_layout)
+        
+        self.label_323.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_301.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_80.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_327.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.comboBox_79.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+
+        block4_line5_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Label N° top contributors
+        self.label_301b = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_301b.setFont(font)
+        self.label_301b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_301b.setObjectName("label_301b")
+        block4_line5_layout.addWidget(self.label_301b)
+        
+        #Spinbox N° top contributors
+        self.spinBox_48b = QtWidgets.QSpinBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_48b.setFont(font)
+        self.spinBox_48b.setProperty("value", 10)
+        self.spinBox_48b.setObjectName("spinBox_48b")
+        block4_line5_layout.addWidget(self.spinBox_48b)
+        
+        
+        
+        #Label N° key extracted
+        
+        self.label_307b = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_307b.setFont(font)
+        self.label_307b.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_307b.setObjectName("label_307b")
+        block4_line5_layout.addWidget(self.label_307b)
+        
+        
+        #Spinbox N° key extracted
+        self.spinBox_48c = QtWidgets.QSpinBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_48c.setFont(font)
+        self.spinBox_48c.setProperty("value", 10)
+        self.spinBox_48c.setObjectName("spinBox_48c")
+        block4_line5_layout.addWidget(self.spinBox_48c)
+        
+        
+        
+        block4_layout.addLayout(block4_line5_layout)
+        
+        self.label_301b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_48b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_307b.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_48c.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line6_layout = QtWidgets.QHBoxLayout()
+        
+        
+        #Label pathway mining
+        self.label_317 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_317.setFont(font)
+        self.label_317.setObjectName("label_317")
+        block4_line6_layout.addWidget(self.label_317)
+        
+        
+        #Label padj threshold
+        self.label_306 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_306.setFont(font)
+        self.label_306.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_306.setObjectName("label_306")
+        block4_line6_layout.addWidget(self.label_306)
+        
+        
+        #Spinbox padj threshold
+        self.doubleSpinBox_68 = QtWidgets.QDoubleSpinBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.doubleSpinBox_68.setFont(font)
+        self.doubleSpinBox_68.setSingleStep(0.25)
+        self.doubleSpinBox_68.setProperty("value", 0.05)
+        self.doubleSpinBox_68.setObjectName("doubleSpinBox_68")
+        block4_line6_layout.addWidget(self.doubleSpinBox_68)
+        
+        
+        #Label Pathways shown
+        self.label_307 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_307.setFont(font)
+        self.label_307.setStyleSheet("QWidget{\n"
+"\n"
+"background-color:rgb(114, 159, 207)\n"
+"\n"
+"}")
+        self.label_307.setObjectName("label_307")
+        block4_line6_layout.addWidget(self.label_307)
+        
+        #Spinbox Pathways shown
+        self.spinBox_48 = QtWidgets.QSpinBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.spinBox_48.setFont(font)
+        self.spinBox_48.setProperty("value", 10)
+        self.spinBox_48.setObjectName("spinBox_48")
+        block4_line6_layout.addWidget(self.spinBox_48)
+        
+        
+        block4_layout.addLayout(block4_line6_layout)
+        
+        self.label_317.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_306.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.doubleSpinBox_68.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_307.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.spinBox_48.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line7_layout = QtWidgets.QHBoxLayout()
+        
+        #Label clinical
+        self.label_318 = QtWidgets.QLabel(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_318.setFont(font)
+        self.label_318.setObjectName("label_318")
+        block4_line7_layout.addWidget(self.label_318)
+        
+        #Checkbox button numeric
+        self.checkBox_84 = QtWidgets.QCheckBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_84.setFont(font)
+        self.checkBox_84.setObjectName("checkBox_84")
+        block4_line7_layout.addWidget(self.checkBox_84)
+        
+        #Push button numeric
+        self.push_clinical_numeric = QtWidgets.QPushButton(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_clinical_numeric.setFont(font)
+        block4_line7_layout.addWidget(self.push_clinical_numeric)
+        
+        #Checkbox button binary
+        self.checkBox_83 = QtWidgets.QCheckBox(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.checkBox_83.setFont(font)
+        self.checkBox_83.setObjectName("checkBox_83")
+        block4_line7_layout.addWidget(self.checkBox_83)
+        
+        #Push button binary
+        self.push_clinical_binary = QtWidgets.QPushButton(self.tab)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.push_clinical_binary.setFont(font)
+        block4_line7_layout.addWidget(self.push_clinical_binary)
+        
+        
+        self.label_318.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_84.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_clinical_numeric.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_83.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.push_clinical_binary.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_layout.addLayout(block4_line7_layout)
+        
+        
+        main_layout.addLayout(block4_layout)
+        
+        
+        self.tabWidget.addTab(self.tab, "")
+        
+        
+        
+        #TAB2 contains the SAVE OPTION BUTTON
+        
+        
+
+        #TAB/BLOCK 5
+        
+        #Line 1
+
         
         self.tab2 = QtWidgets.QWidget()
-        self.tab2.setObjectName("tab2")        
+        self.tab2.setObjectName("tab2")       
+        
+        
+        block5_layout = QtWidgets.QVBoxLayout()
+        
+        main_layout = QtWidgets.QVBoxLayout(self.tab2)
+        
+        
+        block5_line1_layout = QtWidgets.QHBoxLayout() 
         
         self.pushButton_6 = QtWidgets.QPushButton(self.tab2)
-        self.pushButton_6.setGeometry(QtCore.QRect(230, 280, 351, 81))
         font = QtGui.QFont()
-        font.setFamily("Ubuntu")
+        font.setFamily("Arial")
         font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
@@ -4800,14 +5527,22 @@ class SecondWindow(QMainWindow):
 "background-color:rgb(114, 159, 207)\n"
 "\n"
 "}")
-        self.pushButton_6.setObjectName("pushButton_6")        
+        self.pushButton_6.setObjectName("pushButton_6")   
         
-        self.tabWidget.addTab(self.tab_18, "")     
-        self.tabWidget.addTab(self.tab, "")
-        self.tabWidget.addTab(self.tab2, "")
-        self.setCentralWidget(self.centralwidget)
+        self.pushButton_6.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block5_line1_layout.addWidget(self.pushButton_6)  
+        
+        block5_layout.addLayout(block5_line1_layout)  
+        
+        main_layout.addLayout(block5_layout)
+        
+        
+        self.tabWidget.addTab(self.tab2, "") 
+        
+
         self.menubar = QtWidgets.QMenuBar(self)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 681, 22))
+        #self.menubar.setGeometry(QtCore.QRect(0, 0, 681, 22))
         self.menubar.setObjectName("menubar")
         self.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(self)
@@ -4816,7 +5551,7 @@ class SecondWindow(QMainWindow):
 
         self.retranslateUi2(self)
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_5.setCurrentIndex(1)
+        #self.tabWidget_5.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(self)
         
         
@@ -4875,49 +5610,7 @@ class SecondWindow(QMainWindow):
         self.label_243.setText(_translate("BiomiX_advanced", " CPU Threads"))
         self.label_243b.setText(_translate("BiomiX_advanced", " N° MOFA input features"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_13), _translate("BiomiX_advanced", "General"))
-        self.label_253.setText(_translate("BiomiX_advanced", "M/Z Tolerance ppm"))
-        self.comboBox_64.setItemText(0, _translate("BiomiX_advanced", "No"))
-        self.comboBox_64.setItemText(1, _translate("BiomiX_advanced", "1 (priority)"))
-        self.comboBox_64.setItemText(2, _translate("BiomiX_advanced", "2 (priority)"))
-        self.comboBox_64.setItemText(3, _translate("BiomiX_advanced", "3 (priority)"))
-        self.label_254.setText(_translate("BiomiX_advanced", "Collision energy"))
-        self.label_255.setText(_translate("BiomiX_advanced", "HMDB"))
-        self.label_256.setText(_translate("BiomiX_advanced", "Ion mode"))
-        self.label_258.setText(_translate("BiomiX_advanced", "Column"))
-        self.label_260.setText(_translate("BiomiX_advanced", "MONA"))
-        self.comboBox_65.setItemText(0, _translate("BiomiX_advanced", "No"))
-        self.comboBox_65.setItemText(1, _translate("BiomiX_advanced", "1 (priority)"))
-        self.comboBox_65.setItemText(2, _translate("BiomiX_advanced", "2 (priority)"))
-        self.comboBox_65.setItemText(3, _translate("BiomiX_advanced", "3 (priority)"))
-        self.label_261.setText(_translate("BiomiX_advanced", "MS2-MS/MS Annotation"))
-        self.comboBox_66.setItemText(0, _translate("BiomiX_advanced", "positive"))
-        self.comboBox_66.setItemText(1, _translate("BiomiX_advanced", "negative"))
-        self.comboBox_67.setItemText(0, _translate("BiomiX_advanced", "all"))
-        self.comboBox_68.setItemText(0, _translate("BiomiX_advanced", "rp"))
-        self.comboBox_68.setItemText(1, _translate("BiomiX_advanced", "hilic"))
-        self.label_262.setText(_translate("BiomiX_advanced", "MASSBANK"))
-        self.label_263.setText(_translate("BiomiX_advanced", "Log2FC threshold"))
-        self.label_264.setText(_translate("BiomiX_advanced", "P.adj threshold"))
-        self.label_265.setText(_translate("BiomiX_advanced", "Annotated peaks"))
-        self.label_266.setText(_translate("BiomiX_advanced", "Metabolomics Options"))
-        self.label_267.setText(_translate("BiomiX_advanced", "P.adj threshold"))
-        self.label_268.setText(_translate("BiomiX_advanced", "Transcriptomics Options"))
-        self.label_269.setText(_translate("BiomiX_advanced", "% Purity threshold"))
-        self.label_270.setText(_translate("BiomiX_advanced", "Log2FC threshold"))
-        self.comboBox_69.setItemText(0, _translate("BiomiX_advanced", "450K"))
-        self.comboBox_69.setItemText(1, _translate("BiomiX_advanced", "EPIC"))
-        self.label_271.setText(_translate("BiomiX_advanced", "P.adj threshold"))
-        self.label_272.setText(_translate("BiomiX_advanced", "Log2FC threshold"))
-        self.label_273.setText(_translate("BiomiX_advanced", "Methylomics Options"))
-        self.label_274.setText(_translate("BiomiX_advanced", "Array type"))
-        self.label_275.setText(_translate("BiomiX_advanced", "Gene panel and positivity criteria"))
-        self.label_276.setText(_translate("BiomiX_advanced", "N° of genes within the panel with  Z-score > 2 "))
-        self.label_277.setText(_translate("BiomiX_advanced", "N° of genes within the panel with  Z-score > 1 "))
-        self.label_278.setText(_translate("BiomiX_advanced", "Removal of positive control samples"))
-        self.comboBox_70.setItemText(0, _translate("BiomiX_advanced", "fast"))
-        self.comboBox_70.setItemText(1, _translate("BiomiX_advanced", "medium"))
-        self.comboBox_70.setItemText(2, _translate("BiomiX_advanced", "slow"))
-        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_15), _translate("BiomiX_advanced", "General"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_16), _translate("BiomiX_advanced", "Metabolomics annotation"))
         self.comboBox_71.setItemText(0, _translate("BiomiX_advanced", "No"))
         self.comboBox_71.setItemText(1, _translate("BiomiX_advanced", "1 (priority)"))
         self.comboBox_71.setItemText(2, _translate("BiomiX_advanced", "2 (priority)"))
@@ -5049,8 +5742,7 @@ class SecondWindow(QMainWindow):
         self.comboBox_75.setItemText(2, _translate("BiomiX_advanced", "KEGG"))
         self.label_284.setText(_translate("BiomiX_advanced", " M/Z Tolerance ppm"))
         self.label_284b.setText(_translate("BiomiX_advanced", " M/Z Tolerance ppm"))
-        self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_16), _translate("BiomiX_advanced", "Metabolomics annotation"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_14), _translate("BiomiX_advanced", "Metabolomics annotation"))
+        #self.tabWidget_5.setTabText(self.tabWidget_5.indexOf(self.tab_16), _translate("BiomiX_advanced", "Metabolomics annotation"))
         self.comboBox_62.setItemText(0, _translate("BiomiX_advanced", "fast"))
         self.comboBox_62.setItemText(1, _translate("BiomiX_advanced", "medium"))
         self.comboBox_62.setItemText(2, _translate("BiomiX_advanced", "slow"))
