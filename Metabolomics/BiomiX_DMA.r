@@ -35,9 +35,9 @@ if (length(args) == 0) {
 # directory <- args[3]
 # iterations = 1
 # selection_samples = "NO"
-# Cell_type = "Plasma"
-# i = 2
-# ANNOTATION = "MS1"
+# Cell_type = "Urine"
+# i = 1
+# ANNOTATION = "Annotated"
 # DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
 
 
@@ -159,7 +159,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Serum", ignore_case=TRUE))| str_detect(C
         }}
 
 if (str_detect(COMMAND$LABEL[i], fixed("Urine", ignore_case=TRUE))){
-        if (file.exists("urine_metabolite_annotated") == TRUE){
+        if (file.exists("urine_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 urine_metabolite <- vroom(paste(directory2,"urine_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -171,7 +171,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Urine", ignore_case=TRUE))){
 }
 
 if (str_detect(COMMAND$LABEL[i], fixed("Saliva", ignore_case=TRUE))){
-        if (file.exists("saliva_metabolite_annotated") == TRUE){
+        if (file.exists("saliva_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 saliva_metabolite <- vroom(paste(directory2,"saliva_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -183,7 +183,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Saliva", ignore_case=TRUE))){
 
 
 if (str_detect(COMMAND$LABEL[i], fixed("Cerebrospinal Fluid", ignore_case=TRUE))){
-        if (file.exists("cerebrospinal_fluid_metabolite_annotated") == TRUE){
+        if (file.exists("cerebrospinal_fluid_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 CSF_metabolite <- vroom(paste(directory2,"cerebrospinal_fluid_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -195,7 +195,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Cerebrospinal Fluid", ignore_case=TRUE))
 
 
 if (str_detect(COMMAND$LABEL[i], fixed("Feces", ignore_case=TRUE))){
-        if (file.exists("feces_metabolite_annotated") == TRUE){
+        if (file.exists("feces_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 feces_metabolite <- vroom(paste(directory2,"feces_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -206,7 +206,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Feces", ignore_case=TRUE))){
         }}
 
 if (str_detect(COMMAND$LABEL[i], fixed("Sweat", ignore_case=TRUE))){
-        if (file.exists("sweat_metabolite_annotated") == TRUE){
+        if (file.exists("sweat_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 sweat_metabolite <- vroom(paste(directory2,"sweat_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -217,7 +217,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Sweat", ignore_case=TRUE))){
         }}
 
 if (str_detect(COMMAND$LABEL[i], fixed("Breast milk", ignore_case=TRUE))){
-        if (file.exists("breast_milk_metabolite_annotated") == TRUE){
+        if (file.exists("breast_milk_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 breast_milk_metabolite <- vroom(paste(directory2,"breast_milk_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -229,7 +229,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Breast milk", ignore_case=TRUE))){
 
 
 if (str_detect(COMMAND$LABEL[i], fixed("Bile", ignore_case=TRUE))){
-        if (file.exists("bile_metabolite_annotated") == TRUE){
+        if (file.exists("bile_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 bile_metabolite <- vroom(paste(directory2,"bile_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -240,7 +240,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Bile", ignore_case=TRUE))){
         }}
 
 if (str_detect(COMMAND$LABEL[i], fixed("Amniotic Fluid", ignore_case=TRUE))){
-        if (file.exists("AF_metabolite_annotated") == TRUE){
+        if (file.exists("AF_metabolite_annotated.tsv") == TRUE){
                 print("File available locally, using the local version")
                 AF_metabolite <- vroom(paste(directory2,"AF_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
@@ -860,7 +860,8 @@ if(ANNOTATION == "Annotated"){
         if (COMMAND_ADVANCED[2,9] == "HMDB" ){
                 write.table(x= query_id_select, file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)}
         if (COMMAND_ADVANCED[2,9] == "KEGG" ){
-                write.table(x= query_id_select , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],sep="") ,".tsv" ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)}
+                write.table(x= query_id_select , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                } #Sometimes does work, is not able to write the file, exclusively in the network section (?)
         if (COMMAND_ADVANCED[2,9] == "compound_name" ){
                 write.table(x= query_id_select, file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)}
         

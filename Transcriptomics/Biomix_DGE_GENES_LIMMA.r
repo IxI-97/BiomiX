@@ -2449,7 +2449,11 @@ if (NORMALIZATION=="NO"){
   }
   
   #OVERWRITE OR REPLACE A FINAL NORMALIZED FILE WITH VARIANCE IN IT.
-write.table(x=normalizzati  , file= paste(Cell_type,args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+  normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
+  limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
+  if(length(rownames(normalizzati_MOFA)) > limit){
+          normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
+  write.table(x=normalizzati_MOFA  , file= paste(Cell_type,args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
   
 }else{
   print("PATH YES NORMALIZED 2")
@@ -2481,7 +2485,12 @@ write.table(x=normalizzati  , file= paste(Cell_type,args[1], "vs", args[2], "nor
     normalizzati <- normalizzati[, c(1:(ncol(normalizzati) - 2), ncol(normalizzati), ncol(normalizzati) -1 )]
   }
   
-  write.table(x=normalizzati  , file= paste(Cell_type,args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+  normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
+  limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
+  if(length(rownames(normalizzati_MOFA)) > limit){
+  normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
+  write.table(x=normalizzati_MOFA  , file= paste(Cell_type, args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+  
   normalizzati_size <- normalizzati
 }
 

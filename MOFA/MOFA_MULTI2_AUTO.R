@@ -35,6 +35,40 @@ Max_features <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA_INTERPRETATION_
 
 directory2 <- paste(directory,"/Metabolomics",sep="")
 
+
+
+#### UNDEFINED FUNCTION
+
+Undefined_processing <-function(matrix,mer){
+        x<- as.data.frame(colnames(matrix))
+        
+        matrix <- matrix %>% filter(CONDITION == args[2] | CONDITION == args[1])
+        
+        list <- list()        
+        
+        sample_undefined<- reshape(data=matrix, idvar="CONDITION",
+                                   varying = colnames(matrix)[3:ncol(matrix)],
+                                   v.name=c("value"),
+                                   times= colnames(matrix)[3:ncol(matrix)],
+                                   new.row.names = 1:1000000,
+                                   direction="long")
+        colnames(sample_undefined)[3] <- "feature"
+        sample_undefined$view <- paste(mer,"_Undefined", sep="")
+        sample_undefined <- sample_undefined[,c(1,2,3,5,4)]
+        colnames(sample_undefined)[1] <- "sample"
+        colnames(sample_undefined)[2] <- "group"
+        
+        sample_undefined_EASY <- colnames(matrix)
+        
+        list[[1]] <- sample_undefined
+        list[[2]] <- sample_undefined_EASY
+        
+        
+        return(list)
+        
+}
+
+
 #### METABOLOMICS FUNCTION
 
 Metabolomics_processing <-function(annotation,matrix,mer){
@@ -246,6 +280,13 @@ if(COMMAND$DATA_TYPE[i] == "Methylomics"){
         myList <- list.append(myList,INPUTX[[1]])
         
 }
+        if(COMMAND$DATA_TYPE[i] == "Undefined"){        
+                directory2 <- paste(directory,"/MOFA/INPUT/", "Undefined_", COMMAND$LABEL[i], "_",args[1],"_vs_", args[2], sep ="")
+                samples_undefined <- vroom(paste(directory2,"/Undefined_",COMMAND$LABEL[i], "_MOFA.tsv", sep = ""), delim = "\t")
+                INPUTX<-Undefined_processing(samples_undefined,COMMAND$LABEL[i])
+                assign(paste("INPUT", i, "_visual", sep=""),INPUTX[[2]])
+                myList <- list.append(myList,INPUTX[[1]])
+        }
 }
 }
 
@@ -496,15 +537,16 @@ for(i in 1:length(COMMAND$INTEGRATION)){
       features_names(model)[Views[n]] <- o
       n = n+1
       print("OK")
-    }else{
-      print(n)
-      o<- list("Serum_metabolomics" = get(paste("INPUT",i,"_visual",sep="")))
-      names(o) <- Views[n]
-      #print(o)
-      features_names(model)[Views[n]] <- o
-      n = n+1
-      print("OKK")
     }
+    #       else{
+    #   print(n)
+    #   o<- list("Serum_metabolomics" = get(paste("INPUT",i,"_visual",sep="")))
+    #   names(o) <- Views[n]
+    #   #print(o)
+    #   features_names(model)[Views[n]] <- o
+    #   n = n+1
+    #   print("OKK")
+    # }
   }
 }
 

@@ -49,10 +49,47 @@ print(args)
 #print(args[3])
 
 
+
+
+#FIND A WAY TO SELECT ANY POSSIBLE INPUT WITHOUT CONSIDERING THE ORDER
+
+n_iteration<- sum(COMMAND$DATA_TYPE == "Undefined")
+position <- which(COMMAND$DATA_TYPE %in% "Undefined")
+cat("\n\n\n\n\n Checking Undefined datasets.... \n\n\n\n\n")
+iterations <- 0
+for (i in position){
+        if(COMMAND$ANALYSIS[i] == "YES"){
+                
+                
+                Cell_type <- COMMAND$LABEL[i]
+                cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
+                iterations = iterations + 1
+                selection_samples = COMMAND$SELECTION[i]
+                #purity_filter =COMMAND$PURITY[i]
+                directory2 <- paste(directory,"/Undefined/INPUT",sep="")
+                #files <- grep("MATRIX*",list.files(directory2),value=TRUE)
+                #files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
+                source(paste(directory,"/Undefined/BiomiX_Undefined.r",sep=""))
+                cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
+                gc()
+        }
+}
+
+
+
+
+#===============================================================================
+
+
+
+
+
+
 #FIND A WAY TO SELECT ANY POSSIBLE INPUT WITHOUT CONSIDERING THE ORDER
 
 n_iteration<- sum(COMMAND$DATA_TYPE == "Transcriptomics")
 position <- which(COMMAND$DATA_TYPE %in% "Transcriptomics")
+cat("\n\n\n\n\nChecking Transcriptomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
 if(COMMAND$ANALYSIS[i] == "YES"){
@@ -82,6 +119,7 @@ if(COMMAND$ANALYSIS[i] == "YES"){
 
 n_iteration<- sum(COMMAND$DATA_TYPE == "Metabolomics")
 position <- which(COMMAND$DATA_TYPE %in% "Metabolomics")
+cat("\n\n\n\n\nChecking Metabolomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
         
@@ -104,6 +142,7 @@ for (i in position){
 
 n_iteration<- sum(COMMAND$DATA_TYPE == "Methylomics")
 position <- which(COMMAND$DATA_TYPE %in% "Methylomics")
+cat("\n\n\n\n\nChecking Methylomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
         
@@ -123,7 +162,6 @@ for (i in position){
 }
 
 #================================================================================
-
 
 
 if(COMMAND_MOFA[2,2] == "YES") {
@@ -305,24 +343,24 @@ matr_4[12:13,1]<-c("NUMERIC_CLINICAL_DATA_FILE?", "BINARY_CLINICAL_DATA_FILE")
 
 dir.create(path =  paste(directory,"/","Report_parameters/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
 line="#PARAMETERS OMICS INPUT#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(COMMAND[,-1], file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(COMMAND[,-1], file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE , row.names = F)
 line="#PARAMETERS INTEGRATION#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE)
 COMMAND_MOFA[,1]<-c("TYPE_INTEGRATION", "MULTIOMICS INTEGRATION?", "N° MOFA FACTOR CALCULATED? 0 = AUTOMATIC MODE", "MOFA FACTOR TO EXPLORE WITH VISUALIZATION", "MIN OMICS SHARED PER SAMPLE")
-write.table(COMMAND_MOFA, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
+write.table(COMMAND_MOFA, file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (GENERAL)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr, file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (METABOLOMICS)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_2, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_2, file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (METADATA)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE , col.names = F, row.names = F)
 line="#ADVANCED OPTION PARAMETER (MOFA)#"
-write(line,file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
-write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
+write(line,file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2], substr(Sys.time(), 1,16),sep=""),append=TRUE)
+write.table(matr_3, file= paste(directory,"/","Report_parameters/","Report_", args[1],"_vs_", args[2],"_", substr(Sys.time(), 1,16),sep=""),append=TRUE, col.names = F, row.names = F)
 
 
 cat("\n\n\n\n\n Report parameters saved ^-^")

@@ -10,8 +10,8 @@ library(litsearchr)
 # MANUAL INPUT
 # # #
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"PTB"
-# args[2] <-"HC"
+# args[2] <-"PTB"
+# args[1] <-"HC"
 # args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
@@ -456,7 +456,7 @@ write("no_results",file=paste(directory3, "/", "Factor_", numb, "_articles.tsv",
 
 #####BLOCK RESEARCH QUERY OMICS PAIRS TOGETHER ####
 #TRASCRIPTOMICS-METABOLOMICS
-print("TRASCRIPTOMICS-METABOLOMICS")
+print("TRANSCRIPTOMICS-METABOLOMICS")
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
 
 # Patterns to check for
@@ -494,7 +494,7 @@ if (length(uu) == 1){
                 write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
 }
 }
-#TRASCRIPTOMICS-METHYLOMICS
+#TRANSCRIPTOMICS-METHYLOMICS
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
 # Patterns to check for
@@ -543,7 +543,7 @@ patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics")
 # Check if any of the patterns is present in each file name
 patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
 
-if (all(patterns_present == c(TRUE, TRUE, TRUE))){
+if (all(patterns_present == c(FALSE, TRUE, TRUE))){
 files<- files[grep("\\Methylomics|\\Metabolomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
@@ -681,6 +681,7 @@ Total_articles <- vroom(paste(directory3, "/", "Factor_", numb, "_articles.tsv",
 Total_articles<- Total_articles[!grepl("#.*", Total_articles$X1),]
 Total_articles<- Total_articles[!(Total_articles$X1 == "x"),]
 Total_articles<- Total_articles[!grepl("no_results", Total_articles$X1),]
+if (nrow(Total_articles) != 0 ){
 frame_identification<- which(grepl("Pubmed", Total_articles$X1))
 frame_identification<- c(frame_identification,(length(Total_articles$X1) + 1))
 
@@ -714,7 +715,7 @@ pubmed_codes =NULL
 terms_articles_single=NULL
 
 }
-
+}
 
 
 }
