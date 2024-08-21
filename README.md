@@ -3,7 +3,7 @@
 
  
  <div align="center">
-    <img src="https://github.com/IxI-97/IxI-97.github.io/blob/main/BiomiX_logo3.png?raw=true" width="600" height="300">
+    <img src="https://github.com/IxI-97/IxI-97.github.io/blob/main/BiomiX_logo3.png?raw=true" width="300" height="300">
 </div>
 
 
