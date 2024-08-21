@@ -19,6 +19,8 @@ This version introduces several **new features**:
 
 - Package conflicts on Linux and macOS have been resolved.
 
+
+
 ### *18 June 2024* 
 Hi to everyone! 
 
