@@ -10,6 +10,8 @@ commands = [
     'conda install -c conda-forge pyqt -y',
     'conda install -c anaconda pandas -y',
     'pip install scikit-learn',
+    'pip install xlrd',
+    'pip install openpyxl',
     'pip install mofapy2==0.6.7',
     'conda install -c conda-forge r-ncdf4 -y'
     'conda install bioconda::bioconductor-mzr'

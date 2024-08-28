@@ -119,7 +119,7 @@ def rest_of_the_script():
         def open_dialog(self):
             dialog = QFileDialog()
             dialog.setFileMode(QFileDialog.ExistingFile)
-            dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+            dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
             if dialog.exec_():
                 file_path = dialog.selectedFiles()[0]
                 print(file_path)

@@ -16,8 +16,8 @@ reticulate::py_config()
 #
 # # #MANUAL INPUT
 # args = as.list(c("BLymphocytes","SJS"))
-# args[2] <-"PTB"
-# args[1] <-"HC"
+# args[2] <-"unmutated"
+# args[1] <-"mutated"
 # args[3] <- "/home/cristia/BiomiX2.2"
 # 
 # directory <-args[3]

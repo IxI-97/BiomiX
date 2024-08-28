@@ -3,13 +3,14 @@ library(dplyr)
 library(stringr)
 library(rlist)
 library(tibble)
+library(readxl)
 
 # MANUAL INPUT
 # # # #
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"PTB"
-# args[2] <-"HC"
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
 # args[3] <-"/home/cristia/BiomiX2.2"
 # 
 # directory <- args[3]
@@ -29,15 +30,20 @@ LogFC <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS[1])
 padju <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS[2])
 
 
-#loading annotation and matrix
+#loading matrix
 directory2 <- paste(directory,"/Undefined/INPUT",sep="")
 setwd(directory2)
 
 print(i)
 print(COMMAND$LABEL[i])
 
-#LOADING ANNOTATION AND PEAKS
-matrix <- vroom(COMMAND$DIRECTORIES[i],delim="\t",col_names = TRUE, comment = "#")
+if (grepl("\\.xlsx$|\\.xls$", COMMAND$DIRECTORIES[i])) {
+        matrix <- read_excel(COMMAND$DIRECTORIES[i])
+        print("Matrix Excel File read successfully!")
+}else{
+        matrix <- vroom(COMMAND$DIRECTORIES[i],delim="\t",col_names = TRUE, comment = "#")
+}
+
 
 sam <- colnames(matrix)
 pea <-matrix$ID
@@ -53,18 +59,14 @@ directory2 <- paste(directory, "/MOFA/INPUT/", "Undefined_", Cell_type,  "_",arg
 setwd(directory2)
 
 
-#CHECK OF THE CTRL AND CONDITION LABEL (ex SLE or CTRL)
+if (grepl("\\.xlsx$|\\.xls$", DIR_METADATA)) {
+        Metadata_total <- read_excel(DIR_METADATA)
+        print("Metadata Excel File read successfully!")
+}else{
+        Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)}
 
-Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)
-# Identifier<-matrix$ID
-# matrix<-matrix[,c(-1,-2)]
-# matrix<-as.data.frame(t(matrix))
-# colnames(matrix) <- Identifier
-# matrix$ID <- row.names(matrix)
-# matrix <- matrix[, c(ncol(matrix), 1:(ncol(matrix)-1))]
-# rownames(matrix) = NULL
-# write.table(x=matrix , file= "Urine.tsv" ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
 
+#If statement in case of sample selection
 
 if (selection_samples == "YES") {
         num <- grep(Cell_type, Metadata_total$ID_CELL_TYPE)
@@ -189,7 +191,18 @@ matrixs <- matrix
 
 matrixs <- add_column(matrixs, Metadata$CONDITION, .after = 1)
 colnames(matrixs)[2] <- "CONDITION"
-matrixs[,3:ncol(matrixs)]<-apply(matrixs[,3:ncol(matrixs)],2,as.numeric)
+
+
+tryCatch({
+        # If there is a missmatch between metadata and matrix this line will not work
+        matrixs[,3:ncol(matrixs)]<-apply(matrixs[,3:ncol(matrixs)],2,as.numeric)
+        
+}, error = function(e) {
+        # Personalized error message
+        print(paste("Oops! An error occurred:", e$message))
+        print("Are you sure the Undefined matrix samples are the same of the metadata file?")
+})
+
 
 
 #Calculus variance
@@ -215,11 +228,13 @@ limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
 #These data should not be normalized by log.
 
 if(length(rownames(ordering)) > limit){
+        ordering<-ordering[!ordering$variance == Inf,]
         normalizzati_MOFA <- ordering[1:limit,]
         ond<-colnames(matrixs) %in% normalizzati_MOFA[,1] 
         ond[1:2] <- TRUE
         normalizzati_MOFA<-matrixs[,ond]
-}
+}else{
+normalizzati_MOFA <- matrixs}
 
 write.table(normalizzati_MOFA,paste(directory2,"/Undefined_",Cell_type, "_MOFA.tsv", sep = ""),quote = FALSE, row.names = F, sep = "\t")
 
@@ -233,13 +248,18 @@ DMS_REFERENCE <- function(Condition1){
         CON <- matrix[Metadata$CONDITION == Condition1,] #Example CONTROL vs SLE patients
         samp_CON<-row.names(CON) 
         CON <-CON[,c(-1,-2)] 
-        CON <-apply(CON,2,as.numeric) 
+        CON <-apply(CON,2,as.numeric)
+        
+
         
         y=NULL
         for (i in seq(1:length(colnames(CON)))) {
+                if (all_same(CON[,i])){
+                        y <-append(y, 1)
+                }else{
                 res <- (shapiro.test(CON[,i]))
                 y <-append(y, res[["p.value"]])
-        }
+        }}
         
         CON<-as.data.frame(CON)
         shapiro_test_CON <- y
@@ -266,9 +286,12 @@ DMS_TESTED <- function(Condition2){
         
         y=NULL
         for (i in seq(1:length(colnames(SLE)))) {
-                res <- (shapiro.test(SLE[,i]))
-                y <-append(y, res[["p.value"]])
-        }
+                if (all_same(SLE[,i])){
+                        y <-append(y, 1)
+                }else{
+                        res <- (shapiro.test(SLE[,i]))
+                        y <-append(y, res[["p.value"]])
+                }}
         
         SLE<-as.data.frame(SLE)
         shapiro_test_SLE <- y
@@ -320,7 +343,10 @@ DMS_TESTED <- function(Condition2){
 }
 
 
-
+#Function to check if all the variable elements are the same
+all_same <- function(x) {
+        all(x == x[1])
+}
 
 
 

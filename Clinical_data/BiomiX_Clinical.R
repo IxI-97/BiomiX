@@ -2,6 +2,7 @@
 library(dplyr)
 library(tidyverse)
 library(vroom)
+library(readxl)
 
 # MANUAL INPUT
 # # #
@@ -48,7 +49,14 @@ setwd(directory2)
 
 
 if(NUMERICAL_AVAILABLE == "YES"){
-NUMERICAL <-read.table(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[1], sep = "\t", header = TRUE)
+
+        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[1])) {
+                NUMERICAL <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[1])
+                NUMERICAL <- as.data.frame(NUMERICAL)
+                print("Clinical Numeric File read successfully!")
+        }else{
+                NUMERICAL <-read.table(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[1], sep = "\t", header = TRUE)}
+        
 
 
 dir.create(path = paste(directory,"/Clinical_data/OUTPUT/","Clinical", "_", args[1] ,"_vs_", args[2], "_",as.numeric(COMMAND_MOFA[3,2]),"_factors" ,sep="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
@@ -109,7 +117,13 @@ setwd(directory2)
 }
 
 if(BINARY_AVAILABLE == "YES"){
-BINARY <-vroom(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[2], delim = "\t", col_names = TRUE)
+
+        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[2])) {
+                BINARY <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[2])
+                BINARY <- as.data.frame(BINARY)
+                print("Clinical Numeric File read successfully!")
+        }else{
+                BINARY <-vroom(COMMAND_ADVANCED$ADVANCED_OPTION_CLINIC_DATA_DIRECTORY[2], delim = "\t", col_names = TRUE)}
 
 dir.create(path = paste(directory,"/Clinical_data/OUTPUT/","Clinical", "_", args[1] ,"_vs_", args[2], "_",as.numeric(COMMAND_MOFA[3,2]),"_factors" ,sep="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
 directory2 <- paste(directory,"/Clinical_data/OUTPUT/","Clinical", "_", args[1] ,"_vs_", args[2], "_",as.numeric(COMMAND_MOFA[3,2]),"_factors" ,sep="") 

@@ -4,8 +4,8 @@
 # MANUAL INPUT
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"CLL"
-# args[2] <-"T-PLL"
+# args[1] <-"PTB"
+# args[2] <-"HC"
 # args[3] <-"/home/cristia/BiomiX2.2"
 # #
 # directory <- args[3]
@@ -20,24 +20,6 @@
 # DIR_METADATA <- readLines("directory.txt")
 
 
-
-if (length(args) ==0) {
-  stop("At least one argument must be supplied (input file).n", call.=FALSE)
-} else if (length(args)==1) {
-  if (args == "help") {
-    print("CELL TYPE available: BLymphocytes / Monocytes / TLymphocytes / Neutrophils ....... DISEASES AVAILABLE: SjS / RA / SSc / PAPs / MCTD / UCTD / SLE ")
-    stop()
-  } else {
-    stop("The number of argument is not enough, did you miss the cell type or the disease?")
-  }
-  
-} else if (length(args)==3) {
-  print("Correct number of argument :)")
-  paste("Disease:", args[1])
-}else if (length(args)> 3) {
-  stop("Too many argument.. are you typing random words?") 
-}
-
 #### DATASET REARRANGEMENT ----
 
 print("starting data upload and preparation")
@@ -45,6 +27,7 @@ print("starting data upload and preparation")
 library(vroom)
 library(dplyr)
 library(sjmisc)
+library(readxl)
 
 directory2 <- paste(directory,"/Transcriptomics/INPUT",sep="")
 setwd(directory2)
@@ -52,8 +35,18 @@ setwd(directory2)
 print(iterations)
 
 COMMAND$DIRECTORIES[i]
-Matrix <-vroom(COMMAND$DIRECTORIES[i] , delim = "\t", col_names = TRUE)
-Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)
+if (grepl("\\.xlsx$|\\.xls$", COMMAND$DIRECTORIES[i])) {
+        Matrix <- read_excel(COMMAND$DIRECTORIES[i])
+        print("Metadata Excel File read successfully!")
+        }else{
+                Matrix <-vroom(COMMAND$DIRECTORIES[i] , delim = "\t", col_names = TRUE)}
+
+if (grepl("\\.xlsx$|\\.xls$", DIR_METADATA)) {
+        Metadata_total <- read_excel(DIR_METADATA)
+        print("Metadata Excel File read successfully!")
+        }else{
+                Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)}
+
 COMMAND_ADVANCED <- vroom(paste(directory,"COMMANDS_ADVANCED.tsv",sep="/"), delim = "\t")
 log2FC <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[1])
 padju <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[2])
@@ -63,6 +56,9 @@ n_genes_heat<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_CLUSTERING_OPTIONS[3])
 
 genes <- Matrix$ID
 
+
+#IF STATEMENT TO SELECT SAMPLES BASED ON THEIR NAME (BY REGEX) -
+# IT CORRESPOND TO -> SELECTION OPTION ON INTERFACE
 
 if (selection_samples == "YES") {
   num <- grep(Cell_type, Metadata_total$SAMPLE_TYPE)
@@ -113,9 +109,20 @@ if (selection_samples == "YES") {
   Metadata_Bcell <- Metadata_Bcell[num,]
   #If multiple select only the first column
   Metadata_Bcell <- Metadata_Bcell[!duplicated(Metadata_Bcell$ID), ]
-  
   Metadata_Bcell<-Metadata_Bcell[order(Metadata_Bcell$ID),]
-  Matrix<-Matrix[,order(colnames(Matrix))]
+  
+  
+  tryCatch({
+          # If there is a missmatch between metadata and matrix this line will not work
+          Matrix<-Matrix[,order(colnames(Matrix))]
+          
+  }, error = function(e) {
+          # Personalized error message
+          print(paste("Oops! An error occurred:", e$message))
+          print("Are you sure the transcriptomics matrix samples are the same of the metadata file?")
+  })
+  
+  
 }
 
 rownames(Matrix) <- genes
@@ -132,7 +139,7 @@ Metadata_total = NULL
 
 
 
-#STATEMENT IF DATA ARE NORMALIZED
+#STATEMENT IF DATA ARE NORMALIZED OR NOT, IT LOOKS IF NUMERS ARE FLOATS OR INTEGER
 if (is_float(Matrix[-1])){
   NORMALIZATION <- "YES"
   
@@ -178,7 +185,8 @@ if (is_float(Matrix[-1])){
   print("X")
   
   
-  #Purity from MCP
+  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+  #DEFINED IN ADVANCED OPTION, METADATA SECTION
   library(dplyr)
   
   setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
@@ -254,7 +262,7 @@ if (is_float(Matrix[-1])){
   print(paste("Automatic detection of normalized data. Are the data normalized? ",NORMALIZATION))
   
   
-  #### NORMALIZATION ----
+  #### DATA NOT NORMALIZED, NORMALIZATION SECTION ----
   
   
   #Normalization
@@ -289,7 +297,7 @@ if (is_float(Matrix[-1])){
   Metadata_Bcell <- arrange(Metadata_Bcell,ID)
   
   num <- Metadata_Bcell$CONDITION == args[1]
-  #Choise disease + HC
+
   numero <- Metadata_Bcell$CONDITION == args[2]
   
   Metadata_Bcells <- Metadata_Bcell
@@ -299,7 +307,8 @@ if (is_float(Matrix[-1])){
   print("X")
   
   
-  #Purity from MCP
+  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+  #DEFINED IN ADVANCED OPTION, METADATA SECTION
   library(dplyr)
   
   setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
@@ -379,7 +388,7 @@ if (is_float(Matrix[-1])){
   DGE4$Gene.name <- rownames(DGE4)
   
   
-  #### DATA INTEGRATION MATRIX ----
+  #### CREATION DATA INTEGRATION MATRICES ----
   
   #create directory
   dir.create(path = paste(directory,"/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
@@ -411,15 +420,20 @@ if (is_float(Matrix[-1])){
   
 }
 
-#### HEATMAP ----
+#### HEATMAP SECTION ----
 
-#Genes interferon signature
+#Genes panel signature
 directory2 <- paste(directory,"/Transcriptomics/INPUT",sep="")
 setwd(directory2)
 
 if(COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X"){
-  genes <-vroom(Gene_panel, delim = "\t", col_names = TRUE)
-  genes <- genes$GENES_FOR_SUBPOPULATION}
+  if (grepl("\\.xlsx$|\\.xls$", Gene_panel)) {
+          genes <- read_excel(Gene_panel)
+                print("Metadata Excel File read successfully!")
+  }else{
+          genes <-vroom(Gene_panel, delim = "\t", col_names = TRUE)}
+  
+genes <- genes$GENES_FOR_SUBPOPULATION}
 
 directory2 <- paste(directory, "/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="")
 setwd(directory2)
@@ -481,17 +495,6 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     }}
   IFN_score[length(Panel),] <- tmp
   
-  #colnames(IFN_score)<- Metadata_Bcells$CONDITION
-  
-  # library(ComplexHeatmap)
-  # Heatmap(IFN_score)
-  # 
-  # library(circlize)
-  # col_fun = colorRamp2(c(-0.3, 0, 0.3), c("blue", "black", "yellow"))
-  # col_fun(seq(-3, 3))
-  # Heatmap(IFN_score,km =2, name = "IFN_score", col = col_fun, clustering_distance_rows = "pearson", clustering_method_rows= "complete", row_dend_width = unit(0.5, "cm"), column_names_gp = grid::gpar(fontsize = 6),
-  #         row_names_gp = grid::gpar(fontsize = 8))
-  
   
   #HEATMAP
   num<-Metadata_Bcell$CONDITION == args[2]
@@ -500,10 +503,10 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   IFN_score<-IFN_score[, num | num2]
   
   
-  # #### ADD HEATMAP AFTER IFNPOS PREDICION ----
-  
   
   # #### AUTOMATIC IDENTIFICATION POSITIVE - NEGATIVE ----
+  #USING THE CRITERIA IN ADVANCED OPTION, GENERAL SECTION
+  
   library(stringr)
   
   z1 <- IFN_score > 2 
@@ -516,16 +519,9 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   colSums(z2, na.rm = TRUE) 
   positivity2 <- colSums(z2, na.rm = TRUE) >= as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_SUBGROUPING[2])
   
-  
-  # z3 <- IFN_score > 0.5
-  # 
-  # colSums(z3, na.rm = TRUE) 
-  # positivity3 <- colSums(z3, na.rm = TRUE) > 10
-  # 
+
   positivity<- positivity1|positivity2
-  
-  
-  
+
   Metadata_Bcell$condition <- positivity
   
   Metadata_Bcell$condition <- str_replace(Metadata_Bcell$condition, "TRUE", "pos")
@@ -584,6 +580,8 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
   
   # #### VALIDATION SIGNATURE ----
+  #IF WITHIN THE METADATA THERE IS A COLUMN CALLED MARKER, WITH THE SAME BIOLOGICAL MEANING OF
+  #THE GENE PANEL, YOU CAN COMPARE THE PERFORMANCE IN CLASSIFYING THE SAMPLES.
   
   library(dplyr)
   
@@ -605,9 +603,6 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     #here we must define the classification pos/neg based on the heatmap
     
     setwd(directory2)
-    #write.table(x=Metadata  , file= "Metadata_condition"  ,sep= ",", row.names = FALSE, col.names = TRUE,  quote = FALSE)
-    # Metadata_cond <- vroom("Metadata_condition" , delim = ",", col_names = TRUE)
-    # Metadata$condition <- Metadata_cond$condition
     
     #Setting the IFN value to 1 this is the neg/pos condition accuracy
     print(paste("Number of samples IFN pos correctly classified = ", nrow(Metadata_Bcell %>% filter(MARKER > 0 | MARKER < 0 ) %>% filter(CONDITION == args[1]) %>% filter(condition == "pos")) , "/",  nrow(Metadata_Bcell %>% filter(CONDITION == args[1]) %>% filter(MARKER > 1.25 )), sep = ""))
@@ -700,10 +695,6 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_SUBGROUPING[3] != "YES") {
         if (NORMALIZATION=="NO"){
                 DGE2<-DGE2[-nrow(DGE2),]}else{print("")}
         
-        #ADD CENTER AND BATCH TO THE MODEL
-        #DGE2$batch <- Metadata$Batch
-        #DGE2$center <- Metadata$Center
-        #colnames(DGE2) <- c(genes_name,"condition","Batch", "Center")
         colnames(DGE2) <- c(genes_name)
         rownames(DGE2) <- Metadata$ID
         DGE2$samples <- Metadata$ID
@@ -738,8 +729,8 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   gene_name <- DGE3$Gene.name
   
   
-  
-  #Purity from MCP
+  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+  #DEFINED IN ADVANCED OPTION, METADATA SECTION
   library(dplyr)
   
   setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
@@ -797,10 +788,10 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
   
   
-  
+  #Check to Reorder (in case) the Matrix and Metadata
   tmp = NULL
   for (i in 1:length(Metadata$ID)){
-    x <-grep(Metadata$ID[i], colnames(DGE3))
+    x <-match(Metadata$ID[i], colnames(DGE3))
     tmp<-append(tmp,x)
   }
   
@@ -815,6 +806,9 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
   if (sum(Metadata$condition == "pos") > 2){
     
+          
+#IF STATEMENT THAT RUN A DESEQ ANALYSIS IF THE DATA ARE NOT NORMALIZED,
+          #AND RUN A LIMMA ANALYSIS IF THE DATA ARE NORMALIZED.
     if(NORMALIZATION=="YES"){
       
       library(limma)
@@ -1108,8 +1102,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     
     write.table(dis[,c("ID","CONDITION")],
                 file= paste(args[1], "pos_",args[2],"_",Cell_type, "_RAW_meta_groups.tsv", sep =""),sep = "\t", quote= FALSE, row.names = FALSE)
-    #Ho preso i nomi dei diversi geni attraverso bio.mart da questo ho scaricato
-    #la tabella e l'ho aggiunta a quella DGE.
+
     #
     #
     #
@@ -1125,13 +1118,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     
     setwd(directory2)
     
-    # write.csv(arrange(ALTI,padj),
-    #           file="HC_vs_SLEpos_upregulated")
-    #
-    #
-    # write.csv(arrange(BASSI,padj),
-    #           file="HC_vs_SLEpos_downregulated")
-    
+
     
     library(ggplot2)
     library(ggrepel)
@@ -1293,7 +1280,8 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
   
   
-  #Purity from MCP
+  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+  #DEFINED IN ADVANCED OPTION, METADATA SECTION
   library(dplyr)
   
   setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
@@ -1353,7 +1341,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
   tmp = NULL
   for (i in 1:length(Metadata$ID)){
-    x <-grep(Metadata$ID[i], colnames(DGE3))
+    x <-match(Metadata$ID[i], colnames(DGE3))
     tmp<-append(tmp,x)
   }
   
@@ -1679,13 +1667,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     
     setwd(directory2)
     
-    # write.csv(arrange(ALTI,padj),
-    #           file="HC_vs_SLEpos_upregulated")
-    #
-    #
-    # write.csv(arrange(BASSI,padj),
-    #           file="HC_vs_SLEpos_downregulated")
-    
+
     
     library(ggplot2)
     library(ggrepel)
@@ -1844,7 +1826,8 @@ gene_name <- DGE3$Gene.name
 
 
 
-#Purity from MCP
+#FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+#DEFINED IN ADVANCED OPTION, METADATA SECTION
 library(dplyr)
 
 setwd(paste(directory,"/Transcriptomics/INPUT",sep = ""))
@@ -1909,6 +1892,8 @@ for (i in 1:length(Metadata$ID)){
 DGE3 <- DGE3[,tmp]
 rownames(DGE3) <- gene_name
 
+#IF STATEMENT THAT RUN A DESEQ ANALYSIS IF THE DATA ARE NOT NORMALIZED,
+#AND RUN A LIMMA ANALYSIS IF THE DATA ARE NORMALIZED.
 if(NORMALIZATION=="YES"){
   
   library(limma)

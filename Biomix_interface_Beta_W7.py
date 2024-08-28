@@ -1283,7 +1283,13 @@ class Ui_BiomiX(object):
             table_directory = file.read().strip()
 
         # Read the table
-        df = pd.read_csv(table_directory, delimiter="\t")
+        if table_directory.endswith(('.xlsx', '.xls')):
+        # Read the Excel file
+            df = pd.read_excel(table_directory)
+            print("Excel metadata file read successfully!")
+        else:
+            df = pd.read_csv(table_directory, delimiter="\t")
+            print(".tsv metadata file read successfully!")
         print(df)
         # Extract unique elements from the "conditions" column
         unique_conditions = df["CONDITION"].unique()
@@ -1306,7 +1312,7 @@ class Ui_BiomiX(object):
     def open_dialog(self,file_number):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFile)
-        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
         if dialog.exec_():
             file_path = dialog.selectedFiles()[0]
             file_paths.append(file_path)
@@ -1983,7 +1989,7 @@ class Ui_BiomiX(object):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFile)
         dialog.setWindowTitle("Select OMICS matrix")
-        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
         if dialog.exec_():
             inputs = dialog.selectedFiles()[0]
             global file_path_panel
@@ -2008,7 +2014,7 @@ class Ui_BiomiX(object):
     def open_dialog_annot(self,file_number):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFile)
-        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
         dialog.setWindowTitle("Select MS2 annotation file")
         if dialog.exec_():
             file_path = dialog.selectedFiles()[0]
@@ -2023,7 +2029,7 @@ class Ui_BiomiX(object):
     def open_dialog_annot_for_ms2(self,file_number):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFile)
-        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
         dialog.setWindowTitle("Select MS2 annotation file")
         if dialog.exec_():
             file_path = dialog.selectedFiles()[0]
@@ -2053,7 +2059,7 @@ class Ui_BiomiX(object):
     def open_dialog_clinic(self,file_number):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.ExistingFile)
-        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv)")
+        dialog.setNameFilter("Metadata Files (*.txt *.csv *.tsv *.xls *.xlsx)")
         dialog.setWindowTitle("Select Clinical data file")
         if dialog.exec_():
             file_path = dialog.selectedFiles()[0]
@@ -4959,8 +4965,16 @@ class SecondWindow(QMainWindow):
         with open(directory_path, "r") as file:
             table_directory = file.read().strip()
 
-        # Read the table
-        df = pd.read_csv(table_directory, delimiter="\t")
+        if table_directory.endswith(('.xlsx', '.xls')):
+        # Read the Excel file
+            df = pd.read_excel(table_directory)
+            print("Excel metadata file read successfully!")
+        else:
+                # Read the table
+            df = pd.read_csv(table_directory, delimiter="\t")
+            print(".tsv metadata file read successfully!")
+        print(df)
+        
 
         # Extract unique elements from the "conditions" column
         column_names = df.columns.tolist()
@@ -5912,7 +5926,18 @@ class MatrixModifierApp(QMainWindow):
         if file_name:
             try:
                 if self2.has_header:
-                    self2.matrix_data = pd.read_csv(file_name, sep=self2.separator, header=0, error_bad_lines=False, warn_bad_lines=True)
+                
+                
+                    # Read the table
+                    if file_name.endswith(('.xlsx', '.xls')):
+                        # Read the Excel file
+                        self2.matrix_data = pd.read_excel(file_name)
+                        print("Excel metadata file read successfully!")
+                    else:
+                        self2.matrix_data = pd.read_csv(file_name, sep=self2.separator, header=0, error_bad_lines=False, warn_bad_lines=True)
+                        print(".tsv metadata file read successfully!")
+                
+                
                     # Ask the user to select the column containing gene names
                     gene_column, ok = QInputDialog.getItem(self2, 'Select Gene Column', 'Select the column containing gene names:', list(self2.matrix_data.columns), 0, False)
                     if ok:
@@ -5929,7 +5954,19 @@ class MatrixModifierApp(QMainWindow):
                         self2.matrix_data = self2.matrix_data.applymap(lambda x: str(x).replace(decimal_separator, '.'))
 
                 else:
-                    self2.matrix_data = pd.read_csv(file_name, sep=self2.separator, header=None, error_bad_lines=False, warn_bad_lines=True)
+                    
+                    
+                    
+                    
+                    # Read the table
+                    if file_name.endswith(('.xlsx', '.xls')):
+                        # Read the Excel file
+                        self2.matrix_data = pd.read_excel(file_name)
+                        print("Excel metadata file read successfully!")
+                    else:
+                        self2.matrix_data = pd.read_csv(file_name, sep=self2.separator, header=None, error_bad_lines=False, warn_bad_lines=True)
+                        print(".tsv metadata file read successfully!")
+                    
 
                 # Update displayed matrix to the entire matrix
                 self2.displayed_matrix = self2.matrix_data.copy()

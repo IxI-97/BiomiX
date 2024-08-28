@@ -1,5 +1,6 @@
 library(vroom)
 library(dplyr)
+library(readxl)
 
 #### INPUT PROMPT ----
 
@@ -56,9 +57,19 @@ n_genes_heat<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_CLUSTERING_OPTIONS[3])
 
 
 
-Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)
-Matrix <- vroom(COMMAND$DIRECTORIES[i] , delim = "\t", col_names = TRUE)
 
+if (grepl("\\.xlsx$|\\.xls$", DIR_METADATA)) {
+        Metadata_total <- read_excel(DIR_METADATA)
+        print("Metadata Excel File read successfully!")
+}else{
+        Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)}
+
+
+if (grepl("\\.xlsx$|\\.xls$", COMMAND$DIRECTORIES[i])) {
+        Matrix <- read_excel(COMMAND$DIRECTORIES[i])
+        print("Metadata Excel File read successfully!")
+}else{
+        Matrix <- vroom(COMMAND$DIRECTORIES[i] , delim = "\t", col_names = TRUE)}
 
 
 if (selection_samples == "YES") {

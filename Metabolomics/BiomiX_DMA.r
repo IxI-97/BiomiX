@@ -4,25 +4,7 @@ library(cmmr)
 library(stringr)
 library(rlist)
 library(tibble)
-
-#Testing if the number of argument added in the interface is correct (disease,control and directory)
-
-if (length(args) == 0) {
-        stop("At least one argument must be supplied (input file).n", call.=FALSE)
-} else if (length(args)==1) {
-        if (args == "help") {
-                print("CELL TYPE available: BLymphocytes / Monocytes / TLymphocytes / Neutrophils ....... DISEASES AVAILABLE: SjS / RA / SSc / PAPs / MCTD / UCTD / SLE ")
-                stop()
-        } else {
-                stop("The number of argument is not enough, did you miss the cell type or the disease?")
-        }
-        
-} else if (length(args)==3) {
-        print("Correct number of argument :)")
-        paste("Disease:", args[1])
-}else if (length(args)> 3) {
-        stop("Too many argument.. are you typing random words?") 
-}
+library(readxl)
 
 # MANUAL INPUT
 # # # #
@@ -35,9 +17,9 @@ if (length(args) == 0) {
 # directory <- args[3]
 # iterations = 1
 # selection_samples = "NO"
-# Cell_type = "Urine"
-# i = 1
-# ANNOTATION = "Annotated"
+# Cell_type = "METAB"
+# i = 2
+# ANNOTATION = "MS1"
 # DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
 
 
@@ -60,8 +42,8 @@ if (length(args) == 0) {
 # Metadata_total <- vroom("/home/cristia/Scrivania/BiomiX1.9/Metadata/Metadata_PRECISESADS.tsv", delim = "\t", col_names = TRUE)
 # annotation <- vroom("/home/cristia/Scrivania/BiomiX1.9/Metabolomics/INPUT/ANNOTATION_PLASMA_SLE.tsv",delim="\t",col_names = TRUE)
 
-# MS2_annotation = "YES"   #ADD TO INTERFACE
-MS2_databases = c("HMDB","MONA","MASSBANK")  #ADD TO INTERFACE
+#AVAILABLE MS2 DATASET.
+MS2_databases = c("HMDB","MONA","MASSBANK")  
 
 COMMAND <- vroom(paste(directory,"COMMANDS.tsv",sep="/"), delim = "\t")
 COMMAND_MOFA <- vroom(paste(directory,"COMMANDS_MOFA.tsv",sep="/"), delim = "\t")
@@ -73,7 +55,7 @@ Heatmap_genes <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_CLUSTERING_OPTIONS[
 LogFC <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS[1])
 padju <- as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS[2])
 
-#MS2_DATABASES
+#ORDER THE MS2_DATABASES PRIORITY BASED ON THE USER INDICATION IN THE ADVANCED OPTIONS.
 Input_ms2<- COMMAND_ADVANCED[3,8]
 Input_ms2 <- unlist(strsplit(as.character(Input_ms2), "/"))
 Input_ms2<-as.numeric(substr(Input_ms2, 1, 1))
@@ -84,15 +66,19 @@ if(sum(is.na(Input_ms2)) > 0){
 MS2_databases <-MS2_databases[order(Input_ms2)]
 
 
-#loading annotation and matrix
 directory2 <- paste(directory,"/Metabolomics/INPUT",sep="")
 setwd(directory2)
 
 print(i)
 print(COMMAND$LABEL[i])
 
-#LOADING ANNOTATION AND PEAKS
-matrix <- vroom(COMMAND$DIRECTORIES[i],delim="\t",col_names = TRUE, comment = "#")
+#LOADING ANNOTATION AND PEAKS MATRIX
+if (grepl("\\.xlsx$|\\.xls$", COMMAND$DIRECTORIES[i])) {
+        matrix <- read_excel(COMMAND$DIRECTORIES[i])
+        print("Matrix Excel File read successfully!")
+}else{
+        matrix <- vroom(COMMAND$DIRECTORIES[i],delim="\t",col_names = TRUE, comment = "#")
+}
 
 sam <- colnames(matrix)
 pea <-matrix$ID
@@ -102,18 +88,24 @@ colnames(matrix) <-c("ID",pea)
 
 ANNOTATION = COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_GENERAL[1]
 
-
+#IF STATEMENT TO UPLOAD ANNOTATION, 
+#THE REQUIREMENTS CHANGE IF THE USER SELECTED THE MS1 OR MS2 ANNOTATION
 if(ANNOTATION == "MS1"){  
         input_ms1<-which(substr(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_INDEX,1,1) %in% i)
         if (length(input_ms1) != 0){
                 if (file.exists(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms1])){
-                        annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms1],delim="\t",col_names = TRUE)
+                        
+                        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms1])) {
+                                annotation <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms1])
+                                print("Annotation ms1 Excel File read successfully!")
+                        }else{
+                                annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms1],delim="\t",col_names = TRUE)}
                         if (ncol(annotation) == 3){
                                 if (colnames(annotation)[3] == "RT_sec"){
-                                        annotation$RT_min <- annotation$RT_sec/60
+                                        annotation$RT_min <- as.numeric(annotation$RT_sec)/60
                                 }
                                 if (colnames(annotation)[3] == "RT_min"){
-                                        annotation$RT_sec <- annotation$RT_min*60
+                                        annotation$RT_sec <- as.numeric(annotation$RT_min)*60
                                 }
                                 
                         } 
@@ -125,13 +117,19 @@ if(ANNOTATION == "MS2"){
         input_ms1<-which(substr(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_MS2_3_INDEX,1,1) %in% i)
         if (length(input_ms1) != 0){
                 if (file.exists(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1])){
-                        annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1],delim="\t",col_names = TRUE)
+                        
+                        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2])) {
+                                annotation <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2])
+                                print("Annotation ms1 Excel File read successfully!")
+                        }else{
+                                annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2],delim="\t",col_names = TRUE)}
+                        
                         if (ncol(annotation) == 3){
                                 if (colnames(annotation)[3] == "RT_sec"){
-                                        annotation$RT_min <- annotation$RT_sec/60
+                                        annotation$RT_min <- as.numeric(annotation$RT_sec)/60 #as.numeric source of bug?
                                 }
                                 if (colnames(annotation)[3] == "RT_min"){
-                                        annotation$RT_sec <- annotation$RT_min*60
+                                        annotation$RT_sec <- as.numeric(annotation$RT_min)*60
                                 }
                                 
                         } 
@@ -145,7 +143,8 @@ directory2 <- paste(directory, "/MOFA/INPUT/", "Metabolomics_", Cell_type,  "_",
 setwd(directory2)
 
 #ANNOTATION <- "Annotated"
-#UPLOAD SEUM URINE ANNOTATIONS FROM HMDB AND FILTERING (IF THE SAMPLE IS FROM SERUM OR URINE)
+#UPLOAD PLASMA, URINE OR OTHERS ANNOTATIONS FROM HMDB AND FILTERING 
+#IT WORKS IF THE LABEL IS NAMES AS THE TISSUES/SAMPLE WHERE THE DATABASE IS AVAILABLE 
 
 if (str_detect(COMMAND$LABEL[i], fixed("Serum", ignore_case=TRUE))| str_detect(COMMAND$LABEL[i], fixed("Plasma", ignore_case=TRUE))){
         if (file.exists("serum_metabolite_annotated.tsv") == TRUE){
@@ -252,16 +251,16 @@ if (str_detect(COMMAND$LABEL[i], fixed("Amniotic Fluid", ignore_case=TRUE))){
 
 #CHECK OF THE CTRL AND CONDITION LABEL (ex SLE or CTRL)
 
-Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)
-# Identifier<-matrix$ID
-# matrix<-matrix[,c(-1,-2)]
-# matrix<-as.data.frame(t(matrix))
-# colnames(matrix) <- Identifier
-# matrix$ID <- row.names(matrix)
-# matrix <- matrix[, c(ncol(matrix), 1:(ncol(matrix)-1))]
-# rownames(matrix) = NULL
-# write.table(x=matrix , file= "Urine.tsv" ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
 
+if (grepl("\\.xlsx$|\\.xls$", DIR_METADATA)) {
+        Metadata_total <- read_excel(DIR_METADATA)
+        print("Metadata Excel File read successfully!")
+}else{
+        Metadata_total <- vroom(DIR_METADATA, delim = "\t", col_names = TRUE)}
+
+
+#IF STATEMENT TO SELECT SAMPLES BASED ON THEIR NAME (BY REGEX) -
+# IT CORRESPOND TO -> SELECTION OPTION ON INTERFACE
 
 if (selection_samples == "YES") {
         num <- grep(Cell_type, Metadata_total$ID_CELL_TYPE)
@@ -315,8 +314,8 @@ Metadata<- Metadata[outs,]
 matrix<- matrix[outs,]
 
 
-#FILTERING BASED ON METADATA
-
+#FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+#DEFINED IN ADVANCED OPTION, METADATA SECTION
 METADATA_FILT <- !is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])
 METADATA_FILT_INDEX <-grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))
 
@@ -362,16 +361,6 @@ for (meta_filter in METADATA_FILT_INDEX){
         }
 }
 
-# 
-# 
-# summary(as.factor(Metadata$CONDITION))
-# matrix <- t(matrix)
-# colnames(matrix) <- Identifier
-# matrix<-as.data.frame(matrix)
-# matrix$ID <- rownames(matrix)
-# matrix$CONDITION <- Metadata$CONDITION
-# samples <- matrix$ID
-# matrix <- matrix[, c(ncol(matrix) -1,ncol(matrix), 1:(ncol(matrix)-2))]
 
 ###
 matrix<- as.data.frame(matrix)
@@ -389,10 +378,7 @@ colnames(matrix) <- make.unique(names(matrix), sep = "_")
 #====================================
 
 
-#matrixs <- matrix %>% filter(CONDITION == args[2]| CONDITION ==args[1])
 matrixs <- matrix 
-
-
 matrixs <- add_column(matrixs, Metadata$CONDITION, .after = 1)
 colnames(matrixs)[2] <- "CONDITION"
 matrixs[,3:ncol(matrixs)]<-apply(matrixs[,3:ncol(matrixs)],2,as.numeric)
@@ -404,7 +390,7 @@ write.table(matrixs,paste(directory2,"/Metabolomics_",Cell_type, "_MOFA.tsv", se
 
 
 
-# #### FUNCTION DEFINITION FOR CONTROL AND TESTED SAMPLES----
+# #### FUNCTION DEFINITION FOR STATISTICAL TEST BETWEEN CONTROL AND TESTED SAMPLES----
 
 
 DMS_REFERENCE <- function(Condition1){
@@ -416,9 +402,12 @@ DMS_REFERENCE <- function(Condition1){
         
         y=NULL
         for (i in seq(1:length(colnames(CON)))) {
-                res <- (shapiro.test(CON[,i]))
-                y <-append(y, res[["p.value"]])
-        }
+                if (all_same(CON[,i])){
+                        y <-append(y, 1)
+                }else{
+                        res <- (shapiro.test(CON[,i]))
+                        y <-append(y, res[["p.value"]])
+                }}
         
         CON<-as.data.frame(CON)
         shapiro_test_CON <- y
@@ -445,9 +434,12 @@ DMS_TESTED <- function(Condition2){
         
         y=NULL
         for (i in seq(1:length(colnames(SLE)))) {
-                res <- (shapiro.test(SLE[,i]))
-                y <-append(y, res[["p.value"]])
-        }
+                if (all_same(SLE[,i])){
+                        y <-append(y, 1)
+                }else{
+                        res <- (shapiro.test(SLE[,i]))
+                        y <-append(y, res[["p.value"]])
+                }}
         
         SLE<-as.data.frame(SLE)
         shapiro_test_SLE <- y
@@ -491,7 +483,10 @@ DMS_TESTED <- function(Condition2){
 }
 
 
-
+#Function to check if all the variable elements are the same
+all_same <- function(x) {
+        all(x == x[1])
+}
 
 
 

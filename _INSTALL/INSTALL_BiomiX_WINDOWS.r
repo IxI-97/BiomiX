@@ -1,275 +1,26 @@
 
-print("looking for the BiomiX_folder")
-
-find_folder <- function(folder_name, depth = 5) {
-        # Get the root directory
-        root <- normalizePath("/")
-        
-        # Recursive function to search for the folder within the specified depth
-        search_folder <- function(directory, current_depth) {
-                if (current_depth <= depth) {
-                        files <- list.files(directory, full.names = TRUE)
-                        
-                        matching_folders <- files[file.info(files)$isdir & basename(files) == folder_name]
-                        
-                        if (length(matching_folders) > 0) {
-                                return(matching_folders[1])
-                        } else {
-                                subdirectories <- files[file.info(files)$isdir]
-                                for (subdir in subdirectories) {
-                                        result <- search_folder(subdir, current_depth + 1)
-                                        if (!is.null(result)) {
-                                                return(result)
-                                        }
-                                }
-                        }
-                }
-                return(NULL)
-        }
-        
-        # Call the recursive function starting from the root directory
-        found_folder <- search_folder(root, 1)
-        
-        # Return the path to the matching folder (if found)
-        if (!is.null(found_folder)) {
-                return(found_folder)
-        } else {
-                return(NULL)
-        }
-}
-
-
-#tot<-find_folder("BiomiX2.2")
-#setwd(tot)
-
-
 print("R Package checking..")
 print("getwd()")
 
+if (file.exists("Package_Windows.tar") == TRUE){
+        if (file.exists("Package_Windows") == TRUE){
+            print("R package already downloaded and decompressed")        
+        }else{
+            print("R package already downloaded, decompressing the .tar file ")   
+            untar("Package_Windows.tar")
+        }
+}else{
+        path<- paste(getwd(),"/", "Package_Windows.tar", sep="")
+        options(timeout=6000)
+        download.file("https://github.com/IxI-97/BiomiX/releases/download/v2.2.1/Package_Windows.tar", destfile = path, mode = "wb")
+        untar("Package_Windows.tar")
+}
+
+
+
+setwd(paste(getwd(),"/", "Package_Windows", sep=""))
+
 chooseCRANmirror(48, ind = TRUE)
-
-
-getPackages <- function(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL") {
-  # Ensure the output directory exists
-  if (!dir.exists(output_dir)) {
-    dir.create(output_dir, recursive = TRUE)
-  }
-  
-  # Initialize a list to store package strings for each package
-  package_strings_list <- list()
-  
-  # Get package dependencies for each input package
-  for (pack in packs) {
-    # Get package dependencies
-    dependencies <- unlist(
-      tools::package_dependencies(pack, available.packages(), which = c("Depends", "Imports"), recursive = TRUE)
-    )
-    
-    # Add the package itself to the dependencies
-    dependencies <- union(pack, dependencies)
-    
-    # Remove dependencies that have already been processed
-    dependencies <- setdiff(dependencies, unlist(package_strings_list))
-    
-    # Download the packages
-    download.packages(dependencies, destdir = output_dir, type = "win.binary", quiet = TRUE)
-    
-    # List downloaded packages
-    downloaded_files <- list.files(output_dir, pattern = "\\.zip$", full.names = TRUE)
-    
-    # Loop through each downloaded package and create the required string
-    package_strings <- character()
-    for (file_path in downloaded_files) {
-      package_name <- tools::file_path_sans_ext(basename(file_path))
-      version <- gsub(".*_([0-9.]+)\\.zip$", "\\1", package_name)
-      
-      # Construct the filename
-      filename <- paste0(package_name, ".zip")
-      
-      # Construct the all.packages string
-      package_string <- paste0('install.packages("', filename, '", repos=NULL, type="source")')
-      package_strings <- c(package_strings, package_string)
-    }
-    
-    # Store the package strings for the current package
-    package_strings_list[[pack]] <- package_strings
-    
-    # Write the package strings to a file
-    output_file <- file.path(output_dir, paste0(pack, "_packages.txt"))
-    writeLines(package_strings, con = output_file)
-  }
-  
-  return(package_strings_list)
-}
-
-
-
-packs <- c("httr2","devtools","vroom","lava","recipes", "dplyr","future.apply","stringr","circlize","ggplot2",
-"ggrepel", "enrichR","rlist","tidyverse","data.table","caret","reticulate","XML","xml2","rentrez","remotes", "GGally",
-"ggpubr","BiocManager", "htmltools", "ncdf4", "igraph")
-
-#all_packages <- getPackages(packs)
-
-
-
-getPackages <- function(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL") {
-  # Ensure the output directory exists
-  if (!dir.exists(output_dir)) {
-    dir.create(output_dir, recursive = TRUE)
-  }
-  
-  # Initialize a list to store package strings for each package
-  package_strings_list <- list()
-  
-  # Get package dependencies for each input package
-  for (pack in packs) {
-    # Install the package
-    BiocManager::install(pack)
-    
-    # Get the installed package details
-    pkg_details <- BiocManager::available()[[1]]
-    
-    # Get the package dependencies
-    dependencies <- pkg_details$Depends
-    if (!is.null(pkg_details$Imports)) {
-      dependencies <- c(dependencies, pkg_details$Imports)
-    }
-    
-    # Construct the all.packages strings for each dependency
-    package_strings <- lapply(dependencies, function(dep) {
-      package_string <- paste0('install.packages("', dep, '", repos = NULL, type = "source")')
-      return(package_string)
-    })
-    
-    # Store the package strings for the current package
-    package_strings_list[[pack]] <- package_strings
-    
-    # Write the package strings to a file
-    output_file <- file.path(output_dir, paste0(pack, "_packages.txt"))
-    writeLines(unlist(package_strings), con = output_file)
-  }
-  
-  return(package_strings_list)
-}
-
-
-# Define your packages
-packs <- c("DESeq2", "ComplexHeatmap","TxDb.Hsapiens.UCSC.hg19.knownGene","IlluminaHumanMethylationEPICanno.ilm10b4.hg19",
-"ChAMP","MOFA2","MSnbase","Rdisop")
-
-# Call the function to generate separate output files for each package
-#package_strings_list <- getPackages(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL")
-
-getPackages <- function(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL") {
-  # Ensure the output directory exists
-  if (!dir.exists(output_dir)) {
-    dir.create(output_dir, recursive = TRUE)
-  }
-  
-  # Initialize a list to store package strings for each package
-  package_strings_list <- list()
-  
-  # Get package dependencies for each input package
-  for (pack in packs) {
-    # Get package dependencies
-    dependencies <- unlist(
-      tools::package_dependencies(pack, available.packages(), which = c("Depends", "Imports"), recursive = TRUE)
-    )
-    
-    # Add the package itself to the dependencies
-    dependencies <- union(pack, dependencies)
-    
-    # Remove dependencies that have already been processed
-    dependencies <- setdiff(dependencies, unlist(package_strings_list))
-    
-    # Download the packages
-    download.packages(dependencies, destdir = output_dir, type = "win.binary", quiet = TRUE)
-    
-    # List downloaded packages
-    downloaded_files <- list.files(output_dir, pattern = "\\.zip$", full.names = TRUE)
-    
-    # Loop through each downloaded package and create the required string
-    package_strings <- character()
-    for (file_path in downloaded_files) {
-      package_name <- tools::file_path_sans_ext(basename(file_path))
-      version <- gsub(".*_([0-9.]+)\\.zip$", "\\1", package_name)
-      
-      # Construct the filename
-      filename <- paste0(package_name, ".zip")
-      
-      # Construct the all.packages string
-      package_string <- paste0('install.packages("', filename, '", repos=NULL, type="source")')
-      package_strings <- c(package_strings, package_string)
-    }
-    
-    # Store the package strings for the current package
-    package_strings_list[[pack]] <- package_strings
-    
-    # Write the package strings to a file
-    output_file <- file.path(output_dir, paste0(pack, "_packages.txt"))
-    writeLines(package_strings, con = output_file)
-  }
-  
-  return(package_strings_list)
-}
-
-
-
-packs <- c("httr2","devtools","vroom","lava","recipes", "dplyr","future.apply","stringr","circlize","ggplot2",
-"ggrepel", "enrichR","rlist","tidyverse","data.table","caret","reticulate","XML","xml2","rentrez","remotes", "GGally",
-"ggpubr","BiocManager", "htmltools", "ncdf4", "igraph")
-
-#all_packages <- getPackages(packs)
-
-
-
-getPackages <- function(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL") {
-  # Ensure the output directory exists
-  if (!dir.exists(output_dir)) {
-    dir.create(output_dir, recursive = TRUE)
-  }
-  
-  # Initialize a list to store package strings for each package
-  package_strings_list <- list()
-  
-  # Get package dependencies for each input package
-  for (pack in packs) {
-    # Install the package
-    BiocManager::install(pack)
-    
-    # Get the installed package details
-    pkg_details <- BiocManager::available()[[1]]
-    
-    # Get the package dependencies
-    dependencies <- pkg_details$Depends
-    if (!is.null(pkg_details$Imports)) {
-      dependencies <- c(dependencies, pkg_details$Imports)
-    }
-    
-    # Construct the all.packages strings for each dependency
-    package_strings <- lapply(dependencies, function(dep) {
-      package_string <- paste0('install.packages("', dep, '", repos = NULL, type = "source")')
-      return(package_string)
-    })
-    
-    # Store the package strings for the current package
-    package_strings_list[[pack]] <- package_strings
-    
-    # Write the package strings to a file
-    output_file <- file.path(output_dir, paste0(pack, "_packages.txt"))
-    writeLines(unlist(package_strings), con = output_file)
-  }
-  
-  return(package_strings_list)
-}
-
-
-# Define your packages
-packs <- c("DESeq2", "ComplexHeatmap","TxDb.Hsapiens.UCSC.hg19.knownGene","IlluminaHumanMethylationEPICanno.ilm10b4.hg19",
-"ChAMP","MOFA2","MSnbase","Rdisop")
-
-# Call the function to generate separate output files for each package
-#package_strings_list <- getPackages(packs, output_dir = "C:/Users/Utente/Desktop/BiomiX2.2/_INSTALL")
 
 install.packages("abind_1.4-5.zip", repos=NULL, type="source")
 install.packages("askpass_1.1.zip", repos=NULL, type="source")
@@ -643,7 +394,7 @@ install.packages("DSS_2.42.0.zip", repos=NULL, type="source")
 install.packages("foreign_0.8-84.zip", repos=NULL, type="source")
 install.packages("Formula_1.2-5.zip", repos=NULL, type="source")
 install.packages("Gviz_1.38.4.zip", repos=NULL, type="source")
-install.packages("ROC_1.70.0.zip", repos=NULL, type="source")
+install.packages("ROC_1.70.0.zip", repos=NULL, type="source")####
 install.packages("BiasedUrn_2.0.9.zip", repos=NULL, type="source")
 install.packages("ruv_0.9.7.1.zip", repos=NULL, type="source")
 install.packages("lumi_2.46.0.zip", repos=NULL, type="source")
