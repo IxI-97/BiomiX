@@ -13,7 +13,7 @@ commands = [
     'pip install scikit-learn',
     'pip install xlrd',
     'pip install openpyxl',
-    'pip install mofapy2==0.6.7',
+    'pip install mofapy2==0.7.1',
     'conda install -c conda-forge r-ncdf4 -y'
 ]
 

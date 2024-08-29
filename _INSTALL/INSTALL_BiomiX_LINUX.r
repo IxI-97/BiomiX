@@ -58,7 +58,7 @@ if (file.exists("Package_linux.tar") == TRUE){
 }else{
         path<- paste(getwd(),"/", "Package_linux.tar", sep="")
         options(timeout=6000)
-        download.file("https://github.com/IxI-97/BiomiX/releases/download/v2.3/Package_linux.tar", destfile = path, mode = "wb")
+        download.file("https://github.com/IxI-97/BiomiX/releases/download/v2.2.1/Package_linux.tar", destfile = path, mode = "wb")
         untar("Package_linux.tar")
 }
 
