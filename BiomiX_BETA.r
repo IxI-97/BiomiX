@@ -8,7 +8,7 @@ cat("\n\n\n\n\n          /////////      ///    /////////    ///       ///     //
 # args[1] <-"SJS"
 # args[2] <-"CTRL"
 # args[3] <-"/home/cristia/BiomiX2.2"
-library(vroom)
+#library(vroom)
 
 
 #Sys.sleep(5)
@@ -32,7 +32,7 @@ print("Information acquired, running the analysis")
 #directory <- "/home/cristia/Scrivania/PhD/Bioinfo/Article_MULTI_BETA"
 directory <- args[[3]]
 setwd(directory)
-#setwd(directory)
+print(directory)
 
 
 #COMMAND <- vroom(paste(directory,"Commands",sep="/"), delim = "\t")

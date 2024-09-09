@@ -525,7 +525,7 @@ head(features_names(model)[[l[[1]]]])
 n=1
 
 for(i in 1:length(COMMAND$INTEGRATION)){
-  print(i)
+  #print(i)
   
   if(COMMAND$INTEGRATION[i] == "YES"){
     
@@ -685,8 +685,8 @@ if (length(nice) != 0){
                 
         y = ir #Factor of interest
 
-        
-        print(y)
+        print(paste("Significant factor identified:",y,sep=" "))
+        #print(y)
         
         #USE OF PERCENTILE
         
