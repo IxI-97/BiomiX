@@ -1,0 +1,10 @@
+firefox
+
+#In this document you can select the browser for the QC-preview visualizaton
+In the first line insert the name of your browser among the available ones:
+firefox   <-
+chromium  <-
+chrome    <-
+
+If you want to change the browser, replace the one in the first line with one of the browsers proposed.
+ATTENTION: Make sure to don't leave spaces after and before the browser name :) 
