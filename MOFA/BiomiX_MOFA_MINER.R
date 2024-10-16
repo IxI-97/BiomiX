@@ -7,9 +7,9 @@ library(dplyr)
 
 # MANUAL INPUT
 # args = as.list(c("BLymphocytes","SJS"))
-# args[1] <-"PTB"
-# args[2] <-"HC"
-# args[3] <-"/home/cristia/BiomiX2.2"
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
+# args[3] <-"/home/cristia/BiomiX2.3"
 # 
 # directory <-args[3]
 # 
@@ -29,6 +29,7 @@ dbs <- c("Reactome_2022", "GO_Biological_Process_2023", "CODE_and_ChEA_Consensus
 websiteLive <- getOption("enrichR.live")
 
 
+#fil <-files_out[1]
 #For loop required
 for (fil in files_out){
 
@@ -44,6 +45,7 @@ factors<-unlist(factors)
 factors<-str_remove(factors,".tsv")
 factors<-unique(as.numeric(factors[!is.na(as.numeric(factors))]))
 
+#numb <- factors[1]
 for (numb in factors){
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
@@ -51,6 +53,7 @@ files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 nam_adv <- substr(nam, 1, nchar(nam) - 1)
 nam_adv<-COMMAND$DATA_TYPE[match(nam_adv, COMMAND$LABEL)]
 

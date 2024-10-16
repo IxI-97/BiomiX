@@ -185,7 +185,44 @@ colnames(matrix)[na_cols] <- new_names
 colnames(matrix) <- make.unique(names(matrix), sep = "_")
 
 #====================================
+if(COMMAND$PREVIEW[i] == "YES"){
+        
+        #Block to open the Quality control windows to select filtering, normalization and visualize the QC.
+        #ADD the ID to the first column
+        sample_preview<-matrix$ID
+        numeric_data <- matrix[,-1]
+        
+        numeric_data<-apply(numeric_data,2,as.numeric)
+        rownames(numeric_data) <- sample_preview
+        
+        metadata <- Metadata
+        numeric_data <- as.data.frame(numeric_data)
+        colnames(metadata)[colnames(metadata) == "CONDITION"] <- "condition"
+        
+        # Source the BiomiX_preview script to load the runShinyApp() function
+        source(paste(directory,'/BiomiX_preview.r', sep=""))
+        
+        browser_analysis <- readLines(paste(directory,'/_INSTALL/CHOISE_BROWSER_pre-view',sep=""), n = 1)
+        
+        # Now call the runShinyApp function with numeric_data and metadata
+        options(browser = get_default_browser())
+        print("Pre QC data visualization. If the browser does not open automatically copy and paste the link on a browser")
+        print("One completed the analysis modification click on close app to continue the analysis")
+        print("ATTENTION!: IF the browser does not open set up the path to your browser on the file ")
+        
+        Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = TRUE)
+        
+        matrix<-Preview$matrix
+        Metadata<-Preview$metadata
+        matrix <- cbind(ID=Metadata$ID, matrix)
+        colnames(Metadata)[colnames(Metadata) == "condition"] <- "CONDITION"
+        
+}else{
+        print("no QC pre-visualization")
+}
 
+
+#====================================
 matrixs <- matrix 
 
 
@@ -238,6 +275,9 @@ normalizzati_MOFA <- matrixs}
 
 write.table(normalizzati_MOFA,paste(directory2,"/Undefined_",Cell_type, "_MOFA.tsv", sep = ""),quote = FALSE, row.names = F, sep = "\t")
 
+
+if (STATISTICS == "YES"){
+        
 
 
 # #### FUNCTION DEFINITION FOR CONTROL AND TESTED SAMPLES----
@@ -345,6 +385,7 @@ DMS_TESTED <- function(Condition2){
 
 #Function to check if all the variable elements are the same
 all_same <- function(x) {
+        x<-x[!is.na(x)]
         all(x == x[1])
 }
 
@@ -503,7 +544,7 @@ gc()
                 #dev.new()
                 
                 library(circlize)
-                col_fun = colorRamp2(c(min(Heat), mean(colMeans(Heat)), max(Heat)), c("blue", "black", "yellow"))
+                col_fun = colorRamp2(c(min(Heat, na.rm = TRUE), mean(colMeans(Heat, na.rm = TRUE)), max(Heat, na.rm = TRUE)), c("blue", "black", "yellow"))
                 col_fun(seq(-3, 3))
                 
                 t<-c("CTRL" = "blue", "SLE" = "red")
@@ -513,6 +554,10 @@ gc()
                 
                 ha = HeatmapAnnotation(condition = Metadata$CONDITION,
                                        col = list(condition = t))
+                
+                Heat[is.na(Heat)] <- 0 #Add 0 when there are 0 values to allow the Heatmap plot
+                
+                
                 p<- Heatmap(Heat,km =2, name = "SD_score", col = col_fun, clustering_distance_rows = "pearson", clustering_method_rows= "complete", clustering_method_columns ="ward.D", row_dend_width = unit(0.5, "cm"),column_dend_height = unit(60, "mm"), column_names_gp = grid::gpar(fontsize = 6),
                             row_names_gp = grid::gpar(fontsize = 8), top_annotation = ha)
                 
@@ -533,7 +578,9 @@ gc()
 }
 
         
-                
+}else{
+        print("No statistical analysis and annotation")
+}                
         
 
 

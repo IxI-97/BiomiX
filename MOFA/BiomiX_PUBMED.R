@@ -10,10 +10,9 @@ library(litsearchr)
 # MANUAL INPUT
 # # #
 # args = as.list(c("Neutrophils","PAPS"))
-# args[2] <-"PTB"
-# args[1] <-"HC"
-# args[3] <-"/home/cristia/BiomiX2.2"
-# #
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
+# args[3] <-"/home/cristia/BiomiX2.3"
 # directory <- args[3]
 
 COMMAND_ADVANCED <- vroom(paste(directory,"COMMANDS_ADVANCED.tsv",sep="/"), delim = "\t")
@@ -167,6 +166,7 @@ count_word_occurrences <- function(text, word_list) {
 count_match_in_top_article <- function(nami) {
         
         iter= 0
+        #omik<-nam[1]
         
         for (omik in (nami)){
                 iter <- iter + 1
@@ -427,6 +427,7 @@ files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -469,6 +470,7 @@ files<- files[grep("\\Metabolomics|\\RNAseq", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -507,6 +509,7 @@ files<- files[grep("\\Methylomics|\\RNAseq", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -548,6 +551,7 @@ files<- files[grep("\\Methylomics|\\Metabolomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -581,6 +585,7 @@ files<- files[grep("\\RNAseq", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -614,6 +619,7 @@ files<- files[grep("\\Metabolomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 iter= 0
 
@@ -647,6 +653,7 @@ files<- files[grep("\\Methylomics", files)]
 nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
 
 if(length(nam) != 0){
 uu<-count_match_in_top_article(nam)

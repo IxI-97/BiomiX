@@ -4,9 +4,9 @@
 # MANUAL INPUT
 # library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
-# args[1] <-"PTB"
-# args[2] <-"HC"
-# args[3] <-"/home/cristia/BiomiX2.2"
+# args[1] <-"mutated"
+# args[2] <-"unmutated"
+# args[3] <-"/home/cristia/BiomiX2.3"
 # #
 # directory <- args[3]
 # iterations = 1
@@ -18,6 +18,8 @@
 # COMMAND <- vroom(paste(directory,"COMMANDS.tsv",sep="/"), delim = "\t")
 # COMMAND_MOFA <- vroom(paste(directory,"COMMANDS_MOFA.tsv",sep="/"), delim = "\t")
 # DIR_METADATA <- readLines("directory.txt")
+# STATISTICS = "YES"
+
 
 
 #### DATASET REARRANGEMENT ----
@@ -40,6 +42,7 @@ if (grepl("\\.xlsx$|\\.xls$", COMMAND$DIRECTORIES[i])) {
         print("Metadata Excel File read successfully!")
         }else{
                 Matrix <-vroom(COMMAND$DIRECTORIES[i] , delim = "\t", col_names = TRUE)}
+
 
 if (grepl("\\.xlsx$|\\.xls$", DIR_METADATA)) {
         Metadata_total <- read_excel(DIR_METADATA)
@@ -137,105 +140,145 @@ Metadata_total = NULL
 
 
 
+# Check type of gene name used (ENSEMBL or GENE SYMBOL)
+
+library(DESeq2)
+setwd(directory2)
+
+if(sum(grep("ENSG", rownames(Matrix)[1])) == 1){
+        Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
+        Matrix <- as.data.frame(Matrix)
+        Matrix$X <- genes
+        DGE <- merge(Matrix, Mart, by.x = "X", by.y = "Gene.stable.ID")
+        genes_name<-DGE$X
+        genes_name_C <-DGE$Gene.name
+        DGE2<-DGE[c(-1,-ncol(DGE))]
+        rownames(DGE2) <- genes_name
+        GENE_ANNOTATION <- "ENSEMBL"
+}else{
+        Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
+        Matrix <- as.data.frame(Matrix)
+        Matrix$X <- genes
+        DGE <- Matrix
+        genes_name<-DGE$X
+        DGE$Gene.name <- DGE$X
+        genes_name_C <-DGE$Gene.name
+        DGE2<-as.matrix(DGE[c(-(ncol(DGE)-1),-ncol(DGE))])
+        rownames(DGE2) <- genes_name
+        DGE2 <- as.data.frame(DGE2)
+        GENE_ANNOTATION <- "GENE_NAME"
+}
+
+DGE2 <- DGE2[,order(colnames(DGE2))]
+Metadata_Bcell <- arrange(Metadata_Bcell,ID)
+
+num <- Metadata_Bcell$CONDITION == args[1]
+#Choise disease
+numero <- Metadata_Bcell$CONDITION == args[2]
+
+Metadata_Bcells <- Metadata_Bcell
+Metadata_Bcell <- Metadata_Bcell[num | numero,]
+DGE2 <- DGE2[, num | numero]
+
+print("X")
+
+
+#FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
+#DEFINED IN ADVANCED OPTION, METADATA SECTION
+library(dplyr)
+
+setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
+
+METADATA_FILT <- !is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])
+METADATA_FILT_INDEX <-grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))
+
+repetition = 0
+for (meta_filter in METADATA_FILT_INDEX){
+        repetition <- repetition + 1 
+        if (!is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])[repetition]){
+                COLNAME<-as.character(COMMAND_ADVANCED[1,meta_filter])
+                if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Numerical"){
+                        To_filter<-as.numeric(unlist(Metadata_Bcell[,COLNAME]))
+                        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,1)
+                        characters_to_remove <- c(">", "<", "=", " ")
+                        value_threshold <- as.numeric(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
+                        
+                        comparison_operator <- switch(simbol,
+                                                      "<" = function(a, b) a < b,
+                                                      ">" = function(a, b) a > b,
+                                                      "=" = function(a, b) a == b,
+                                                      ">=" = function(a, b) a >= b,
+                                                      "<=" = function(a, b) a <= b,
+                                                      NA)
+                        
+                        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
+                        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold))]
+                        
+                }else if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Factors"){
+                        To_filter<- as.character(unlist(Metadata_Bcell[,COLNAME]))
+                        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,2)
+                        characters_to_remove <- c("!=", "==", " ")
+                        value_threshold <- as.character(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
+                        
+                        comparison_operator <- switch(simbol,
+                                                      "==" = function(a, b) a == b,
+                                                      "!=" = function(a, b) a != b,
+                                                      NA)
+                        
+                        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
+                        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold),TRUE)]
+                }
+                
+        }
+}
+
+Metadata_Bcell$CONDITION
+summary(as.factor(Metadata_Bcell$CONDITION))
+
+if(COMMAND$PREVIEW[i] == "YES"){
+
+#QC preview visualization
+
+#Block to open the Quality control windows to select filtering, normalization and visualize the QC.
+#ADD the ID to the first column
+Samples_preview<-colnames(DGE2)
+numeric_data <- DGE2
+numeric_data<-t(numeric_data)
+numeric_data<-apply(numeric_data,2,as.numeric)
+rownames(numeric_data) <- Samples_preview
+
+metadata <- Metadata_Bcell
+numeric_data <- as.data.frame(numeric_data)
+colnames(metadata)[colnames(metadata) == "CONDITION"] <- "condition"
+
+# Source the BiomiX_preview script to load the runShinyApp() function
+source(paste(directory,'/BiomiX_preview.r', sep=""))
+
+browser_analysis <- readLines(paste(directory,'/_INSTALL/CHOISE_BROWSER_pre-view',sep=""), n = 1)
+
+# Now call the runShinyApp function with numeric_data and metadata
+options(browser = get_default_browser())
+print("Pre QC data visualization. If the browser does not open automatically copy and paste the link on a browser")
+print("One completed the analysis modification click on close app to continue the analysis")
+print("ATTENTION!: IF the browser does not open set up the path to your browser on the file ")
+
+Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = TRUE)
+
+DGE2<-as.data.frame(t(Preview$matrix))
+Metadata_Bcell<-Preview$metadata
+colnames(Metadata_Bcell)[colnames(Metadata_Bcell) == "condition"] <- "CONDITION"
+}else{
+        print("no QC pre-visualization")
+}
+
+
 
 
 #STATEMENT IF DATA ARE NORMALIZED OR NOT, IT LOOKS IF NUMERS ARE FLOATS OR INTEGER
-if (is_float(Matrix[-1])){
+if (any(is_float(DGE2))){
   NORMALIZATION <- "YES"
-  
-  library(DESeq2)
-  setwd(directory2)
-  
-  if(sum(grep("ENSG", rownames(Matrix)[1])) == 1){
-    Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    Matrix <- as.data.frame(Matrix)
-    Matrix$X <- genes
-    DGE <- merge(Matrix, Mart, by.x = "X", by.y = "Gene.stable.ID")
-    genes_name<-DGE$X
-    genes_name_C <-DGE$Gene.name
-    DGE2<-DGE[c(-1,-ncol(DGE))]
-    rownames(DGE2) <- genes_name
-    GENE_ANNOTATION <- "ENSEMBL"
-  }else{
-    Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    Matrix <- as.data.frame(Matrix)
-    Matrix$X <- genes
-    DGE <- Matrix
-    genes_name<-DGE$X
-    DGE$Gene.name <- DGE$X
-    genes_name_C <-DGE$Gene.name
-    DGE2<-as.matrix(DGE[c(-(ncol(DGE)-1),-ncol(DGE))])
-    rownames(DGE2) <- genes_name
-    DGE2 <- as.data.frame(DGE2)
-    GENE_ANNOTATION <- "GENE_NAME"
-  }
-  
+ 
   print(paste("Automatic detection of normalized data. Are the data normalized? ",NORMALIZATION))
-  DGE2 <- DGE2[,order(colnames(DGE2))]
-  Metadata_Bcell <- arrange(Metadata_Bcell,ID)
-  
-  num <- Metadata_Bcell$CONDITION == args[1]
-  #Choise disease + HC
-  numero <- Metadata_Bcell$CONDITION == args[2]
-  
-  Metadata_Bcells <- Metadata_Bcell
-  Metadata_Bcell <- Metadata_Bcell[num | numero,]
-  DGE2 <- DGE2[, num | numero]
-  
-  print("X")
-  
-  
-  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
-  #DEFINED IN ADVANCED OPTION, METADATA SECTION
-  library(dplyr)
-  
-  setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
-  
-  METADATA_FILT <- !is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])
-  METADATA_FILT_INDEX <-grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))
-  
-  repetition = 0
-  for (meta_filter in METADATA_FILT_INDEX){
-    repetition <- repetition + 1 
-    if (!is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])[repetition]){
-      COLNAME<-as.character(COMMAND_ADVANCED[1,meta_filter])
-      if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Numerical"){
-        To_filter<-as.numeric(unlist(Metadata_Bcell[,COLNAME]))
-        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,1)
-        characters_to_remove <- c(">", "<", "=", " ")
-        value_threshold <- as.numeric(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
-        
-        comparison_operator <- switch(simbol,
-                                      "<" = function(a, b) a < b,
-                                      ">" = function(a, b) a > b,
-                                      "=" = function(a, b) a == b,
-                                      ">=" = function(a, b) a >= b,
-                                      "<=" = function(a, b) a <= b,
-                                      NA)
-        
-        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
-        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold))]
-        
-      }else if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Factors"){
-        To_filter<- as.character(unlist(Metadata_Bcell[,COLNAME]))
-        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,2)
-        characters_to_remove <- c("!=", "==", " ")
-        value_threshold <- as.character(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
-        
-        comparison_operator <- switch(simbol,
-                                      "==" = function(a, b) a == b,
-                                      "!=" = function(a, b) a != b,
-                                      NA)
-        
-        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
-        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold),TRUE)]
-      }
-      
-    }
-  }
-  
-  Metadata_Bcell$CONDITION
-  summary(as.factor(Metadata_Bcell$CONDITION))
   
   ###
   
@@ -264,99 +307,11 @@ if (is_float(Matrix[-1])){
   
   #### DATA NOT NORMALIZED, NORMALIZATION SECTION ----
   
-  
-  #Normalization
-  library(DESeq2)
-  setwd(directory2)
-  
-  if(sum(grep("ENSG", rownames(Matrix)[1])) == 1){
-    Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    Matrix <- as.data.frame(Matrix)
-    Matrix$X <- genes
-    DGE <- merge(Matrix, Mart, by.x = "X", by.y = "Gene.stable.ID")
-    genes_name<-DGE$X
-    genes_name_C <-DGE$Gene.name
-    DGE2<-DGE[c(-1,-ncol(DGE))]
-    rownames(DGE2) <- genes_name
-    GENE_ANNOTATION <- "ENSEMBL"
-  }else{
-    Mart<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    Matrix <- as.data.frame(Matrix)
-    Matrix$X <- genes
-    DGE <- Matrix
-    genes_name<-DGE$X
-    DGE$Gene.name <- DGE$X
-    genes_name_C <-DGE$Gene.name
-    DGE2<-as.matrix(DGE[c(-(ncol(DGE)-1),-ncol(DGE))])
-    rownames(DGE2) <- genes_name
-    DGE2 <- as.data.frame(DGE2)
-    GENE_ANNOTATION <- "GENE_NAME"
-  }
-  
-  DGE2 <- DGE2[,order(colnames(DGE2))]
-  Metadata_Bcell <- arrange(Metadata_Bcell,ID)
-  
-  num <- Metadata_Bcell$CONDITION == args[1]
 
-  numero <- Metadata_Bcell$CONDITION == args[2]
-  
-  Metadata_Bcells <- Metadata_Bcell
-  Metadata_Bcell <- Metadata_Bcell[num | numero,]
-  DGE2 <- DGE2[, num | numero]
-  
-  print("X")
   
   
-  #FILTERING SAMPLES BASED ON METADATA CRITERIA SELECTED. 
-  #DEFINED IN ADVANCED OPTION, METADATA SECTION
-  library(dplyr)
   
-  setwd(paste(directory,"/Transcriptomics/INPUT",sep=""))
-  
-  METADATA_FILT <- !is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])
-  METADATA_FILT_INDEX <-grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))
-  
-  repetition = 0
-  for (meta_filter in METADATA_FILT_INDEX){
-    repetition <- repetition + 1 
-    if (!is.na(COMMAND_ADVANCED[3,grep( "*.FILTERING.*", colnames(COMMAND_ADVANCED))])[repetition]){
-      COLNAME<-as.character(COMMAND_ADVANCED[1,meta_filter])
-      if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Numerical"){
-        To_filter<-as.numeric(unlist(Metadata_Bcell[,COLNAME]))
-        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,1)
-        characters_to_remove <- c(">", "<", "=", " ")
-        value_threshold <- as.numeric(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
-        
-        comparison_operator <- switch(simbol,
-                                      "<" = function(a, b) a < b,
-                                      ">" = function(a, b) a > b,
-                                      "=" = function(a, b) a == b,
-                                      ">=" = function(a, b) a >= b,
-                                      "<=" = function(a, b) a <= b,
-                                      NA)
-        
-        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
-        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold))]
-        
-      }else if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Factors"){
-        To_filter<- as.character(unlist(Metadata_Bcell[,COLNAME]))
-        simbol<-substr(as.character(COMMAND_ADVANCED[3,meta_filter]),1,2)
-        characters_to_remove <- c("!=", "==", " ")
-        value_threshold <- as.character(gsub(paste(characters_to_remove, collapse = "|"), "", as.character(COMMAND_ADVANCED[3,meta_filter])))
-        
-        comparison_operator <- switch(simbol,
-                                      "==" = function(a, b) a == b,
-                                      "!=" = function(a, b) a != b,
-                                      NA)
-        
-        Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
-        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold),TRUE)]
-      }
-      
-    }
-  }
-  
-  
+  #VST normalization
   
   DGE2<- apply(DGE2,2,round)
   Metadata_Bcell$CONDITION
@@ -693,11 +648,15 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_SUBGROUPING[3] != "YES") {
         DGE2<-as.data.frame(t(DGE2))
         
         if (NORMALIZATION=="NO"){
-                DGE2<-DGE2[-nrow(DGE2),]}else{print("")}
-        
-        colnames(DGE2) <- c(genes_name)
-        rownames(DGE2) <- Metadata$ID
-        DGE2$samples <- Metadata$ID
+                DGE2<-DGE2[-nrow(DGE2),]
+                # colnames(DGE2) <- c(genes_name)
+                # rownames(DGE2) <- Metadata$ID
+        }else{print("")
+                        }
+        ####################ATTTTENTION####################
+        # colnames(DGE2) <- c(genes_name)
+        # rownames(DGE2) <- Metadata$ID
+        # DGE2$samples <- Metadata$ID
 }
 
 setwd(directory2)
@@ -709,6 +668,187 @@ write.table(x=DGE3  , file= paste("gene_count_",Cell_type, "_", args[1], "_vs_",
 counts<- paste("gene_count_",Cell_type, "_", args[1], "_vs_", args[2],"_unnormalized.tsv", sep ="") 
 Meta<- paste("Metadata_", Cell_type, "_", args[1],"_vs_",args[2],"_final.tsv",sep ="")
 
+
+
+#### GENERATION MATRIX FOR DATA INTEGRATION ----
+
+if (NORMALIZATION=="NO"){
+        print("PATH NO NORMALIZED 1")
+        
+        directory2 <- paste(directory,"/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="")
+        setwd(directory2)
+        
+        normalizzati <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized_vst.tsv", sep="") , delim = "\t", col_names = TRUE)
+        normalizzati_size <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized.tsv", sep="") , delim = "\t", col_names = TRUE)
+        
+        genes <- normalizzati$Gene.name
+        normalizzati <- normalizzati[,-ncol(normalizzati)]
+        rownames(normalizzati) <- genes
+        
+        genes <- normalizzati_size$Gene.name
+        normalizzati_size <- normalizzati_size[,-ncol(normalizzati_size)]
+        rownames(normalizzati_size) <- genes
+        
+        
+        x <- normalizzati_size > 0
+        righe_da_eliminare=NULL
+        for (i in 1:nrow(normalizzati_size)){
+                if ((sum(x[i,]) <= (ncol(normalizzati_size)/2))){
+                        righe_da_eliminare<-append(righe_da_eliminare,i)
+                }
+        }
+        
+        
+        print("numero di geni prima del filtraggio")
+        print(nrow(normalizzati_size))
+        
+        if (length(righe_da_eliminare) > 0){
+                normalizzati_size<-normalizzati_size[-righe_da_eliminare,]
+                normalizzati<-normalizzati[-righe_da_eliminare,]
+                gene <- genes[-righe_da_eliminare]
+                rownames(normalizzati) <-gene
+                rownames(normalizzati_size) <-gene
+                }
+        
+        print("numero di geni dopo il filtraggio")
+        print(nrow(normalizzati_size))
+        print(nrow(normalizzati))
+        
+}else{
+        print("PATH NORMALIZED 1")
+        directory2 <- paste(directory,"/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="")
+        setwd(directory2)
+        
+        normalizzati <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized_vst.tsv", sep="") , delim = "\t", col_names = TRUE)
+        
+        genes <- normalizzati$Gene.name
+        normalizzati <- normalizzati[,-ncol(normalizzati)]
+        rownames(normalizzati) <- genes
+        
+        x <- normalizzati > 0
+        righe_da_eliminare=NULL
+        for (i in 1:nrow(normalizzati)){
+                if ((sum(x[i,]) <= (ncol(normalizzati)/2))){
+                        righe_da_eliminare<-append(righe_da_eliminare,i)
+                }
+        }
+        
+        print("numero di geni prima del filtraggio")
+        print(nrow(normalizzati))
+        
+        if (length(righe_da_eliminare) > 0){
+                normalizzati<-normalizzati[-righe_da_eliminare,]
+                gene <- genes[-righe_da_eliminare]}else{gene <- genes}
+        
+        print("numero di geni dopo il filtraggio")
+        print(nrow(normalizzati))
+        
+}
+
+
+
+#=====================GENE FILTER ON VARIANCE==============================
+
+if (NORMALIZATION=="NO"){
+        print("PATH NO NORMALIZED 2")
+        
+        varianze = NULL
+        #Vari <- read.table("tab_finaleDESeq2", header=TRUE, sep = ",")
+        Vari <- as.matrix(normalizzati_size)
+        #rownames(Vari) <- Vari[,8]
+        Vari <- as.data.frame(Vari)
+        #Vari<- Vari[,c(-1,-ncol(Vari))]
+        genes <- rownames(Vari)
+        
+        #Vari<- Vari[,-ncol(Vari)]
+        #generazione e filtraggio per varianza
+        for (i in 1:nrow(Vari)){
+                varianze <- append(varianze, var(as.numeric(Vari[i,])))
+        }
+        
+        normalizzati<- as.data.frame(normalizzati)
+        normalizzati$Gene.name <- gene
+        normalizzati$variance <- log10(varianze)
+        
+        normalizzati_size<- as.data.frame(normalizzati_size)
+        normalizzati_size$Gene.name <- gene
+        normalizzati_size$variance <- log10(varianze)
+        
+        if(GENE_ANNOTATION == "GENE_NAME"){
+                MART<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
+                colnames(MART)[2] <-"Gene"
+                normalizzati <- merge(normalizzati, MART, by.x = "Gene.name", by.y = "Gene")
+                normalizzati <- normalizzati[,-1]
+                colnames(normalizzati)[ncol(normalizzati)] <- "Gene.name"
+                normalizzati <- normalizzati[, c(1:(ncol(normalizzati) - 2), ncol(normalizzati), ncol(normalizzati) -1 )]
+        }
+        
+        #OVERWRITE OR REPLACE A FINAL NORMALIZED FILE WITH VARIANCE IN IT.
+        normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
+        limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
+        if(length(rownames(normalizzati_MOFA)) > limit){
+                normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
+        write.table(x=normalizzati_MOFA  , file= paste(Cell_type,args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+        
+}else{
+        print("PATH YES NORMALIZED 2")
+        varianze = NULL
+        #Vari <- read.table("tab_finaleDESeq2", header=TRUE, sep = ",")
+        Vari <- as.matrix(normalizzati)
+        #rownames(Vari) <- Vari[,8]
+        Vari <- as.data.frame(Vari)
+        #Vari<- Vari[,c(-1,-ncol(Vari))]
+        
+        genes <- rownames(Vari)
+        
+        #generazione e filtraggio per varianza
+        for (i in 1:nrow(Vari)){
+                varianze <- append(varianze, var(as.numeric(Vari[i,])))
+        }
+        
+        normalizzati<- as.data.frame(normalizzati)
+        normalizzati$Gene.name <- gene
+        normalizzati$variance <- log10(varianze)
+        
+        
+        if(GENE_ANNOTATION == "GENE_NAME"){
+                MART<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
+                colnames(MART)[2] <-"Gene"
+                normalizzati <- merge(normalizzati, MART, by.x = "Gene.name", by.y = "Gene")
+                normalizzati <- normalizzati[,-1]
+                colnames(normalizzati)[ncol(normalizzati)] <- "Gene.name"
+                normalizzati <- normalizzati[, c(1:(ncol(normalizzati) - 2), ncol(normalizzati), ncol(normalizzati) -1 )]
+        }
+        
+        normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
+        limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
+        if(length(rownames(normalizzati_MOFA)) > limit){
+                normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
+        write.table(x=normalizzati_MOFA  , file= paste(Cell_type, args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+        
+        normalizzati_size <- normalizzati
+}
+
+
+#PLOT VARIANCE
+library(ggplot2)
+pdf(file = paste("Gene_expression_Variance_", Cell_type,"_",args[1],"_vs_", args[2],".pdf" ,sep =""))
+
+t<- ggplot(normalizzati_size, aes(x=variance)) +
+        geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.7, bins=1000) + stat_bin(bins = 1000)
+print(t)
+
+p <-ggplot(normalizzati_size, aes(x=variance)) +
+        geom_density(color="darkblue", fill="lightblue")
+p <- p + geom_vline(aes(xintercept=2.5))
+print(p)
+
+dev.off()
+
+if (STATISTICS == "YES"){
+
+
+#STARTING STATISTICS ANALYSIS
 
 if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
   
@@ -1040,12 +1180,12 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     setwd(directory2)
     DGE <- read.table(file = paste(args[1], "_pos_", args[2],"_", Cell_type,".tsv", sep =""), sep="\t", header = TRUE)
     DGE$X <- rownames(DGE)
-    DGE <- DGE %>% select(X, everything())
+    DGE <- DGE %>% dplyr::select(X, everything())
     
     dir.create(path = paste(directory2,"/Subpopulation_input/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
     DGE3_modified <- DGE3
     DGE3_modified$ID <- rownames(DGE3_modified)
-    DGE3_modified <- DGE3_modified %>% select(ID, everything())
+    DGE3_modified <- DGE3_modified %>% dplyr::select(ID, everything())
     write.table(x=DGE3_modified   , file= paste(directory2,"/Subpopulation_input/",args[1], "_pos_and_", args[2],"_", Cell_type,"_counts.tsv", sep ="")  ,sep= "\t", row.names = FALSE, col.names = T,  quote = FALSE)
     write.table(x=Metadata   , file= paste(directory2,"/Subpopulation_input/",args[1], "_pos_and_", args[2],"_", Cell_type,"_metadata.tsv", sep ="")  ,sep= "\t", row.names = FALSE, col.names = T,  quote = FALSE)
     DGE3_modified = NULL
@@ -1075,7 +1215,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     tab$X<- rownames(tab)
     
     if(GENE_ANNOTATION == "GENE_NAME"){
-      tab <- tab %>% select(X, everything())
+      tab <- tab %>% dplyr::select(X, everything())
     }else{
       tab <- merge(tab, Mart, by.x = "X", by.y = "Gene.stable.ID")
       #tab<-tab[,c(ncol(tab),3:ncol(tab)-1)]
@@ -1585,13 +1725,13 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     setwd(directory2)
     DGE <- read.table(file = paste(args[1], "_neg_", args[2],"_", Cell_type,".tsv", sep =""), sep="\t", header = TRUE)
     DGE$X <- rownames(DGE)
-    DGE <- DGE %>% select(X, everything())
+    DGE <- DGE %>% dplyr::select(X, everything())
     
     
     dir.create(path = paste(directory2,"/Subpopulation_input/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
     DGE3_modified <- DGE3
     DGE3_modified$ID <- rownames(DGE3_modified)
-    DGE3_modified <- DGE3_modified %>% select(ID, everything())
+    DGE3_modified <- DGE3_modified %>% dplyr::select(ID, everything())
     write.table(x=DGE3_modified   , file= paste(directory2,"/Subpopulation_input/",args[1], "_neg_and_", args[2],"_", Cell_type,"_counts.tsv", sep ="")  ,sep= "\t", row.names = FALSE, col.names = T,  quote = FALSE)
     write.table(x=Metadata   , file= paste(directory2,"/Subpopulation_input/",args[1], "_neg_and_", args[2],"_", Cell_type,"_metadata.tsv", sep ="")  ,sep= "\t", row.names = FALSE, col.names = T,  quote = FALSE)
     DGE3_modified = NULL
@@ -1622,7 +1762,7 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
     
     
     if(GENE_ANNOTATION == "GENE_NAME"){
-      tab <- tab %>% select(X, everything())
+      tab <- tab %>% dplyr::select(X, everything())
     }else{
       tab <- merge(tab, Mart, by.x = "X", by.y = "Gene.stable.ID")
       #tab<-tab[,c(ncol(tab),3:ncol(tab)-1)]
@@ -1925,7 +2065,7 @@ if(NORMALIZATION=="YES"){
       
       colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
       rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[1] <- args[1]
+      rownames(contr.matrix)[2] <- args[1]
       
       vfit <- lmFit(DGE3, design)
       vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
@@ -1950,7 +2090,7 @@ if(NORMALIZATION=="YES"){
       
       colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
       rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[1] <- args[1]
+      rownames(contr.matrix)[2] <- args[1]
       
       vfit <- lmFit(DGE3, design)
       vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
@@ -2003,7 +2143,7 @@ if(NORMALIZATION=="YES"){
       
       colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
       rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[1] <- args[1]
+      rownames(contr.matrix)[2] <- args[1]
       
       vfit <- lmFit(DGE3, design)
       vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
@@ -2121,7 +2261,7 @@ if(NORMALIZATION=="YES"){
 
 DGE <- read.table(file = paste(args[1], "_",args[2],"_",Cell_type ,".tsv",sep ="") , sep="\t", header = TRUE)
 DGE$X <- rownames(DGE)
-DGE <- DGE %>% select(X, everything())
+DGE <- DGE %>% dplyr::select(X, everything())
 
 
 if(GENE_ANNOTATION == "GENE_NAME"){
@@ -2144,7 +2284,7 @@ if(NORMALIZATION=="NO"){
 tab$X<- rownames(tab)
 
 if(GENE_ANNOTATION == "GENE_NAME"){
-  tab <- tab %>% select(X, everything())
+  tab <- tab %>% dplyr::select(X, everything())
 }else{
   tab <- merge(tab, Mart, by.x = "X", by.y = "Gene.stable.ID")
   #tab<-tab[,c(ncol(tab),3:ncol(tab)-1)]
@@ -2324,177 +2464,6 @@ if(length(BASSI$Gene.name) != 0){
 
 dev.off()
 
-#### GENERATION MATRIX FOR DATA INTEGRATION ----
-
-if (NORMALIZATION=="NO"){
-  print("PATH NO NORMALIZED 1")
-  
-  directory2 <- paste(directory,"/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="")
-  setwd(directory2)
-  
-  normalizzati <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized_vst.tsv", sep="") , delim = "\t", col_names = TRUE)
-  normalizzati_size <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized.tsv", sep="") , delim = "\t", col_names = TRUE)
-  
-  genes <- normalizzati$Gene.name
-  normalizzati <- normalizzati[,-ncol(normalizzati)]
-  rownames(normalizzati) <- genes
-  
-  genes <- normalizzati_size$Gene.name
-  normalizzati_size <- normalizzati_size[,-ncol(normalizzati_size)]
-  rownames(normalizzati_size) <- genes
-  
-  
-  x <- normalizzati_size > 0
-  righe_da_eliminare=NULL
-  for (i in 1:nrow(normalizzati_size)){
-    if ((sum(x[i,]) <= (ncol(normalizzati_size)/2))){
-      righe_da_eliminare<-append(righe_da_eliminare,i)
-    }
-  }
-  
-  
-  print("numero di geni prima del filtraggio")
-  print(nrow(normalizzati_size))
-  
-  if (length(righe_da_eliminare) > 0){
-    normalizzati_size<-normalizzati_size[-righe_da_eliminare,]
-    normalizzati<-normalizzati[-righe_da_eliminare,]
-    gene <- genes[-righe_da_eliminare]}
-  
-  print("numero di geni dopo il filtraggio")
-  print(nrow(normalizzati_size))
-  print(nrow(normalizzati))
-  
-}else{
-  print("PATH NORMALIZED 1")
-  directory2 <- paste(directory,"/MOFA/INPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep ="")
-  setwd(directory2)
-  
-  normalizzati <-vroom(file = paste(Cell_type, "_",args[1],"_vs_", args[2],"_normalized_vst.tsv", sep="") , delim = "\t", col_names = TRUE)
-  
-  genes <- normalizzati$Gene.name
-  normalizzati <- normalizzati[,-ncol(normalizzati)]
-  rownames(normalizzati) <- genes
-  
-  x <- normalizzati > 0
-  righe_da_eliminare=NULL
-  for (i in 1:nrow(normalizzati)){
-    if ((sum(x[i,]) <= (ncol(normalizzati)/2))){
-      righe_da_eliminare<-append(righe_da_eliminare,i)
-    }
-  }
-  
-  print("numero di geni prima del filtraggio")
-  print(nrow(normalizzati))
-  
-  if (length(righe_da_eliminare) > 0){
-    normalizzati<-normalizzati[-righe_da_eliminare,]
-    gene <- genes[-righe_da_eliminare]}else{gene <- genes}
-  
-  print("numero di geni dopo il filtraggio")
-  print(nrow(normalizzati))
-  
-}
-
-
-
-#=====================GENE FILTER ON VARIANCE==============================
-
-if (NORMALIZATION=="NO"){
-  print("PATH NO NORMALIZED 2")
-  
-  varianze = NULL
-  #Vari <- read.table("tab_finaleDESeq2", header=TRUE, sep = ",")
-  Vari <- as.matrix(normalizzati_size)
-  #rownames(Vari) <- Vari[,8]
-  Vari <- as.data.frame(Vari)
-  #Vari<- Vari[,c(-1,-ncol(Vari))]
-  genes <- Vari$Gene.name
-  Vari<- Vari[,-ncol(Vari)]
-  #generazione e filtraggio per varianza
-  for (i in 1:nrow(Vari)){
-    varianze <- append(varianze, var(as.numeric(Vari[i,])))
-  }
-  
-  normalizzati<- as.data.frame(normalizzati)
-  normalizzati$Gene.name <- gene
-  normalizzati$variance <- log10(varianze)
-  
-  normalizzati_size<- as.data.frame(normalizzati_size)
-  normalizzati_size$Gene.name <- gene
-  normalizzati_size$variance <- log10(varianze)
-  
-  if(GENE_ANNOTATION == "GENE_NAME"){
-    MART<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    colnames(MART)[2] <-"Gene"
-    normalizzati <- merge(normalizzati, MART, by.x = "Gene.name", by.y = "Gene")
-    normalizzati <- normalizzati[,-1]
-    colnames(normalizzati)[ncol(normalizzati)] <- "Gene.name"
-    normalizzati <- normalizzati[, c(1:(ncol(normalizzati) - 2), ncol(normalizzati), ncol(normalizzati) -1 )]
-  }
-  
-  #OVERWRITE OR REPLACE A FINAL NORMALIZED FILE WITH VARIANCE IN IT.
-  normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
-  limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
-  if(length(rownames(normalizzati_MOFA)) > limit){
-          normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
-  write.table(x=normalizzati_MOFA  , file= paste(Cell_type,args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
-  
-}else{
-  print("PATH YES NORMALIZED 2")
-  varianze = NULL
-  #Vari <- read.table("tab_finaleDESeq2", header=TRUE, sep = ",")
-  Vari <- as.matrix(normalizzati)
-  #rownames(Vari) <- Vari[,8]
-  Vari <- as.data.frame(Vari)
-  #Vari<- Vari[,c(-1,-ncol(Vari))]
-  
-  genes <- rownames(Vari)
-  
-  #generazione e filtraggio per varianza
-  for (i in 1:nrow(Vari)){
-    varianze <- append(varianze, var(as.numeric(Vari[i,])))
-  }
-  
-  normalizzati<- as.data.frame(normalizzati)
-  normalizzati$Gene.name <- gene
-  normalizzati$variance <- log10(varianze)
-  
-  
-  if(GENE_ANNOTATION == "GENE_NAME"){
-    MART<-read.table(paste(directory,"/MOFA/x_BiomiX_DATABASE/mart_export_37.txt", sep=""), sep = ",", header=TRUE)
-    colnames(MART)[2] <-"Gene"
-    normalizzati <- merge(normalizzati, MART, by.x = "Gene.name", by.y = "Gene")
-    normalizzati <- normalizzati[,-1]
-    colnames(normalizzati)[ncol(normalizzati)] <- "Gene.name"
-    normalizzati <- normalizzati[, c(1:(ncol(normalizzati) - 2), ncol(normalizzati), ncol(normalizzati) -1 )]
-  }
-  
-  normalizzati_MOFA <- normalizzati[order(normalizzati$variance, decreasing = TRUE), ]
-  limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
-  if(length(rownames(normalizzati_MOFA)) > limit){
-  normalizzati_MOFA <- normalizzati_MOFA[1:limit,]}
-  write.table(x=normalizzati_MOFA  , file= paste(Cell_type, args[1], "vs", args[2], "normalized_vst_variance.tsv",sep = "_")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
-  
-  normalizzati_size <- normalizzati
-}
-
-
-#PLOT VARIANCE
-library(ggplot2)
-pdf(file = paste("Gene_expression_Variance_", Cell_type,"_",args[1],"_vs_", args[2],".pdf" ,sep =""))
-
-t<- ggplot(normalizzati_size, aes(x=variance)) +
-  geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.7, bins=1000) + stat_bin(bins = 1000)
-print(t)
-
-p <-ggplot(normalizzati_size, aes(x=variance)) +
-  geom_density(color="darkblue", fill="lightblue")
-p <- p + geom_vline(aes(xintercept=2.5))
-print(p)
-
-dev.off()
-
 
 # OUT<- normalizzati$varianze > 1.5
 # normalizzati<-normalizzati[OUT,-ncol(normalizzati)]
@@ -2515,6 +2484,10 @@ if(file.exists(paste("Gene_expression_Variance_", Cell_type,"_",args[1],"_vs_", 
 if(file.exists("Validation_MARKER_vs_GENE_PANEL.tsv")){
   file.copy("Validation_MARKER_vs_GENE_PANEL.tsv",paste(directory,"/Transcriptomics/OUTPUT/", Cell_type, "_",args[1],"_vs_", args[2], "/", args[1],"_vs_",args[2], sep =""), overwrite=TRUE )
   
+}
+
+}else{
+        print("No statistical analysis")
 }
 
 gc()

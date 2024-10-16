@@ -7,16 +7,12 @@ cat("\n\n\n\n\n          /////////      ///    /////////    ///       ///     //
 # args = as.list(c("BLymphocytes","SLE"))
 # args[1] <-"SJS"
 # args[2] <-"CTRL"
-# args[3] <-"/home/cristia/BiomiX2.2"
+# args[3] <-"/home/cristia/BiomiX2.3"
 library(vroom)
 
 
 #Sys.sleep(5)
 print("Welcome to BiomiX toolkit")
-
-#Sys.sleep(5)
-Cell_type = readline(prompt = "Which sorted cell type do you want to analyze? ^-^ : ")
-Cell_Disease = readline(prompt = "Which disease type do you want to analyze? ^-^ : ")
 
 #Sys.sleep(5)
 
@@ -58,9 +54,11 @@ position <- which(COMMAND$DATA_TYPE %in% "Undefined")
 cat("\n\n\n\n\n Checking Undefined datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
-        if(COMMAND$ANALYSIS[i] == "YES"){
+        if(COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "YES"
+           | COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "NO")
+           {
                 
-                
+                STATISTICS <- "YES"
                 Cell_type <- COMMAND$LABEL[i]
                 cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
                 iterations = iterations + 1
@@ -72,6 +70,20 @@ for (i in position){
                 source(paste(directory,"/Undefined/BiomiX_Undefined.r",sep=""))
                 cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
                 gc()
+        }else if (COMMAND$ANALYSIS[i] == "NO" & COMMAND$INTEGRATION[i] == "YES") {
+                STATISTICS <- "NO"
+                Cell_type <- COMMAND$LABEL[i]
+                cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
+                iterations = iterations + 1
+                selection_samples = COMMAND$SELECTION[i]
+                #purity_filter =COMMAND$PURITY[i]
+                directory2 <- paste(directory,"/Undefined/INPUT",sep="")
+                #files <- grep("MATRIX*",list.files(directory2),value=TRUE)
+                #files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
+                source(paste(directory,"/Undefined/BiomiX_Undefined.r",sep=""))
+                cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
+                gc()
+                
         }
 }
 
@@ -92,9 +104,25 @@ position <- which(COMMAND$DATA_TYPE %in% "Transcriptomics")
 cat("\n\n\n\n\nChecking Transcriptomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
-if(COMMAND$ANALYSIS[i] == "YES"){
-        
-        
+if(COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "YES"
+   | COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "NO")
+   {
+
+        STATISTICS <- "YES"
+        Cell_type <- COMMAND$LABEL[i]
+        cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
+        iterations = iterations + 1
+        selection_samples = COMMAND$SELECTION[i]
+        #purity_filter =COMMAND$PURITY[i]
+        directory2 <- paste(directory,"/Transcriptomics/INPUT",sep="")
+        #files <- grep("MATRIX*",list.files(directory2),value=TRUE)
+        #files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
+        source(paste(directory,"/Transcriptomics/Biomix_DGE_GENES_LIMMA.r",sep=""))
+        cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
+        gc()
+
+        }else if (COMMAND$ANALYSIS[i] == "NO" & COMMAND$INTEGRATION[i] == "YES") {
+        STATISTICS <- "NO"
         Cell_type <- COMMAND$LABEL[i]
         cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
         iterations = iterations + 1
@@ -111,7 +139,6 @@ if(COMMAND$ANALYSIS[i] == "YES"){
 
 
 
-
 #===============================================================================
 
 
@@ -122,7 +149,11 @@ position <- which(COMMAND$DATA_TYPE %in% "Metabolomics")
 cat("\n\n\n\n\nChecking Metabolomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
+        if(COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "YES"
+           | COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "NO")
+           {
         
+        STATISTICS <- "YES"
         Cell_type <- COMMAND$LABEL[i]
         cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
         iterations = iterations + 1
@@ -131,11 +162,24 @@ for (i in position){
         directory2 <- paste(directory,"/Transcriptomics/INPUT_PRECISESADS",sep="")
         files <- grep("MATRIX*",list.files(directory2),value=TRUE)
         files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
-        if(COMMAND$ANALYSIS[i] == "YES"){
         source(paste(directory,"/Metabolomics/BiomiX_DMA.r",sep = ""))
         cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
         gc()
-}
+        
+        }else if (COMMAND$ANALYSIS[i] == "NO" & COMMAND$INTEGRATION[i] == "YES") {
+                STATISTICS <- "NO"
+                Cell_type <- COMMAND$LABEL[i]
+                cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
+                iterations = iterations + 1
+                selection_samples = COMMAND$SELECTION[i] # TO ADD
+                #purity_filter =COMMAND$PURITY[i] #TO ADD
+                directory2 <- paste(directory,"/Transcriptomics/INPUT_PRECISESADS",sep="")
+                files <- grep("MATRIX*",list.files(directory2),value=TRUE)
+                files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
+                source(paste(directory,"/Metabolomics/BiomiX_DMA.r",sep = ""))
+                cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
+                gc() 
+        }
 }
 
 #================================================================================
@@ -145,7 +189,11 @@ position <- which(COMMAND$DATA_TYPE %in% "Methylomics")
 cat("\n\n\n\n\nChecking Methylomics datasets.... \n\n\n\n\n")
 iterations <- 0
 for (i in position){
+        if(COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "YES" 
+           | COMMAND$ANALYSIS[i] == "YES" & COMMAND$INTEGRATION[i] == "NO")
+                {
         
+        STATISTICS <- "YES"
         Cell_type <- COMMAND$LABEL[i]
         cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
         iterations = iterations + 1
@@ -154,7 +202,20 @@ for (i in position){
         directory2 <- paste(directory,"/Transcriptomics/INPUT_PRECISESADS",sep="")
         files <- grep("MATRIX*",list.files(directory2),value=TRUE)
         files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
-        if(COMMAND$ANALYSIS[i] == "YES"){
+        source(paste(directory,"/Methylomics/BiomiX_DMA.r",sep=""))
+        cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
+        gc()
+        
+        } else if (COMMAND$ANALYSIS[i] == "NO" & COMMAND$INTEGRATION[i] == "YES") {
+                STATISTICS <- "NO"
+                Cell_type <- COMMAND$LABEL[i]
+                cat(paste( "\n\n\n\n\nStarting the ", Cell_type, " analysis \n\n\n\n\n", sep =""))
+                iterations = iterations + 1
+                selection_samples = COMMAND$SELECTION[i] # TO ADD
+                #purity_filter =COMMAND$PURITY[i] #TO ADD
+                directory2 <- paste(directory,"/Transcriptomics/INPUT_PRECISESADS",sep="")
+                files <- grep("MATRIX*",list.files(directory2),value=TRUE)
+                files_meta <- grep("METADATA*",list.files(directory2),value=TRUE)
                 source(paste(directory,"/Methylomics/BiomiX_DMA.r",sep=""))
                 cat("\n\n\n\n\n  ", Cell_type, " analysis complete ^-^")
                 gc()

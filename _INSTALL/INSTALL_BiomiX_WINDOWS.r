@@ -538,3 +538,20 @@ install.packages("datawizard_0.10.0.tar.gz", repos=NULL, type="source")
 devtools::install_github("strengejacke/sjmisc", dependencies = FALSE)
 
 library(sjmisc)
+
+
+install.packages("umap_0.2.10.0.zip", repos=NULL, type="source")
+install.packages("randomForest_4.7-1.2.zip", repos=NULL, type="source")
+install.packages("itertools_0.1-3.zip", repos=NULL, type="source")
+install.packages("corpcor_1.6.10.zip", repos=NULL, type="source")
+install.packages("rARPACK_0.11-0.zip", repos=NULL, type="source")
+install.packages("ellipse_0.5.0.zip", repos=NULL, type="source")
+install.packages("mixOmics_6.28.0.zip", repos=NULL, type="source")
+
+install.packages("ucminf_1.2.2.zip", repos=NULL, type="source")
+install.packages("ordinal_2023.12-4.1.zip", repos=NULL, type="source")
+install.packages("pan_1.9.zip", repos=NULL, type="source")
+install.packages("jomo_2.7-6.zip", repos=NULL, type="source")
+install.packages("mitml_0.4-5.zip", repos=NULL, type="source")
+install.packages("glmnet_4.1-8.zip", repos=NULL, type="source")
+install.packages("mice_3.16.0.zip", repos=NULL, type="source")

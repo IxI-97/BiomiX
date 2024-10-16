@@ -1,9 +1,10 @@
 library(vroom)
 library(dplyr)
 library(readxl)
+library(data.table)
 
 #### INPUT PROMPT ----
-
+# 
 # args = commandArgs(trailingOnly=TRUE)
 # 
 # args = as.list(c("Wholeblood","SLE"))
@@ -12,35 +13,15 @@ library(readxl)
 # args = as.list(c("Neutrophils","PAPS"))
 # args[1] <-"mutated"
 # args[2] <-"unmutated"
-# args[3] <-"/home/cristia/BiomiX2.2"
+# args[3] <-"/home/cristia/BiomiX2.3"
 # 
 # directory <- args[3]
 # iterations = 1
-# i=2
+# i=1
 # selection_samples = "NO"
 # Cell_type = "Whole_methyl"
-# DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
+# DIR_METADATA <- readLines("/home/cristia/BiomiX2.3/directory.txt")
 
-# Matrix <- vroom("WHOLEBLOOD_METHYLOMICS_SSC_vs_CTRL.tsv" , delim = "\t", col_names = TRUE)
-# Metadata_total <- vroom("/home/henry/Desktop/BiomiX2.0/Metadata/Metadata_PRECISESADS.tsv" , delim = "\t", col_names = TRUE)
-
-
-if (length(args) ==0) {
-  stop("At least one argument must be supplied (input file).n", call.=FALSE)
-} else if (length(args)==1) {
-  if (args == "help") {
-    print("CELL TYPE available: BLymphocytes / Monocytes / TLymphocytes / Neutrophils ....... DISEASES AVAILABLE: SjS / RA / SSc / PAPs / MCTD / UCTD / SLE ")
-    stop()
-  } else {
-    stop("The number of argument is not enough, did you miss the cell type or the disease?")
-  }
-  
-} else if (length(args)==3) {
-  print("Correct number of argument :)")
-  paste("Disease:", args[1])
-}else if (length(args)> 3) {
-  stop("Too many argument.. are you typing random words?") 
-}
 
 #### DATASET REARRANGEMENT ----
 
@@ -160,25 +141,73 @@ for (meta_filter in METADATA_FILT_INDEX){
 }
 
 
-
-
 Metadata_individual <- Metadata
 
-num <- Metadata_individual$CONDITION == args[1]
+num<-Metadata_individual$ID[Metadata_individual$CONDITION == args[1]]
 #Choise disease + HC
-numero <- Metadata_individual$CONDITION == args[2]
+numero <- Metadata_individual$ID[Metadata_individual$CONDITION == args[2]]
 #Metadata_individual <- Metadata_individual[num | numero,]
 Matrix <- as.data.frame(Matrix)
 Matrix$ID <- Identifier
 
 Matrix <- Matrix[, c(ncol(Matrix), 1:(ncol(Matrix)-1))]
 
-vector<- num | numero
-vector2 <- c(TRUE,vector)
+vector<- c(num,numero)
+vector2 <- c("ID",vector)
 
-Matrix <- Matrix[,vector2]
+Matrix<-Matrix[,colnames(Matrix) %in% vector2]
+colnames(Matrix)[-1]<-colnames(Matrix)[-1][order(colnames(Matrix)[-1])]
+
+Metadata_individual<-Metadata_individual[Metadata_individual$ID %in% vector,]
+Metadata_individual<-Metadata_individual[order(Metadata_individual$ID),]
 
 dim(Matrix)
+
+
+
+if(COMMAND$PREVIEW[i] == "YES"){
+        
+#QC preview visualization
+
+#Block to open the Quality control windows to select filtering, normalization and visualize the QC.
+#ADD the ID to the first column
+Samples_preview<-colnames(Matrix[,-1])
+cpg <- Matrix$ID
+numeric_data <- Matrix[,-1]
+numeric_data <- transpose(numeric_data)
+numeric_data<-apply(numeric_data,2,as.numeric)
+rownames(numeric_data) <- Samples_preview
+colnames(numeric_data) <- cpg
+
+metadata <- Metadata_individual
+numeric_data <- as.data.frame(numeric_data)
+colnames(metadata)[colnames(metadata) == "CONDITION"] <- "condition"
+
+# Source the BiomiX_preview script to load the runShinyApp() function
+source(paste(directory,'/BiomiX_preview.r', sep=""))
+
+browser_analysis <- readLines(paste(directory,'/_INSTALL/CHOISE_BROWSER_pre-view',sep=""), n = 1)
+
+# Now call the runShinyApp function with numeric_data and metadata
+options(browser = get_default_browser())
+print("Pre QC data visualization. If the browser does not open automatically copy and paste the link on a browser")
+print("One completed the analysis modification click on close app to continue the analysis")
+print("ATTENTION!: IF the browser does not open set up the path to your browser on the file ")
+
+Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = TRUE)
+
+Matrix<-as.data.frame(t(Preview$matrix))
+Metadata_individual<-Preview$metadata
+colnames(Metadata_individual)[colnames(Metadata_individual) == "condition"] <- "CONDITION"
+
+Matrix <- cbind(cpg,Matrix)
+colnames(Matrix)[1] <- "ID"
+
+
+}else{
+        print("no QC pre-visualization")
+}
+
 
 #### METHYLATION FILTER ON VARIANCE + INTEGRATION ----
 
@@ -201,18 +230,22 @@ directory2 <- paste(directory,"/MOFA/INPUT/", "Methylome_",Cell_type, "_",args[1
 
 setwd(directory2)
 
-#IN THE METADATA SELECT ONLY THE SAMPLES IN THE MATRIX
-Metadata_individual<-Metadata_individual[vector,]
-
 #SELECT JUST THE TOP 10000 FEATURES WITH HIGHER VIABILITY
 Matrix2<- Matrix2 %>% arrange(desc(variance))
 
+limit<-as.numeric(COMMAND_ADVANCED$ADVANCED_OPTION_MOFA[1])
+if(length(rownames(Matrix2)) > limit){
+        Matrix2 <- Matrix2[1:limit,]}
 
-write.table(x=Matrix2[1:10000,]  , file= paste(Cell_type,"_matrix_MOFA.tsv",sep = "")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
+write.table(x=Matrix2  , file= paste(Cell_type,"_matrix_MOFA.tsv",sep = "")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE)
 write.table(x=Metadata_individual  , file= paste(Cell_type, "_metadata_MOFA.tsv", sep = "")  ,sep= "\t", row.names = F, col.names = T,  quote = FALSE,)
 
 
-#### DMP ANALYSIS ----
+if (STATISTICS == "YES"){
+
+
+
+#### STATISTICAL DMP ANALYSIS ----
 
 dir.create(path = paste(directory,"/Methylomics/OUTPUT/", sep =""))
 dir.create(path = paste(directory,"/Methylomics/OUTPUT/", Cell_type, "_",args[1],"_vs_", args[2], sep =""))
@@ -399,3 +432,6 @@ if(length(BASSI$gene) != 0){
 
 dev.off()
 
+}else{
+        print("No statistical analysis")
+}

@@ -130,7 +130,9 @@ library(mixOmics)
                                                  checkboxInput("transpose", "Transpose Data", value = FALSE),
                                                  checkboxInput("remove_first_row", "Remove First Row", value = FALSE),
                                                  checkboxInput("remove_first_col", "Remove First Column", value = FALSE),
-                                                 actionButton("load_data", "Load Data")
+                                                 actionButton("load_data", "Load Data"),
+                                                 uiOutput("warningMessage")
+                                                 
                                         ),
                                         tabPanel("Boxplot by Variables", plotOutput("boxplot")),
                                         tabPanel("Barplot by Samples", plotOutput("barplot")),
@@ -202,19 +204,19 @@ library(mixOmics)
                         # Remove the first column if selected
                         if (input$remove_first_col) {
                                 sav<- df[, 1]
-                                print(dim(sav))
+                                #print(dim(sav))
                                 df <- df[, -1]
                                 df <- as.data.frame(df)
-                                print(dim(df))
-                                print("OK")
+                                #print(dim(df))
+                                #print("OK")
                                 sav <- as.vector(sav[[1]])
                                 # Identify the rows with NA values
                                 rows_with_na <- which(is.na(sav))  # Change 'A' to the relevant column
-                                print(rows_with_na)
+                                #print(rows_with_na)
                                 # Generate new row names for the rows with NA values
                                 if (length(rows_with_na) > 1){
                                         sav[rows_with_na] <- paste("missing", seq_along(rows_with_na), sep="_")}
-                                print(sav)
+                                #print(sav)
                                 sav <- make.unique(sav, sep = "_")
                                 
                                 row.names(df) <- as.vector(sav)
@@ -227,11 +229,37 @@ library(mixOmics)
                         # Update the combined_data reactive value
                         #combined_data$numeric <- df
                         combined_data$numeric <- df # Update original data with uploaded data
-                        print(combined_data$numeric)
-                        print(original_data)
+                        #print(combined_data$numeric)
+                        #print(original_data)
                         original_data$numeric <- df # Update original data with uploaded data
-                        print(original_data$numeric)
+                        #print(original_data$numeric)
+                        
+                        
+                        
                 })
+                
+                
+                
+                # Check if any column contains non-numeric values
+                output$warningMessage <- renderUI({
+
+                        # Get matrix
+                        plot_data <- combined_data$numeric
+                        
+                        # Check if any column is non-numeric
+                        is_numeric <- sapply(plot_data, is.numeric)
+                        if (any(!is_numeric)) {
+                                warning_cols <- paste(names(plot_data)[!is_numeric], collapse = ", ")
+                                div(
+                                        style = "color: red; font-weight: bold;",
+                                        paste("Warning: Non-numeric values found in columns:", warning_cols)
+                                )
+                        } else {
+                                return(NULL)  # No warning if all columns are numeric
+                        }
+                })
+                
+                
                 
                 # Barplot: Missing/zero values by variable
                 output$boxplot <- renderPlot({
@@ -310,7 +338,7 @@ library(mixOmics)
                 
                 # Summary table of the filtered and imputed data
                 output$summary_table <- DT::renderDataTable({
-                        print(combined_data$numeric)
+                        #print(combined_data$numeric)
                         plot_data <- combined_data$numeric
                         if (ncol(plot_data) > 50 | nrow(plot_data) > 50) {
                                 if (ncol(plot_data) > 50) {
@@ -340,7 +368,9 @@ library(mixOmics)
                 output$downloadData <- downloadHandler(
                         filename = function() { paste("imputated_data", Sys.Date(), ".tsv", sep = "") },
                         content = function(file) {
-                                write.table(combined_data$numeric, file, row.names = FALSE, quote = FALSE, sep = "\t")
+                                saved<-cbind(rownames(combined_data$numeric), combined_data$numeric)
+                                colnames(saved)[1] <- "ID"
+                                write.table(saved, file, row.names = FALSE, quote = FALSE, sep = "\t")
                         }
                 )
                 

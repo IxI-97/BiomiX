@@ -6,21 +6,22 @@ library(rlist)
 library(tibble)
 library(readxl)
 
+
 # MANUAL INPUT
 # # # #
-# library(vroom)
+library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
 # args[1] <-"PTB"
 # args[2] <-"HC"
-# args[3] <-"/home/cristia/BiomiX2.2"
+# args[3] <-"/home/cristia/BiomiX2.3"
 # 
 # directory <- args[3]
 # iterations = 1
 # selection_samples = "NO"
 # Cell_type = "METAB"
-# i = 2
-# ANNOTATION = "MS1"
-# DIR_METADATA <- readLines("/home/cristia/BiomiX2.2/directory.txt")
+# i = 1
+# ANNOTATION = "annotated"
+# DIR_METADATA <- readLines("/home/cristia/BiomiX2.3/directory.txt")
 
 
 # library(vroom)
@@ -339,7 +340,7 @@ for (meta_filter in METADATA_FILT_INDEX){
                                                       NA)
                         
                         Metadata <- Metadata[comparison_operator(To_filter, value_threshold),]
-                        matrix <- matrix[,comparison_operator(To_filter, value_threshold)]
+                        matrix <- matrix[comparison_operator(To_filter, value_threshold),]
                         
                 }else if (as.character(COMMAND_ADVANCED[2,meta_filter]) =="Factors"){
                         To_filter<- as.character(unlist(Metadata[,COLNAME]))
@@ -353,7 +354,7 @@ for (meta_filter in METADATA_FILT_INDEX){
                                                       NA)
                         
                         Metadata <- Metadata[comparison_operator(To_filter, value_threshold),]
-                        DGE3 <- DGE3[,comparison_operator(To_filter, value_threshold)]
+                        DGE3 <- DGE3[comparison_operator(To_filter, value_threshold),]
                 }
                 
         }else{
@@ -377,17 +378,57 @@ colnames(matrix) <- make.unique(names(matrix), sep = "_")
 
 #====================================
 
+if(COMMAND$PREVIEW[i] == "YES"){
+
+#Block to open the Quality control windows to select filtering, normalization and visualize the QC.
+#ADD the ID to the first column
+sample_preview<-matrix$ID
+numeric_data <- matrix[,-1]
+
+numeric_data<-apply(numeric_data,2,as.numeric)
+rownames(numeric_data) <- sample_preview
+
+metadata <- Metadata
+numeric_data <- as.data.frame(numeric_data)
+colnames(metadata)[colnames(metadata) == "CONDITION"] <- "condition"
+
+# Source the BiomiX_preview script to load the runShinyApp() function
+source(paste(directory,'/BiomiX_preview.r', sep=""))
+
+browser_analysis <- readLines(paste(directory,'/_INSTALL/CHOISE_BROWSER_pre-view',sep=""), n = 1)
+
+# Now call the runShinyApp function with numeric_data and metadata
+options(browser = get_default_browser())
+print("Pre QC data visualization. If the browser does not open automatically copy and paste the link on a browser")
+print("One completed the analysis modification click on close app to continue the analysis")
+print("ATTENTION!: IF the browser does not open set up the path to your browser on the file ")
+
+Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = TRUE)
+
+matrix<-Preview$matrix
+Metadata<-Preview$metadata
+matrix <- cbind(ID=Metadata$ID, matrix)
+colnames(Metadata)[colnames(Metadata) == "condition"] <- "CONDITION"
+
+}else{
+        print("no QC pre-visualization")
+}
+
+#===================================
 
 matrixs <- matrix 
 matrixs <- add_column(matrixs, Metadata$CONDITION, .after = 1)
 colnames(matrixs)[2] <- "CONDITION"
 matrixs[,3:ncol(matrixs)]<-apply(matrixs[,3:ncol(matrixs)],2,as.numeric)
-matrixs[matrixs == 0] <- 1
+#matrixs[matrixs == 0] <- 1
 
 
 #SAVING THE INPUT FOR THE MOFA ANALYSIS
 write.table(matrixs,paste(directory2,"/Metabolomics_",Cell_type, "_MOFA.tsv", sep = ""),quote = FALSE, row.names = F, sep = "\t")
 
+
+
+if (STATISTICS == "YES"){
 
 
 # #### FUNCTION DEFINITION FOR STATISTICAL TEST BETWEEN CONTROL AND TESTED SAMPLES----
@@ -485,6 +526,7 @@ DMS_TESTED <- function(Condition2){
 
 #Function to check if all the variable elements are the same
 all_same <- function(x) {
+        x<-x[!is.na(x)]
         all(x == x[1])
 }
 
@@ -608,7 +650,7 @@ if(ANNOTATION == "Annotated"){
                 #dev.new()
                 
                 library(circlize)
-                col_fun = colorRamp2(c(min(Heat), mean(colMeans(Heat)), max(Heat)), c("blue", "black", "yellow"))
+                col_fun = colorRamp2(c(min(Heat, na.rm = TRUE), mean(colMeans(Heat, na.rm = TRUE)), max(Heat, na.rm = TRUE)), c("blue", "black", "yellow"))
                 col_fun(seq(-3, 3))
                 
                 t<-c("CTRL" = "blue", "SLE" = "red")
@@ -618,6 +660,9 @@ if(ANNOTATION == "Annotated"){
                 
                 ha = HeatmapAnnotation(condition = Metadata$CONDITION,
                                        col = list(condition = t))
+                
+                Heat[is.na(Heat)] <- 0 #Add 0 when there are 0 values to allow the Heatmap plot
+                
                 p<- Heatmap(Heat,km =2, name = "SD_score", col = col_fun, clustering_distance_rows = "pearson", clustering_method_rows= "complete", clustering_method_columns ="ward.D", row_dend_width = unit(0.5, "cm"),column_dend_height = unit(60, "mm"), column_names_gp = grid::gpar(fontsize = 6),
                             row_names_gp = grid::gpar(fontsize = 8), top_annotation = ha)
                 
@@ -823,6 +868,8 @@ if(ANNOTATION == "Annotated"){
                 write.table(x= query_id_select, file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)}
         
         
+        #LATE INTEGRATION TRANSCRIPTOMICS
+        
         regeX <- paste("*",args[1],"_vs_",args[2], sep="")
         regeX2 <- paste(args[1],"_vs_",args[2], sep="")
         files <- grep(regeX,list.files(paste(directory,"/Transcriptomics/OUTPUT",sep="")),value=TRUE)
@@ -845,6 +892,30 @@ if(ANNOTATION == "Annotated"){
                         
                 }}
         
+        #LATE INTEGRATION METHYLOMICS
+        
+        regeX <- paste("*",args[1],"_vs_",args[2], sep="")
+        regeX2 <- paste(args[1],"_vs_",args[2], sep="")
+        files <- grep(regeX,list.files(paste(directory,"/Methylomics/OUTPUT",sep="")),value=TRUE)
+        
+        if (length(files) != 0){
+                for (fil in 1:length(files)){
+                        print(fil)
+                        files2 <- grep("GENES[A-Z]*",list.files(paste(directory,"/Methylomics/OUTPUT/", files[fil], sep="")),value=TRUE)
+                        LIST_GENE<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[1], sep=""), delim="\t")
+                        LIST_GENE2<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[2], sep=""), delim="\t")
+                        LIST_GENE3<-rbind(LIST_GENE, LIST_GENE2)
+                        
+                        Sources<-str_split(files2[1], "_")[[1]][1]
+                        print(Sources)
+                        
+                        dir.create(path = paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
+                        setwd(paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep =""))
+                        
+                        write.table(x= LIST_GENE3[c("gene", "logFC")], file= paste("GENE_ID_",Sources,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                        
+                }}
+        
         
         #Network analysis
         dir.create(path = paste(directory2,"/MetaboAnalyst/", "Network_Analysis", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
@@ -860,6 +931,8 @@ if(ANNOTATION == "Annotated"){
         if (COMMAND_ADVANCED[2,9] == "compound_name" ){
                 write.table(x= query_id_select, file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)}
         
+        
+        #LATE INTEGRATION TRANSCRIPTOMICS
         
         regeX <- paste("*",args[1],"_vs_",args[2], sep="")
         regeX2 <- paste(args[1],"_vs_",args[2], sep="")
@@ -883,6 +956,32 @@ if(ANNOTATION == "Annotated"){
                         
                 }
         }
+        
+        
+        #LATE INTEGRATION METHYLOMICS
+        
+        regeX <- paste("*",args[1],"_vs_",args[2], sep="")
+        regeX2 <- paste(args[1],"_vs_",args[2], sep="")
+        files <- grep(regeX,list.files(paste(directory,"/Methylomics/OUTPUT",sep="")),value=TRUE)
+        
+        if (length(files) != 0){
+                for (fil in 1:length(files)){
+                        print(fil)
+                        files2 <- grep("GENES[A-Z]*",list.files(paste(directory,"/Methylomics/OUTPUT/", files[fil], sep="")),value=TRUE)
+                        LIST_GENE<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[1], sep=""), delim="\t")
+                        LIST_GENE2<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[2], sep=""), delim="\t")
+                        LIST_GENE3<-rbind(LIST_GENE, LIST_GENE2)
+                        
+                        Sources<-str_split(files2[1], "_")[[1]][1]
+                        print(Sources)
+                        
+                        dir.create(path = paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
+                        setwd(paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep =""))
+                        
+                        write.table(x= LIST_GENE3[c("gene", "logFC")], file= paste("GENE_ID_",Sources,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                        
+                }}
+        
         
 } else {
         
@@ -1713,7 +1812,7 @@ if(ANNOTATION == "Annotated"){
                 #dev.new()
                 
                 library(circlize)
-                col_fun = colorRamp2(c(min(Heat), mean(colMeans(Heat)), max(Heat)), c("blue", "black", "yellow"))
+                col_fun = colorRamp2(c(min(Heat, na.rm = TRUE), mean(colMeans(Heat, na.rm = TRUE)), max(Heat, na.rm = TRUE)), c("blue", "black", "yellow"))
                 col_fun(seq(-3, 3))
                 
                 t<-c("CTRL" = "blue", "SLE" = "red")
@@ -1723,6 +1822,9 @@ if(ANNOTATION == "Annotated"){
                 
                 ha = HeatmapAnnotation(condition = Metadata$CONDITION,
                                        col = list(condition = t))
+                
+                Heat[is.na(Heat)] <- 0 #Add 0 when there are 0 values to allow the Heatmap plot
+                
                 p<- Heatmap(Heat,km =2, name = "SD_score", col = col_fun, clustering_distance_rows = "pearson", clustering_method_rows= "complete", clustering_method_columns ="ward.D", row_dend_width = unit(0.5, "cm"),column_dend_height = unit(60, "mm"), column_names_gp = grid::gpar(fontsize = 6),
                             row_names_gp = grid::gpar(fontsize = 8), top_annotation = ha)
                 
@@ -1943,6 +2045,7 @@ if(ANNOTATION == "Annotated"){
         write.table(x= query_id_select[,c(2,4)] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_select[,c(3,4)], file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         
+        #LATE INTEGRATION TRANSCRIPTOMICS
         
         regeX <- paste("*",args[1],"_vs_",args[2], sep="")
         regeX2 <- paste(args[1],"_vs_",args[2], sep="")
@@ -1967,6 +2070,31 @@ if(ANNOTATION == "Annotated"){
                 }}
         
         
+        #LATE INTEGRATION METHYLOMICS
+        
+        regeX <- paste("*",args[1],"_vs_",args[2], sep="")
+        regeX2 <- paste(args[1],"_vs_",args[2], sep="")
+        files <- grep(regeX,list.files(paste(directory,"/Methylomics/OUTPUT",sep="")),value=TRUE)
+        
+        if (length(files) != 0){
+                for (fil in 1:length(files)){
+                        print(fil)
+                        files2 <- grep("GENES[A-Z]*",list.files(paste(directory,"/Methylomics/OUTPUT/", files[fil], sep="")),value=TRUE)
+                        LIST_GENE<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[1], sep=""), delim="\t")
+                        LIST_GENE2<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[2], sep=""), delim="\t")
+                        LIST_GENE3<-rbind(LIST_GENE, LIST_GENE2)
+                        
+                        Sources<-str_split(files2[1], "_")[[1]][1]
+                        print(Sources)
+                        
+                        dir.create(path = paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
+                        setwd(paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep =""))
+                        
+                        write.table(x= LIST_GENE3[c("gene", "logFC")], file= paste("GENE_ID_",Sources,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                        
+                }}
+        
+        
         #Network analysis
         dir.create(path = paste(directory2,"/MetaboAnalyst/", "Network_Analysis", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
         setwd(paste(directory2,"/MetaboAnalyst/", "Network_Analysis", sep =""))
@@ -1976,6 +2104,9 @@ if(ANNOTATION == "Annotated"){
         write.table(x= query_id_select[,c(1,4)] , file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_select[,c(2,4)] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_select[,c(3,4)], file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+        
+        
+        #LATE INTEGRATION TRANSCRIPTOMICS
         
         
         regeX <- paste("*",args[1],"_vs_",args[2], sep="")
@@ -2000,6 +2131,29 @@ if(ANNOTATION == "Annotated"){
                         
                 }}
         
+        #LATE INTEGRATION METHYLOMICS
+        
+        regeX <- paste("*",args[1],"_vs_",args[2], sep="")
+        regeX2 <- paste(args[1],"_vs_",args[2], sep="")
+        files <- grep(regeX,list.files(paste(directory,"/Methylomics/OUTPUT",sep="")),value=TRUE)
+        
+        if (length(files) != 0){
+                for (fil in 1:length(files)){
+                        print(fil)
+                        files2 <- grep("GENES[A-Z]*",list.files(paste(directory,"/Methylomics/OUTPUT/", files[fil], sep="")),value=TRUE)
+                        LIST_GENE<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[1], sep=""), delim="\t")
+                        LIST_GENE2<-vroom(paste(directory,"/Methylomics/OUTPUT/", files[fil],"/",files2[2], sep=""), delim="\t")
+                        LIST_GENE3<-rbind(LIST_GENE, LIST_GENE2)
+                        
+                        Sources<-str_split(files2[1], "_")[[1]][1]
+                        print(Sources)
+                        
+                        dir.create(path = paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
+                        setwd(paste(directory2,"/MetaboAnalyst/Joint_Pathway_Analysis/Methylomics_availables/", Sources, sep =""))
+                        
+                        write.table(x= LIST_GENE3[c("gene", "logFC")], file= paste("GENE_ID_",Sources,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+                        
+                }}
         
         
         #MSEA ANALYSIS
@@ -2014,6 +2168,10 @@ if(ANNOTATION == "Annotated"){
         write.table(x= MSEA, file= paste("MSEA_",args[1],"_vs_",args[2],".txt",sep="")  ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
         gc()
         
+}
+
+}else{
+        print("No statistical analysis and annotation")
 }
 
 

@@ -7,6 +7,7 @@
 
 import os
 import pandas as pd
+import subprocess
 from PyQt5 import QtCore, QtGui, QtWidgets 
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget, QStyledItemDelegate, QFileDialog , QMessageBox, QTabWidget
@@ -169,7 +170,7 @@ class Ui_BiomiX(object):
         block2_layout = QtWidgets.QHBoxLayout()
         
         
-        # Column 1
+        # Column 1 (input names)
         block2_column1_layout = QtWidgets.QVBoxLayout()
 
         #label
@@ -267,7 +268,71 @@ class Ui_BiomiX(object):
         block2_layout.addLayout(block2_column1_layout)
         
         
-        # Column 2
+        # Column 2 duplicated (Preview)
+        block2_column2_duplicate_layout = QtWidgets.QVBoxLayout()
+        
+        #Analysis label
+        self.label_16_duplicate = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_16_duplicate.setFont(font)
+        self.label_16_duplicate.setObjectName("label_16_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.label_16_duplicate)
+        
+        #Checkbox 1
+        self.checkBox_4_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_4_duplicate.setText("")
+        self.checkBox_4_duplicate.setObjectName("checkBox_4_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_4_duplicate)
+        
+        #Checkbox 2
+        self.checkBox_30_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_30_duplicate.setText("")
+        self.checkBox_30_duplicate.setObjectName("checkBox_30_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_30_duplicate)
+        
+        #Checkbox 3
+        self.checkBox_34_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_34_duplicate.setText("")
+        self.checkBox_34_duplicate.setObjectName("checkBox_34_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_34_duplicate)
+        
+        #Checkbox 4
+        self.checkBox_38_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_38_duplicate.setText("")
+        self.checkBox_38_duplicate.setObjectName("checkBox_38_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_38_duplicate)
+        
+        #Checkbox 5
+        self.checkBox_42_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_42_duplicate.setText("")
+        self.checkBox_42_duplicate.setObjectName("checkBox_42_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_42_duplicate)
+        
+        #Checkbox 6
+        self.checkBox_46_duplicate = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_46_duplicate.setText("")
+        self.checkBox_46_duplicate.setObjectName("checkBox_46_duplicate")
+        block2_column2_duplicate_layout.addWidget(self.checkBox_46_duplicate)
+        
+        
+        self.label_16_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_4_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_30_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_34_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_38_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_42_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.checkBox_46_duplicate.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        block2_layout.addLayout(block2_column2_duplicate_layout)
+
+        
+        
+        # Column 2 (Single omics analysis)
         block2_column2_layout = QtWidgets.QVBoxLayout()
         
         #Analysis label
@@ -329,10 +394,8 @@ class Ui_BiomiX(object):
         
         block2_layout.addLayout(block2_column2_layout)
         
-
-
         
-        # Column 3
+        # Column 3 ( Data Type)
         
         block2_column3_layout = QtWidgets.QVBoxLayout()
         
@@ -476,9 +539,8 @@ class Ui_BiomiX(object):
         
         block2_layout.addLayout(block2_column3_layout)
         
-
         
-        # Column 4
+        # Column 4 (Integration)
         
         block2_column4_layout = QtWidgets.QVBoxLayout()
         
@@ -541,10 +603,10 @@ class Ui_BiomiX(object):
         
         block2_layout.addLayout(block2_column4_layout)
         
+
+        
              
-             
-             
-        # Column 5 
+        # Column 5  (label)
              
         block2_column5_layout = QtWidgets.QVBoxLayout()  
              
@@ -670,7 +732,7 @@ class Ui_BiomiX(object):
         block2_layout.addLayout(block2_column5_layout)
         
         
-        # Column 6 
+        # Column 6  (Selection)
              
         block2_column6_layout = QtWidgets.QVBoxLayout() 
         
@@ -728,7 +790,7 @@ class Ui_BiomiX(object):
              
              
            
-        # Column 7 
+        # Column 7 (Directories)
              
         block2_column7_layout = QtWidgets.QVBoxLayout() 
         
@@ -1131,7 +1193,7 @@ class Ui_BiomiX(object):
         
         
         # BLOCK BUTTON CONNECTIONS
-        
+        self.pushButton_3.clicked.connect(self.open_shiny_app)
         self.Push_01.clicked.connect(self.open_dialog1)
         self.Push_02.clicked.connect(self.open_dialog2)
         self.Push_03.clicked.connect(self.open_dialog3)
@@ -1148,6 +1210,7 @@ class Ui_BiomiX(object):
         self.pushButton.clicked.connect(self.item_selected_integration)
         self.pushButton.clicked.connect(self.QLineEdit_label)
         self.pushButton.clicked.connect(self.item_selected_selection)
+        self.pushButton.clicked.connect(self.item_selected_preview)
 
         self.pushButton.clicked.connect(self.radio_selected)
         self.pushButton.clicked.connect(self.spin_selected)
@@ -1170,7 +1233,8 @@ class Ui_BiomiX(object):
         self.Push_05.setText(_translate("BiomiX", "Upload"))
         self.Push_06.setText(_translate("BiomiX", "Upload"))
         self.label_36.setText(_translate("BiomiX", "Input"))
-        self.label_16.setText(_translate("BiomiX", "Analysis     "))
+        self.label_16_duplicate.setText(_translate("BiomiX", "Preview-QC"))
+        self.label_16.setText(_translate("BiomiX", "Single Omics Analysis             "))
         self.label_37.setText(_translate("BiomiX", "                Data type                  "))
         self.label_38.setText(_translate("BiomiX", "         Integration             "))
         self.label_39.setText(_translate("BiomiX", "         Label                  "))
@@ -1221,7 +1285,7 @@ class Ui_BiomiX(object):
         self.checkBox.setText(_translate("BiomiX", "MOFA"))
         self.label.setText(_translate("BiomiX", "       Analysis status"))
         self.pushButton_2.setText(_translate("BiomiX", "Open advanced options"))
-        self.pushButton_3.setText(_translate("BiomiX", "Open BiomiX chatbot"))
+        self.pushButton_3.setText(_translate("BiomiX", "Open BiomiX toolkit"))
         self.radioButton.setText(_translate("BiomiX", "Yes"))
         self.label_65.setText(_translate("BiomiX", "Omics overlay"))
         self.label_space.setText(_translate("BiomiX", "  "))
@@ -1262,6 +1326,33 @@ class Ui_BiomiX(object):
             value = "YES"
         input_analysis.append(value)
         print(input_analysis)
+        
+    def item_selected_preview(self):
+        value = "NO"
+        if self.checkBox_4_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        value = "NO"
+        if self.checkBox_30_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        value = "NO"
+        if self.checkBox_34_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        value = "NO"
+        if self.checkBox_38_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        value = "NO"
+        if self.checkBox_42_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        value = "NO"
+        if self.checkBox_46_duplicate.isChecked():
+            value = "YES"
+        input_preview.append(value)
+        print(input_preview)
 
     
     def CORE_INPUT(self):
@@ -1304,8 +1395,16 @@ class Ui_BiomiX(object):
         delegate = ItemDelegate()
         self.ComboBox_1.setItemDelegate(delegate)
         self.ComboBox_2.setItemDelegate(delegate)
+        
 
-
+    def open_shiny_app(self):
+        # Command to run the Shiny app
+        # Make sure to specify the full path to Rscript if not in your PATH
+        command = ["Rscript", "BiomiX_preview_Imputation.r"]  # Change this to your actual path
+        self.label.setText("Running Shiny app...")
+        
+        # Start the Shiny app in a new process
+        subprocess.Popen(command)
 
 
 #UPLOAD OMICS FILES FUNCTION
@@ -1569,6 +1668,7 @@ class Ui_BiomiX(object):
         print(input_label)
         print(input_selection)
         print(sorted_vector)
+        print(input_preview)
         
         
         df = pd.DataFrame(
@@ -1580,7 +1680,8 @@ class Ui_BiomiX(object):
                     input_integration,
                     input_label,
                     input_selection,
-                    sorted_vector
+                    sorted_vector,
+                    input_preview
                 )
             ),
             columns=[
@@ -1590,7 +1691,8 @@ class Ui_BiomiX(object):
                 "INTEGRATION",
                 "LABEL",
                 "SELECTION",
-                "DIRECTORIES"
+                "DIRECTORIES",
+                "PREVIEW"
             ],
         )
         print("BIOMIX_INPUT_DATA")
@@ -1607,6 +1709,7 @@ class Ui_BiomiX(object):
         print(" ".join(data))
         data[2:5] = []
         input_analysis.clear()
+        input_preview.clear()
         input_type.clear()
         input_integration.clear()
         input_label.clear()
@@ -2304,6 +2407,7 @@ class Ui_BiomiX(object):
         Clustering_options.clear()
         input_advanced_mofa_interpretation_bibliography_2.clear()
         input_analysis.clear()
+        input_preview.clear()
         input_type.clear()
         input_integration.clear()
         input_label.clear()
@@ -5748,9 +5852,9 @@ class SecondWindow(QMainWindow):
         self.label_300.setText(_translate("BiomiX_advanced", " Neutral mode"))
         self.label_343.setText(_translate("BiomiX_advanced", " MS1 files"))
         self.label_343b.setText(_translate("BiomiX_advanced", " MS1 files"))
-        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and MS2-MS/MS Annotation (.Mzml files)"))
-        self.radioButton_2.setText(_translate("BiomiX_advanced", "MS1 Annotation"))
-        self.radioButton_3.setText(_translate("BiomiX_advanced", "Annotated"))
+        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and MS2-MS/MS Annotation by .Mzml fragmentation files (Untargeted metabolomics)"))
+        self.radioButton_2.setText(_translate("BiomiX_advanced", "MS1 Annotation (Untargeted metabolomics)"))
+        self.radioButton_3.setText(_translate("BiomiX_advanced", "Annotated (Targeted metabolomics)"))
         self.label_287.setText(_translate("BiomiX_advanced", " Metabolite annotation"))
         self.comboBox_75.setItemText(0, _translate("BiomiX_advanced", "HMDB"))
         self.comboBox_75.setItemText(1, _translate("BiomiX_advanced", "compound_name"))
@@ -6061,6 +6165,7 @@ if __name__ == "__main__":
     data = ["Rscript", "BiomiX_BETA.r"]
     input_index = ["input1", "input2", "input3", "input4", "input5", "input6"]
     input_analysis = []
+    input_preview = []
     input_type = []
     input_integration = []
     input_label = []

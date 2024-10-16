@@ -39,7 +39,7 @@ find_folder <- function(folder_name, depth = 5) {
         }
 }
 
-setwd(find_folder("BiomiX2.3"))
+setwd(find_folder("BiomiX2.4"))
 setwd(paste(getwd(),"/", "_INSTALL", sep=""))
 
 print("R Package checking..")
@@ -637,3 +637,20 @@ devtools::install_github("strengejacke/sjmisc", dependencies = FALSE)
 library(sjmisc)
 
 library(sjmisc)
+
+
+install.packages("umap_0.2.10.0.tar.gz", repos=NULL, type="source")
+install.packages("randomForest_4.7-1.2.tar.gz", repos=NULL, type="source")
+install.packages("itertools_0.1-3.tar.gz", repos=NULL, type="source")
+install.packages("corpcor_1.6.10.tar.gz", repos=NULL, type="source")
+install.packages("rARPACK_0.11-0.tar.gz", repos=NULL, type="source")
+install.packages("ellipse_0.5.0.tar.gz", repos=NULL, type="source")
+install.packages("mixOmics_6.28.0.tar.gz", repos=NULL, type="source")
+
+install.packages("ucminf_1.2.2.tar.gz", repos=NULL, type="source")
+install.packages("ordinal_2023.12-4.1.tar.gz", repos=NULL, type="source")
+install.packages("pan_1.9.tar.gz", repos=NULL, type="source")
+install.packages("jomo_2.7-6.tar.gz", repos=NULL, type="source")
+install.packages("mitml_0.4-5.tar.gz", repos=NULL, type="source")
+install.packages("glmnet_4.1-8.tar.gz", repos=NULL, type="source")
+install.packages("mice_3.16.0.tar.gz", repos=NULL, type="source")

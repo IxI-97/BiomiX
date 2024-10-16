@@ -72,7 +72,7 @@ Undefined_processing <-function(matrix,mer){
 #### METABOLOMICS FUNCTION
 
 Metabolomics_processing <-function(annotation,matrix,mer){
-matrix[,-1:-2]<- apply(matrix[,-1:-2],2,log)
+#matrix[,-1:-2]<- apply(matrix[,-1:-2],2,log)
 annotation <- annotation %>% distinct(NAME.x, .keep_all = TRUE)
 annotation$NAMES <- paste(annotation$NAME.x, annotation$Name,sep = "/")
 x<- as.data.frame(colnames(matrix))
@@ -408,7 +408,7 @@ library(MOFA2)
 #filepath <- system.file("extdata", "model.hdf5", package = "MOFA2")
 #print(outfile)
 
-model <- load_model(outfile)
+model <- load_model(outfile, remove_inactive_factors = FALSE)
 p <-plot_data_overview(model)
 p <-p + theme(text=element_text(size=18,face = "bold"))
 print(p)
@@ -507,7 +507,9 @@ write.table(D,file=paste("MOFA_SEPARATION", "_", args[1] ,"_vs_", args[2],"_",n_
 
 #REMOVAL MOFA TAG FROM TRANSCRIPTOMICS
 if(sum(COMMAND$DATA_TYPE == "Transcriptomics") > 1){
+print("Cleaning transcriptomics gene name in position:")
 position <- which(COMMAND$DATA_TYPE %in% "Transcriptomics")
+print(position)
 
 for (i in position) {       
   l<-list()
@@ -530,7 +532,8 @@ for(i in 1:length(COMMAND$INTEGRATION)){
   if(COMMAND$INTEGRATION[i] == "YES"){
     
     if(COMMAND$DATA_TYPE[i] == "Metabolomics"){
-      
+      print("Cleaning metabolomics metabolite position:")
+      print(i)
       o<- list("Serum_metabolomics" = get(paste("INPUT",i,"_visual",sep=""))[-1:-2])
       names(o) <- Views[n]
       #print(o)
