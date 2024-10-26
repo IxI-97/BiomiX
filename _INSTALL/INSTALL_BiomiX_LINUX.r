@@ -53,13 +53,13 @@ if (file.exists("Package_linux.tar") == TRUE){
             print("R package already downloaded and decompressed")        
         }else{
             print("R package already downloaded, decompressing the .tar file ")   
-            untar("Package_linux.tar")
+            untar("Package_linux.tar.gz")
         }
 }else{
-        path<- paste(getwd(),"/", "Package_linux.tar", sep="")
+        path<- paste(getwd(),"/", "Package_linux.tar.gz", sep="")
         options(timeout=6000)
-        download.file("https://github.com/IxI-97/BiomiX/releases/download/v2.2.1/Package_linux.tar", destfile = path, mode = "wb")
-        untar("Package_linux.tar")
+        download.file("https://github.com/IxI-97/BiomiX/releases/download/v2.4/Package_linux.tar.gz", destfile = path, mode = "wb")
+        untar("Package_linux.tar.gz")
 }
 
 
@@ -581,22 +581,27 @@ library(igraph)
 
 
 install.packages("RJSONIO_1.3-1.9.tar.gz", repos=NULL, type="source")
-devtools::install_github("lzyacht/cmmr", dependencies = FALSE)
+#devtools::install_github("lzyacht/cmmr", dependencies = FALSE)
+install.packages("cmmr_1.0.5.tar.gz", repos=NULL, type="source")
+
 
 library(cmmr)
 
 install.packages("pbapply_1.7-2.tar.gz", repos=NULL, type="source")
-remotes::install_gitlab("jaspershen/masstools", dependencies = FALSE)
+#remotes::install_gitlab("jaspershen/masstools", dependencies = FALSE)
+remotes::install_local("masstools_1.0.13.tar.gz", upgrade= "never")
 
 library(masstools)
 
 install.packages("openxlsx_4.2.6.1.tar.gz", repos=NULL, type="source")
-remotes::install_github("tidymass/massdataset", dependencies = FALSE)
+#remotes::install_github("tidymass/massdataset", dependencies = FALSE)
+remotes::install_local("massdataset_1.0.34.tar.gz", upgrade= "never")
 
 library(massdataset)
 
 install.packages("furrr_0.3.1.tar.gz", repos=NULL, type="source")
-remotes::install_github("tidymass/metid", dependencies = FALSE)
+#remotes::install_github("tidymass/metid", dependencies = FALSE)
+remotes::install_local("metid_1.2.35.tar.gz", upgrade= "never")
 
 library(metid)
 
@@ -608,7 +613,9 @@ install.packages("ggforce_0.4.2.tar.gz", repos=NULL, type="source")
 install.packages("bookdown_0.40.tar.gz ", repos=NULL, type="source")
 install.packages("BiocStyle_2.32.1.tar.gz", repos=NULL, type="source")
 install.packages("ggraph_2.2.1.tar.gz", repos=NULL, type="source")
-remotes::install_gitlab("tidymass/metpath", dependencies = FALSE)
+#remotes::install_gitlab("tidymass/metpath", dependencies = FALSE)
+remotes::install_local("metpath_1.0.8.tar.gz", upgrade= "never")
+
 
 library(metpath)
 
@@ -625,7 +632,8 @@ install.packages("synthesisr_0.3.0.tar.gz", repos=NULL, type="source")
 install.packages("ngram_3.2.3.tar.gz", repos=NULL, type="source")
 install.packages("SnowballC_0.7.1.tar.gz", repos=NULL, type="source")
 install.packages("changepoint_2.2.4.tar.gz", repos=NULL, type="source")
-remotes::install_github("elizagrames/litsearchr", dependencies = FALSE)
+#remotes::install_github("elizagrames/litsearchr", dependencies = FALSE)
+remotes::install_local("litsearchr_1.0.0.tar.gz", upgrade= "never")
 
 library(litsearchr)
 
@@ -633,8 +641,8 @@ install.packages("insight_0.20.3.tar.gz", repos=NULL, type="source")
 install.packages("datawizard_0.12.2.tar.gz", repos=NULL, type="source")
 install.packages("sjlabelled_1.2.0.tar.gz", repos=NULL, type="source")
 
-devtools::install_github("strengejacke/sjmisc", dependencies = FALSE)
-library(sjmisc)
+#devtools::install_github("strengejacke/sjmisc", dependencies = FALSE)
+remotes::install_local("sjmisc_2.8.10.tar.gz", upgrade= "never")
 
 library(sjmisc)
 
@@ -642,10 +650,14 @@ library(sjmisc)
 install.packages("umap_0.2.10.0.tar.gz", repos=NULL, type="source")
 install.packages("randomForest_4.7-1.2.tar.gz", repos=NULL, type="source")
 install.packages("itertools_0.1-3.tar.gz", repos=NULL, type="source")
+install.packages("missForest_1.5.tar.gz", repos=NULL, type="source")
 install.packages("corpcor_1.6.10.tar.gz", repos=NULL, type="source")
 install.packages("rARPACK_0.11-0.tar.gz", repos=NULL, type="source")
 install.packages("ellipse_0.5.0.tar.gz", repos=NULL, type="source")
 install.packages("mixOmics_6.28.0.tar.gz", repos=NULL, type="source")
+
+library(mixOmics)
+
 
 install.packages("ucminf_1.2.2.tar.gz", repos=NULL, type="source")
 install.packages("ordinal_2023.12-4.1.tar.gz", repos=NULL, type="source")
@@ -654,3 +666,6 @@ install.packages("jomo_2.7-6.tar.gz", repos=NULL, type="source")
 install.packages("mitml_0.4-5.tar.gz", repos=NULL, type="source")
 install.packages("glmnet_4.1-8.tar.gz", repos=NULL, type="source")
 install.packages("mice_3.16.0.tar.gz", repos=NULL, type="source")
+
+library(mice)
+

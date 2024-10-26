@@ -6,6 +6,7 @@ library(mixOmics)
 library(tidyr)
 library(mice)
 library(data.table)
+library(readxl)
 
 
 
@@ -53,6 +54,9 @@ get_default_browser <- function() {
         
 impute_data <- function(data, method) {
         df <- data  # Start with the original data    
+        df<-t(df)
+        df <- as.data.frame(df, stringsAsFactors = FALSE)  # Convert back to data frame
+        
                 
         if (method == "Replace with 0") {
                 df[is.na(df)] <- 0
@@ -64,7 +68,10 @@ impute_data <- function(data, method) {
                         mutate_all(~ifelse(is.na(.), median(., na.rm = TRUE), .))
         } else if (method == "Lasso") {
                 # Implement Lasso-based imputation using mice
-                imputed_data <- mice(df, method = "lasso.norm", m = 1, maxit = 5, printFlag = FALSE)
+                #print(summary(df))
+                pred <- quickpred(df, mincor = 0.4, minpuc = 0.5) 
+                imputed_data <- mice(df, method = "lasso.norm", m = 1, predictorMatrix = pred, maxit = 5, printFlag = TRUE)
+                #print("MIDDLE")
                 df <- complete(imputed_data)  # Extract the completed dataset
         } else if (method == "Random Forest") {
                 # Implement Random Forest Imputation
@@ -74,10 +81,11 @@ impute_data <- function(data, method) {
                 if (any(is.na(df))) {
                         # Impute using NIPALS from mixOmics
                         # num_comp is the number of principal components to compute (you can adjust it)
-                        nipals_result <- nipals(df, ncomp = 2)
+                        X.na <- as.matrix(df)
                         
-                        # Get the matrix with missing values imputed
-                        df <- nipals_result$rec  # Reconstructed matrix with imputed values
+                        #Computation by NIPALS
+                        df <- impute.nipals(X = X.na, ncomp = 10)
+                        
                 } else {
                         message("No missing values detected, skipping NIPALS imputation.")
                 }
@@ -85,6 +93,8 @@ impute_data <- function(data, method) {
                 df[is.na(df)] <- 0  # Replace only NA with 0
         }
         
+        df <- t(df)
+        df <- as.data.frame(df, stringsAsFactors = FALSE)  # Convert back to data frame
         return(df)
 }
 
@@ -110,8 +120,8 @@ library(mixOmics)
                                 
                                 
                                 # Thresholds for filtering variables and samples
-                                numericInput("var_threshold", "Variable Missingness Threshold (%)", 50, min = 0, max = 100),
-                                numericInput("sample_threshold", "Sample Missingness Threshold (%)", 50, min = 0, max = 100),
+                                numericInput("sample_threshold", "Variable Missingness Threshold (%)", 50, min = 0, max = 100),
+                                numericInput("var_threshold", "Sample Missingness Threshold (%)", 50, min = 0, max = 100),
                                 actionButton("Impute", "Impute the matrix"),
                                 actionButton("Filter", "Filter Variables and samples"),
                                 br(),
@@ -134,8 +144,8 @@ library(mixOmics)
                                                  uiOutput("warningMessage")
                                                  
                                         ),
-                                        tabPanel("Boxplot by Variables", plotOutput("boxplot")),
-                                        tabPanel("Barplot by Samples", plotOutput("barplot")),
+                                        tabPanel("Boxplot by Variables", plotOutput("barplot")),
+                                        tabPanel("Barplot by Samples", plotOutput("boxplot")),
                                         tabPanel("Summary Table", DT::dataTableOutput("summary_table")),
                                         tabPanel("Download",
                                                  downloadButton("downloadData", "Download Normalized Data")
@@ -228,6 +238,12 @@ library(mixOmics)
                         
                         # Update the combined_data reactive value
                         #combined_data$numeric <- df
+                        
+                        # #print(summary(df))
+                        # df<-t(df)
+                        # df <- as.data.frame(df, stringsAsFactors = FALSE)  # Convert back to data frame
+                        # #print(summary(df))
+                        
                         combined_data$numeric <- df # Update original data with uploaded data
                         #print(combined_data$numeric)
                         #print(original_data)
@@ -247,6 +263,7 @@ library(mixOmics)
                         plot_data <- combined_data$numeric
                         
                         # Check if any column is non-numeric
+                        #print(summary(plot_data))
                         is_numeric <- sapply(plot_data, is.numeric)
                         if (any(!is_numeric)) {
                                 warning_cols <- paste(names(plot_data)[!is_numeric], collapse = ", ")
@@ -261,34 +278,34 @@ library(mixOmics)
                 
                 
                 
-                # Barplot: Missing/zero values by variable
+                # Barplot: Missing/zero values by samples
                 output$boxplot <- renderPlot({
                         plot_data <- combined_data$numeric
                         #print(plot_data)
                         df <- plot_data
                         total_samples <- nrow(df)
                         
-                        # Check for NA or 0 values in each variable
+                        # Check for NA or 0 values in each samples (column)
                         stats <- df %>%
                                 summarise_all(~sum(is.na(.) | . == 0)) %>%
-                                pivot_longer(everything(), names_to = "variable", values_to = "count_missing") %>%
+                                pivot_longer(everything(), names_to = "samples", values_to = "count_missing") %>%
                                 mutate(percent_missing = (count_missing / total_samples) * 100)
-                        variable_stats <- stats
+                        sample_stats <- stats
                         
-                        ggplot(variable_stats, aes(x = variable, y = percent_missing)) +
+                        ggplot(sample_stats, aes(x = samples, y = percent_missing)) +
                                 geom_bar(stat = "identity", fill = "steelblue") +  # Bar plot
-                                labs(title = "Percentage of Missing/Zero Values by Variable", y = "% Missing or Zero", x = "Variable") +
+                                labs(title = "Percentage of Missing/Zero Values by Samples", y = "% Missing or Zero", x = "Samples") +
                                 theme(axis.text.x = element_text(angle = 90, hjust = 1))
                 })
                 
-                # Barplot: Missing/zero values by sample
+                # Barplot: Missing/zero values by Variable
                 output$barplot <- renderPlot({
                         plot_data <- combined_data$numeric
                         df <- plot_data
                         total_vars <- ncol(df)
                         
-                        # Calculate number of missing/zero values for each sample (row)
-                        sample<-rownames(df)
+                        # Calculate number of missing/zero values for each variable (row)
+                        variable<-rownames(df)
                         stats <- df %>%
                                 rowwise() %>%
                                 mutate(count_missing = sum(is.na(c_across()) | c_across() == 0)) %>%
@@ -296,12 +313,12 @@ library(mixOmics)
                                 mutate(percent_missing = (count_missing / total_vars) * 100)
                         
                         stats <- stats[, c(ncol(stats) - 1, ncol(stats))]
-                        rownames(stats) <- sample
-                        sample_stats <- stats
+                        rownames(stats) <- variable
+                        variable_stats <- stats
                         
-                        ggplot(sample_stats, aes(x = factor(rownames(stats)), y = percent_missing)) +
+                        ggplot(variable_stats, aes(x = factor(rownames(stats)), y = percent_missing)) +
                                 geom_bar(stat = "identity", fill = "darkorange") +  # Bar plot
-                                labs(title = "Percentage of Missing/Zero Values by Sample", y = "% Missing or Zero", x = "Sample") +
+                                labs(title = "Percentage of Missing/Zero Values by Variables", y = "% Missing or Zero", x = "Variables") +
                                 theme(axis.text.x = element_text(angle = 90, hjust = 1))
                 })
                 
@@ -319,18 +336,42 @@ library(mixOmics)
                 # Filter data based on thresholds
                 observeEvent(input$Filter, {
                         df <- combined_data$numeric
+                        total_samples <- nrow(df)
+                        
+                        stats <- df %>%
+                                summarise_all(~sum(is.na(.) | . == 0)) %>%
+                                pivot_longer(everything(), names_to = "samples", values_to = "count_missing") %>%
+                                mutate(percent_missing = (count_missing / total_samples) * 100)
+                        sample_stats <- stats
                         
                         # Filter variables based on missing percentage
-                        var_stats <- variable_stats
-                        vars_to_keep <- var_stats %>%
-                                filter(percent_missing <= input$var_threshold) %>%
-                                pull(variable)
+                        sam_stats <- sample_stats
+                        sam_to_keep <- sam_stats %>%
+                                filter(percent_missing <= input$sample_threshold) %>%
+                                pull(samples)
                         
-                        df_filtered <- df[, c(vars_to_keep)]
+                        df_filtered <- df[, c(sam_to_keep)]
                         
-                        # Filter samples based on missing percentage
-                        samples_to_keep <- which(sample_stats$percent_missing <= input$sample_threshold)
-                        df_filtered <- df_filtered[samples_to_keep, ]
+                        # Filter samples based on missing percentage var_threshold
+                        
+                        
+                        total_vars <- ncol(df)
+                        
+                        # Calculate number of missing/zero values for each variable (row)
+                        variable<-rownames(df)
+                        stats <- df %>%
+                                rowwise() %>%
+                                mutate(count_missing = sum(is.na(c_across()) | c_across() == 0)) %>%
+                                ungroup() %>%
+                                mutate(percent_missing = (count_missing / total_vars) * 100)
+                        
+                        stats <- stats[, c(ncol(stats) - 1, ncol(stats))]
+                        rownames(stats) <- variable
+                        variable_stats <- stats
+                        
+                        
+                        variables_to_keep <- which(variable_stats$percent_missing <= input$var_threshold)
+                        df_filtered <- df_filtered[variables_to_keep, ]
                         
                         # Update reactiveValues object
                         combined_data$numeric <- df_filtered

@@ -9,11 +9,11 @@ library(readxl)
 
 # MANUAL INPUT
 # # # #
-library(vroom)
+# library(vroom)
 # args = as.list(c("Neutrophils","PAPS"))
 # args[1] <-"PTB"
 # args[2] <-"HC"
-# args[3] <-"/home/cristia/BiomiX2.3"
+# args[3] <-"/home/cristia/BiomiX2.4"
 # 
 # directory <- args[3]
 # iterations = 1
@@ -21,7 +21,8 @@ library(vroom)
 # Cell_type = "METAB"
 # i = 1
 # ANNOTATION = "annotated"
-# DIR_METADATA <- readLines("/home/cristia/BiomiX2.3/directory.txt")
+# DIR_METADATA <- readLines("/home/cristia/BiomiX2.4/directory.txt")
+# STATISTICS = "YES"
 
 
 # library(vroom)
@@ -119,11 +120,11 @@ if(ANNOTATION == "MS2"){
         if (length(input_ms1) != 0){
                 if (file.exists(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1])){
                         
-                        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2])) {
-                                annotation <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2])
+                        if (grepl("\\.xlsx$|\\.xls$", COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1])) {
+                                annotation <- read_excel(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1])
                                 print("Annotation ms1 Excel File read successfully!")
                         }else{
-                                annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES[input_ms2],delim="\t",col_names = TRUE)}
+                                annotation <- vroom(COMMAND_ADVANCED$ADVANCED_OPTION_METABOLOMICS_ANNOTATION_FILES_MS2[input_ms1],delim="\t",col_names = TRUE)}
                         
                         if (ncol(annotation) == 3){
                                 if (colnames(annotation)[3] == "RT_sec"){
@@ -153,6 +154,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Serum", ignore_case=TRUE))| str_detect(C
                 serum_metabolite <- vroom(paste(directory2,"serum_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 serum_metabolite <- vroom(url("https://hmdb.ca/metabolites.csv?action=index&blood=1&c=hmdb_id&controller=metabolites&d=up&detected=1&expected=1&filter=true&predicted=1&quantified=1&utf8=%E2%9C%93"),delim=",",col_names = TRUE )
                 serum_metabolite <- as.data.frame(serum_metabolite)
                 write.table(serum_metabolite,paste(directory2,"serum_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -164,6 +166,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Urine", ignore_case=TRUE))){
                 urine_metabolite <- vroom(paste(directory2,"urine_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 urine_metabolite <- vroom(url("https://hmdb.ca/metabolites.csv?action=index&c=hmdb_id&controller=metabolites&d=up&detected=1&expected=1&filter=true&predicted=1&quantified=1&urine=1&utf8=%E2%9C%93"),delim=",",col_names = TRUE )
                 urine_metabolite <- as.data.frame(urine_metabolite)
                 write.table(urine_metabolite,paste(directory2,"urine_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -176,6 +179,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Saliva", ignore_case=TRUE))){
                 saliva_metabolite <- vroom(paste(directory2,"saliva_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 saliva_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&saliva=1&filter=true"),delim=",",col_names = TRUE )
                 saliva_metabolite <- as.data.frame(saliva_metabolite)
                 write.table(saliva_metabolite,paste(directory2,"saliva_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -188,6 +192,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Cerebrospinal Fluid", ignore_case=TRUE))
                 CSF_metabolite <- vroom(paste(directory2,"cerebrospinal_fluid_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 CSF_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&csf=1&filter=true"),delim=",",col_names = TRUE )
                 CSF_metabolite <- as.data.frame(CSF_metabolite)
                 write.table(CSF_metabolite,paste(directory2,"cerebrospinal_fluid_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -200,6 +205,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Feces", ignore_case=TRUE))){
                 feces_metabolite <- vroom(paste(directory2,"feces_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 feces_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&feces=1&filter=true"),delim=",",col_names = TRUE )
                 feces_metabolite <- as.data.frame(feces_metabolite)
                 write.table(feces_metabolite,paste(directory2,"feces_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -211,6 +217,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Sweat", ignore_case=TRUE))){
                 sweat_metabolite <- vroom(paste(directory2,"sweat_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 sweat_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&sweat=1&filter=true"),delim=",",col_names = TRUE )
                 sweat_metabolite <- as.data.frame(sweat_metabolite)
                 write.table(sweat_metabolite,paste(directory2,"sweat_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -222,6 +229,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Breast milk", ignore_case=TRUE))){
                 breast_milk_metabolite <- vroom(paste(directory2,"breast_milk_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 breast_milk_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&breast_milk=1&filter=true"),delim=",",col_names = TRUE )
                 breast_milk_metabolite <- as.data.frame(breast_milk_metabolite)
                 write.table(breast_milk_metabolite,paste(directory2,"breast_milk_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -234,6 +242,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Bile", ignore_case=TRUE))){
                 bile_metabolite <- vroom(paste(directory2,"bile_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 bile_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&bile=1&filter=true"),delim=",",col_names = TRUE )
                 bile_metabolite <- as.data.frame(bile_metabolite)
                 write.table(bile_metabolite,paste(directory2,"bile_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -245,6 +254,7 @@ if (str_detect(COMMAND$LABEL[i], fixed("Amniotic Fluid", ignore_case=TRUE))){
                 AF_metabolite <- vroom(paste(directory2,"AF_metabolite_annotated.tsv",sep = "/"),delim="\t",col_names = TRUE)
         }else{
                 print("File unavailable locally, downloading it from HMDB database")
+                options(timeout=6000)
                 AF_metabolite <- vroom(url("https://hmdb.ca/metabolites?utf8=%E2%9C%93&filter=true&quantified=1&detected=1&expected=1&predicted=1&amniotic_fluid=1&filter=true"),delim=",",col_names = TRUE )
                 AF_metabolite <- as.data.frame(AF_metabolite)
                 write.table(AF_metabolite,paste(directory2,"AF_metabolite_annotated.tsv", sep = "/"),quote = FALSE, row.names = F, sep = "\t")
@@ -310,7 +320,7 @@ Metadata_total = NULL
 
 print("Same samples in matrix and metadata?")
 print(all(Metadata$ID == matrix[,1]))
-outs <- Metadata$CONDITION  == args[2]|Metadata$CONDITION  == args[1]
+outs <- Metadata$CONDITION  == args[2]|Metadata$CONDITION  == args[1] | Metadata$CONDITION  == "QC"
 Metadata<- Metadata[outs,]
 matrix<- matrix[outs,]
 
@@ -407,6 +417,12 @@ Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = T
 
 matrix<-Preview$matrix
 Metadata<-Preview$metadata
+
+qc_elim<-which(Metadata$condition == "QC")
+Metadata<-Metadata[-qc_elim,]
+matrix <-matrix[-qc_elim,]
+
+
 matrix <- cbind(ID=Metadata$ID, matrix)
 colnames(Metadata)[colnames(Metadata) == "condition"] <- "CONDITION"
 
@@ -1077,7 +1093,6 @@ if(ANNOTATION == "Annotated"){
                 
                 
                 
-                
                 annotate_result5 <- 
                         identify_metabolite_all(ms1.data = "TEMP.csv", 
                                                 ms2.data = files_MS2, #USING ONLY ONE FILE
@@ -1273,12 +1288,14 @@ if(ANNOTATION == "Annotated"){
                 Negative_adduct <- strsplit(Negative_adduct, "/")
                 Negative_adduct <- Negative_adduct[[1]]
                 
-                if (sum(is.na(Negative_adduct)) == 0){
-                        ducts <- Positive_adduct %>% str_c(collapse = ",")
-                        ducts <- paste("[",ducts,"]",sep = "")
-                } else if (sum(is.na(Positive_adduct)) == 0){
-                        ducts <- Positive_adduct  %>% str_c(collapse = ",") 
-                        ducts <- paste("[",ducts,"]",sep = "")
+                if (is.na(Negative_adduct)){
+                        ducts <- as.list(Positive_adduct)
+                        #ducts <- Positive_adduct %>% str_c(collapse = ",")
+                        #ducts <- paste("[",ducts,"]",sep = "")
+                } else if (is.na(Positive_adduct)){
+                        ducts <- as.list(Negative_adduct)
+                        #ducts <- Positive_adduct  %>% str_c(collapse = ",") 
+                        #ducts <- paste("[",ducts,"]",sep = "")
                 } else{
                         #ducts <- c(Positive_adduct,Negative_adduct)
                         print("ERROR YOU SELECTED POSITIVE AND NEGATIVE ADDUCTS AT THE SAME TIME!!")
@@ -1299,13 +1316,16 @@ if(ANNOTATION == "Annotated"){
         databases <- as.array(list_database_ms1)
         databases <- strsplit(databases, "/")
         databases <- databases[[1]]
-        databases <- databases %>% str_c('"', ., '"') %>% str_c(collapse = ",") 
-        databases<-paste("[",databases,"]",sep = "")
+        databases <- as.list(databases)
+        #databases <- databases %>% str_c('"', ., '"') %>% str_c(collapse = ",") 
+        #databases<-paste("[",databases,"]",sep = "")
         
         
         
-        MASS <- as.array(round(as.numeric(total$`m/z`),4))
-        RT <- as.array(total$RT_min)
+        #MASS <- as.array(round(as.numeric(total$`m/z`),4))
+        MASS <- round(as.numeric(total$`m/z`),4)
+        #RT <- as.array(total$RT_min)
+        RT <- as.numeric(total$RT_min)
         
         # MASS <- MASS[0:300]
         # RT <- RT[0:300]
@@ -1313,14 +1333,14 @@ if(ANNOTATION == "Annotated"){
         
         
         cat(MASS, fill = getOption("width"), sep = ",")
-        xx<-paste(MASS, collapse = " ")
-        xx<-gsub(" ", ",", xx, fixed=TRUE)
-        MASS<-paste("[",xx,"]",sep = "")
+        # xx<-paste(MASS, collapse = " ")
+        # xx<-gsub(" ", ",", xx, fixed=TRUE)
+        # MASS<-paste("[",xx,"]",sep = "")
         
         cat(RT, fill = getOption("width"), sep = ",")
-        xx<-paste(RT, collapse = " ")
-        xx<-gsub(" ", ",", xx, fixed=TRUE)
-        RT<-paste("[",xx,"]",sep = "")
+        # xx<-paste(RT, collapse = " ")
+        # xx<-gsub(" ", ",", xx, fixed=TRUE)
+        # RT<-paste("[",xx,"]",sep = "")
         
         
         #THIS IF ELSE ALLOWS TO UPLOAD A PREVIOUS ANNOTATION MADE ON THE SAME DATASET.
@@ -1339,36 +1359,70 @@ if(ANNOTATION == "Annotated"){
                 #Allow to user to change the option based on their request  
                 
                 #  '["hmdb","metlin", "kegg", "lipidmaps"]'
-                #databases3 <-"[\"hmdb\",\"lipidmaps\",\"metlin\",\"kegg\"]"
                 # '["M+H","M+Na","M+NH4","M+H-H2O"]'
-                #database3 <-"[M+H,M+Na,M+NH4,M+H-H2O]"
+                # databases <-list("hmdb", "metlin", "kegg", "lipidmaps" )
+                # ducts <-list("M+H", "M+Na", "M+NH4", "M+H-H2O" )
+                # masses_mode = "mz"
+                # Ion_mode = "positive"
+                # tolerance = 10
+                # MASSI <- c(399.3367, 421.31686, 315.2424, 337.2234, 280.2402)
+                # RT <- c(18.842525, 18.842525, 8.144917, 8.144917, 28.269503, 4.021555)
+                
+                
+                # advanced_batch_df <- advanced_batch_search(
+                #         cmm_url             = paste0(
+                #                 'http://ceumass.eps.uspceu.es/mediator/api/v3/',
+                #                 'advancedbatch'),
+                #         chemical_alphabet   = 'all',
+                #         modifiers_type      = 'none',
+                #         metabolites_type    = 'all-except-peptides',
+                #         databases           = databases,
+                #         masses_mode         = masses_mode,
+                #         ion_mode            = Ion_mode,
+                #         adducts             = ducts,
+                #         deuterium           = 'false',
+                #         tolerance           = tolerance,
+                #         tolerance_mode      = "ppm",
+                #         #masses              = MASS,
+                #         masses              = "[114.0907,245.0765]",
+                #         all_masses          = '[]',
+                #         #retention_times     = RT,
+                #         retention_times     = "[2.316083333,0.948808333]",
+                #         all_retention_times = '[]'
+                # )
+
+                
+                library(cmmr)
                 
                 advanced_batch_df <- advanced_batch_search(
-                        cmm_url             = paste0(
-                                'http://ceumass.eps.uspceu.es/mediator/api/v3/',
-                                'advancedbatch'),
-                        chemical_alphabet   = 'all',
-                        modifiers_type      = 'none',
-                        metabolites_type    = 'all-except-peptides',
-                        databases           = databases,
-                        masses_mode         = masses_mode,
-                        ion_mode            = Ion_mode,
-                        adducts             = ducts,
-                        deuterium           = 'false',
-                        tolerance           = tolerance,
-                        tolerance_mode      = "ppm",
-                        masses              = MASS,
-                        #masses              = "[114.0907,245.0765]",
-                        all_masses          = '[]',
-                        retention_times     = RT,
-                        #retention_times     = "[2.316083333,0.948808333]",
-                        all_retention_times = '[]'
+                        cmm_url = "https://ceumass.eps.uspceu.es/mediator/api/v3/advancedbatch",
+                        chemical_alphabet = "all",
+                        modifiers_type = "none",
+                        metabolites_type = "all-except-peptides",
+                        databases = databases,  #create a list
+                        masses_mode = as.character(masses_mode),
+                        ion_mode = as.character(Ion_mode),
+                        adducts = ducts,
+                        deuterium = FALSE,
+                        tolerance = as.numeric(tolerance),
+                        tolerance_mode = "ppm",
+                        masses = MASS,
+                        all_masses = list(),
+                        retention_times = RT ,
+                        all_retention_times = list(),
+                        composite_spectra = list(),
+                        all_composite_spectra = list()
                 )
                 
+                
+                head(advanced_batch_df)
+                str(advanced_batch_df)
+                
+                
+                
+                
+                
                 #NOTE ADD THE OPTIONS WHEN CEU MASS MEDIATOR WILL WORK
-                
-                
-                
                 
                 
                 print("File unavailable locally, generating the annotation from Ceu Mass Mediator database")
@@ -1385,18 +1439,18 @@ if(ANNOTATION == "Annotated"){
         str(advanced_batch_df)
         gc()
         
-        total$`m/z` %in% advanced_batch_df$Experimental.mass
+        as.numeric(total$`m/z`) %in% advanced_batch_df$experimental_mass
         
         #Match annotation file and peaks file (total) using the m/z to match
         
-        advanced_batch_df$Experimental.mass <- as.character(round(advanced_batch_df$Experimental.mass,4))
-        total$`m/z` <- as.character(round(total$`m/z`,4))
+        advanced_batch_df$experimental_mass <- as.character(round(as.numeric(advanced_batch_df$experimental_mass),4))
+        total$`m/z` <- as.character(round(as.numeric(total$`m/z`),4))
         total$`m/z`<-as.character(total$`m/z`)
         
         
         
-        tat<-merge(total,advanced_batch_df, by.x="m/z", by.y="Experimental.mass", all.x=TRUE)
-        total$`m/z` %in% advanced_batch_df$Experimental.mass
+        tat<-merge(total,advanced_batch_df, by.x="m/z", by.y="experimental_mass", all.x=TRUE)
+        total$`m/z` %in% advanced_batch_df$experimental_mass
         
         
         x <- colnames(tat) %in% matrix$ID
@@ -1418,8 +1472,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% serum_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1430,7 +1484,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,serum_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 
@@ -1442,8 +1496,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% urine_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1454,7 +1508,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,urine_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1465,8 +1519,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% saliva_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1477,7 +1531,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,saliva_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1488,8 +1542,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% CSF_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1500,7 +1554,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,CSF_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1511,8 +1565,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% Feces_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1523,7 +1577,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,Feces_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1536,8 +1590,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% sweat_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1548,7 +1602,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,sweat_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1560,8 +1614,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% breast_milk_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1572,7 +1626,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,breast_milk_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1584,8 +1638,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% bile_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1596,7 +1650,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,bile_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1609,8 +1663,8 @@ if(ANNOTATION == "Annotated"){
                 #its annotation is eliminated and degradated to level4.
                 
                 to_eliminate2 =NULL
-                for (pe in unique(tat$NAME)){
-                        sat<-which(tat$NAME == pe)
+                for (pe in unique(tat$name)){
+                        sat<-which(tat$name == pe)
                         if(sum(tat$HMDB[sat] %in% AF_metabolite$HMDB_ID) == 0){
                                 tat[sat,9:ncol(tat)] <- NA
                                 to_eliminate2<-append(to_eliminate2,sat[-1])
@@ -1621,7 +1675,7 @@ if(ANNOTATION == "Annotated"){
                 tat <- tat[-to_eliminate2,]
                 
                 total <-merge(tat,AF_metabolite, by.x="HMDB", by.y="HMDB_ID",all.x=TRUE )
-                exit<-!is.na(total$Identifier) & is.na(total$SMILES)
+                exit<-!is.na(total$identifier) & is.na(total$SMILES)
                 total <- total[!exit,]
                 filtering <- "YES"
                 gc()
@@ -1650,7 +1704,10 @@ if(ANNOTATION == "Annotated"){
         
         if(ANNOTATION == "MS2"){  
                 
-                for(yy in 1:length(unique(annot$peak_number)) ){
+                
+                #This script is recognizing the metabolites not annotated by MS1, but annotated in MS2
+                #removing the MS1 information an replacing them entirely from the MS2 one
+                for(yy in 1:length(unique(annot$peak_number))){
                         t<-annot$peak_number %in% unique(annot$peak_number)[yy]
                         mix<-paste(annot$Compound.name[t], collapse = "/")
                         mix2<-paste(annot$Adduct[t], collapse = "/")
@@ -1665,32 +1722,43 @@ if(ANNOTATION == "Annotated"){
                                 print(paste(unique(annot$peak_number)[yy], "not_annotated",sep="_"))
                                 z <-which(total$NAME.x %in% unique(annot$peak_number)[yy])
                                 total[z,c(11:(ncol(total)-2))] <- "NA"
-                                total[z[1],"Name"] <- mix
-                                total[z[1],"Adduct"] <- mix2
-                                total[z[1],"PPM.Error"] <- mix3
+                                total[z[1],"name"] <- mix
+                                total[z[1],"adduct"] <- mix2
+                                total[z[1],"error_ppm"] <- mix3
                                 total[z[1],"MS2_annot"] <- mix
                                 total[z[1],"annot_level"] <- "Level_2"
-                                to_eliminate2<-append(to_eliminate2,z[-1])
+                                to_eliminate2<-append(to_eliminate2,z[-1]) 
+                                
+                                #In this section the MS2 information replace the MS1
+                                #The MS1 multiple annotations are removed to keep a single MS2 one.
                                 
                         }else{
                                 t<-total$HMDB[x]
                                 t<-which(total$HMDB %in% t & total$NAME.x == unique(annot$peak_number)[yy])
+
                                 
                                 for(c in t){
+                                        print(paste(total$NAME.x[c], "already_annotated",sep="_"))
                                         total$MS2_annot[c] <- mix
+                                        total$name[c] <- mix
+                                        total$adduct[c] <- mix2
+                                        total$error_ppm[c] <- mix3
                                         total$annot_level[c]  <- "Level_2"
                                         
                                 }
                                 out<-which(total$NAME.x == unique(annot$peak_number)[yy] & total$annot_level == "Level_3")
-                                to_eliminate <-append(to_eliminate,out)
+                                to_eliminate2 <-append(to_eliminate2,out)
+                                
+                                #This part of the script saves the metabolites annotated with a MS2 and remove the previous
+                                #MS1 annotated metabolites
                         }
                 }
                 
-                if(length(to_eliminate) != 0){
-                        total<-total[-to_eliminate,]
+                if(length(to_eliminate2) != 0){
+                        total<-total[-to_eliminate2,]
                 }
                 
-                total$annot_level[is.na(total$Name)] <- "Level_4"
+                total$annot_level[is.na(total$name)] <- "Level_4"
                 
         }
         
@@ -1753,10 +1821,10 @@ if(ANNOTATION == "Annotated"){
                 ylab("-log10(padj)") + xlab("log2FC")
         if (SKIP_ALTI){
                 p <- p + geom_point(data = ALTI, aes(x = log2FC, y = -log10(padj)), color = "red") +
-                        geom_text_repel(data = ALTI[c(1:25), ], aes(x = log2FC , y = -log10(padj), label=Name),hjust=0, vjust=0,size=3, arrow = NULL, force = 10, force_pull = 1, max.overlaps = 10)}
+                        geom_text_repel(data = ALTI[c(1:25), ], aes(x = log2FC , y = -log10(padj), label=name),hjust=0, vjust=0,size=3, arrow = NULL, force = 10, force_pull = 1, max.overlaps = 10)}
         if (SKIP_BASSI){
                 p <- p + geom_point(data = BASSI, aes(x = log2FC, y = -log10(padj)), color = "blue") +
-                        geom_text_repel(data = BASSI[1:25, ], aes(x = log2FC , y = -log10(padj), label=Name),hjust=0, vjust=0,size=3, force = 20, force_pull = 1, max.overlaps = 10)}
+                        geom_text_repel(data = BASSI[1:25, ], aes(x = log2FC , y = -log10(padj), label=name),hjust=0, vjust=0,size=3, force = 20, force_pull = 1, max.overlaps = 10)}
         
         p <- p + geom_point(data = NO, aes(x = log2FC, y = -log10(padj)), color = "black")
         
@@ -1863,16 +1931,36 @@ if(ANNOTATION == "Annotated"){
         outs<-total$NAME.x %in% peak_repeated & total$annot_level == "Level_3"
         total <-total[!outs,]
         
+        
+        
+        #Filtering annotation couples where both or a single one contains the annotation
         #Selection of best annotation in peak with 2 annotation based on minimun ppm error
-        iter<-which(duplicated(total$NAME.x))
+        iter<-which(duplicated(total$NAME.x) & !total$annot_level == "Level_2")
         to_elim = NULL
         iterat=NULL
         for (u in iter){
                 n1<-u
-                s1<-total$PPM.Error[u]
+                s1<-total$error_ppm[u]
                 n2<-u-1
-                s2<-total$PPM.Error[u-1]
+                s2<-total$error_ppm[u-1]
                 
+                #Statement to treat missing ppm_errors values
+                if (is.na(s1) | is.na(s2)){
+                        if(is.na(s1) & is.na(s2)){
+                                to_elim<-append(to_elim, n2)                                
+                        }else if(is.na(s1)){
+                                to_elim<-append(to_elim, n1)
+                        }else{#(is.na(s2))
+                                to_elim<-append(to_elim, n2)
+                        }
+                        
+                }else{
+                
+                
+                if(as.numeric(s1) == as.numeric(s2)){
+                        #The results with the same ppm error are kept for the metpath analysis
+                        }else{
+                        
                 elim <- max(as.numeric(s1), as.numeric(s2))
                 if(elim == as.numeric(s1)){
                         print = as.numeric(s1)
@@ -1881,6 +1969,9 @@ if(ANNOTATION == "Annotated"){
                 if(elim == as.numeric(s2)){
                         to_elim<-append(to_elim, n2)
                 }
+                
+                        }
+                        }
                 
         }
         
@@ -1971,7 +2062,7 @@ if(ANNOTATION == "Annotated"){
                 
                 
                 result = 
-                        enrich_kegg(query_id = unique(query_id$Kegg), 
+                        enrich_kegg(query_id = unique(query_id$KEGG), 
                                     query_type = "compound", 
                                     id_type = "KEGG",
                                     pathway_database = pathway_database, 
@@ -2017,8 +2108,8 @@ if(ANNOTATION == "Annotated"){
         query_id<-query_id[order(numbe),]
         
         write.table(x= query_id$HMDB[!is.na(query_id$HMDB)] , file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv", sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
-        write.table(x= query_id$Kegg[!is.na(query_id$Kegg )] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
-        write.table(x= query_id$Name[!is.na(query_id$Name )] , file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+        write.table(x= query_id$KEGG[!is.na(query_id$KEGG )] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+        write.table(x= query_id$name[!is.na(query_id$name )] , file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         
         numbe<-as.numeric(gsub("peak", "", query_id_saved$NAME.x))
         query_id_saved<-query_id_saved[order(numbe),]
@@ -2030,8 +2121,8 @@ if(ANNOTATION == "Annotated"){
         setwd(paste(directory2,"/MetaboAnalyst/", "Pathway_Analysis", sep =""))
         
         write.table(x= query_id$HMDB[!is.na(query_id$HMDB)] , file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
-        write.table(x= query_id$Kegg[!is.na(query_id$Kegg )] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
-        write.table(x= query_id$Name[!is.na(query_id$Name )] , file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+        write.table(x= query_id$KEGG[!is.na(query_id$KEGG )] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
+        write.table(x= query_id$name[!is.na(query_id$name )] , file= paste("Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= ",", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_saved[,c(3,1,21,14)] , file= paste("HMDB_KEGG_Compound_names_",Cell_type,"_",args[1],"_vs_",args[2],"_complete.tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = TRUE,  quote = FALSE)
         
         
@@ -2039,7 +2130,7 @@ if(ANNOTATION == "Annotated"){
         dir.create(path = paste(directory2,"/MetaboAnalyst/", "Joint_Pathway_Analysis", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
         setwd(paste(directory2,"/MetaboAnalyst/", "Joint_Pathway_Analysis", sep =""))
         
-        query_id_select <- query_id[,c("HMDB", "Kegg", "Name", "log2FC")]
+        query_id_select <- query_id[,c("HMDB", "KEGG", "name", "log2FC")]
         
         write.table(x= query_id_select[,c(1,4)] , file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_select[,c(2,4)] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
@@ -2099,7 +2190,7 @@ if(ANNOTATION == "Annotated"){
         dir.create(path = paste(directory2,"/MetaboAnalyst/", "Network_Analysis", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
         setwd(paste(directory2,"/MetaboAnalyst/", "Network_Analysis", sep =""))
         
-        query_id_select <- query_id[,c("HMDB", "Kegg", "Name", "log2FC")]
+        query_id_select <- query_id[,c("HMDB", "KEGG", "name", "log2FC")]
         
         write.table(x= query_id_select[,c(1,4)] , file= paste("HMDB_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)
         write.table(x= query_id_select[,c(2,4)] , file= paste("KEGG_ID_",Cell_type,"_",args[1],"_vs_",args[2],".tsv",sep="")  ,sep= "\t", row.names = FALSE, col.names = FALSE,  quote = FALSE)

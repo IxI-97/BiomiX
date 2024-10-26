@@ -1,6 +1,6 @@
 	INDEX	ANALYSIS	DATA_TYPE	INTEGRATION	LABEL	SELECTION	DIRECTORIES	PREVIEW
-0	input1	YES	Undefined	YES	MMMM	NO	/home/cristia/BiomiX2.3/Undefined/INPUT/MTBLS7623_positive_mode_annotated_HMDB_missing.tsv	YES
-1	input2	NO	Transcriptomics	YES		NO	/home/cristia/BiomiX2.3/Transcriptomics/INPUT/MTBLS7623_RNA_seq.xls	NO
+0	input1	YES	Metabolomics	NO	NANA	NO	/home/cristia/BiomiX2.4/Metabolomics/INPUT/MTBLS7623_positive_mode_annotated_HMDB_with_QC.xlsx	YES
+1	input2	NO	Undefined	NO		NO	X	NO
 2	input3	NO	Undefined	NO		NO	X	NO
 3	input4	NO	Undefined	NO		NO	X	NO
 4	input5	NO	Undefined	NO		NO	X	NO

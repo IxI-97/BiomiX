@@ -25,7 +25,7 @@ for command in commands:
 python_script_path = os.path.realpath(__file__)
 
 # Construct the path to the R script in the same directory as the Python script
-r_script_path = os.path.join(os.path.dirname(python_script_path), "INSTALL_BiomiX_LINUX.r")
+r_script_path = os.path.join(os.path.dirname(python_script_path), "INSTALL_BiomiX_OS.r")
 
 print("INSTALL R PACKAGE")
 # Run the R script using the subprocess module

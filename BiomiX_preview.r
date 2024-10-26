@@ -507,7 +507,7 @@ runShinyApp <- function(numeric_data, metadata) {
                         
                         # Step 1: Calculate CV for each variable (column)
                         cv_values <- apply(plot_data, 2, function(x) {
-                                sd(x) / mean(x) * 100
+                                sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE) * 100
                                 
                         })
                         
@@ -545,6 +545,12 @@ runShinyApp <- function(numeric_data, metadata) {
                         
                         if (ncol(plot_data) > 1000) {
                                 plot_data <- get_top_variable_features(plot_data, top_n = 1000)
+                        }
+                        
+                        #If missing data are present are computated
+                        if (any(is.na(plot_data))) {
+                                # Replace NA with the mean of the respective column
+                                plot_data <- apply(plot_data, 2, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE), x))
                         }
                         
                         # Step 1: Perform PCA on the data with scaling (each variable gets the same weight).

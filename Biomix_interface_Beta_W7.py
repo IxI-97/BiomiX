@@ -1222,7 +1222,7 @@ class Ui_BiomiX(object):
 
     def retranslateUi(self, BiomiX):
         _translate = QtCore.QCoreApplication.translate
-        BiomiX.setWindowTitle(_translate("BiomiX", "Biomix 2.3"))
+        BiomiX.setWindowTitle(_translate("BiomiX", "Biomix 2.4"))
         self.label_31.setText(_translate("BiomiX", "Factor to explore"))
         self.pushButton.setText(_translate("BiomiX", "Start Analysis"))
         self.Push_output.setText(_translate("BiomiX", "Select the directory"))
@@ -5677,7 +5677,7 @@ class SecondWindow(QMainWindow):
 
     def retranslateUi2(self, BiomiX_advanced):
         _translate = QtCore.QCoreApplication.translate
-        BiomiX_advanced.setWindowTitle(_translate("BiomiX_advanced", "BiomiX 1.0 advanced options"))
+        BiomiX_advanced.setWindowTitle(_translate("BiomiX_advanced", "BiomiX 2.4 advanced options"))
         self.push_panel.setText(_translate("BiomiX", "Upload Panel"))
         self.push_annot_01.setText(_translate("BiomiX", "Upload MS1"))
         self.push_annot_01b.setText(_translate("BiomiX", "Upload MS1"))
@@ -5852,9 +5852,9 @@ class SecondWindow(QMainWindow):
         self.label_300.setText(_translate("BiomiX_advanced", " Neutral mode"))
         self.label_343.setText(_translate("BiomiX_advanced", " MS1 files"))
         self.label_343b.setText(_translate("BiomiX_advanced", " MS1 files"))
-        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and MS2-MS/MS Annotation by .Mzml fragmentation files (Untargeted metabolomics)"))
-        self.radioButton_2.setText(_translate("BiomiX_advanced", "MS1 Annotation (Untargeted metabolomics)"))
-        self.radioButton_3.setText(_translate("BiomiX_advanced", "Annotated (Targeted metabolomics)"))
+        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and DDA-MS/MS annotation (.mzML files) (Untargeted HRMS data)"))
+        self.radioButton_2.setText(_translate("BiomiX_advanced", "MS1 annotation (Untargeted HRMS data)"))
+        self.radioButton_3.setText(_translate("BiomiX_advanced", "Targeted metabolomics, non-targeted dataset with annotated peaks"))
         self.label_287.setText(_translate("BiomiX_advanced", " Metabolite annotation"))
         self.comboBox_75.setItemText(0, _translate("BiomiX_advanced", "HMDB"))
         self.comboBox_75.setItemText(1, _translate("BiomiX_advanced", "compound_name"))
