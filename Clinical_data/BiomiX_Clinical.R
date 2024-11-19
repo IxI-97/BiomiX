@@ -35,7 +35,7 @@ FACTORS_WEIGHTS <-read.table("MOFA_FACTORS_WEIGHTS.tsv",sep = "\t", header = TRU
 
 #detection significant factors analyzed by BiomiX
 files <- grep("*factor_",list.files(directory3),value=TRUE)
-files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
+files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined", files)]
 factors<-strsplit(files, "_")
 factors<-unlist(factors)
 factors<-str_remove(factors,".tsv")

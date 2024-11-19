@@ -5852,7 +5852,7 @@ class SecondWindow(QMainWindow):
         self.label_300.setText(_translate("BiomiX_advanced", " Neutral mode"))
         self.label_343.setText(_translate("BiomiX_advanced", " MS1 files"))
         self.label_343b.setText(_translate("BiomiX_advanced", " MS1 files"))
-        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and DDA-MS/MS annotation (.mzML files) (Untargeted HRMS data)"))
+        self.radioButton.setText(_translate("BiomiX_advanced", "MS1 and DDA-MS/MS annotation (.mzML and .mgf files) (Untargeted HRMS data)"))
         self.radioButton_2.setText(_translate("BiomiX_advanced", "MS1 annotation (Untargeted HRMS data)"))
         self.radioButton_3.setText(_translate("BiomiX_advanced", "Targeted metabolomics, non-targeted dataset with annotated peaks"))
         self.label_287.setText(_translate("BiomiX_advanced", " Metabolite annotation"))
