@@ -6,7 +6,7 @@
 # args = as.list(c("Neutrophils","PAPS"))
 # args[1] <-"mutated"
 # args[2] <-"unmutated"
-# args[3] <-"/home/cristia/BiomiX2.3"
+# args[3] <-"/home/cristia/BiomiX2.4"
 # #
 # directory <- args[3]
 # iterations = 1
@@ -763,7 +763,7 @@ if (NORMALIZATION=="NO"){
         #Vari<- Vari[,-ncol(Vari)]
         #generazione e filtraggio per varianza
         for (i in 1:nrow(Vari)){
-                varianze <- append(varianze, var(as.numeric(Vari[i,])))
+                varianze <- append(varianze, var(as.numeric((Vari[i,]))))
         }
         
         normalizzati<- as.data.frame(normalizzati)
@@ -846,6 +846,49 @@ print(p)
 dev.off()
 
 if (STATISTICS == "YES"){
+        
+        
+        
+        #FUNCTION TO IDENTIFY CONFOUNDING FACTORS. THE NAME STRUCTURE INCLUDES
+        #VARIABLE NAME_CONFOUNDER_{N/F}. N FOR NUMERIC VARIABLES AND F FOR FACTOR VARIABLES.
+        
+        # Function to process metadata and add covariates
+        prepare_design_formula <- function(metadata, Methods) {
+                # Detect columns containing "_CONFOUNDER_"
+                confounder_cols <- grep("_CONFOUNDER_", colnames(Metadata), value = TRUE)
+                
+                # Parse variable type and ensure they match column data type
+                for (col in confounder_cols) {
+                        # Assign the column values to a variable named after the column
+                        assign(col, metadata[[col]], envir = .GlobalEnv)
+                        # Check if column ends in _N or _F
+                        if (grepl("_N$", col)) {
+                                # Ensure numeric
+                                if (!is.numeric(Metadata[[col]])) {
+                                }else{ 
+                                        Metadata[[col]] <- as.numeric(Metadata[[col]])}}
+                        
+                        if (grepl("_F$", col)) {
+                                # Ensure factor
+                                if (!is.factor(Metadata[[col]])) {
+                                }else{ 
+                                        Metadata[[col]] <- as.factor(Metadata[[col]])}}
+                }
+                
+                # Create the design formula dynamically
+                covariates <- paste(confounder_cols, collapse = " + ")
+                if(Methods == "DESEQ2"){
+                        if(length(confounder_cols) != 0){
+                                design_formula <- as.formula(paste("~", covariates, "+ CONDITION"))
+                        }else{design_formula <- as.formula(paste("~", covariates, "CONDITION"))}
+                }else if(Methods == "LIMMA"){
+                        if(length(confounder_cols) != 0){
+                                design_formula <- as.formula(paste("~ 0 +", covariates, "+ CONDITION"))
+                        }else{design_formula <- as.formula(paste("~ 0", covariates, "+ CONDITION"))}
+                }
+                
+                return(list(design_formula = design_formula, metadata = metadata))
+        }
 
 
 #STARTING STATISTICS ANALYSIS
@@ -951,122 +994,39 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
           #AND RUN A LIMMA ANALYSIS IF THE DATA ARE NORMALIZED.
     if(NORMALIZATION=="YES"){
       
-      library(limma)
-      library(edgeR)
-      
-      rownames(DGE3) <- gene_name
-      
-      if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-        
-        
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          #=========================================
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          AGE <- Metadata$AGE
-          GENDER <- Metadata$GENDER
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + AGE + GENDER, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }else{
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          AGE <- Metadata$AGE
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + AGE, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }
-      }else{
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          GENDER <- Metadata$GENDER
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + GENDER, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }else{
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-        }}
-      
+            library(limma)
+            library(edgeR)
+            
+            rownames(DGE3) <- gene_name
+            
+            
+            #=========================================
+            
+            CONDITION<-as.factor(Metadata$CONDITION)
+            
+            Confounders_design <- prepare_design_formula(Metadata, "LIMMA")
+            rownames(DGE3) <- gene_name
+            
+            design <- model.matrix(Confounders_design$design_formula, data = DGE3)
+            colnames(design)[1] <- args[[2]]
+            colnames(design)[2] <- args[[1]]
+            design
+            
+            contr.matrix <- makeContrasts(
+                    CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
+                    levels = design)
+            contr.matrix
+            
+            colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
+            rownames(contr.matrix)[1] <- args[2]
+            rownames(contr.matrix)[2] <- args[1]
+            
+            vfit <- lmFit(DGE3, design)
+            vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
+            efit <- eBayes(vfit,trend=TRUE)
+            plotSA(efit, main="Final model: Mean-variance trend")
+            dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
+            
       
       #create directory
       dir.create(path = paste(directory,"/Transcriptomics/OUTPUT/", sep ="") ,  showWarnings = TRUE, recursive = TRUE, mode = "0777")
@@ -1094,41 +1054,17 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
       #DGE3$GENE <- gene_name
       #DGE3$GENE
       
-      library("DESeq2")
+            library("DESeq2")
+            
+            Confounders_design <- prepare_design_formula(Metadata, "DESEQ2")
+            Metadata <- Confounders_design$metadata
+            
+            dds <- DESeqDataSetFromMatrix(countData = DGE3,
+                                          colData = Confounders_design$metadata,
+                                          design = Confounders_design$design_formula)
+            
       
-      if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-        
-        Metadata$AGE[Metadata$AGE <= 35] <- "less30"
-        Metadata$AGE[Metadata$AGE <= 50 & Metadata$AGE > 35] <- "35_50"
-        Metadata$AGE[Metadata$AGE > 50] <- "more50"
-        
-        
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          #=========================================
-          
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ GENDER + AGE + condition)
-          
-        }else{
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ AGE + condition)}
-      }else{
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ GENDER + condition)
-          
-        }else{
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ condition)}}
-      
-      
-      
-      dds$condition <- relevel(dds$condition, ref = "healthy")
+      dds$condition <- relevel(as.factor(Metadata$condition), ref = "healthy")
       
       #dds$condition <- relevel(dds$condition, ref = "neg")
       
@@ -1503,116 +1439,33 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
       
       rownames(DGE3) <- gene_name
       
-      if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-        
-        
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          #=========================================
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          AGE <- Metadata$AGE
-          GENDER <- Metadata$GENDER
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + AGE + GENDER, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }else{
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          AGE <- Metadata$AGE
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + AGE, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }
-      }else{
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          GENDER <- Metadata$GENDER
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_ + GENDER, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-          
-        }else{
-          
-          CONDITION_<-as.factor(Metadata$CONDITION)
-          rownames(DGE3) <- gene_name
-          
-          design <- model.matrix(~ 0 + CONDITION_, data = DGE3)
-          colnames(design)[1] <- args[[2]]
-          colnames(design)[2] <- args[[1]]
-          design
-          
-          contr.matrix <- makeContrasts(
-            CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-            levels = design)
-          contr.matrix
-          
-          colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-          rownames(contr.matrix)[1] <- args[2]
-          rownames(contr.matrix)[1] <- args[1]
-          
-          vfit <- lmFit(DGE3, design)
-          vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-          efit <- eBayes(vfit,trend=TRUE)
-          plotSA(efit, main="Final model: Mean-variance trend")
-          dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-        }}
+      #=========================================
+      
+      CONDITION<-as.factor(Metadata$CONDITION)
+      
+      Confounders_design <- prepare_design_formula(Metadata, "LIMMA")
+      rownames(DGE3) <- gene_name
+      
+      design <- model.matrix(Confounders_design$design_formula, data = DGE3)
+      colnames(design)[1] <- args[[2]]
+      colnames(design)[2] <- args[[1]]
+      design
+      
+      contr.matrix <- makeContrasts(
+              CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
+              levels = design)
+      contr.matrix
+      
+      colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
+      rownames(contr.matrix)[1] <- args[2]
+      rownames(contr.matrix)[2] <- args[1]
+      
+      vfit <- lmFit(DGE3, design)
+      vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
+      efit <- eBayes(vfit,trend=TRUE)
+      plotSA(efit, main="Final model: Mean-variance trend")
+      dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
+      
       
       
       #create directory
@@ -1640,40 +1493,19 @@ if (COMMAND_ADVANCED$ADVANCED_OPTION_TRASCRIPTOMICS[3] != "X") {
       #DGE3$GENE
       
       library("DESeq2")
-      if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-        
-        Metadata$AGE[Metadata$AGE <= 35] <- "less30"
-        Metadata$AGE[Metadata$AGE <= 50 & Metadata$AGE > 35] <- "35_50"
-        Metadata$AGE[Metadata$AGE > 50] <- "more50"
-        
-        
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          
-          #=========================================
-          
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ GENDER + AGE + condition)
-          
-        }else{
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ AGE + condition)}
-      }else{
-        if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ GENDER + condition)
-          
-        }else{
-          dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                        colData = Metadata,
-                                        design = ~ condition)}}
+      
+      Metadata$CONDITION <- as.factor(Metadata$CONDITION)
+      
+      Confounders_design <- prepare_design_formula(Metadata, "DESEQ2")
+      Metadata <- Confounders_design$metadata
+      
+      dds <- DESeqDataSetFromMatrix(countData = DGE3,
+                                    colData = Confounders_design$metadata,
+                                    design = Confounders_design$design_formula)
       
       
       
-      
-      dds$condition <- relevel(dds$condition, ref = "healthy")
+      dds$condition <- relevel(as.factor(Metadata$condition), ref = "healthy")
       
       #dds$condition <- relevel(dds$condition, ref = "neg")
       
@@ -2032,6 +1864,7 @@ for (i in 1:length(Metadata$ID)){
 DGE3 <- DGE3[,tmp]
 rownames(DGE3) <- gene_name
 
+
 #IF STATEMENT THAT RUN A DESEQ ANALYSIS IF THE DATA ARE NOT NORMALIZED,
 #AND RUN A LIMMA ANALYSIS IF THE DATA ARE NORMALIZED.
 if(NORMALIZATION=="YES"){
@@ -2041,19 +1874,15 @@ if(NORMALIZATION=="YES"){
   
   rownames(DGE3) <- gene_name
   
-  if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-    
-    
-    if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
       
       #=========================================
       
-      CONDITION_<-as.factor(Metadata$CONDITION)
-      AGE <- Metadata$AGE
-      GENDER <- Metadata$GENDER
+      CONDITION<-as.factor(Metadata$CONDITION)
+
+      Confounders_design <- prepare_design_formula(Metadata, "LIMMA")
       rownames(DGE3) <- gene_name
       
-      design <- model.matrix(~ 0 + CONDITION_ + AGE + GENDER, data = DGE3)
+      design <- model.matrix(Confounders_design$design_formula, data = DGE3)
       colnames(design)[1] <- args[[2]]
       colnames(design)[2] <- args[[1]]
       design
@@ -2072,85 +1901,6 @@ if(NORMALIZATION=="YES"){
       efit <- eBayes(vfit,trend=TRUE)
       plotSA(efit, main="Final model: Mean-variance trend")
       dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-      
-    }else{
-      CONDITION_<-as.factor(Metadata$CONDITION)
-      AGE <- Metadata$AGE
-      rownames(DGE3) <- gene_name
-      
-      design <- model.matrix(~ 0 + CONDITION_ + AGE, data = DGE3)
-      colnames(design)[1] <- args[[2]]
-      colnames(design)[2] <- args[[1]]
-      design
-      
-      contr.matrix <- makeContrasts(
-        CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-        levels = design)
-      contr.matrix
-      
-      colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-      rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[2] <- args[1]
-      
-      vfit <- lmFit(DGE3, design)
-      vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-      efit <- eBayes(vfit,trend=TRUE)
-      plotSA(efit, main="Final model: Mean-variance trend")
-      dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-      
-    }
-  }else{
-    if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-      
-      CONDITION_<-as.factor(Metadata$CONDITION)
-      GENDER <- Metadata$GENDER
-      rownames(DGE3) <- gene_name
-      
-      design <- model.matrix(~ 0 + CONDITION_ + GENDER, data = DGE3)
-      colnames(design)[1] <- args[[2]]
-      colnames(design)[2] <- args[[1]]
-      design
-      
-      contr.matrix <- makeContrasts(
-        CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-        levels = design)
-      contr.matrix
-      
-      colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-      rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[1] <- args[1]
-      
-      vfit <- lmFit(DGE3, design)
-      vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-      efit <- eBayes(vfit,trend=TRUE)
-      plotSA(efit, main="Final model: Mean-variance trend")
-      dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-      
-    }else{
-      
-      CONDITION_<-as.factor(Metadata$CONDITION)
-      rownames(DGE3) <- gene_name
-      
-      design <- model.matrix(~ 0 + CONDITION_, data = DGE3)
-      colnames(design)[1] <- args[[2]]
-      colnames(design)[2] <- args[[1]]
-      design
-      
-      contr.matrix <- makeContrasts(
-        CTRLvsCONDITION = paste(colnames(design)[1],"-",colnames(design)[2]),
-        levels = design)
-      contr.matrix
-      
-      colnames(contr.matrix) <- paste(args[2],"_vs_",args[1], sep="")
-      rownames(contr.matrix)[1] <- args[2]
-      rownames(contr.matrix)[2] <- args[1]
-      
-      vfit <- lmFit(DGE3, design)
-      vfit <- contrasts.fit(vfit, contrasts=contr.matrix)
-      efit <- eBayes(vfit,trend=TRUE)
-      plotSA(efit, main="Final model: Mean-variance trend")
-      dds <- as.data.frame(topTreat(efit, coef=1, n=Inf, adjust="BH"))
-    }}
   
   
   #create directory
@@ -2173,41 +1923,14 @@ if(NORMALIZATION=="YES"){
 }else{
   
   library("DESeq2")
-  if ("AGE" %in% colnames(Metadata) & length(unique(Metadata$AGE)) > 1){
-    
-    Metadata$AGE[Metadata$AGE <= 35] <- "less30"
-    Metadata$AGE[Metadata$AGE <= 50 & Metadata$AGE > 35] <- "35_50"
-    Metadata$AGE[Metadata$AGE > 50] <- "more50"
-    
-    
-    if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-      
-      #=========================================
-      
+
+      Confounders_design <- prepare_design_formula(Metadata, "DESEQ2")
+      Metadata <- Confounders_design$metadata
+
       dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                    colData = Metadata,
-                                    design = ~ GENDER + AGE + CONDITION)
+                                    colData = Confounders_design$metadata,
+                                    design = Confounders_design$design_formula)
       
-    }else{
-      dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                    colData = Metadata,
-                                    design = ~ AGE + CONDITION)}
-  }else{
-    if ("GENDER" %in% colnames(Metadata) & length(unique(Metadata$GENDER)) > 1) {
-      dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                    colData = Metadata,
-                                    design = ~ GENDER + CONDITION)
-      
-    }else{
-      dds <- DESeqDataSetFromMatrix(countData = DGE3,
-                                    colData = Metadata,
-                                    design = ~ CONDITION)}}
-  
-  
-  
-  
-  
-  
   y<-unlist(args[2])
   dds$CONDITION<- as.factor(dds$CONDITION)
   dds$CONDITION <- relevel(dds$CONDITION, ref = y)

@@ -847,6 +847,31 @@ class Ui_BiomiX(object):
         # Block 3
         block3_layout = QtWidgets.QVBoxLayout()
         
+        #Help
+        block3_uppertop_layout = QtWidgets.QHBoxLayout()
+        
+        self.label_link_MAIN = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MAIN.setFont(font)
+        self.label_link_MAIN.setObjectName("label_link_MAIN")
+
+        # Set the HTML content with a link
+        self.label_link_MAIN.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#Main interface guide">Help Main interface</a>')
+        self.label_link_MAIN.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        block3_uppertop_layout.addWidget(self.label_link_MAIN)
+        block3_layout.addLayout(block3_uppertop_layout)
+        
+        self.label_link_MAIN.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        
         block3_top_layout = QtWidgets.QHBoxLayout()
         
         #Upper
@@ -3073,6 +3098,58 @@ class SecondWindow(QMainWindow):
         self.label_X2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.comboBox_X2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
+        
+        
+        
+        block1_line10_1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # Create the label
+        self.label_link_CDistance = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_CDistance.setFont(font)
+        self.label_link_CDistance.setObjectName("label_link_METADATA")
+
+        # Set the HTML content with a link
+        self.label_link_CDistance.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#Clustering_Distance_Recommendation">Help Clustering Distance</a>')
+        self.label_link_CDistance.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        block1_line10_1_layout.addWidget(self.label_link_CDistance)
+        
+        
+        # Create the label
+        self.label_link_CMethod = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_CMethod.setFont(font)
+        self.label_link_CMethod.setObjectName("label_link_METADATA")
+
+        # Set the HTML content with a link
+        self.label_link_CMethod.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#Clustering_Methods_Recommendation">Help Clustering Methods</a>')
+        self.label_link_CMethod.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        block1_line10_1_layout.addWidget(self.label_link_CMethod)
+        
+        block1_layout.addLayout(block1_line10_1_layout)
+        
+        self.label_link_CDistance.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_link_CMethod.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        
+        
+        
+        
         block1_line11_layout = QtWidgets.QHBoxLayout()
         
         #starting line
@@ -3253,7 +3330,26 @@ class SecondWindow(QMainWindow):
         self.radioButton_3.setChecked(False)
         block2_line2_layout.addWidget(self.radioButton_3)
         
+        
+        # Create the label
+        self.label_link_MS0 = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MS0.setFont(font)
+        self.label_link_MS0.setObjectName("label_link_MS0")
+
+        # Set the HTML content with a link
+        self.label_link_MS0.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#Targeted metabolomics, non-targeted dataset with annotated peaks">Help targeted annotation</a>')
+        self.label_link_MS0.setOpenExternalLinks(True)  # Allows opening links in a web browser
+
+        # Add label to the layout
+        block2_line2_layout.addWidget(self.label_link_MS0)
+        
         block2_layout.addLayout(block2_line2_layout)
+        
         
         
         block2_line3_layout = QtWidgets.QHBoxLayout()
@@ -3294,6 +3390,7 @@ class SecondWindow(QMainWindow):
         
         
         self.radioButton_3.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_link_MS0.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.label_287.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.comboBox_75.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
@@ -3338,6 +3435,21 @@ class SecondWindow(QMainWindow):
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
         block2_line5_layout.addWidget(self.radioButton_2)
+        
+        # Create the label
+        self.label_link_MS1 = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MS1.setFont(font)
+        self.label_link_MS1.setObjectName("label_link_MS1")
+
+        # Set the HTML content with a link
+        self.label_link_MS1.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#MS1 annotation from Untargeted High Resolution Mass Spectrometry (HRMS) data">Help MS1 annotation</a>')
+        self.label_link_MS1.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        block2_line5_layout.addWidget(self.label_link_MS1)
         
         block2_layout.addLayout(block2_line5_layout)
         
@@ -3409,6 +3521,7 @@ class SecondWindow(QMainWindow):
         block2_layout.addLayout(block2_line6_layout)
         
         self.radioButton_2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_link_MS1.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.label_299.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.label_284.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.spinBox_47.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -3863,10 +3976,28 @@ class SecondWindow(QMainWindow):
         self.radioButton.setObjectName("radioButton")
         block2_line12_layout.addWidget(self.radioButton)
         
+        # Create the label
+        self.label_link_MS2 = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MS2.setFont(font)
+        self.label_link_MS2.setObjectName("label_link_MS2")
+
+        # Set the HTML content with a link
+        self.label_link_MS2.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#MS1 and  Data Dependent Acquisition (DDA)-MS2 annotation (.mzMl and .mgf files) Untargeted High Resolution Mass Spectrometry (HRMS) data.">Help MS2 annotation</a>')
+        self.label_link_MS2.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        block2_line12_layout.addWidget(self.label_link_MS2)
         
         block2_layout.addLayout(block2_line12_layout)
         
+        
         self.radioButton.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.label_link_MS2.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
         block2_line13_layout = QtWidgets.QHBoxLayout()
         
@@ -4642,10 +4773,33 @@ class SecondWindow(QMainWindow):
         self.line_121.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
         
+        block3_line2_1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # Create the label
+        self.label_link_METADATA = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_METADATA.setFont(font)
+        self.label_link_METADATA.setObjectName("label_link_METADATA")
+
+        # Set the HTML content with a link
+        self.label_link_METADATA.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#Metadata">Help Metadata</a>')
+        self.label_link_METADATA.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        block3_line2_1_layout.addWidget(self.label_link_METADATA)
+        block3_layout.addLayout(block3_line2_1_layout)
+        
+        self.label_link_METADATA.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
         block3_line2_layout = QtWidgets.QHBoxLayout()
-        
-        
-        
+
         
         # label column name
         self.label_330 = QtWidgets.QLabel(self.tab_18)
@@ -5154,6 +5308,34 @@ class SecondWindow(QMainWindow):
         self.label_312.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.line_96.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
+        
+        
+        block4_line2_1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # Create the label
+        self.label_link_MOFA = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MOFA.setFont(font)
+        self.label_link_MOFA.setObjectName("label_link_MOFA")
+
+        # Set the HTML content with a link
+        self.label_link_MOFA.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#MOFA_options">Help MOFA parameters</a>')
+        self.label_link_MOFA.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        self.label_link_MOFA.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line2_1_layout.addWidget(self.label_link_MOFA)
+        block4_layout.addLayout(block4_line2_1_layout)
+        
+        
+        
+        
         block4_line2_layout = QtWidgets.QHBoxLayout()
 
         
@@ -5300,6 +5482,36 @@ class SecondWindow(QMainWindow):
         self.line_114.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.label_315.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.line_113.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
+        
+        
+        block4_line3_1_layout = QtWidgets.QHBoxLayout()
+        
+        
+        # Create the label
+        self.label_link_MOFA_interpretation = QtWidgets.QLabel(self)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(11)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_link_MOFA_interpretation.setFont(font)
+        self.label_link_MOFA_interpretation.setObjectName("label_link_MOFA")
+
+        # Set the HTML content with a link
+        self.label_link_MOFA_interpretation.setText('<a href="https://ixi-97.github.io/Parameters_guidelines.html#MOFA_interpretation">Help MOFA parameters</a>')
+        self.label_link_MOFA_interpretation.setOpenExternalLinks(True)  # Allows opening links in a web browser
+        
+        
+        self.label_link_MOFA_interpretation.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        block4_line3_1_layout.addWidget(self.label_link_MOFA_interpretation)
+        block4_layout.addLayout(block4_line3_1_layout)
+        
+        self.label_link_MOFA_interpretation.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        
+        
         
         block4_line4_layout = QtWidgets.QHBoxLayout()
         
