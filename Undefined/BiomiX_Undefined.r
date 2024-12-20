@@ -208,7 +208,7 @@ if(COMMAND$PREVIEW[i] == "YES"){
         options(browser = get_default_browser())
         print("Pre QC data visualization. If the browser does not open automatically copy and paste the link on a browser")
         print("One completed the analysis modification click on close app to continue the analysis")
-        print("ATTENTION!: IF the browser does not open set up the path to your browser on the file ")
+        print("ATTENTION!: IF the browser does not open set up the path to your browser on the CHOISE_BROWSER_pre-view file in the BiomiX _INSTALL folder")
         
         Preview <- shiny::runApp(runShinyApp(numeric_data, metadata), launch.browser = TRUE)
         

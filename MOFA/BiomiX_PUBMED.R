@@ -398,7 +398,7 @@ setwd(directory2)
 
 #detection total significant factors
 files <- grep("*factor_",list.files(directory2),value=TRUE)
-files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
+files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined", files)]
 factors<-strsplit(files, "_")
 factors<-unlist(factors)
 factors<-str_remove(factors,".tsv")
@@ -423,8 +423,8 @@ patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(patter
 
 if (all(patterns_present == c(TRUE, TRUE, TRUE))){
 
-files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics", files)]
-nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
+files<- files[grep("\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined", files)]
+nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
 nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
@@ -577,6 +577,129 @@ if (length(uu) == 1){
                 write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
 }}
 
+
+#TRANSCRIPTOMICS-UNDEFINED
+
+files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics", "Undefined")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(FALSE, TRUE, TRUE))){
+        files<- files[grep("\\RNAseq|\\Undefined", files)]
+        nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
+        nam<-unlist(nam)
+        nam<-unique(nam[-grep("*factor*", nam)])
+        nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
+        
+        iter= 0
+        
+        if(length(nam) != 0){
+                uu<-count_match_in_top_article(nam)
+                
+                if (length(uu) > 1){
+                        uu$Keywords <- gsub("\n", "", uu$Keywords)
+                        terms_articles_sum =NULL
+                        it<-as.data.frame(get_text_mined_keywords(uu))
+                        if (nrow(it) > n_keywords_generated){
+                                it<-it[1:n_keywords_generated,]   
+                        }
+                        
+                        mined<-paste(it$terms_articles_sum,it$Freq, collapse = "/")
+                        uu$Keywords_text_mined <- mined
+                }
+                
+                line="#PAIRS OMICS (TRANSCRIPTOMICS-UNDEFINED)#"
+                write(line,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)
+                if (length(uu) == 1){
+                        write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
+                                write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
+        }}
+
+
+
+#METABOLOMICS-UNDEFINED
+
+files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics", "Undefined")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(FALSE, TRUE, TRUE))){
+        files<- files[grep("\\Metabolomics|\\Undefined", files)]
+        nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
+        nam<-unlist(nam)
+        nam<-unique(nam[-grep("*factor*", nam)])
+        nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
+        
+        iter= 0
+        
+        if(length(nam) != 0){
+                uu<-count_match_in_top_article(nam)
+                
+                if (length(uu) > 1){
+                        uu$Keywords <- gsub("\n", "", uu$Keywords)
+                        terms_articles_sum =NULL
+                        it<-as.data.frame(get_text_mined_keywords(uu))
+                        if (nrow(it) > n_keywords_generated){
+                                it<-it[1:n_keywords_generated,]   
+                        }
+                        
+                        mined<-paste(it$terms_articles_sum,it$Freq, collapse = "/")
+                        uu$Keywords_text_mined <- mined
+                }
+                
+                line="#PAIRS OMICS (METABOLOMICS-UNDEFINED)#"
+                write(line,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)
+                if (length(uu) == 1){
+                        write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
+                                write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
+        }}
+
+
+
+#METHYLOMICS-UNDEFINED
+
+files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+# Patterns to check for
+patterns_to_check <- c( "RNAseq","Metabolomics", "Methylomics", "Undefined")
+# Check if any of the patterns is present in each file name
+patterns_present <- sapply(patterns_to_check, function(pattern) any(grepl(pattern, files)))
+
+if (all(patterns_present == c(FALSE, TRUE, TRUE))){
+        files<- files[grep("\\Methylomics|\\Undefined", files)]
+        nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
+        nam<-unlist(nam)
+        nam<-unique(nam[-grep("*factor*", nam)])
+        nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
+        
+        iter= 0
+        
+        if(length(nam) != 0){
+                uu<-count_match_in_top_article(nam)
+                
+                if (length(uu) > 1){
+                        uu$Keywords <- gsub("\n", "", uu$Keywords)
+                        terms_articles_sum =NULL
+                        it<-as.data.frame(get_text_mined_keywords(uu))
+                        if (nrow(it) > n_keywords_generated){
+                                it<-it[1:n_keywords_generated,]   
+                        }
+                        
+                        mined<-paste(it$terms_articles_sum,it$Freq, collapse = "/")
+                        uu$Keywords_text_mined <- mined
+                }
+                
+                line="#PAIRS OMICS (METHYLOMICS-UNDEFINED)#"
+                write(line,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)
+                if (length(uu) == 1){
+                        write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
+                                write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
+        }}
+
+
 #BLOCK SINGLE OMICS ANALYSIS
 #TRANSCRIPTOMICS
 
@@ -616,7 +739,7 @@ if (length(uu) == 0){
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
 files<- files[grep("\\Metabolomics", files)]
-nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
+nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
 nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
@@ -650,7 +773,7 @@ if (length(uu) == 0){
 
 files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
 files<- files[grep("\\Methylomics", files)]
-nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics")
+nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
 nam<-unlist(nam)
 nam<-unique(nam[-grep("*factor*", nam)])
 nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
@@ -679,6 +802,39 @@ if (length(uu) == 0){
 }
 
 
+
+#BLOCK SINGLE OMICS ANALYSIS
+#UNDEFINED
+
+files <- grep(paste("*factor_", numb, sep=""),list.files(directory2),value=TRUE)
+files<- files[grep("\\Undefined", files)]
+nam<-strsplit(files, "\\Metabolomics|\\RNAseq|\\Methylomics|\\Undefined")
+nam<-unlist(nam)
+nam<-unique(nam[-grep("*factor*", nam)])
+nam <- nam[nam %in% paste(COMMAND$LABEL, "_", sep="")]
+
+if(length(nam) != 0){
+        uu<-count_match_in_top_article(nam)
+        
+        if (length(uu) > 1){
+                uu$Keywords <- gsub("\n", "", uu$Keywords)
+                terms_articles_sum =NULL
+                it<-as.data.frame(get_text_mined_keywords(uu))
+                if (nrow(it) > n_keywords_generated){
+                        it<-it[1:n_keywords_generated,]   
+                }
+                
+                mined<-paste(it$terms_articles_sum,it$Freq, collapse = "/")
+                uu$Keywords_text_mined <- mined
+        }
+        
+        line="#SINGLE OMICS (UNDEFINED)#"
+        write(line,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)
+        if (length(uu) == 0){
+                write("no_results",file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE)} else{
+                        write.table(uu,file= paste(directory3, "/", "Factor_", numb, "_articles.tsv", sep=""),append=TRUE, quote = FALSE, row.names = FALSE, sep="\t")        }
+        
+}
 
 terms_articles_tot = NULL
 pubmed_codes =NULL
