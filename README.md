@@ -14,20 +14,20 @@ _Preview-QC interface:_ The first interface, named preview-QC, opens in a browse
 
 _Imputation interface:_ The second Shiny interface included in the BiomiX toolkit allows users to select the type of imputation method (NIPALS, random forest, lasso, mean/median and 0 values) along with any potential bias introduced into the data. The BiomiX version 2.4 version can handle both imputed and unimputed data, as MOFA can manage missing data during the integration.
 
-_Installation process execution_ 
+_**Installation process execution**_ 
 - Many MacOS installation bugs were fixed and the installation tutorial was updated: [Installation Page](https://ixi-97.github.io/Installation.html#MAC-OS) 
 - The BiomiX execution file BiomiX.sh was splitted into Biomix_linux_exe.sh and Biomix_macos_exe.sh.
 
-_main and advanced option interface_ 
+_**main and advanced option interface**_ 
 - Feature renaming in the metabolomics section to clarify the input technology. 
 - Each advance option and main interface section has included many "help" sections to guide the user to a wise usage of the parameters. The novel in depth webpage is accessible at this link: [Avanced Parameters Page](https://ixi-97.github.io/Parameters_guidelines.html)  
 
-_Single omics pipeline_ 
+_**Single omics pipeline**_ 
 - Unlock the .mgf file usage for the metabolomics annotation. As they are lighter than .mzML files this optimize the RAM memory usage in the inclusion of high number of files. 
 - Although BiomiX does not support instrument normalization for metabolomics, users can still preview QC samples in the Preview-QC interface by labelling the “QC” in the CONDITION column and the loading order by adding order columns in the metadata. QC samples and their loading can in this way, be displayed in PCA and UMAP before being removed automatically afterwards.
 - We added a section in the omics area called **“Undefined**”. This new “omics” allows users to perform general QC, transformation, and statistical analysis on any type of data, including omics without a specialized pipeline. Over time, we plan to incorporate specific pipelines based on state-of-the-art methods commonly used for each type of omics.
 
-_MOFA factor intepretation_ 
+_**MOFA factor intepretation**_ 
 - Bug fixed: the bibliography and correlation analysis are now properly recognizing the undefined omics contributors to correlate and interpret them. 
 
 
