@@ -20,7 +20,7 @@ _**Installation process execution**_
 
 _**main and advanced option interface**_ 
 - Feature renaming in the metabolomics section to clarify the input technology. 
-- Each advance option and main interface section has included many "help" sections to guide the user to a wise usage of the parameters. The novel in depth webpage is accessible at this link: [Avanced Parameters Page](https://ixi-97.github.io/Parameters_guidelines.html)  
+- Each advance option and main interface section has included many "help" sections to guide the user to a wise usage of the parameters. The novel in depth webpage is accessible at this link: [Advanced Parameters Page](https://ixi-97.github.io/Parameters_guidelines.html)  
 
 _**Single omics pipeline**_ 
 - Unlock the .mgf file usage for the metabolomics annotation. As they are lighter than .mzML files this optimize the RAM memory usage in the inclusion of high number of files. 
