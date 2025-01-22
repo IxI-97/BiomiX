@@ -3,18 +3,18 @@ import subprocess
 
 # List of commands to execute
 commands = [
-    'conda install -c conda-forge pkg-config=0.29.2 -y',
-    'conda install -c anaconda libcurl -y',
-    'conda install -c conda-forge libnetcdf -y',
-    'conda install -c anaconda libxcb -y',
+    'mamba install -c conda-forge pkg-config=0.29.2 -y',
+    'mamba install -c anaconda libcurl=8.11.1 -y',
+    'mamba install -c conda-forge libnetcdf=4.9.2 -y',
+    'mamba install -c anaconda libxcb=1.17.0 -y',
 #   'conda install -c conda-forge pyqt -y',
     'pip install PyQT5==5.12.3',
-    'conda install -c anaconda pandas -y',
-    'pip install scikit-learn',
-    'pip install xlrd',
-    'pip install openpyxl',
+    'mamba install -c anaconda pandas=2.2.3 -y',
+    'pip install scikit-learn==1.6.1',
+    'pip install xlrd==2.0.1',
+    'pip install openpyxl==3.1.5',
     'pip install mofapy2==0.7.1',
-    'conda install -c conda-forge r-ncdf4 -y'
+    'mamba install -c conda-forge r-ncdf4==1.23 -y'
 ]
 
 # Execute commands
