@@ -48,7 +48,7 @@ chooseCRANmirror(48, ind = TRUE)
 print("R Package checking..")
 print("getwd()")
 
-if (file.exists("Package_linux.tar") == TRUE){
+if (file.exists("Package_linux.tar.gz") == TRUE){
         if (file.exists("Package_linux") == TRUE){
             print("R package already downloaded and decompressed")        
         }else{

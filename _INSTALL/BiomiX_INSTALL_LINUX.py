@@ -14,7 +14,7 @@ commands = [
     'pip install xlrd==2.0.1',
     'pip install openpyxl==3.1.5',
     'pip install mofapy2==0.7.1',
-    'mamba install -c conda-forge r-ncdf4==1.23 -y'
+    #'mamba install -c conda-forge r-ncdf4==1.23 -y'
 ]
 
 # Execute commands

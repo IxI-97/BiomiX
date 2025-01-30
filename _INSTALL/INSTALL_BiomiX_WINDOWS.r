@@ -22,9 +22,6 @@ setwd(paste(getwd(),"/", "Package_Windows", sep=""))
 
 chooseCRANmirror(48, ind = TRUE)
 
-
-.libPaths()
-
 install.packages("abind_1.4-5.zip", repos=NULL, type="source")
 install.packages("askpass_1.1.zip", repos=NULL, type="source")
 install.packages("backports_1.4.1.zip", repos=NULL, type="source")
