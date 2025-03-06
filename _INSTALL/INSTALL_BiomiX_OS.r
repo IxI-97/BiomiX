@@ -65,6 +65,9 @@ if (file.exists("Package_os.tar") == TRUE){
 
 setwd(paste(getwd(),"/", "Package_os", sep=""))
 
+chooseCRANmirror(48, ind = TRUE)
+options(Ncpus = 6)
+
 
 install.packages("sys_3.4.2.tar.gz", repos=NULL, type="source")
 install.packages("abind_1.4-5.tar.gz", repos=NULL, type="source")

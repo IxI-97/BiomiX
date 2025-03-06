@@ -4,12 +4,12 @@ import subprocess
 # List of commands to execute
 commands = [
     'mamba install -c conda-forge pkg-config=0.29.2 -y',
-    'mamba install -c anaconda libcurl=8.11.1 -y',
+    'mamba install -c conda-forge libcurl=8.11.1 -y',
     'mamba install -c conda-forge libnetcdf=4.9.2 -y',
-    'mamba install -c anaconda libxcb=1.17.0 -y',
+    'mamba install -c conda-forge libxcb=1.17.0 -y',
 #   'conda install -c conda-forge pyqt -y',
     'pip install PyQT5==5.12.3',
-    'pip install pandas=2.2.3 -y',
+    'mamba install -c conda-forge pandas=2.2.3 -y',
     'pip install scikit-learn==1.6.1',
     'pip install xlrd==2.0.1',
     'pip install openpyxl==3.1.5',
@@ -27,7 +27,6 @@ python_script_path = os.path.realpath(__file__)
 
 # Construct the path to the R script in the same directory as the Python script
 r_script_path = os.path.join(os.path.dirname(python_script_path), "INSTALL_BiomiX_WINDOWS.r")
-print(r_script_path)
 
 print("INSTALL R PACKAGE")
 # Run the R script using the subprocess module

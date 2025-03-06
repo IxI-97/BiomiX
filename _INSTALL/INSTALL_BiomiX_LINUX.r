@@ -68,6 +68,9 @@ setwd(paste(getwd(),"/", "Package_linux", sep=""))
 
 chooseCRANmirror(48, ind = TRUE)
 
+library('systemfonts')
+options(Ncpus = 6)
+
 install.packages("sys_3.4.2.tar.gz", repos=NULL, type="source")
 install.packages("abind_1.4-5.tar.gz", repos=NULL, type="source")
 install.packages("askpass_1.2.0.tar.gz", repos=NULL, type="source")
