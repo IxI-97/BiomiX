@@ -20,9 +20,11 @@ if (file.exists("Package_Windows.tar") == TRUE){
 
 setwd(paste(getwd(),"/", "Package_Windows", sep=""))
 
+.libPaths(.libPaths()[grepl("BiomiX-env", .libPaths())])
+print(.libPaths())
+
 chooseCRANmirror(48, ind = TRUE)
 
-library('systemfonts')
 options(Ncpus = 6)
 
 install.packages("abind_1.4-5.zip", repos=NULL, type="source")
