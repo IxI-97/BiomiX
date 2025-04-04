@@ -226,7 +226,7 @@ for (meta_filter in METADATA_FILT_INDEX){
                                                       NA)
                         
                         Metadata_Bcell <- Metadata_Bcell[comparison_operator(To_filter, value_threshold),]
-                        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold),TRUE)]
+                        DGE2 <- DGE2[,c(comparison_operator(To_filter, value_threshold))]
                 }
                 
         }
