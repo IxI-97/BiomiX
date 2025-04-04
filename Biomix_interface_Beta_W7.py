@@ -1655,7 +1655,7 @@ class Ui_BiomiX(object):
 
         import pandas as pd
 
-        dff = pd.DataFrame(input_mofa)
+        dff = pd.DataFrame(input_mofa, index=['Integration_type', 'Data_Integration', 'Number_of_factors_to_calculate', 'Factor_to_explore', 'Omics_overlay'])
         print(dff)
         dff.to_csv("COMMANDS_MOFA.tsv", sep="\t")
 
