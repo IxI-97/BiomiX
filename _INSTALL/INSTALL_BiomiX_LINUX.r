@@ -280,7 +280,32 @@ install.packages("rversions_2.1.2.tar.gz", repos=NULL, type="source")
 install.packages("urlchecker_1.0.1.tar.gz", repos=NULL, type="source")
 #install.packages("systemfonts_1.1.0.tar.gz", repos=NULL, type="source")
 install.packages("textshaping_0.4.0.tar.gz", repos=NULL, type="source")
-install.packages("ragg_1.3.2.tar.gz", repos=NULL, type="source")
+
+
+# IF A PACKAGE IS NOT WORKING ON DIFFERENT LINUX VERSION, YOU CAN ADD NEWER VERSION IN THE REPOSITORY TO INTALL THE IF THE STANDARD FAILS. 
+
+pkg_files <- list.files(pattern = "ragg_", full.names = TRUE)
+
+for (pkg in pkg_files) {
+  message(paste("Trying:", pkg))
+  install.packages(pkg, repos = NULL, type = "source")
+
+  # Extract package name (assuming standard format like "mypackage_1.2.3.tar.gz")
+  pkg_name <- sub("(_[0-9.]+)?\\.tar\\.gz$", "", basename(pkg))
+
+  # Check if the package loads
+  load_attempt <- try(suppressMessages(library(pkg_name, character.only = TRUE)), silent = TRUE)
+  
+  if (!inherits(load_attempt, "try-error")) {
+    message(paste("Installed successfully:", pkg))
+    break
+  } else {
+    message(paste("Installation failed:", pkg))
+  }
+}
+
+#install.packages("ragg_1.3.2.tar.gz", repos=NULL, type="source")
+#install.packages("ragg_1.3.3.tar.gz", repos=NULL, type="source")
 install.packages("uuid_1.2-1.tar.gz", repos=NULL, type="source")
 install.packages("downlit_0.4.4.tar.gz", repos=NULL, type="source")
 install.packages("pkgdown_2.1.0.tar.gz", repos=NULL, type="source")
