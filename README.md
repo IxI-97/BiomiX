@@ -2,6 +2,22 @@
 ## **BiomiX package/source:** https://github.com/IxI-97/BiomiX
 ## **News**
 
+### *4 April 2025*
+
+Hi everyone!
+
+There are some news from the BiomiX community, 
+The BiomiX consortium including more contributors is going to replace in the next months this repository. This w will bring soon to a new version of BiomiX (Version 3.0) including novel integration methods (SNF, NEMO, DIABLO), a Nextflow Workflow and a CRAN package. 
+
+This will include an important improvement in the code efficiency and usage, so stay tuned! 
+
+_**Installation bug correction**_
+- Some bug occuring in the installation process in both Linux and Windows were fixed (ragg, systemfont R package error in MAKE compilation).
+- To enhance the stability the version of conda to use has been fixed to Version 23.5.0
+- Bug fix in transcriptomics sample filtering (advance option)
+- The Mac version has still issues in the installation process. We suggest to use Linux or Windows instead, we plan to fix it replacing the Mac version with the Nextflow Workflow, including the same functionalities. 
+
+
 ### *20 December 2024*
 
 Hi everyone!
