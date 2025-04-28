@@ -367,6 +367,9 @@ runShinyApp <- function(numeric_data, metadata) {
                         #print("TIME Scatter")
                         #print(Sys.time())
                         plot_data <- combined_data()
+
+                        req(input$x_var, input$y_var)
+
                         
                         # Use the selected variables for x and y axes
                         ggplot(data = cbind(plot_data$numeric, plot_data$metadata), aes_string(x = input$x_var, y = input$y_var, color = input$color_col)) +
