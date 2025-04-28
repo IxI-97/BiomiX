@@ -15,9 +15,9 @@ get_default_browser <- function() {
                 
                 if (browser_analysis == "chrome") {
                         return("C:/Program Files/Google/Chrome/Application/chrome.exe")
-                } else if (browser_name == "firefox") {
+                } else if (browser_analysis == "firefox") {
                         return("C:/Program Files/Mozilla Firefox/firefox.exe")
-                } else if (browser_name == "chromium") {
+                } else if (browser_analysis == "chromium") {
                         return("C:/Program Files/Chromium/chromium.exe")
                 } else {
                         return(NULL)
