@@ -2,7 +2,7 @@
 ## **BiomiX package/source:** https://github.com/IxI-97/BiomiX
 ## **News**
 
-## **Migration of the BiomiX repository**
+### **Migration of the BiomiX repository**
 
 We have released BiomiX version 2.5, including a novel installation system and integration methods. 
 Please visit the new repository to stay tuned for news and updates: 
