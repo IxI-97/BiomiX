@@ -7,9 +7,12 @@
 We have released BiomiX version 2.5, including a novel installation system and integration methods. 
 Please visit the new repository to stay tuned for news and updates: 
 
-### **New BiomiX repository** https://github.com/BiomiX-consortium/BiomiX2.5
+**New BiomiX repository** https://github.com/BiomiX-consortium/BiomiX2.5
 
-- BiomiX team
+BiomiX team
+
+
+
 
 ### *4 April 2025*
 
