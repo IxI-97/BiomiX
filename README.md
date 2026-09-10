@@ -4,7 +4,7 @@
 
 ### **Migration of the BiomiX repository**
 
-We have released BiomiX version 2.5, including a novel installation system in docker and integration methods. 
+We have released BiomiX version 2.5, including a novel installation system in Docker and integration methods. 
 Please visit the new repository to stay tuned for news and updates: 
 
 ## **BiomiX webpage:** https://biomix-consortium.github.io/
