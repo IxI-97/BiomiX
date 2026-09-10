@@ -1,6 +1,6 @@
-## **BiomiX webpage:** https://ixi-97.github.io/
-## **BiomiX package/source:** https://github.com/IxI-97/BiomiX
 ## **News**
+
+### *10 September 2026*
 
 ### **Migration of the BiomiX repository**
 
@@ -9,9 +9,12 @@ Please visit the new repository to stay tuned for news and updates:
 
 **New BiomiX repository** https://github.com/BiomiX-consortium/BiomiX2.5
 
+
+## **BiomiX webpage:** https://biomix-consortium.github.io/
+## **BiomiX package/source:** https://github.com/BiomiX-consortium/BiomiX2.5
+
+
 BiomiX team
-
-
 
 
 ### *4 April 2025*
@@ -28,6 +31,7 @@ _**Installation bug correction**_
 - To enhance the stability the version of conda to use has been fixed to Version 23.5.0
 - Bug fix in transcriptomics sample filtering (advance option)
 - The Mac version has still issues in the installation process. We suggest to use Linux or Windows instead, we plan to fix it replacing the Mac version with the Nextflow Workflow, including the same functionalities. 
+
 
 
 ### *20 December 2024*
